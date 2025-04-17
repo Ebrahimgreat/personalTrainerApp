@@ -1,0 +1,1 @@
+ALTER TABLE `nutrition` ADD `created_at` timestamp 

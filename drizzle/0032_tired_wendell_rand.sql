@@ -1,0 +1,1 @@
+ALTER TABLE `latestActivities` ADD `message` text;

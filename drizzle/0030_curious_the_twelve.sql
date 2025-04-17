@@ -1,0 +1,1 @@
+ALTER TABLE `workout` ADD `programme_id` integer REFERENCES programme(id);

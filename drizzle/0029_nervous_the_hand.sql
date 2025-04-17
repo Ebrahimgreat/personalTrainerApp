@@ -1,0 +1,1 @@
+ALTER TABLE `userProgramme` ADD `status` text;

@@ -1,0 +1,1 @@
+ALTER TABLE `programmeDetails` ADD `sets` integer;

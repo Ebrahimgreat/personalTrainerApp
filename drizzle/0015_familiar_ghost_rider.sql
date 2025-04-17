@@ -1,0 +1,1 @@
+ALTER TABLE `workoutDetails` RENAME COLUMN "rpe" TO "rir";
