@@ -17,7 +17,7 @@ function button({children,onClick,class:className,type="button"}:ButtonProps)
 
 
     return(
-        <button type={type} class={`bg-blue-500 text-white text-xs font-bold py-2 px-4 rounded ${className}`} onClick={onClick}>
+        <button type={type} class={`bg-blue-500 hover:bg-blue-700  text-white text-xs font-bold w-32 h-8   rounded ${className}`} onClick={onClick}>
         {children}
         </button>
     );

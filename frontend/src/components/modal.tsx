@@ -4,10 +4,12 @@ interface ModalProps{
     buttonText:string,
     children:JSX.Element,
     onClick?:()=>void,
+    title:string
+
 
 }
 
-function Modal({buttonText,children}:ModalProps){
+function Modal({buttonText,children,title}:ModalProps){
     let buttonRef:any=undefined;
 
     const openHandler=()=>{
@@ -22,16 +24,27 @@ function Modal({buttonText,children}:ModalProps){
             {buttonText}
 
         </button>
+      
         
 <div
- class={`fixed inset-0  overflow-hidden flex items-center justify-center transition-all${isOpen()? "w-screen h-screen": "w-0 h-0 delay-500"}`}>
-    <div class={`bg-black text-white rounded-lg p-4 min-w-[400px] max-w-xl shadow-md ${isOpen()? "translate-y-0 ": "translate-y-[100vh]"}`}>
-       <button onClick={()=>setIsOpen(false)} class="border px-4 py-1 rounded-lg text-sm text-white bg-black">
+ class={`fixed inset-0  overflow-hidden flex items-center justify-center transition-all${isOpen()? "w-full": "w-0 h-0 delay-500"}`}>
+    <div class={` text-black rounded-lg p-4  overflow-y-auto max-w-xl bg-white shadow-md ${isOpen()?  "min-w-screen h-full translate-y-0 ": "translate-y-[100vh]"}`}>
+       
 
-        Close
+       <div class="flex flex-row justify-between border-b">
+
+
+       <h1 class="font-bold">
+  {title}
+  </h1>
+  <button onClick={()=>setIsOpen(false)} class="border px-4 py-1 rounded-lg text-sm text-white bg-black">
+
+        X
        </button>
+       </div>
         {children}
     </div>
+
 
     
 </div>

@@ -5,20 +5,20 @@ import{Router,Route,A} from '@solidjs/router';
 import Home from './home';
 import Weight from './weight';
 import nutrition from './nutrition';
-import createWeight from './createWeight'
+
 import SearchNutrition from "./searchNutrition";
 import nutritionShow from './nutrition.show';
 import globalSearch from './globalSearch';
 import createNutrition from './createNutrition';
 import Testing from './testing';
 import Workout from './workout';
-import CreateWorkout from './createWorkout';
+import CreateWorkout from './components/workout/createWorkout';
 import ShowWorkout from './showWorkout';
 import loginPage from './login';
 import {ClerkProvider,UserButton,useAuth,ClerkLoaded} from 'clerk-solidjs';
 import Register from './register';
 import { exercise } from './components/CreateExerciseForm';
-import exerciseLibrary from './exerciseLibrary';
+import exerciseLibrary from './Exercise';
 import Clients from './clients';
 import Programme from './programme';
 import CreateProgramme from './createProgramme';
@@ -34,6 +34,7 @@ import { ToastProvider, Toaster } from "solid-notifications";
 
 import CheckRoles from './components/CheckRoles';
 import Layout2 from './components/Layout2';
+import Chat from './chat';
 function Layout(props)
 {
   
@@ -44,7 +45,6 @@ function Layout(props)
   <header>
 
     
-
 
 
 
@@ -69,12 +69,7 @@ function Layout(props)
       Exercise
       </A>
      
-      <A href="/weights" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-        weights
-      </A>
-      <A href="/workout" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-     Workout
-      </A>
+     
       <UserButton class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 
       </UserButton>
@@ -99,41 +94,41 @@ function Layout(props)
 
 
 
+
 function App() {
  
-  const{role}=useRoleContext();
+
+
 
   return(
     
 
     <ClerkProvider publishableKey='pk_test_aHVnZS1zZWFob3JzZS00NC5jbGVyay5hY2NvdW50cy5kZXYk'>
-      <ClerkLoaded>
 
-<RoleContextProvider>
+    
 
-<CheckRoles/>
+
 
 
   
 
        
-        <Router root={role()==='admin'? Layout1 : Layout2}>
+        <Router root={Layout}>
     
  
-
-       
+      
           <Route path='/home' component={Home}/>
           <Route path="/exercise" component={exerciseLibrary}/>
           <Route path='/weights' component={Weight}/>
           <Route path='/nutrition' component={nutrition}/>
-          <Route path='/weights/create' component={createWeight}/>
+       
           <Route path="/nutrition/search" component={SearchNutrition}/>
           <Route path="/nutrition/show" component={nutritionShow}/>
           <Route path="/nutrition/globalsearch" component={globalSearch}/>
           <Route path="/nutrition/create" component={createNutrition}/>
           <Route path="/testing" component={Testing}/>
           <Route path="/workout" component={Workout} />
-          <Route path="/createWorkout" component={CreateWorkout}/>
+
           <Route path="/workout/show" component={ShowWorkout}/>
           <Route path="/login" component={loginPage}/>
           <Route path="/register" component={Register}/>
@@ -143,13 +138,14 @@ function App() {
           <Route path="/programme/create" component={CreateProgramme}/>
           <Route path="/clients/view" component={ViewClient}/>
           <Route path="/programme/view" component={ViewProgramme}/>
+          <Route path="/chat" component={Chat}/>
 
           </Router>
 
           
    
- </RoleContextProvider>
- </ClerkLoaded>
+
+
       
         </ClerkProvider>
 

@@ -15,14 +15,51 @@ export const usersTable=sqliteTable(
     }
 
 )
+
+
+
+export const measurementsTable=sqliteTable(
+    'measurements',{
+        id:int().primaryKey({autoIncrement:true}),
+        name:text().notNull()
+
+
+    }
+
+
+)
+
+
+
+export const measurementsDataTable=sqliteTable(
+    'measurementsData',{
+
+        id:int().primaryKey({autoIncrement:true}),
+        user_id:int().notNull().references(()=>usersTable.id),
+        measurement_id:int().references(()=>measurementsTable.id),
+        value:numeric(),
+        created_at:text(),
+      
+
+        
+
+
+    }
+)
+
+
+
+
+
+
 export const weightTable=sqliteTable(
     "weight",{
 
         id:int().primaryKey({autoIncrement:true}),
         scaleWeight:numeric(),
-        created_at: timestamp().defaultNow(),
+        created_at:text(),
         trendWeight:numeric(),
-        user_id:int('user_id').notNull().references(()=>usersTable.id)
+        user_id:int().notNull().references(()=>usersTable.id)
 
 
     }
@@ -34,7 +71,7 @@ export const nutritionTable=sqliteTable(
         protein:numeric(),
         fat:numeric(),
         carbs:numeric(),
-       created_at: timestamp(),
+       created_at:text(),
         user_id:int('user_id').notNull().references(()=>usersTable.id)
 
     }
@@ -94,11 +131,28 @@ export const exerciseTable=sqliteTable(
     "exercise",{
         id:int().primaryKey({autoIncrement:true}),
         name:text(),
+        equipment:text(),
+        targetMuscleGroup:text(),
         type:text(),
-        instructions:text()
+        instructions:text(),
+        photo:text()
     }
 
 )
+export const customExerciseTable=sqliteTable('customExercise',{
+    id:int().primaryKey({autoIncrement:true}),
+        name:text(),
+        equipment:text(),
+        targetMuscleGroup:text(),
+        type:text(),
+        instructions:text(),
+        photo:text(),
+        user_id:int('user_id').references(()=>usersTable.id)
+
+
+})
+
+
 
 
 export const workoutTable=sqliteTable(
@@ -107,7 +161,7 @@ export const workoutTable=sqliteTable(
         user_id:int('user_id').references(()=>usersTable.id),
         name:text(),
         programme_id:int().references(()=>programmesTable.id),
-        created_at:timestamp(),
+        created_at:text(),
 
 
     }
@@ -145,6 +199,9 @@ export const programmeWorkoutTable=sqliteTable(
     }
 
 )
+
+
+
 export const programmeDetailsTable=sqliteTable(
     "programmeDetails",{
         id:int().primaryKey({autoIncrement:true}),
@@ -156,6 +213,40 @@ export const programmeDetailsTable=sqliteTable(
 
     }
 )
+
+
+export const roomsTable=sqliteTable(
+    'rooms',{
+        id:int().primaryKey({autoIncrement:true}),
+        name:text(),
+        user_id:int('user_id').references(()=>usersTable.id)
+
+
+    }
+)
+export const roomMembersTable=sqliteTable(
+    'roomMembers',{
+        id:int().primaryKey({autoIncrement:true}),
+        user_id:int().references(()=>usersTable.id),
+        room_id:int().references(()=>roomsTable.id)
+        
+    }
+)
+export const messagesTable=sqliteTable(
+    'messages',{
+        id:int().primaryKey({autoIncrement:true}),
+        content:text(),
+        created_at:timestamp(),
+        user_id:int('user_id').references(()=>usersTable.id),
+        room_id:int('room_id').references(()=>roomsTable.id)
+
+    }
+)
+
+
+
+
+
 
 
 export const workoutDetailsTable=sqliteTable(
@@ -171,6 +262,13 @@ export const workoutDetailsTable=sqliteTable(
 
     }
 )
+
+export const customExerciseRelationWithUser=relations(customExerciseTable,({one})=>({
+    'user':one(usersTable,{
+        fields:[customExerciseTable.user_id],
+        references:[usersTable.id]
+    })
+}))
 
 export const programmeUserRelationWithUser=relations(userProgrammeTable,({one})=>({
     user:one(usersTable,{
@@ -274,7 +372,8 @@ export const programmeRelationWithProgramme=relations(programmesTable,({many})=>
 
     userProgramme:many(userProgrammeTable),
     workout:many(workoutTable),
-    programmeWorkout:many(programmeWorkoutTable)
+    programmeWorkout:many(programmeWorkoutTable),
+   
 }))
 
 
@@ -287,6 +386,8 @@ export const programmeWorkoutRelation=relations(programmeWorkoutTable,({one})=>(
 
 
 }))
+
+
 
 export const programmeWorkoutDetailRelation=relations(programmeWorkoutTable,({many})=>({
     programmeDetails:many(programmeDetailsTable)
@@ -337,14 +438,20 @@ export const activtiesRelation=relations(latestActivitiesTable,({one})=>({
 
 
 
+
 export const userRelations=relations(usersTable,({many})=>({
     weight:many(weightTable),
+    
     nutrients:many(nutritionTable),
+    measurementData:many(measurementsDataTable),
     workout:many(workoutTable),
     customFood:many(customFoodTable),
     programmes:many(programmesTable),
     userProgramme:many(userProgrammeTable),
-    
+    rooms:many(roomsTable),
+    room_members:many(roomMembersTable),
+    messages:many(messagesTable),
+    customExercises:many(customExerciseTable),
     sender:many(latestActivitiesTable,{
         relationName:'senderActivity',
    
@@ -358,6 +465,84 @@ export const userRelations=relations(usersTable,({many})=>({
     
     
 }))
+
+//Room relation with RoomMembers
+
+export const roomRelations=relations(
+    roomsTable,
+    ({one,many})=>({
+        roomMembers:many(roomMembersTable),
+        messages:many(messagesTable),
+        user:one(usersTable,{
+            fields:[roomsTable.user_id],
+            references:[usersTable.id]
+         
+        })
+        
+    })
+    
+    
+)
+
+//messages RElations
+
+export const messagesRelations=relations(
+    messagesTable,
+    ({one,many})=>({
+        
+        user:one(usersTable,
+            {
+                fields:[messagesTable.user_id],
+                references:[usersTable.id]
+            }
+        ),
+        room:one(roomsTable,{
+            fields:[messagesTable.room_id],
+            references:[roomsTable.id]
+        })
+
+    }
+)
+)
+
+//room Members Relations
+
+export const roomMembersRelations=relations(
+    roomMembersTable,({one})=>({
+        user:one(usersTable,{
+            fields:[roomMembersTable.user_id],
+            references:[usersTable.id]
+        }),
+        room:one(roomsTable,{
+            fields:[roomMembersTable.room_id],
+            references:[roomsTable.id]
+        })
+
+    })
+  
+)
+
+
+export const measurementRelationwithData=relations(measurementsTable,({many})=>({
+    measurementData:many(measurementsDataTable)
+}))
+
+
+export const measurementDataTableWithMeasurement=relations(measurementsDataTable,({one})=>({
+    measurement:one(measurementsTable,{
+        fields:[measurementsDataTable.measurement_id],
+        references:[measurementsTable.id]
+        
+    }),
+    user:one(usersTable,{
+        fields:[measurementsDataTable.user_id],
+        references:[usersTable.user_id]
+    })
+}))
+
+
+
+
 
 
 export const parent_child=relations(
@@ -404,5 +589,8 @@ export const nutritionRelations=relations(nutritionTable,({one})=>({
 
 
 export type User = typeof usersTable.$inferSelect;
+export type Exercise=typeof exerciseTable.$inferSelect
 export type InsertUser = typeof usersTable.$inferInsert;
+export type Weight= typeof weightTable.$inferSelect
+export type InsertWeight= typeof weightTable.$inferInsert
 

@@ -20,13 +20,20 @@ type newProgrmme={
 
 }
 
-
+const equipmentArray:string[]=['Barbell','Dumbell','KettleBells','Body Weight','Cable']
+const bodyPart:string[]=['Chest','Quads','Hamstrings','Rear Delts','Tricpes']
 
 const options:string[]=['1-3','3-6','6-9','10-12','12-15','15+']
-
+const[searchString,setSearchString]=createSignal('')
+const[exerciseType,setExerciseType]=createSignal('')
+const[equipment,setEquipment]=createSignal('')
+const[selectedIndex,setSelectedIndex]=createSignal(-1)
 const[save,setSave]=createSignal(false)
+const[name,setName]=createSignal('')
+
+const[selectedExercise,setSelectedExercise]=createSignal('')
 const getExercises=async()=>{
-    const data=await fetch('http://localhost:3001/api/exercise/all')
+    const data=await fetch(`http://localhost:3001/api/exercise/all?exerciseName=${searchString()}&type=${exerciseType()}&equipment=${equipment()}`)
     return data.json();
 }
 
@@ -38,6 +45,7 @@ import { updateFields } from "./components/createClientForm";
 import TotalWorkouts from "./components/programmeComponent/totalWorkouts";
 import CreateNewProgramme from "./components/programmeComponent/createNewProgramme";
 import EditExercises from "./components/programmeComponent/editExercises";
+import ExerciseLibrary from "./components/exercise/exerciseLibrary";
 
 
 function CreateProgramme()
@@ -55,21 +63,44 @@ function CreateProgramme()
         
     })
 
-    const addExercise=()=>{
-       
+    const addExercise=(item:object)=>{
+        console.log(selectedIndex())
+        if(selectedIndex()==-1)
+        {
+       console.log(item)
         setNewProgramme('workout',workoutSignal(),'exercise',(current)=>[
             ...current,{
                 id:newProgramme.workout[workoutSignal()].exercise.length,
-                name:'',
-                repRange:'',
+                name:item.name,
+                repRange:'1-3',
                 weight:0
 
             }
         ])
+      
      
       
       
         
+    }
+    else{
+
+ 
+    setNewProgramme('workout',workoutSignal(),'exercise',selectedIndex(),(current)=>({
+        ...current,
+        name:item.name,
+        
+    }))
+}
+}
+   
+    const updateItem=(item:object)=>{
+        console.log(item)
+       
+       setSelectedExercise(item.name)
+
+        
+
     }
 
     const removeitem=(key:number)=>{
@@ -88,38 +119,7 @@ function CreateProgramme()
 
 
     
-    const addWorkoutInProgramme=async()=>{
-        
-       
-        setNewProgramme('workout',(current)=>[
-            ...current,{
-                name:'Upper Body',
-                id:newProgramme.workout.length,
-                exercise:[
-                    {
-                        id:0,
-                        name:'',
-                        repRange:'1-3',
-                        weight:0
-                    }
-
-                ],
-                
-            }
-        ])
-        setWorkoutSignal(newProgramme.workout.length-1);
-        
-        setSave(false)
-        console.log(newProgramme.workout)
-       
-      
-
-
-
-
-
-    }
-
+   
 
     const editFields=(key:number,fieldName:string)=>(event:Event)=>{
         console.log(fieldName)
@@ -180,6 +180,34 @@ else{
             setNewProgramme('workout',workoutSignal(),'exercise',(current)=>current.filter((item)=>item.id!=key))
 
         }
+
+
+        const addWorkoutInProgramme=async()=>{
+        
+       
+            setNewProgramme('workout',(current)=>[
+                ...current,{
+                    name:name(),
+                    id:newProgramme.workout.length,
+                    exercise:[
+                       
+                    ],
+                    
+                }
+            ])
+            setWorkoutSignal(newProgramme.workout.length-1);
+            
+            setSave(false)
+            console.log(newProgramme.workout)
+           
+          
+    
+    
+    
+    
+    
+        }
+    
         
 
         const saveExercise=()=>{
@@ -187,22 +215,46 @@ else{
             setWorkoutSignal(-1)
             console.log(newProgramme.workout)
         }
+
+
 createEffect(()=>{
     console.log(workoutSignal())
 })
 
+createEffect(()=>{
+    if(newProgramme.workout.length==0)
+    {}
+})
 
+const[myExercises,setMyExercises]=createResource(()=>[searchString(),exerciseType(),equipment()],
+([search,type,equipment])=>getExercises());
 
-
-    const[exerciseLibrary]=createResource(getExercises)
     return(
         
-        <div class="grid grid-cols-3 gap-x-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            <TotalWorkouts removeItem={(index)=>removeWorkout(index)} setWorkoutSignal={(index)=>setWorkoutSignal(index)}  items={newProgramme.workout} onClick={(index)=>setWorkoutSignal(index)}>
+        <div class="flex flex-col">
 
-            </TotalWorkouts>
+           
+           <For each={newProgramme.workout}>
+            {(item)=>(
+                <For each={item.exercise}>
+                    {(value)=><p>
+                        {value}
+                        </p>}
+                    </For>
+
+            )}
+           
+           </For>
+
+         <div class="grid grid-cols-1  md:grid-cols-3 gap-x-3 mb-10 ">
             
-   <CreateNewProgramme headingText="Create Programme" onDescriptionChange={(e)=>setNewProgramme('description',e)} name={newProgramme.name} onNameChange={(e)=>setNewProgramme('name',e)} description={newProgramme.description} onSubmit={submitForm}>
+            <div class="h-full  overflow-y-auto">
+
+          
+
+<ExerciseLibrary updatingExercise={(item)=>addExercise(item)} selectAction={workoutSignal()} types={bodyPart} typeSelected={exerciseType()} setTypeSelected={(item)=>setExerciseType(item)}  myExercises={myExercises()} equipment={equipmentArray} equipmentSelected={equipment()} setEquipment={(item)=>setEquipment(item)}  setSearchSelected={(item)=>setSearchString(item)} searchExercise={searchString()}/>
+</div>
+   <CreateNewProgramme headingText="Create Programme" onDescriptionChange={(e)=>setNewProgramme('description',e)} name={newProgramme.name} onNameChange={(e)=>setName(e)} description={newProgramme.description} onSubmit={submitForm}>
             
             
 
@@ -224,21 +276,19 @@ createEffect(()=>{
 <div class="mb-5">
 
 
-<input class={` w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`} value={newProgramme.workout[workoutSignal()].name} onchange={(e)=>setNewProgramme('workout',workoutSignal(),'name',e.currentTarget.value)} type="text">
+<input class={` w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none `} value={newProgramme.workout[workoutSignal()].name} onchange={(e)=>setNewProgramme('workout',workoutSignal(),'name',e.currentTarget.value)} type="text">
 </input>
 </div>
 
 
 </Show>
-Workout Signal: {workoutSignal()}
+
 
 <Show when={workoutSignal()!=-1}>
     <div class="flex flex-row justify-between">
 
 
-            <Button type="button" class="bg-blue-50" onClick={()=>addExercise()}>
-                Add Exercise
-            </Button>
+       
             <Button type="button" onClick={()=>saveExercise()}>
                 Save
             </Button>
@@ -261,7 +311,10 @@ Workout Signal: {workoutSignal()}
 
 
 
-<div class="mt-8 px-4 py-4 border-t flex items-center justify-center">
+<div>
+<TotalWorkouts workoutSignal={workoutSignal()}  removeItem={(index)=>removeWorkout(index)} setWorkoutSignal={(index)=>setWorkoutSignal(index)}  items={newProgramme.workout} onClick={(index)=>setWorkoutSignal(index)}>
+
+</TotalWorkouts>
 <Show when={save()}>
 
 
@@ -269,7 +322,11 @@ Workout Signal: {workoutSignal()}
 <Button type="submit">
     Submit
 </Button>
+
+
+
 </Show>
+
 
 
 </div>
@@ -288,14 +345,20 @@ Workout Signal: {workoutSignal()}
 
 
 <Show when={workoutSignal()!=-1 && newProgramme.workout[workoutSignal()]}>
-<EditExercises onRemove={(index)=>removeExercise(index)}  onNameChange={(index)=>editFields(index,'name')}  onRepRangeChange={(index)=>editFields(index,'repRange')}  onWeightChange={(index)=>editFields(index,'weight')}   items={newProgramme.workout[workoutSignal()].exercise} exerciseLibrary={exerciseLibrary()} name={newProgramme.workout[workoutSignal()].name}/>
 
+<div class="">
+<EditExercises selectedIndex={selectedIndex()} setSelectedIndex={(item)=>setSelectedIndex(item)} onRemove={(index)=>removeExercise(index)}  onNameChange={(index)=>editFields(index,'name')}  onRepRangeChange={(index)=>editFields(index,'repRange')}  onWeightChange={(index)=>editFields(index,'weight')}   items={newProgramme.workout[workoutSignal()].exercise} name={newProgramme.workout[workoutSignal()].name}/>
+</div>
     </Show>
 
             </div>
-            </div>
-            
 
+            
+            </div>
+           
+            
+            
+</div>
     )
 }
 export default CreateProgramme;

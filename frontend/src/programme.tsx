@@ -87,10 +87,6 @@ function Programme()
     navigate(`/programme/view?id=${id}`)
 
 
-
-    
-    
-
  }
 
 
@@ -122,12 +118,26 @@ console.log(newProgramme.exercise)
     <div>
 
 
+
+<h1 class="text-3xl font-semi-bold text-gray-900 ">
+               Programmes
+                </h1>
+                <span class="font-extralight">
+                 Organize Your Programmes
+                </span>
         
-        <Button onClick={()=>navigate('/programme/create')}>
+        <div class="flex flex-row justify-between">
+
+
+        <Button class="btn" onClick={()=>navigate('/programme/create')}>
             New Programme
         </Button>
-
-
+       
+        
+        <input type="text" class="shadow-appearance-none border border-gray-300 rounded-xl focus:ouline-none focus:ring-2 py-2 px-3 mb-2" placeholder="search Programme">
+        </input>
+</div>
+   
 
        <For each={programmeDetails.exercise}>
         {(item)=><p>
@@ -135,55 +145,26 @@ console.log(newProgramme.exercise)
 
        </For>
      <Show when={myProgrammes()}>
-        <table class="w-full text-gray-600">
+        
 
-   <thead class="">
-     <tr>
-        <For each={lists}>
-            {(item)=>
-          
-            <th class="border px-4 py-2 font-bold border-gray-300">
-                {item}
-
-            </th>
-      
-
-            }
+        <For each={myProgrammes()}>
+            {(item)=><div onclick={()=>viewProgramme(item.id)} class="bg-white shadow-md mb-10 rounded-xl p-4 hover:shadow-lg transition cursor-pointer">
+                <h1 class="font-bold text-2xl">
+               {item.name}
+               </h1>
+               <p class="text-gray-800 text-sm">
+                {item.description}
+               </p>
+                <For each={item.programmeWorkout}>
+                    {(workout)=><span class="block text-sm text-center">
+                        {workout.name}</span>}
+                </For>
+                </div>}
         </For>
-        </tr>
-   
+       
 
-        </thead>
-        <tbody>
-            <For each={myProgrammes()}>
-                {(item)=><tr>
-                    <td class="px-4 py-2 underline cursor-pointer">
-                        <span onclick={()=>viewProgramme(item.id)}>
-                        {item.name}
-                            </span>
-                        </td>
-                        <td class="px-4 py-2 text-center">
-                            {item.userProgramme.length}
-                          
-                        </td>
-                        <td  class="px-4 py-2 text-center">
-                           
-                            
-                            <Modal buttonText="Add new Client">
 
-                             <ClientProgramme results={client()} value={searchClientSignal()} onUpdate={setSearchClientSignal}/>
-                               
-                            </Modal>
-                        </td>
-                        
-                       
-                       
-                          
-                       
-                        </tr>}
-            </For>
-        </tbody>
-        </table>
+
         
        
      </Show>

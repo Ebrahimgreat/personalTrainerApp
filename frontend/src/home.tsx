@@ -5,16 +5,16 @@ import { useNavigate } from "@solidjs/router";
 import { useAuth } from "clerk-solidjs";
 import { UserProfile,OrganizationProfile } from "clerk-solidjs";
 import { useUser } from "clerk-solidjs";
-import { useRoleContext } from "./components/RoleContext";
+
 import { ToastProvider, useToast,Toast,Toaster } from "solid-notifications";
 import ClientMain from "./components/HomePage/client/clientMain";
 import Button from "./components/button";
+import LatestActivities from "./components/HomePage/client/creater/latestActivities";
 
 function home()
 {
 
-    const role=useRoleContext();
- 
+
     const{getToken}=useAuth();
 
     async function removeWeight(item:object)
@@ -79,7 +79,6 @@ const fetchData=async()=>{
 const token=await getToken()
 
 
-
     const response=await fetch(`http://localhost:3001/api/dashboard`,{
         method:'GET',
         headers:{
@@ -98,11 +97,6 @@ const token=await getToken()
     const [myValue]=createResource(fetchData);
 
 
-
-createEffect(()=>{
-    console.log(message(),"message")
-})
-
  
     return(
       
@@ -110,22 +104,17 @@ createEffect(()=>{
       
         <div class="flex flex-col">
 
-            <Show when={role.role()==='client' && myValue()} >
-                <ClientMain list={myValue()} name={myValue()[0].name}>
 
-                </ClientMain>
-         
-
-            </Show>
-           
-        
 
   
-            <Show when={role.role()==='admin'}>
                 <Show when={myValue()}>
-                   <h1 class="text-center font-bold mb-10">
+
+                   <h1 class=" font-bold">
            Welcome {myValue()[0].name}
              </h1>
+             <span class="font-extralight">
+                Get an overview of your Clients Progress
+             </span>
                 </Show>
                 
         
@@ -185,17 +174,15 @@ createEffect(()=>{
             </div>
 
 
-            <div class="bg-white shadow-md outline-none w-[350px] h-[350px]">
-                <h3 class="font-bold text-center border-b">
-                    Workouts
-
-                </h3>
-                </div>
+       
 
 </div>
 
 
-</Show>
+
+
+
+
             </div>
 
 

@@ -18,6 +18,14 @@ function CreateClient()
 
     return(
         <div class="flex items-center flex-col">
+            
+            <h1>
+                Invite new Clients
+
+            </h1>
+            <span class="text-gray-800">
+                Send this Code to your clients. They wil accept this to get coached by you.
+            </span>
             <div class="bg-white shadow-md">
                 <form onSubmit={handleSubmit}>
 

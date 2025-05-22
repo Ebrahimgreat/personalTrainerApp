@@ -4,7 +4,7 @@ import Button from "./components/button";
 import{weights,setWeights,submitForm,updateWeightField} from "./weightForm";
 import { useNavigate } from "@solidjs/router";
 import Modal from "./components/modal";
-import CreateWeight from "./createWeight";
+import CreateWeight from "./components/weight/createWeight";
 import { useAuth } from "clerk-solidjs";
 
 
@@ -102,8 +102,6 @@ async function handleSubmit(event:Event)
     const [page,setPage]=createSignal<number>(1)
   
 
-   
-
 
     const [myValue,{refetch}]=createResource(page,fetchData)
 
@@ -121,7 +119,7 @@ async function handleSubmit(event:Event)
 <div class="flex items-center justify-center">
 
 
-<Modal buttonText="Add">
+<Modal title="Create Weight" buttonText="Add">
 
   <CreateWeight/>
     
@@ -144,49 +142,34 @@ async function handleSubmit(event:Event)
 
            <div class="  overflow-y-auto h-[200px] sm-h-[300px] md:h-[400px] lg:h-[500px]">
            <div class="overflow-x-auto w-full">
-            <table class="border-gray-300 w-full">
-                <thead class="bg-pink-500 text-white">
-                    <tr>
-                        <th class="border border-gray-300 px-4 py-2">
-                         Date
-                        </th>
-                        <th class="border border-gray-300 px-4 py-2">
-                            Scale Weight
-                        </th>
-                        <th class="border border-gray-300 px-4 py-2">
-                            Trend Weight
-                        </th>
-                        <th class="px-4 py-2">
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                
 
-         <tbody>
-     
-          <For each={myValue()}>
-            
-            {(item)=><tr>
-               
-               <td class="border border-gray-300 px-4 py-2">
-               {new Date(item.created_at).toLocaleDateString()}
-               </td>
-                <td class="border border-gray-300 px-4 py-2">{item.scaleWeight}</td>
-                <td class="border border-gray-300 px-4 py-2">{item.trendWeight}</td>
-                <td class="border border-gray-300 px-4 py-2">
-                    <Button  onClick={()=>removeData(item)}>
-                     Remove Weight
-                     </Button>
-                </td>
+            <div class="bg-white shadow-md rounded-lg p-4">
+                <ul class="space-y-4">
+                    <For each={myValue()}>
+                        {(item)=><li class="  text-gray-700 text-center rounded-lg p-4 shadow-md hover:shadow-xl gap-y-6">
+                            <p class="text-sm">
+                               {new Date(item.created_at).toLocaleDateString()}
+                               </p>
+                               <p class="text-sm">
+                                Scale Weight: {item.scaleWeight}
 
-                </tr>}
-              
-                </For>
-           
-                </tbody>
-              
-                </table>
+                               </p>
+                               <p class="text-sm">
+                                trend Weight: {item.TrendWeight}
+
+                               </p>
+                               <button class="inline-flex items-center justify-center bg-amber-50  border transition duration-500 ease-in-out  text-black">
+                                remove
+                               </button>
+
+                            </li>}
+
+                    </For>
+                </ul>
+            </div>
+
+
+
                 </div>
                 </div>
 

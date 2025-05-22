@@ -1,7 +1,8 @@
-import { For } from "solid-js";
+import { For, onMount } from "solid-js";
 import Modal from "../../modal";
 import CreateWeight from "../../../createWeight";
-
+import { useNavigate } from "@solidjs/router";
+import Button from "../../button";
 type clientProps={
     name:string
     list:any[]
@@ -9,6 +10,10 @@ type clientProps={
 
 }
 function ClientHomePage(props:clientProps){
+    onMount(()=>{
+        console.log("From Client")
+    })
+    const navigate=useNavigate()
 
     return(
         <div class="flex flex-col">
@@ -64,10 +69,15 @@ function ClientHomePage(props:clientProps){
             </div>
 
 
+
+              
             <div class="bg-white shadow-md outline-none w-[350px] h-[350px]">
                 <h2 class="font-bold text-center border-b">
                    Workouts
                 </h2>
+                <Button onClick={()=>navigate('/createWorkout')}>
+                    Create
+                </Button>
                 <table class="w-full">
                     <thead>
                         <tr>
@@ -83,6 +93,7 @@ function ClientHomePage(props:clientProps){
                         </tr>
                     </thead>
                     <tbody>
+
                         <For each={props.list}>
                             {(item)=>(
                                 <For each={item.workout}>

@@ -1,7 +1,7 @@
 import { createContext,useContext,createSignal,onMount } from "solid-js";
 import { useAuth } from "clerk-solidjs";
 
-const[role,setRole]=createSignal('clients')
+const[role,setRole]=createSignal(null)
  const RoleContext=createContext({
     role,setRole
  })
@@ -9,7 +9,9 @@ const[role,setRole]=createSignal('clients')
 export function RoleContextProvider(props){
    
  
- 
+ onMount(()=>{
+
+ })
 
     return(
     <RoleContext.Provider value={{role,setRole}}>

@@ -6,8 +6,8 @@ function CheckRoles()
   const{setRole}=useRoleContext();
    
     onMount(async()=>{
+      
            
-              console.log('I am running')
               const {getToken}=useAuth();
               const token=await getToken()
               const data=await fetch('http://localhost:3001/api/roles',{
@@ -19,6 +19,7 @@ function CheckRoles()
               })
               const value= await data.json();
              setRole(value.role)
+            
           
     })
     return null;

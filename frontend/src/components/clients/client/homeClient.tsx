@@ -1,6 +1,6 @@
 
 import Button from "../../button";
-import { Show,For } from "solid-js";
+import { Show,For, onMount } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 type ClientProps={
     myClients:any[],
@@ -12,6 +12,7 @@ const columns:string[]=['Client','Assigned Programme']
 
 function ClientHomePage(props:ClientProps)
 {
+  
     const navigate=useNavigate()
     return(
         <div class="flex  flex-col">
@@ -31,10 +32,8 @@ function ClientHomePage(props:ClientProps)
 
               <table class="w-full text-gray-600">
                 <thead class="">
-                    <tr>
+                    <tr class="bg-transparent hover:bg-gray-500" onClick={()=>props.onClientName(item.id)}>
 
-                 
-                
                         <For each={columns}>
                             {(item)=>
                             <th class="px-4 py-2 border border-gray-300">

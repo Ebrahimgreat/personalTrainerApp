@@ -239,6 +239,69 @@
       "when": 1744394560009,
       "tag": "0033_nasty_logan",
       "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "6",
+      "when": 1744959262664,
+      "tag": "0034_flashy_red_ghost",
+      "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "6",
+      "when": 1744959762687,
+      "tag": "0035_early_korvac",
+      "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "6",
+      "when": 1746097813206,
+      "tag": "0036_shallow_madripoor",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "6",
+      "when": 1746195573714,
+      "tag": "0037_brainy_celestials",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "6",
+      "when": 1747553750408,
+      "tag": "0038_chemical_titanium_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "6",
+      "when": 1747593036777,
+      "tag": "0039_certain_wiccan",
+      "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "6",
+      "when": 1747677346798,
+      "tag": "0040_fuzzy_loa",
+      "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "6",
+      "when": 1747677635900,
+      "tag": "0041_nosy_mentallo",
+      "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "6",
+      "when": 1747741756654,
+      "tag": "0042_fluffy_captain_marvel",
+      "breakpoints": true
     }
   ]
 }

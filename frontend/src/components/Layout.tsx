@@ -43,6 +43,8 @@ function Layout1(props)
       <A href="/workout" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
      Workout
       </A>
+      <A href="/chat" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+      Chat</A>
       <UserButton class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 
       </UserButton>

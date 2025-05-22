@@ -14,6 +14,7 @@ const dashboardRoutes=new Hono();
 
 
 dashboardRoutes.get('/',async(c)=>{
+
     const auth=getAuth(c);
    
   if(!auth?.userId){
@@ -32,6 +33,7 @@ dashboardRoutes.get('/',async(c)=>{
     return c.json('not found');
   }
 return c.json(person)
+
 
 
     const nutrientPage:number=c.req.query('weight');

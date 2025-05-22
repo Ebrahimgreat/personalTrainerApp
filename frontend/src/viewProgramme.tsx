@@ -83,6 +83,16 @@ function ViewProgramme(){
 
 
     return(
+        <div class="flex flex-col w-full">
+            <h1 class="text-3xl font-semi-bold text-gray-900">
+                Edit Programme
+            </h1>
+            <span class="text-gray-900 text-sm">
+                Make Changes to Your Programme and workouts
+            </span>
+            
+
+   
         <div class="grid grid-cols-3 gap-x-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             
      
@@ -130,7 +140,7 @@ function ViewProgramme(){
                 </div>
                 <Show when={programmeDetails()}>
                 
-                <CreateNewProgramme description={programmeDetails()[0].description} headingText="View Programme" name={programmeDetails()[0].name}/>
+                <CreateNewProgramme description={programmeDetails()[0].description} headingText="Edit Programme" name={programmeDetails()[0].name}/>
                 </Show>
                
 
@@ -205,7 +215,7 @@ function ViewProgramme(){
 
 
         </div>
-
+</div>
     )
 
 }

@@ -10,6 +10,8 @@ type editProps={
     onNameChange:(index:number)=>(e:Event)=>void,
     onWeightChange:(index:number)=>(e:Event)=>void,  
     onRemove:(index:number)=>void;
+    selectedIndex:number,
+    setSelectedIndex:(index:number)=>void,
       name:string,
    
 
@@ -25,26 +27,31 @@ function EditExercises(props:editProps)
 
     
     return(
-        <div class="bg-white shadow-md">
-            <h2 class="font-bold text-center">
-                {props.name}
-
-            </h2>
+        <div class="bg-white">
+      
           
-            <table class="w-full">
+
+
+          
+            <table class="w-full table-fixed text-gray-900">
                 
-                    <thead>
+                    <thead class="bg-gray-200">
                         <tr>
-                        <th class="px-4 py-2">
+                           
+                        <th class=" border text-sm font-light border-gray-300">
                             name
 
                         </th>
-                        <th class="px-4 py-2">
+                        <th  class="border px-4 py-2 text-sm font-light border-gray-300">
                            rep Range
 
                         </th>
-                        <th class="px-4 py-2">
+                        <th class="border text-xs px-4 py-2 font-light border-gray-300">
                           weight
+
+                        </th>
+                        <th class=" border px-4 py-2 text-xs font-light borde border-gray-300">
+                            Remove
 
                         </th>
                         </tr>
@@ -52,31 +59,32 @@ function EditExercises(props:editProps)
            
                 <tbody>
                     <For each={props.items}>
-                        {(item,key)=><tr>
+                        {(item,key)=><tr onclick={()=>{
+                            if(props.selectedIndex==key()){
+                                props.setSelectedIndex(-1)
+                            }
+                            else{
+                                props.setSelectedIndex(key())
+                            }
+
+                        }} class={ props.selectedIndex==key()?'bg-blue-300': 'cursor-pointer hover:bg-amber-50'}>
+                           
 
 
-                            <td class="px-4 py-2">
-                                    <select value={item.name}  class="w-16">
-                                       <For each={props.exerciseLibrary}>
-                                        {(value)=><option value={item.id}>
-                                            {value.name}
-                                            </option>}
-                                            </For>
-
-
-                                    </select>
+                            <td class="px-4 py-2 text-xs">
+                            {item.name}
 
                                     </td>
-                                <td class="px-4 py-2">
-                                <input type="number" onChange={props.onWeightChange(key())}  class={` w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`} value={item.weight}/>
+                                <td class="px-4 py-2 text-xs">
+                                    
+                                <input type="number" onChange={props.onWeightChange(key())}  class={` w-18 h-8 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`} value={item.weight}/>
 
                                  </td>
-                                 <td class="px-4 py-2">
-
+                                 <td class="px-4 py-2 text-xs">
                         
 
                                         
-                                 <select name="repRange" value={item.repRange} onChange={props.onRepRangeChange(key())}  >
+                                 <select class="w-18 h-8 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" name="repRange" value={item.repRange} onChange={props.onRepRangeChange(key())}  >
                                     <For each={options}>
                                         {(key)=><option value={key}>
                                          {key}
@@ -87,13 +95,14 @@ function EditExercises(props:editProps)
                            
 
                                  </select>
+                                 
              
                          
                                  </td>
-                                 <td class="px-4 py-2">
-                                   <Button onClick={()=>props.onRemove(key())}>
-
-                                   </Button>
+                                 <td class="px-4 py-2 text-xs">
+                                  <button onclick={()=>props.onRemove(key())} class="bg-blue-500 w-8 h-8 rounded-full text-white shadow-md">
+                                    X
+                                  </button>
                                  </td>
 
                                 </tr>}
@@ -101,6 +110,7 @@ function EditExercises(props:editProps)
                    
                         </tbody>
                         </table>
+                       
 
                    {props.children}
             

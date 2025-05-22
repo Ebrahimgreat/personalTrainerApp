@@ -1,4 +1,3 @@
-import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { usersTable } from './db/schema.js';
 import { nutritionTable } from './db/schema.js';
@@ -7,7 +6,6 @@ import { db } from './db/index.js';
 import {basicAuth} from "hono/basic-auth";
 import { sql,eq,and} from 'drizzle-orm';
 import{cors} from 'hono/cors';
-import{z} from '@hono/zod-openapi'
 import { ParamsSchema,UserSchema } from './zod/schemas.js';
 import weightRoutes from './routes/weight/index.js';
 import nutritionRoutes from './routes/nutrition/index.js';
@@ -20,34 +18,26 @@ import{clerkMiddleware,getAuth} from '@hono/clerk-auth';
 import programmeRoutes from './routes/programme/index.js';
 import userProgrammeRoute from './routes/userProgramme/index.js';
 import clientRoutes from './routes/clients/index.js';
-import{createNodeWebSocket} from '@hono/node-ws';
 import latestActivitiesRoutes from './routes/latestActivities/index.js';
 import {stream,streamText,streamSSE} from 'hono/streaming';
-
+import type { ServerWebSocket } from 'bun';
+import {createBunWebSocket} from 'hono/bun';
+import messageRoute from './routes/messages/index.js';
+import roomMembers from './routes/roomMember/index.js';
 const app = new Hono()
-const{injectWebSocket,upgradeWebSocket}=createNodeWebSocket({app})
+const{upgradeWebSocket,websocket}=createBunWebSocket<ServerWebSocket>()
 const cacheStore=new Map();
 
+import { createRoute } from '@hono/zod-openapi';
+import measurementRoute from './routes/measurements/index.js';
 
-app.use('*',clerkMiddleware())
-app.get('/websocket',upgradeWebSocket((c)=>{
-  return{
+app.use('/api/trpc/*',)
 
-  onMessage:(event,ws)=>{
-    console.log('Message')
-  },
-  onClose(){
-    console.log('Connection Closed')
-  },
- onOpen:()=>{
-  console.log('Connection opne')
- }
-}
-}
-
-))
+app.use('*',
+  clerkMiddleware())
 
 
+  
 
 app.get('/children',async(c)=>{
   const body=await db.query.usersTable.findFirst({
@@ -55,10 +45,121 @@ app.get('/children',async(c)=>{
       children:true
     }
   })
-  return c.json(body)
+
+  return c.html(
+    `<html>
+    <h1> Hello Ebrahim
+    </h1>
+    <p>
+    This is Your Clients ${body.children.map((item)=>item.name)}
+    </p>
+    <input type="text" placeholder="Write a message">
+
+
+    `
+  )
 
 
 })
+
+let users=new Map<number,{socket:WebSocket; roomId:number,reciever:number}>();
+let messages=new Map<number,string>();
+
+
+
+
+app.get('/ws',upgradeWebSocket((_)=>{
+
+  return{
+
+  
+    onClose:(_,ws)=>{
+     
+
+ 
+    },
+   onOpen(_,ws){
+    //Web Socket opened
+    console.log('web socket opened')
+    
+ },
+
+
+
+   
+   onMessage(event,ws){
+    console.log("I am running")
+   let timer:number=0;
+
+   const data=JSON.parse(event.data);
+   if(data.type==='left'){
+    console.log("The User has Been Deleted")
+    users.delete(data.sender)
+  
+   }
+
+
+    if(users.size>=2)
+    {
+      const currentTime=new Date().toLocaleTimeString();
+      users.forEach((item)=>{
+        if(item.reciever===data.reciever)
+        {
+          
+         
+         item.socket.send(event.data)
+        }
+      })
+      console.log(data)
+    }
+  
+    
+
+    /*if(users.size>=2)
+    {
+      console.log('SIZE is 2')
+      console.log(event.data)
+     const data=(JSON.parse(event.data))
+    users.forEach((item,key)=>{
+      console.log(key)
+      console.log(data.sender)
+      if(key==data.sender)
+      {
+        console.log("YES SIR SENDING DATA")
+        item.send(event.data)
+      }
+    
+    })
+     
+      return;
+    }
+      */
+   
+
+  
+    
+    
+users.set(data.sender,{
+ socket:ws,
+  roomId:data.roomNumber,
+  reciever:data.sender
+})
+
+console.log("The users size is",users.size);
+
+
+ 
+  },
+    onError:(event,ws)=>{
+      console.log('error')
+      ws.send('error e')
+    }
+  }
+
+  
+}))
+
+
 
 
 
@@ -66,18 +167,19 @@ app.use('/api/*',cors())
 app.use('/api/*',clerkMiddleware())
 app.use('/api2/*',
   cors({
-    origin:'http://localhost:3000/',
+    origin:['http://localhost:3000','http://localhost:8081'],
     allowMethods:['POST','GET','PUT'],
     credentials: true,
 
   })
 )
 app.get('/hello',async(c)=>{
-  return c.html(`<h1> Hello</h1>`)
+ return c.json({message:'HLI'})
   
 
 
 })
+
 
 
 app.get('/api/roles',async(c)=>{
@@ -122,19 +224,28 @@ return c.json(options)
 })
 
 
-app.route('/api/programme',programmeRoutes);
+
+const route=app.route('/api/programme',programmeRoutes);
 app.route('/api/customFoods',customFoodRoute)
 app.route('/api/weight',weightRoutes)
 app.route('/api/workout',workoutRoutes)
 app.route('/api/userProgramme',userProgrammeRoute)
 app.route('/api/activity',latestActivitiesRoutes)
+app.route('/api/roomMembers',roomMembers);
+app.route('/api/measurements',measurementRoute)
 
 app.route('/api/exercise',exerciseRoutes);
 app.route('/api/nutrition',nutritionRoutes)
 app.route('/api/dashboard',dashboardRoutes)
 app.route('/api/clients',clientRoutes)
 
+app.route('/api/messages',messageRoute);
 
+
+
+app.get('/api/',(c)=>{
+  return c.json('Hello Ebrahim, Welcome. You can Track Your Clients Here. 1.api/clients(To see Clients) ');
+})
 
 app.get('/api/stream',(c)=>{
   return stream(c,async(stream)=>{
@@ -158,6 +269,8 @@ app.get('/api/stream',(c)=>{
   })
 
 })
+
+
 
 app.post('/api/login',async(c)=>{
   const body=await c.req.json()
@@ -188,11 +301,24 @@ app.get('/api/dogs',(c)=>{
 })
 
 
-const server=serve({
-  fetch: app.fetch,
-  port: 3001
-}, (info) => {
-  console.log(`Server is running on http://localhost:${info.port}`)
+
+app.get('/api/me',async(c)=>{
+  const auth=getAuth(c);
+  if(!auth?.userId){
+    return c.json('User does not exisst');
+  }
+  const user=await db.query.usersTable.findFirst({
+    where:eq(usersTable.user_id,auth.userId)
+  })
+  return c.json(user)
+
 })
 
-injectWebSocket(server)
+
+export default{
+  port:3001,
+  fetch:app.fetch,
+  websocket,
+  
+}
+console.log('Bun running')

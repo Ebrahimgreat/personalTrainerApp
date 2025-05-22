@@ -25,6 +25,11 @@ function Workout()
   const{getToken}=useAuth();
 
   
+const navigateToCreateWeight=(item:number)=>{
+setSearchParams({name:item})
+navigate(`/createWorkout?id=${item}`);
+
+}
   
   const[searchParams,setSearchParams]=useSearchParams();
   const[newWorkout,setNewWorkout]=createStore<newWorkout>({
@@ -141,53 +146,20 @@ function Workout()
     return(
         <div class="flex flex-col">
          
-         <div class="flex items-center justify-center mb-3">
+         <div class="flex items-center flex-row  justify-between mt-5">
 
        
-          <Button class="w-32" onClick={()=>navigate('/createWorkout')}>
+          <Button class="w-32" onClick={()=>navigateToCreateWeight(0)}>
             Add Workout
 
+          </Button>
+          <Button class="w-32" onClick={()=>navigateToCreateWeight(1)}>
+            Create From Programme
           </Button>
           </div>
          
 
 
-<table class="w-full text-gray-600">
-  <thead class="border px-4 py-2 gap-x-3 border-gray-300">
-    <tr class="px-4 py-2">
-      <th class="px-4 py-2">
-      Date
-      </th>
-      <th class="px-4 py=2">
-   Programme
-      </th>
-     
-    </tr>
-  </thead>
-  <tbody>
-    <For each={myWorkout()}>
-      {(item)=><tr>
-        <td class="px-4 py-2 text-center">
-          {new Date(item.created_at).toLocaleDateString()}
-          </td>
-          <td class="px-4 py-2 text-center" >
-            
-      
-          </td>
-          </tr>}
-    </For>
-    
-    
-    
-
-       
-       
-          
-          
-      
-      
-    </tbody>
-    </table>
     </div>
 
 )}
