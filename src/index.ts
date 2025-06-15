@@ -30,6 +30,14 @@ const cacheStore=new Map();
 
 import { createRoute } from '@hono/zod-openapi';
 import measurementRoute from './routes/measurements/index.js';
+import { createClerkClient, EmailAddress } from '@clerk/backend';
+import {clientSchema} from './zod/clientSchema.js';
+
+
+
+app.get('/',async(c)=>{
+  return c.json("Hello Ebrahim");
+})
 
 app.use('/api/trpc/*',)
 
@@ -179,7 +187,19 @@ app.get('/hello',async(c)=>{
 
 
 })
+app.post('/api/email-check',async(c)=>{
+  const body=await c.req.json();
 
+  const user=await db.query.usersTable.findFirst({
+    where:eq(usersTable.email,body.email)
+  });
+  if(!user){
+    return c.json("Not Exist");
+  }
+ return c.json("User Exists")
+
+
+})
 
 
 app.get('/api/roles',async(c)=>{
@@ -243,6 +263,50 @@ app.route('/api/messages',messageRoute);
 
 
 
+app.post('/api/client/store',async(c)=>{
+  const auth=getAuth(c);
+  
+
+
+  if(!auth?.userId)
+  {
+    return c.json("Error")
+  }
+
+
+  const userFind=await db.query.usersTable.findFirst({
+    where:eq(usersTable.user_id,auth.userId)
+  })
+
+  
+
+  const query=await c.req.json();
+
+
+  
+
+  try{
+
+    const data=await db.insert(usersTable).values({
+      name:query.name,
+      age:query.age,
+      parent_id:userFind?.id,
+      email:query.email,
+      
+    });
+
+return c.json("Record Created",{data:data});
+ }
+ catch(error)
+ {
+
+  console.log("ERROR",error)
+  return c.json("Error");
+ }
+
+  
+})
+
 app.get('/api/',(c)=>{
   return c.json('Hello Ebrahim, Welcome. You can Track Your Clients Here. 1.api/clients(To see Clients) ');
 })
@@ -293,12 +357,6 @@ return c.json(data)
 
 )
 
-
-
-
-app.get('/api/dogs',(c)=>{
-  return c.text("Hello Ebrahim")
-})
 
 
 

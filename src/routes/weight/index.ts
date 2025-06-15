@@ -41,10 +41,14 @@ weightRoutes.post('/remove',async(c)=>{
 })
 weightRoutes.post('/store',async(c)=>{
     const body=await c.req.json()
+
     const user=getAuth(c);
+  
     if(!user?.userId){
       return c.json('not found');
     }
+    return c.json(user)
+
     
     const userFind=await db.query.usersTable.findFirst({
       where:eq(usersTable.user_id,user?.userId)

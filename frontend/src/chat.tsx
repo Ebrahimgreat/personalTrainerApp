@@ -2,7 +2,6 @@ import { onMount,createSignal,Show,For, createEffect } from "solid-js"
 import { useAuth } from "clerk-solidjs"
 import { createResource } from "solid-js";
 import { createStore } from "solid-js/store";
-import { useRoleContext } from "./components/RoleContext";
 import Button from "./components/button";
 import CreaterChat from "./components/clients/chat/creater";
 
@@ -18,7 +17,6 @@ type MessageType={
 
 
 function Chat(){
-    const role=useRoleContext();
 
     const {getToken}=useAuth();
 
@@ -276,143 +274,15 @@ console.log(authUser().id)
 
     
            
-       <Show when={role.role()==='admin'}>
+   
                 <CreaterChat setNewMessage={(item)=>setNewMessage(item)} setForm={(event)=>newMessageEntered(event)} newMessage={newMessage()} newRecievedMessage={newRecievedMessage()} messages={messageStore.message} userId={userId()} user={user}   onUserClicked={(item)=>userSelected(item)} items={roomMembers()}>
                     </CreaterChat>
-            </Show>
 
 
 
 
-            <Show when={role.role()==='client'}>
-
-
-          
-
-        
-
-   <div class="flex h-screen w-full max-w-screen-2xl m-auto overflow-hidden">
-<aside class="w-full lg:w-1/4 bg-whiterounded-lg mr-5 shadow-md">
-<div class="h-full flex flex-col">
-    <div class="flex p-10 ">
-        <div class="mb-4 text-3xl font-semi-bold text-gray-900">
-            Chat
-        </div>
-        </div>
-
-        
-        <div class="flex-1 overflow-y-scroll scrollbar space-y-2">
-            <div class="w-full space-y-10">
-               
-           
-                <Show when={roomMembers()}>
-                   
-                   <ul class="">
-
-              
-              
-                   <For each={roomMembers()}>
-                       {(item)=><li onclick={()=>userSelected(item.room.user)} class="cursor-pointer px-4 py-2 rounded-lg hover:bg-indigo-100 text-black">
-                           {item.room.user.name}
-                           </li>}
-                   </For>
-                   </ul>
-
-               </Show>
-
-                </div>
-            </div>
-        </div>
-     
-
-
-
-</aside>
-
-
-        
-
-            
-
-              
-            <section class="relative max-h h-full bg-white rounded-lg w-full flex flex-col dark:bg-900 lg:flex">
-
-        
-        <div class="flex-1 overflow-y-scroll p-5 scrollbar-thumb dark:scrollbar-thumb-color-dark scrollbar-width space-y-5">
-
-          <Show when={messageStore.message.length==0}>
-            Select a Conversation
-          </Show>
-
-            <div class="w-full py-3 shadow-md text-black font-extrabold  text-center">
-               {user.name}
-            </div>
-
-            
-                <For each={messageStore.message}>
-                    
-                    {(item)=>
-                
-                    <div class={`flex ${item.id===userId()? 'justify-start': 'justify-end'}`}>
-                       <div class={`p-4 rounded-lg max-w-xl ${item.id===userId()? 'bg-indigo-800 text-white rounded-l-lg': 'bg-gray-100 text-black rouned-r-lg'}`}>
-      
-
-
-
-                    <span class="text-sm">
-                        {item.id===userId() ?`${user.name}: ${item.message}` : `You :${item.message}` }
-
-                    </span>
-                    
-                       
-                       </div>
-
-                    
-
-
-                  
-                        </div>}
-                        
-                </For>
-
-            
-           
-
-       </div>
-        <Show when={messages()}>
-        
-
-
-
-  <form onSubmit={newMessageEntered}>
-
-
-                <input value={newMessage()} onchange={(e)=>setNewMessage(e.currentTarget.value)} placeholder="type a message" type="text" class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 rounded-full py-3 pr-5"/>
-               
-               <div class="ml-5">
 
             
-                <button class="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-black" type="submit">
-                    Send
-
-                </button>
-                </div>
-             </form>
-        
-                </Show>
-              
-
-
- 
-      
-           </section>
-           </div>
- 
-        
-           
-         
-
-           </Show>
     
            </div>
        )

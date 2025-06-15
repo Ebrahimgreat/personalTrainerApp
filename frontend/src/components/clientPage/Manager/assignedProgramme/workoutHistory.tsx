@@ -56,7 +56,7 @@ function WorkoutHistory(props:myWorkout)
                 </h1>
                 <p class="text-center text-gray-600">
            
-                {item.programme.name===''?` No Programme Followed ${item.name}`: ` Programme Followed: ${item.programme?.name}`}
+                {item.programme.name===''?` No Programme Followed: ${item.name}`: ` Programme Followed: ${item.programme?.name}`}
                 </p>
                 <table class="w-full">
                     <thead>

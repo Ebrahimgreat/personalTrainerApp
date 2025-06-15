@@ -9,6 +9,7 @@ type editProps={
     onRepRangeChange:(index:number)=>(e:Event)=>void,
     onNameChange:(index:number)=>(e:Event)=>void,
     onWeightChange:(index:number)=>(e:Event)=>void,  
+    onSetChange:(index:number)=>(e:Event)=>void,
     onRemove:(index:number)=>void;
     selectedIndex:number,
     setSelectedIndex:(index:number)=>void,
@@ -50,6 +51,9 @@ function EditExercises(props:editProps)
                           weight
 
                         </th>
+                        <th class="border text-xs px-4 py-2 font-light border-gray-300">
+                            Sets
+                        </th>
                         <th class=" border px-4 py-2 text-xs font-light borde border-gray-300">
                             Remove
 
@@ -75,11 +79,7 @@ function EditExercises(props:editProps)
                             {item.name}
 
                                     </td>
-                                <td class="px-4 py-2 text-xs">
-                                    
-                                <input type="number" onChange={props.onWeightChange(key())}  class={` w-18 h-8 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`} value={item.weight}/>
-
-                                 </td>
+           
                                  <td class="px-4 py-2 text-xs">
                         
 
@@ -100,7 +100,17 @@ function EditExercises(props:editProps)
                          
                                  </td>
                                  <td class="px-4 py-2 text-xs">
-                                  <button onclick={()=>props.onRemove(key())} class="bg-blue-500 w-8 h-8 rounded-full text-white shadow-md">
+                                    
+                                    <input type="number" onChange={props.onWeightChange(key())}  class={` w-18 h-8 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`} value={item.weight}/>
+    
+                                     </td>
+                                 <td class="px-4 py-2">
+                                    <input type="number" onChange={props.onSetChange(key())}  class={` w-18 h-8 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}>
+
+                                    </input>
+                                 </td>
+                                 <td class="px-4 py-2 text-xs">
+                                  <button onclick={()=>props.onRemove(item.id)} class="bg-blue-500 w-8 h-8 rounded-full text-white shadow-md">
                                     X
                                   </button>
                                  </td>

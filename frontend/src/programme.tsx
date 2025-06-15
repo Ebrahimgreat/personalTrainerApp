@@ -2,7 +2,7 @@ import { For,createResource,Show,createSignal} from "solid-js";
 import { createStore } from "solid-js/store";
 import Table from "./components/table";
 import Modal from "./components/modal";
-import Button from "./components/button";
+import Button from "./components/ui/button";
 import { programmeDetails,setProgrammeDetails,updateProgrammeDetails } from "./components/programmeDetails";
 import { useNavigate } from "@solidjs/router";
 import { useSearchParams } from "@solidjs/router";
@@ -122,6 +122,7 @@ console.log(newProgramme.exercise)
 <h1 class="text-3xl font-semi-bold text-gray-900 ">
                Programmes
                 </h1>
+                <div class="flex flex-row justify-between"></div>
                 <span class="font-extralight">
                  Organize Your Programmes
                 </span>
@@ -129,7 +130,7 @@ console.log(newProgramme.exercise)
         <div class="flex flex-row justify-between">
 
 
-        <Button class="btn" onClick={()=>navigate('/programme/create')}>
+        <Button type="button"  variant="outline" onClick={()=>navigate('/programme/create')}>
             New Programme
         </Button>
        
@@ -152,6 +153,7 @@ console.log(newProgramme.exercise)
                 <h1 class="font-bold text-2xl">
                {item.name}
                </h1>
+              
                <p class="text-gray-800 text-sm">
                 {item.description}
                </p>

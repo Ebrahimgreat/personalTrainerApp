@@ -1,16 +1,16 @@
 import { For,Show } from "solid-js";
-import CreateExercise from "../createExercise";
 import Modal from "../modal";
-import CreateWeight from "../../createWeight";
+
 type props={
    equipmentSelected:string,
-   equipment:[];
+   equipment:string[],
    typeSelected:string,
-   types:[],
+   types:string[]
    searchExercise:string,
    myExercises:[],
    selectAction:number
    selectExercise:string,
+   showProgramme?:string,
 
  
    setTypeSelected:(item:string)=>void,
@@ -42,6 +42,9 @@ function ExerciseLibrary(props:props){
         </Show>
         </div>
         <Show when={props.selectAction!==-1}>
+
+
+<Show when={props.showProgramme==='No Programme'}>
 
 
 <div class="border-b px-6 py-3">
@@ -81,11 +84,19 @@ function ExerciseLibrary(props:props){
 </div>
 
 
+
 <input disabled={props.selectAction==-1} value={props.searchExercise} onChange={(e)=>props.setSearchSelected(e.currentTarget.value)} class=" disabled:cursor-not-allowed  shadow appearance-none border w-full border-gray-300 rounded-xl focus:outline-none focus:ring-2 py-2 px-3 mb-2 " type="text" placeholder="search Exercise"/>
 </div>
+</Show>
+<div class="h-[400px] overflow-auto">
+
+
 <ul class="">
 
-    
+
+
+
+
 <For each={props.myExercises}>
 {(item,count)=> <li class="cursor-pointer px-4 py-2 rounded-lg hover:bg-indigo-100 text-grey-600" onClick={()=>props.updatingExercise(item)}>
 
@@ -109,6 +120,7 @@ function ExerciseLibrary(props:props){
 
 
 </ul>
+</div>
 
 
 </Show>

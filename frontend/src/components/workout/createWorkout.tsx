@@ -13,14 +13,18 @@ import addIcon from './assets/icons/add.svg';
 import ExerciseLibrary from "../exercise/exerciseLibrary";
 import CreateExercise from "../exercise/createExercise";
 
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 
-
-
+const [submitDialog,setSubmitDialog]=createSignal(false)
 type exerciseInformation={
     id:number,
     name:string,
     equipment:string,
     target:string,
+}
+type programmeTypes={
+    id:number,
+    name:string,
 }
 
 type workout={
@@ -46,6 +50,12 @@ type workout={
 
 type props={
     clientName:string,
+    showProgramme:string,
+    programmeTypeSelected:programmeTypes,
+updateProgrammeType:(item:number)=>void,
+    programmeTypes:programmeTypes[],
+    setShowProgramme:(item:string)=>void,
+    programmeExercises:exerciseInformation[],
     exercises:exerciseInformation[],
     myExercise:workout,
     addExercise:(item:workout)=>void,
@@ -58,7 +68,10 @@ type props={
     setWorkoutName:(item:string)=>void,
     setDate:(item:string)=>void,
     workoutName:string,
-    removeItem:(item:number,value:number,key:number)=>void
+
+    removeItem:(item:number,value:number,key:number)=>void,
+    updateWorkout:(item:number,value:number,key:number)=>void,
+    submitWorkout:()=>void
 }
 
 
@@ -112,6 +125,14 @@ function CreateWorkout(props:props)
     props.setDate(item)
   }
 
+  function submitWorkout(){
+    props.submitWorkout()
+  }
+
+  function updateWorkout(id:number,key:number,value:number,field:string){
+    props.updateWorkout(id,key,value,field)
+  }
+
   function removeItem(id:number,value:number,key:number){
    props.removeItem(id,value,key)
   }
@@ -120,9 +141,24 @@ function CreateWorkout(props:props)
 
    props.addExercise(item)
   }
-  
+
+  function updateProgrammeType(item:number){
+   
+   props.updateProgrammeType(item)
+   
+  }
+
    
 
+
+
+
+
+
+
+createEffect(()=>{
+    console.log("Confirmation",submitDialog())
+})
    
     
     
@@ -160,15 +196,17 @@ function CreateWorkout(props:props)
                 </Modal>
          
             </Show>
+            
+            
            
           
-        
+        {props.programmeExercises.length}
         <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-x-4" >
 
         
            
            
-            <ExerciseLibrary updatingExercise={(item)=>addExercise(item)} equipmentSelected={props.equipment}   equipment={equipmentArray} types={bodyPart} typeSelected={props.type} setTypeSelected={(item)=>props.setType(item)} setEquipment={(item)=>updateEquipment(item)} myExercises={props.exercises} setSearchSelected={(item)=>updateSearchString(item)}  searchExercise={props.searchString} >
+            <ExerciseLibrary showProgramme={props.showProgramme} updatingExercise={(item)=>addExercise(item)} equipmentSelected={props.equipment}   equipment={equipmentArray} types={bodyPart} typeSelected={props.type} setTypeSelected={(item)=>props.setType(item)} setEquipment={(item)=>updateEquipment(item)} myExercises={props.showProgramme==='No Programme'? props.exercises: props.programmeExercises} setSearchSelected={(item)=>updateSearchString(item)}  searchExercise={props.searchString} >
         
             </ExerciseLibrary>
 
@@ -180,7 +218,7 @@ function CreateWorkout(props:props)
 
 
 
-<div class="flex flex-col">
+<div class="h-[400px] overflow-y-auto">
 
 
     
@@ -198,7 +236,7 @@ function CreateWorkout(props:props)
         </option>
         
     </select>
-    <select class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-5">
+    <select onchange={(e)=>props.setShowProgramme(e.currentTarget.value)} value={props.showProgramme} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-5">
         <option>
             Programme
         </option>
@@ -207,7 +245,19 @@ function CreateWorkout(props:props)
         </option>
 
     </select>
+{props.programmeTypeSelected.id}
+<Show when={props.showProgramme==='Programme'}>
 
+    <select onchange={(item)=>updateProgrammeType(item.currentTarget.value)}   value={props.programmeTypeSelected.id}>
+      <For each={props.programmeTypes}>
+        {(item)=><option value={item.id}>
+            {item.name}
+          
+            </option>}
+            </For>
+
+    </select>
+</Show>
 
             <input type="text" onchange={(e)=>updateWorkoutName(e.currentTarget.value)} value={props.workoutName} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-5" placeholder="Enter Name of Workout..">
             </input>
@@ -220,7 +270,33 @@ function CreateWorkout(props:props)
 
             <input type="date" onChange={(e)=>updateDate(e.currentTarget.value)} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-10 ">
             </input>
-
+      
+           <AlertDialog open={submitDialog()}>
+            <AlertDialogTrigger onclick={()=>setSubmitDialog(true)}>
+                
+            <Button>
+                Submit
+                </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent class="bg-white">
+                <AlertDialogHeader>
+                    <AlertDialogTitle>
+                        Are you sure you want to submit?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                        This action will submit the workout.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                   <Button onClick={()=>setSubmitDialog(false)}>
+                Cancel
+                </Button>
+                <Button onClick={()=>submitWorkout()} >
+                    Continue
+                </Button>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+           </AlertDialog>
                 
 
 
@@ -230,24 +306,25 @@ function CreateWorkout(props:props)
 
 
                  
-            <div class=" text-black shadow-lg mt-4 h-full overflow-y-scroll px-3">
+            <div class=" text-black shadow-lg mt-4 px-3">
                
 
                <For each={props.myExercise}>
                 {(item,key)=>(
-                    <div class="min-h-[200px] max-h-[200px] overflow-y-auto">
-                           <span class="text-lg font-semibold text-blue-500">
+                  <div class="grid gap-4">
+                           
                      
     
         
-         Name: {item.name}
+             <h2 class="text-lg font-bold">
+               Name: {item.name}
   
-       
-                  </span>
+       </h2>
+                
                         
 
                 <For each={(item.exercise)}>
-                    {(value)=>(
+                    {(value,internalKey)=>(
                    
                 <div class="  text-black shadow-md p-8 flex mb-10 flex-col">
            
@@ -263,9 +340,7 @@ function CreateWorkout(props:props)
                 <p class="text-sm">
                     Set
                 </p>
-                <input value={value.set} type="text" class="shadow-appearance-none border w-full border-gray-300 ">
-                </input>
-                
+                {value.set}
 
          
                   </div>
@@ -281,7 +356,7 @@ function CreateWorkout(props:props)
                          Weight
    
                         </p>
-                        <input value={value.weight} type="text" class="border shadow-md rounded">
+                        <input type="number" value={value.weight} onchange={(e)=>updateWorkout(key(),internalKey(),Number(e.currentTarget.value),'weight')}   class="border shadow-md rounded">
                 </input>
                 
                 
@@ -295,7 +370,7 @@ function CreateWorkout(props:props)
             reps
            </p>
 
-           <input value={value.reps} type="text" class="border shadow-md rounded">
+           <input value={value.reps} onchange={(e)=>updateWorkout(key(),internalKey(),Number(e.currentTarget.value),'reps')} type="number" class="border shadow-md rounded">
                 </input>
                 
 

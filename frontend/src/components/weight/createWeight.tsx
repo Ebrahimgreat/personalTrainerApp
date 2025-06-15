@@ -4,14 +4,17 @@ import { useAuth } from "clerk-solidjs";
 
 type props={
   clientName:string
-  date:string,
+ weightCreated:string,
   scaleWeight:number,
-  updateScaleWeight:(item:string)=>void,
+  updateScaleWeight:(item:number)=>void,
   updateDate:(item:string)=>void,
+  addWeight:()=>void
 }
 
 function CreateWeight(props:props)
 {
+
+
 
   const{getToken}=useAuth();
 
@@ -19,12 +22,15 @@ function CreateWeight(props:props)
 
 async function handleSubmit(event:Event)
 {
+
+
+ 
   event.preventDefault();
+props.addWeight()
 
   const token=await getToken();
  
-   
-    submitForm(token)
+  
     
 }
 
@@ -33,8 +39,8 @@ async function handleSubmit(event:Event)
 
         <div class="h-full w-full">
             
-            <div class="w-full max--xs shadow-md text-black flex items-center justify-center">
-              
+            <div class="">
+             
       
                 
             <form class=" rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
@@ -49,7 +55,7 @@ async function handleSubmit(event:Event)
           <label class="block text-sm font-bold mb-2">
            Scale Weight
           </label>
-          <input value={props.scaleWeight} onChange={updateWeightField('scaleWeight')} class="shadow appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-300">
+          <input value={props.scaleWeight} type="number" onChange={(e)=>props.updateScaleWeight(Number(e.currentTarget.value))}   class="shadow appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-black">
           </input>
           </div>
           <div class="mb-4">
@@ -58,14 +64,15 @@ async function handleSubmit(event:Event)
           <label class="block  text-sm font-bold mb-2">
             Date
           </label>
-          <input type="date" value={weights.created_at} onChange={updateWeightField('created_at')} class="shadow appearance-none border border-gray-300 rounded-lg   w-full py-2 px-3 text-gray-300">
+         
+          <input type="date" value={props.weightCreated} onChange={(e)=>props.updateDate(e.currentTarget.value)} class="shadow appearance-none border border-gray-300 rounded-lg   w-full py-2 px-3 text-black">
           </input>
           </div>
 
 <div class="flex items-center justify-center">
 
 
-          <Button>
+          <Button type="submit">
             Create Weight
 
           </Button>

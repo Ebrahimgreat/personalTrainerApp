@@ -19,7 +19,10 @@ import ClientWorkoutHistory from "./components/clientPage/stats/clientWorkoutHis
 import WorkoutStats from "./components/clientPage/workoutStats/workoutStats";
 import MeasurementLibrary from "./components/clientPage/measurements/measurementLibrary";
 import MeasurementScreen from "./components/clientPage/measurements/measurementRightScreen";
-
+import ExerciseLibrary from "./components/exercise/exerciseLibrary";
+import { useAuth } from "clerk-solidjs";
+import Button from './components/ui/button';
+import Tabs, { TabsContent, TabsIndicator, TabsList, TabsTrigger } from "./components/ui/tabs";
 const tabBarItems:string[]=['Overview','Assigned Programme','Body Measurements', 'Weekly Stats', 'Exercise Statistics','Settings']
 
 
@@ -27,7 +30,17 @@ type Measurement={
     id:number,
     name:string
 }
+type MeasurementStore={
+    id:number,
+    name:string,
+    value:number
+}
 
+type Weight={
+    created_at:string
+    scaleWeight:number,
+
+}
 type WorkoutDetailed={
     id:number,
     name:string,
@@ -56,6 +69,17 @@ type Exercise={
     }[];
 }
 
+type WorkoutExercise={
+    id:number,
+    name:string,
+    exercise:{
+        id:number,
+        set:number,
+        reps:number,
+        weight:number
+    }[];
+}
+
 
 
 
@@ -63,7 +87,7 @@ type workout={
     id:number,
     name:string,
     date:string,
-    workout:Exercise[];
+    workout:WorkoutExercise[];
 }
 
 const[myWorkout,setMyWorkout]=createStore<workout>({
@@ -75,9 +99,31 @@ workout:[]
 })
 
 
+
+type detailedExercise={
+    id:number,
+    name:string,
+    equipment:string,
+
+}
+
+
+const[showProgramme,setShowProgramme]=createSignal('No Programme')
+const[programmeExercise,setProgrammeExercise]=createStore<detailedExercise[]>([]);
+
+const updateWorkout=(key:number,internalKey:number,value:number,field:string)=>{
+   setMyWorkout('workout',key,'exercise',internalKey,field,value)
+   console.log(myWorkout.workout)
+  }
+ 
+ 
+ 
+
+
+
 function removeItem(item:number,value:number,id:number)
 {
-    console.log(id)
+    console.log(item)
 
    setMyWorkout('workout',item,'exercise',(current)=>current.filter((item)=>item.id!=value))
 
@@ -126,8 +172,9 @@ let indexFound=false;
 
         setMyWorkout('workout',index,'exercise',(current)=>[
             ...current,{
-                id:2,
-                set:2,
+                id:myWorkout.workout[index].exercise.length,
+                set:myWorkout.workout[index].exercise.length+1,
+                weight:1,
                 reps:2
             }
 
@@ -139,7 +186,7 @@ let indexFound=false;
     return;
 }
       }
-      console.log("index is false");
+   
  
    
 
@@ -151,7 +198,7 @@ let indexFound=false;
                 id:1,
                 set:1,
                 reps:1,
-                repRange:1
+                weight:1
             }]
 
         }
@@ -176,6 +223,9 @@ if(length==0)
 }
     
    }
+
+
+
 
 
    const updateExercise=(fieldName:string,key:number)=>(event:Event)=>{
@@ -205,8 +255,7 @@ if(length==0)
 
 
 
-
-
+//submit Workout
 
 
 const equipment:string[]=['Barbell','Dumbell','KettleBells','Body Weight','Cable']
@@ -227,6 +276,9 @@ function ViewClient(
 
 {
 
+
+    const{getToken}=useAuth();
+
     const[startDate,setStartDate]=createSignal('')
     const[endDate,setEndDate]=createSignal('');
 
@@ -241,6 +293,13 @@ function ViewClient(
     const [selectedTab,setSelectedTab]=createSignal<string>('Overview')
 
 
+
+
+    const[weight,setWeight]=createStore<Weight>({
+        scaleWeight:0,
+        created_at:new Date().toLocaleDateString()
+
+    })
 const [measurement,setMeasurement]=createStore<Measurement>({
     id:0,
     name:''
@@ -251,8 +310,8 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     const[workoutHistoryDate,setWorkoutHistoryDate]=createSignal('')
 
     const[searchString,setSearchString]=createSignal<string>('')
-    const[equipment,setEquipment]=createSignal<string>('Barbell')
-    const[type,setType]=createSignal('Chest')
+    const[equipment,setEquipment]=createSignal<string>('Equipment')
+    const[type,setType]=createSignal('Type')
 
     const location=useLocation();
     const id=location.search.slice(4)
@@ -298,12 +357,29 @@ const [measurement,setMeasurement]=createStore<Measurement>({
         }
     }
 
+  
     const exerciseId=createMemo(()=>exercise.id)
     const measurementId=createMemo(()=>measurement.id)
     const fetchStats=async()=>{
         try{
             const data=await fetch(`http://localhost:3001/api/clients/${id}/stats?id=${exerciseId()}`,{
                 method:"GET"
+            })
+            return data.json();
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
+    const fetchAllProgrammes=async()=>{
+        try{
+            const token=await getToken();
+            const data=await fetch(`http://localhost:3001/api/programme`,{
+                method:'GET',
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
             })
             return data.json();
         }
@@ -322,11 +398,19 @@ const [measurement,setMeasurement]=createStore<Measurement>({
         }
       
 
+
+
     }
 
     const fetchMeasurements=async()=>{
         try{
-            const data=await fetch('http://localhost:3001/api/measurements')
+            const token=await getToken();
+            const data=await fetch('http://localhost:3001/api/measurements',{
+                method:'GET',
+                headers:{
+                 'Authorization':`Bearer ${token}`
+                }
+            })
             return data.json()
         }
         catch(error){
@@ -344,24 +428,86 @@ const [measurement,setMeasurement]=createStore<Measurement>({
         }
     }
 
+const updateMeasurement=(key:number,value:number)=>{
+  
+  
+    setMeasurementStore(key,(current)=>({
+        ...current,
+        value:value
+
+    }))
+
+}
 
        
 
-const updateSelectExercise=(item:Workout)=>{
+const submitWorkout=async()=>{
+   const token=await getToken();
+   try{
+    const data=await fetch(`http://localhost:3001/api/clients/${id}/workout/store`,{
+        method:'POST',
+        headers:{
+            'Authorization':`Bearer ${token}`
+        },
+        body:JSON.stringify({
+            workout:myWorkout
+
+        })
+
+    })
+   }
+   catch(error){
+    console.log(error)
+   }
+}
+
+
+const updateSelectExercise=(item:Exercise)=>{
     console.log(item)
-    setExercise('id',item.exercise.id),
-    setExercise('name',item.exercise.name)
+    setExercise('id',item.id),
+    setExercise('name',item.name)
 
    
+}
+
+const addWeight=async()=>
+{
+  
+    try{
+        console.log('hi');
+        console.log(weight.scaleWeight)
+        console.log(weight.created_at)
+        return;
+
+        const token=await getToken();
+        const data=await fetch(`http://localhost:3001/api/clients/${id}/weights/store`,{
+            method:'POST',
+            headers:{
+                'Authorization':`Bearer ${token}`
+            },
+          body:JSON.stringify({
+            scaleWeight:weight.scaleWeight,
+            created_at:weight.created_at
+            
+
+          })
+        })
+    }
+    catch(error)
+    {
+        console.log(error)
+    }
 }
 
 
     const[exercises,myExercises]=createResource(workoutHistoryDate,fetchExercises)
     const[programmes,myProgrammes]=createResource(fetchProgrammes);
+    const programmeId=createMemo(()=>programmes()?.id)
     const[workoutStats]=createResource(fetchWorkoutStats);
     const[clientStats,setClientStats]=createResource(exerciseId,fetchStats)
     const[measurements]=createResource(fetchMeasurements)
     const[measurementData]=createResource(measurementId, fetchMeasurementsData);
+    const[allProgrammes]=createResource(fetchAllProgrammes);
     const [allExercises] = createResource<exerciseInformation>(
 
         () => [searchString(), type(), equipment()],
@@ -389,51 +535,227 @@ const updateSelectExercise=(item:Workout)=>{
   createEffect(()=>{
     console.log(exerciseId())
   })
-    
+  const[measurementStore,setMeasurementStore]=createStore<MeasurementStore[]>([]);
+
+
+  
+  createEffect(()=>{
+  if(measurements()){
+for(let i=0; i<measurements().length; i++){
+setMeasurementStore((current)=>[
+    ...current,{
+        id:measurements()[i].id,
+        name:measurements()[i].name,
+        value:0
+    }
+])
+}
+
+
+
+
+
+  }
+  })
+  
+
+  type programmeType={
+    id:number,
+    name:string
+  }
+  const [programmeTypeSelected,setProgrammeType]=createStore<programmeType>({
+    id:0,
+    name:''
+  })
+  const[programmeTypes,setProgrammTypes]=createStore<programmeType[]>([])
+const[programmeNames,setProgrammeNames]=createSignal(false)
+const[workoutFind,setWorkoutFind]=createSignal<number>(0)
+ 
+ 
+
+
+ createEffect(()=>{
+    if(programmes() && programmes().workout){
+   
+ 
+ 
+
+
+     if(programmeNames()==false){
+        console.log("FALSE")
+            
+  setProgrammeType('id',programmes().workout[workoutFind()].id)
+  setProgrammeType('name',programmes().workout[workoutFind()].name)
+
+
+     for(let i=0; i<programmes().workout.length; i++){
+         setProgrammTypes((current)=>[
+         ...current,{
+             id:programmes().workout[i].id,
+             name:programmes().workout[i].name
+         }
+         ])
+ 
+ 
+       
+     
+ }
+}
+setProgrammeNames(true)
+setProgrammeExercise([])
+
+if(programmeNames()==true){
+    console.log("TRUE")
+console.log(programmeTypeSelected.id,"IDs")
+    const findWorkoutType=programmes().workout.findIndex(item=>item.id==programmeTypeSelected.id);
+    console.log(findWorkoutType,"FIND")
+    setWorkoutFind(findWorkoutType)
+    console.log("Workout Find","YES")
+    if(workoutFind()===-1){
+       return;
+    }
+}
+
+ for(let i=0; i<programmes().workout[workoutFind()]?.details.length; i++)
+ {
+     
+ 
+           
+     setProgrammeExercise((current)=>[
+         ...current,{
+             id:programmes().workout[workoutFind()].details[i].exercise.id,
+             name:programmes().workout[workoutFind()].details[i].exercise.name,
+             equipment:programmes().workout[workoutFind()].details[i].exercise.equipment
+ 
+            
+ 
+         }
+     ])
+ }
+ 
+ 
+ 
+     
+    }
+    console.log("Progamme Exercise",programmeExercise)
+
+ 
+  })
+
+
+
+
+
+
+
+
+
     return(
         <div class="flex flex-col">
-       
-            <Show when={myClient()}>
-
-            
-
           
 
-                <div class="border-b">
+            <Show when={myClient()}>
+
+
+                    
+
+
+ 
+                   <ManagerClientHeader updateProgrammeType={(item)=>setProgrammeType('id',item)}  programmeTypeSelected={programmeTypeSelected} programmeTypes={programmeTypes} showProgramme={showProgramme()} setShowProgramme={(item:string)=>setShowProgramme(item)} programmeExercise={programmeExercise}  updateWorkout={(id,value,key,field)=>updateWorkout(id,value,key,field)}   submitWorkout={submitWorkout} updateMeasurement={(key,item)=>updateMeasurement(key,item)}
+                     measurements={measurementStore}  weight={weight.scaleWeight} weightCreated={weight.created_at} updateScaleWeight={(item)=>setWeight('scaleWeight',item)} updateWeightDate={(item)=>setWeight('created_at',item)}  addWeight={addWeight}  removeItem={(number,value,key)=>removeItem(number,value,key)} setDate={(item)=>setMyWorkout('date',item)} setWorkoutName={(item)=>setMyWorkout('name',item)} myExercise={myWorkout.workout} workoutName={myWorkout.name}    searchString={searchString()} setSearchString={(item)=>setSearchString(item) } equipment={equipment()} setEquipment={(item)=>setEquipment(item)}  setType={(item)=>setType(item)}    type={type()} addExercise={(item)=>addExercise(item)} name={myClient().client.name} exercises={allExercises()}/ >
+                 
+                 
+                 
+                 
+            <Tabs  defaultValue="Overview" class="w-400px">
+                        <TabsList class="flex overflow-x-auto whitespace-nowrap no scrollbar gap-2">
+
+                            
+                            <TabsTrigger  value="overview">
+                                Overview
+                            </TabsTrigger>
+                            <TabsTrigger value="assignedProgramme">
+                               Assigned Programme
+                            </TabsTrigger>
+                            <TabsTrigger value="bodyMeasurements">
+                              Body Measurements
+                            </TabsTrigger>
+                            <TabsTrigger value="weeklyStats">
+                             Weekly Stats
+                            </TabsTrigger>
+
+
+                            <TabsTrigger value="exerciseStats">
+                          Exercise Statistics
+                            </TabsTrigger>
+
+                            <TabsTrigger value="settings">
+                         Settings
+                            </TabsTrigger>
+
+
+
+
+                            <TabsIndicator class="bg-gray-300" variant="block"/>
+
+                        </TabsList>
+                        <TabsContent value="exerciseStats">
+
+            <div class="grid grid-cols-2 gap-x-3 py-3">
 
         
+    <div  class="min-h-screen">
+
+    <ExerciseLibrary selectExercise={selectedExercise()} types={bodyPart} equipment={equipment}  updatingExercise={(item)=>updateSelectExercise(item)} searchExercise={searchString()} myExercises={allExercises()}>
+
+</ExerciseLibrary>
 
 
-                   <ManagerClientHeader removeItem={(number,value,key)=>removeItem(number,value,key)} setDate={(item)=>setMyWorkout('date',item)} setWorkoutName={(item)=>setMyWorkout('name',item)} myExercise={myWorkout.workout} workoutName={myWorkout.name}    searchString={searchString()} setSearchString={(item)=>setSearchString(item) } equipment={equipment()} setEquipment={(item)=>setEquipment(item)}  setType={(item)=>setType(item)}    type={type()} addExercise={(item)=>addExercise(item)} name={myClient().client.name} exercises={allExercises()}/ >
-                   <TabBar handleTabChange={(item)=>setSelectedTab(item)} selectedTab={selectedTab()} items={tabBarItems}></TabBar>
-                </div>
+    </div>
+    <div class="flex flex-col gap-y-3">
+{selectedExercise()}
+    
+    <AboutExercise targetMuscleGroup={exercise.target} equipment={exercise.equipment} name={exercise.name}/>
+<ClientStats stats={clientStats()}/>
+</div>
+
+
+
+
+</div>
+                        </TabsContent>
+                        <TabsContent value="overview">
+                        <WorkoutProgrammeOverview name={myClient().client.programme.name}/>
+               
+                        </TabsContent>
+    
+                 
+                 
+                 
+          
           
                 
 
 
-<Show when={selectedTab()==='Overview'}>
-    <div class="flex flex-col">
 
 
-
-  <Notes/>
-<WorkoutProgrammeOverview name={myClient().client.programme.name}/>
-  </div>
-</Show>
             <div class="grid grid-cols-2 gap-x-3 py-3">
 
            
                 <Show when={selectedTab()==='Exercise Statistics'}>
                     <div  class="min-h-screen">
 
+                    <ExerciseLibrary selectExercise={selectedExercise()} types={bodyPart} equipment={equipment}  updatingExercise={(item)=>updateSelectExercise(item)} searchExercise={searchString()} myExercises={allExercises()}>
+
+</ExerciseLibrary>
+
              
-                    <ClientWorkoutHistory selectExercise={selectedExercise()} updatingExercise={(item)=>updateSelectExercise(item)} types={bodyPart} equipment={equipment} workout={exercises()}/>
                     </div>
                     <div class="flex flex-col gap-y-3">
 {selectedExercise()}
                     
                     <AboutExercise targetMuscleGroup={exercise.target} equipment={exercise.equipment} name={exercise.name}/>
-      <ClientStats heaviestWeight={clientStats()}/>
+      <ClientStats stats={clientStats()}/>
                </div>
                 </Show>
       
@@ -442,15 +764,17 @@ const updateSelectExercise=(item:Workout)=>{
             
          
 </div>
-<Show when={selectedTab()==='Settings'}>
+
+<TabsContent value="settings">
+
               
             
               <Settings  name={myClient().client.name} email={myClient().client.email} age={myClient().client.age}>
                   </Settings>
               
-              </Show>
+      </TabsContent>
 
-              <Show when={selectedTab()==='Body Measurements'}>
+              <TabsContent value="bodyMeasurements">
 <div class="grid grid-cols-2 gap-3">
     <div class="min-h-screen">
 
@@ -462,25 +786,31 @@ const updateSelectExercise=(item:Workout)=>{
     
     <MeasurementScreen measurement={measurementData()} name={measurement.name}></MeasurementScreen>
     </div>
+</TabsContent>
+       
 
-              </Show>
-
-              <Show when={selectedTab()==='Weekly Stats'}>
+             <TabsContent value="weeklyStats">
+      
                 <WorkoutStats endDate={endDate()} startDate={startDate()} setStartDate={(item)=>setStartDate(item)} stats={workoutStats()}>
 
                 </WorkoutStats>
-              </Show>
+            
+</TabsContent>
+<TabsContent value="assignedProgramme">
 
-              <Show when={selectedTab()==='Assigned Programme'}>
+
+          
                 <div class="grid grid-cols-2 gap-x-3">
-                    <AssignedProgramme workout={programmes()}  >
+                    <AssignedProgramme programme_id={programmeId()} allProgramme={allProgrammes()} programme={programmes()}  >
 
                     </AssignedProgramme>
                     
      
           <WorkoutHistory date={workoutHistoryDate()} setDate={(item)=>setWorkoutHistoryDate(item)} workout={exercises()}></WorkoutHistory>
-                </div>x
-              </Show>
+               </div>
+     
+           </TabsContent>
+              </Tabs>
               </Show>
             </div>
 

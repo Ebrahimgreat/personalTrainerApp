@@ -2,6 +2,7 @@
 
 
 
+import Button from "../../ui/button"
 import { createSign } from "crypto"
 import { For,createSignal } from "solid-js"
 
@@ -50,12 +51,12 @@ function WorkoutStats(props:props)
 
     return (<div class="bg-gray-50 shadow-lg rounded-2xl p-6 max-w-md mx-auto">
 <div class="flex row justify-between">
-  <button class="border" onclick={()=>props.backButtonPressed()}>
+  <Button variant="outline" onclick={()=>props.backButtonPressed()}>
     Back
-  </button>
-  <button class="border" onclick={()=>props.NextButtonPressed()}>
+  </Button>
+  <Button variant="outline" onclick={()=>props.NextButtonPressed()}>
     Next
-  </button>
+  </Button>
 </div>
         <h1 class="font-bold text-center">
          Weekly Stats 

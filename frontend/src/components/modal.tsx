@@ -27,8 +27,8 @@ function Modal({buttonText,children,title}:ModalProps){
       
         
 <div
- class={`fixed inset-0  overflow-hidden flex items-center justify-center transition-all${isOpen()? "w-full": "w-0 h-0 delay-500"}`}>
-    <div class={` text-black rounded-lg p-4  overflow-y-auto max-w-xl bg-white shadow-md ${isOpen()?  "min-w-screen h-full translate-y-0 ": "translate-y-[100vh]"}`}>
+ class={`fixed inset-0  overflow-hidden flex items-center justify-center transition-all${isOpen()? "": "w-0 h-0 delay-500"}`}>
+    <div class={` text-black rounded-lg p-4  overflow-y-auto max-w-xl bg-white shadow-md ${isOpen()?  " h-full translate-y-0 ": "translate-y-[100vh]"}`}>
        
 
        <div class="flex flex-row justify-between border-b">

@@ -13,6 +13,7 @@ type newProgrmme={
         {
             id:number,
             repRange:string,
+            sets:number,
         name:string,
         weight:number
         }[]
@@ -64,13 +65,21 @@ function CreateProgramme()
     })
 
     const addExercise=(item:object)=>{
-        console.log(selectedIndex())
+        console.log(item.id)
+     
+      
         if(selectedIndex()==-1)
         {
-       console.log(item)
+            if(newProgramme.workout[workoutSignal()].exercise.find((value)=>value.id==item.id))
+            {
+                
+                return;
+            }
+     
         setNewProgramme('workout',workoutSignal(),'exercise',(current)=>[
             ...current,{
-                id:newProgramme.workout[workoutSignal()].exercise.length,
+                id:item.id,
+                sets:1,
                 name:item.name,
                 repRange:'1-3',
                 weight:0
@@ -127,6 +136,7 @@ function CreateProgramme()
 
         if(fieldName==='repRange')
             {
+                alert("IT is REP")
                 console.log(fieldName)
                 const selectElement=event.currentTarget as HTMLSelectElement;
                 console.log(selectElement.value)
@@ -252,7 +262,7 @@ const[myExercises,setMyExercises]=createResource(()=>[searchString(),exerciseTyp
 
           
 
-<ExerciseLibrary updatingExercise={(item)=>addExercise(item)} selectAction={workoutSignal()} types={bodyPart} typeSelected={exerciseType()} setTypeSelected={(item)=>setExerciseType(item)}  myExercises={myExercises()} equipment={equipmentArray} equipmentSelected={equipment()} setEquipment={(item)=>setEquipment(item)}  setSearchSelected={(item)=>setSearchString(item)} searchExercise={searchString()}/>
+<ExerciseLibrary showProgramme="No Programme" updatingExercise={(item)=>addExercise(item)} selectAction={workoutSignal()} types={bodyPart} typeSelected={exerciseType()} setTypeSelected={(item)=>setExerciseType(item)}  myExercises={myExercises()} equipment={equipmentArray} equipmentSelected={equipment()} setEquipment={(item)=>setEquipment(item)}  setSearchSelected={(item)=>setSearchString(item)} searchExercise={searchString()}/>
 </div>
    <CreateNewProgramme headingText="Create Programme" onDescriptionChange={(e)=>setNewProgramme('description',e)} name={newProgramme.name} onNameChange={(e)=>setName(e)} description={newProgramme.description} onSubmit={submitForm}>
             
@@ -347,7 +357,7 @@ const[myExercises,setMyExercises]=createResource(()=>[searchString(),exerciseTyp
 <Show when={workoutSignal()!=-1 && newProgramme.workout[workoutSignal()]}>
 
 <div class="">
-<EditExercises selectedIndex={selectedIndex()} setSelectedIndex={(item)=>setSelectedIndex(item)} onRemove={(index)=>removeExercise(index)}  onNameChange={(index)=>editFields(index,'name')}  onRepRangeChange={(index)=>editFields(index,'repRange')}  onWeightChange={(index)=>editFields(index,'weight')}   items={newProgramme.workout[workoutSignal()].exercise} name={newProgramme.workout[workoutSignal()].name}/>
+<EditExercises selectedIndex={selectedIndex()} setSelectedIndex={(item)=>setSelectedIndex(item)} onRemove={(index)=>removeExercise(index)}  onNameChange={(index)=>editFields(index,'name')} onSetChange={(index)=>editFields(index,'set')}  onRepRangeChange={(index)=>editFields(index,'repRange')}  onWeightChange={(index)=>editFields(index,'weight')}   items={newProgramme.workout[workoutSignal()].exercise} name={newProgramme.workout[workoutSignal()].name}/>
 </div>
     </Show>
 

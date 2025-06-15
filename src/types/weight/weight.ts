@@ -1,4 +1,4 @@
 type Weight={
     scaleWeight:number,
-    date:string
+    created_at:string
 }

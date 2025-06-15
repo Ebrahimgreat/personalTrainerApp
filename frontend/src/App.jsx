@@ -1,11 +1,10 @@
-import logo from './logo.svg';
-import styles from './App.module.css';
-import{createResource, createSignal, onMount} from "solid-js"
-import{Router,Route,A} from '@solidjs/router';
+
+import{createEffect, createResource, createSignal, onMount} from "solid-js"
+import{Router,Route,A, useNavigate, redirect} from '@solidjs/router';
+import Signup from "./signup";
 import Home from './home';
 import Weight from './weight';
 import nutrition from './nutrition';
-
 import SearchNutrition from "./searchNutrition";
 import nutritionShow from './nutrition.show';
 import globalSearch from './globalSearch';
@@ -14,8 +13,8 @@ import Testing from './testing';
 import Workout from './workout';
 import CreateWorkout from './components/workout/createWorkout';
 import ShowWorkout from './showWorkout';
-import loginPage from './login';
-import {ClerkProvider,UserButton,useAuth,ClerkLoaded} from 'clerk-solidjs';
+import LoginPage from './login';
+import {ClerkProvider,UserButton,useAuth,ClerkLoaded,SignedIn, SignedOut, RedirectToSignIn, RedirectToUserProfile, ClerkLoading} from 'clerk-solidjs';
 import Register from './register';
 import { exercise } from './components/CreateExerciseForm';
 import exerciseLibrary from './Exercise';
@@ -25,18 +24,22 @@ import CreateProgramme from './createProgramme';
 import CreateClient from './createClient';
 import ViewClient from './viewClient';
 import ViewProgramme from './viewProgramme';
-import { RoleContextProvider } from './components/RoleContext';
-import { useRoleContext } from './components/RoleContext';
 import layout from './layout';
 import Layout1 from './components/Layout';
 import { ToastProvider, Toaster } from "solid-notifications";
 
-
-import CheckRoles from './components/CheckRoles';
+import Button from "./components/ui/button";
 import Layout2 from './components/Layout2';
 import Chat from './chat';
+import signup from './signup';
+
+
 function Layout(props)
 {
+
+  
+
+  
   
 
   
@@ -99,23 +102,21 @@ function App() {
  
 
 
-
   return(
     
 
     <ClerkProvider publishableKey='pk_test_aHVnZS1zZWFob3JzZS00NC5jbGVyay5hY2NvdW50cy5kZXYk'>
+        
+     
 
-    
-
-
-
-
-  
-
-       
         <Router root={Layout}>
-    
- 
+
+
+    <SignedIn>
+      
+
+
+
       
           <Route path='/home' component={Home}/>
           <Route path="/exercise" component={exerciseLibrary}/>
@@ -130,7 +131,8 @@ function App() {
           <Route path="/workout" component={Workout} />
 
           <Route path="/workout/show" component={ShowWorkout}/>
-          <Route path="/login" component={loginPage}/>
+          <Route path="/login" component={LoginPage}/>
+          <Route path="/signup" component={signup}/>
           <Route path="/register" component={Register}/>
           <Route path="/clients" component={Clients}/>
           <Route path="/clients/create" component={CreateClient}/>
@@ -140,13 +142,25 @@ function App() {
           <Route path="/programme/view" component={ViewProgramme}/>
           <Route path="/chat" component={Chat}/>
 
+  </SignedIn>
+<Route path="/signup" component={signup}/>
+
+<Route path="/login" component={LoginPage}/>
+
           </Router>
 
           
-   
 
 
-      
+
+   <SignedOut >
+   <LoginPage>
+    </LoginPage>
+   </SignedOut>
+            
+        
+
+
         </ClerkProvider>
 
         

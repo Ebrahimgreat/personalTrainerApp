@@ -3,6 +3,8 @@ import { db } from "../../db";
 import { eq,or } from "drizzle-orm";
 import { programmesTable, usersTable } from "../../db/schema";
 import { getAuth } from "@hono/clerk-auth";
+import { Programme } from "../../types/userProgramme/programme";
+import userProgrammeRoute from "../userProgramme";
 const programmeRoutes=new Hono();
 
 
@@ -23,22 +25,51 @@ programmeRoutes.get('/',async(c)=>{
       
       
         with:{
-          workout:true,
-          userProgramme:{
-            with:{
-                user:true
-            }
+          
             
-          },
-          programmeWorkout:true
+          programmeWorkout:{
+            with:{
+              programmeDetails:{
+              with:{
+                exercise:true
+              }
+
+              }
+            }
+          }
         
             
            
            
         }
     })
-    return c.json(data)
 
+    
+  const programme:Programme=data.map((item)=>({
+    id:item.id,
+   name:item.name,
+   description:item.description,
+   
+  
+   workout:item.programmeWorkout?.map((value)=>({
+    id:value.id,
+    name:value.name,
+    details:value.programmeDetails.map((detail)=>({
+      id:detail.id,
+      repRange:detail.repRange,
+      sets:detail.sets,
+      exercise:{
+        id:detail.exercise.id,
+        name:detail.exercise.name,
+        equipment:detail.exercise.equipment
+      }
+    }))
+
+  
+  }))
+  }))
+
+return c.json(programme)
 })
 programmeRoutes.get('/client',async(c)=>{
     const query=c.req.query('name')

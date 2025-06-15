@@ -5,7 +5,6 @@ type Programme={
     description:string,
     workout:Workout,
 
-
 }
 type Workout={
     id:number,
@@ -24,39 +23,109 @@ type details={
     exercise:Exercise
 }
 
-type props={
-    workout:Programme[]
+type ExerciseDetailed={
+    id:number,
+    name:string,
+    equipment:string,
+    target:string
 }
 
+export type programme={
+    name:string,
+    id:number,
+    userProgramme:userProgramme,
+    description:string,
+    workout:programmeWorkout
+}
+
+export type userProgramme={
+    id:number,
+    name:string
+    
+}
+export type programmeDetails={
+    id:number,
+    repRange:string,
+    sets:string,
+    exercise:ExerciseDetailed
+
+}
+export type programmeWorkout={
+    id:number,
+    name:string,
+    details:programmeDetails
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+type props={
+    programme:Programme,
+    allProgramme:programme,
+    programme_id:number
+    
+}
+import { Dialog } from "@kobalte/core/dialog"
+import { Button } from "../../../../components/ui/button"
+import {TextField,TextFieldRoot} from "../../../ui/textfield"
 import { For,Show } from "solid-js"
+import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../../ui/dialog"
+import Programme from "../../programme/programme"
 function AssignedProgramme(props:props)
 {
     return(<div class="bg-white h-full shadow-md p-8 w-full mx-auto flex flex-col overflow-y-auto">
+        <div class="flex flex-row justify-between">
+
         <h1 class="font-bold text-lg">
             Programmes Enrolled
 
         </h1>
-        <input type="text" class="border p-1 mb-4" placeholder="search Programmes For User">
-        </input>
+    <Dialog >
+        <DialogTrigger>
+            <Button>
+                Change
+            </Button>
+        </DialogTrigger>
+        <DialogContent class="bg-white w-full h-full max-w-none">
+            <DialogHeader>
+                <DialogTitle>
+                    My Programmes
+                </DialogTitle>
+
+            </DialogHeader>
+            <Programme programme_id={props.programme_id} programme={props.allProgramme}>
+                
+            </Programme>
+        </DialogContent>
+        </Dialog>
+</div>
+      
 
       <div class="overflow-y-auto">
+       <h2 class="font-semibold">
+      {props.programme?.name?? ""}
+      </h2>
+      <span class="font-bold">
+        {props.programme?.status}
+      </span>
+      <p class="text-gray-600">
+        {props.programme.description}
 
+      </p>
 
-           <For each={props.workout}>
-            {(programme)=><div class="border border-gray-400 overflow-x-auto">
-                <h2 class="font-semibold text-gray-700">
-                   {programme.name}
-                   </h2>
-                   <span class="font-bold">
-                    {programme.status}
-                   </span>
-                
+         
+            
 
-                   <p>
-                    {programme.description}
-                   </p>
-
-                <For each={programme.workout}>
+                <For each={props.programme.workout}>
                     {(workout)=><div class="mt-2 space-y-1 pl-4">
                         <h4 class="text-gray-600 font-medium">
                             {workout.name}
@@ -77,14 +146,12 @@ function AssignedProgramme(props:props)
                                     Rep Range: {detail.repRange}
                                 </span>
                                 </div>
+
 }
+</For>
 
-                        </For>
-
-
-
-                        </div>}
-                </For>
+         
+      
                 
                 
                 </div>}

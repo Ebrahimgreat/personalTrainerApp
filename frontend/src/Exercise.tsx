@@ -1,9 +1,7 @@
 import { createEffect, createResource, createSignal, For,Show } from "solid-js";
 import Button from "./components/button";
 import { createStore } from "solid-js/store";
-import CreateExercise from "./components/createExercise";
 import { useNavigate } from "@solidjs/router";
-import Modal from "./components/modal";
 import AboutExercise from "./components/exercise/about";
 import ExerciseInstructions from "./components/exercise/instructions";
 import { create } from "domain";
@@ -102,7 +100,7 @@ createEffect(()=>{
                 
 
      
-        <ExerciseLibrary setEquipment={(item)=>setEquipment(item)} setTypeSelected={(item)=>setTypeSelected(item)} updatingExercise={(item)=>updateExercise(item)} myExercises={myExercises()} typeSelected={typeSelected()} types={bodyPart} setSearchSelected={(item)=>setSearchExercise(item)} searchExercise={searchExercise()} equipmentSelected={equipmentSelected()} equipment={equipment}>
+        <ExerciseLibrary showProgramme="No Programme" setEquipment={(item)=>setEquipment(item)} setTypeSelected={(item)=>setTypeSelected(item)} updatingExercise={(item)=>updateExercise(item)} myExercises={myExercises()} typeSelected={typeSelected()} types={bodyPart} setSearchSelected={(item)=>setSearchExercise(item)} searchExercise={searchExercise()} equipmentSelected={equipmentSelected()} equipment={equipment}>
 
         </ExerciseLibrary>
 

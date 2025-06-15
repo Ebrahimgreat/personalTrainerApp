@@ -8,7 +8,8 @@ export const usersTable=sqliteTable(
         name:text().notNull(),
         age:int().notNull(),
         email:text().notNull(),
-        password:text('password').notNull(),
+
+
         user_id:numeric(),
         parent_id:int(),
 
@@ -536,7 +537,7 @@ export const measurementDataTableWithMeasurement=relations(measurementsDataTable
     }),
     user:one(usersTable,{
         fields:[measurementsDataTable.user_id],
-        references:[usersTable.user_id]
+        references:[usersTable.id]
     })
 }))
 

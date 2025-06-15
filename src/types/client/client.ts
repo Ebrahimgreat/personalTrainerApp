@@ -1,3 +1,4 @@
+import { MeasurementAll } from "../measurements/measure"
 import { DetailedWorkout } from "../workout/workout"
 
 export type Client={
@@ -7,7 +8,7 @@ export type Client={
 }
 export type DetailedClient= Client &{
   
-   weight:Weight[],
+ measurement:MeasurementAll;
    programme:Programme,
    workout:DetailedWorkout[]
 

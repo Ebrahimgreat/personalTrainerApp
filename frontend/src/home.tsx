@@ -2,20 +2,24 @@ import { createEffect, createMemo, createResource, onCleanup } from "solid-js";
 import { createSignal,Switch, Match, Show ,For} from "solid-js";
 import { createStore } from "solid-js/store";
 import { useNavigate } from "@solidjs/router";
-import { useAuth } from "clerk-solidjs";
+import { SignedOut, useAuth } from "clerk-solidjs";
 import { UserProfile,OrganizationProfile } from "clerk-solidjs";
-import { useUser } from "clerk-solidjs";
 
-import { ToastProvider, useToast,Toast,Toaster } from "solid-notifications";
-import ClientMain from "./components/HomePage/client/clientMain";
 import Button from "./components/button";
-import LatestActivities from "./components/HomePage/client/creater/latestActivities";
+import { Card, CardDescription, CardHeader, CardTitle } from "./components/ui/card";
+import { useSearchParams } from "@solidjs/router";
+
 
 function home()
 {
 
+    const[searchParams,setSearchParams]=useSearchParams();
+   
+   
+
 
     const{getToken}=useAuth();
+    const{isSignedIn}=useAuth();
 
     async function removeWeight(item:object)
     {
@@ -40,11 +44,25 @@ function home()
             console.log(error)
         }
 
+
+
+
     }
+
+
+
+createEffect(()=>{
+    
+    console.log(isSignedIn)
+})
+
     const navigate=useNavigate();
 
 
+   const navigateToClient=(id:number)=>{
+    navigate(`/clients/view?=id${id}`)
 
+   }
     
 
 
@@ -99,6 +117,7 @@ const token=await getToken()
 
  
     return(
+        
       
         
       
@@ -116,67 +135,72 @@ const token=await getToken()
                 Get an overview of your Clients Progress
              </span>
                 </Show>
+
+
                 
-        
-        
-       
-            <div class="flex flex-items-center justify-center">
-                <div class="bg-white shadow-md outline-none h-[100px] w-[350px]">
-                    <p class="font-bold text-sm text-center">
-                        Total Clients
-                
-                 
-                        <Show when={myValue.loading}>
-                            <p>
-                                Loading...
-                            </p>
-                        </Show>
-                     <Show when={myValue()}>
-
-         
-                        <For each={myValue()}>
-                            {(item)=><p>
-                     <span class="font-extrabold">
-                      {item.children.length}
-                      </span>
-                                </p>}
-                        </For>
-                        </Show>
-                        </p>
-
-              </div>
+<div class="flex items-center justify-center">
 
 
-            </div>
-            <div class="flex flex-row justify-between">
+                <Card class="bg-gray-100 border-gray-300 h-[100px] w-[350px] mb-10">
+                  <CardHeader class="p-4 space-y-2">
 
   
-            <div class="bg-white shadow-md outline-none w-[350px] h-[350px]">
-            <p class="border-b font-bold border-gray-300 text-center mb-1s">
-                Clients
-            </p>
-            <ul class="list-decimal list-inside">
-                <For each={myValue()}>
-                    {(item)=>(
-                        <For each={item.children}>
-                            {(value)=>
+                    <CardTitle class="text-lg text-center">
+                        Total Clients
 
-                            <li class="text-sm text-gray-700 text-center">
-                                {value.name}
-                                </li>}
-                                </For>
+                    </CardTitle>
+                    <CardDescription>
+                        <Show when={myValue()}>
+                            <For each={myValue()}>
+                                {(item)=><p class="text-center">
+                                    {item.children.length}</p>}
+                            </For>
+                        </Show>
+                    </CardDescription>
+                    </CardHeader>
+                </Card>
+        </div>
+        
+       
+          
 
-                    )}
-                </For>
-            </ul>
-            
-            
-            </div>
+          <Card class="shadow-md w-full border-gray-300 h-[350px] overflow-auto">
+            <CardHeader>
+                <CardTitle class="text-lg text-center">
+Total Clients
+                </CardTitle>
+                <ul class="list-decimal">
 
+    
+                <CardDescription>
+                    <Show when={myValue()}>
+                        <For each={myValue()}>
+                            {(item)=>(
+                                <For each={item.children}>
+                                    {(child)=>(
+                                        <li onclick={()=>navigateToClient(child.id)} class="text-sm hover:bg-gray-200 cursor-pointer text-gray-700 text-center">
+                                            {child.name}
+
+                                        </li>
+
+                                    )}
+                                    </For>
+                                    
+                                
+                            )}
+                           
+                        </For>
+                    </Show>
+                </CardDescription>
+                </ul>
+
+            </CardHeader>
+          </Card>
+         
 
        
 
-</div>
+
 
 
 

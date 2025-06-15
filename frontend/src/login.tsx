@@ -1,7 +1,7 @@
 import { createStore } from "solid-js/store";
 import Button from "./components/button";
 import { SignedIn,ClerkLoading,SignInButton, SignIn } from "clerk-solidjs";
-function loginPage()
+function LoginPage()
 {
     const[signInForm,setSignInForm]=createStore({
         email:'',
@@ -38,7 +38,7 @@ const updateFormFields=(formField:string)=>(event:Event)=>{
     
     return(
         <div class="flex flex-col items-center justify-center min-h-screen">
-            <SignIn fallbackRedirectUrl={'/home'}>
+            <SignIn signUpUrl="/signup" fallbackRedirectUrl={'/home'}>
             </SignIn>
             
             
@@ -46,4 +46,4 @@ const updateFormFields=(formField:string)=>(event:Event)=>{
     )
 
 }
-export default loginPage;
+export default LoginPage;
