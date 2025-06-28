@@ -7,9 +7,9 @@ import {programmeDetails, updateProgrammeDetails} from "./components/programmeDe
 import ViewClient from "./viewClient";
 import { useSearchParams } from "@solidjs/router";
 import ClientCreater from "./components/client/clientHome";
-import{AppType} from '../../src/index';
+import{AppType} from '../../backend/src/index';
 import { hc } from "hono/client";
-import { mainClientType } from "../../src/routes/clients";
+import { mainClientType } from "../../backend/src/routes/clients";
 import { AlertDialog } from "@kobalte/core/alert-dialog";
 import { AlertDialogTrigger } from "./components/ui/alert-dialog";
 import Button from "./components/ui/button";

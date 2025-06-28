@@ -8,7 +8,7 @@ import {
     useQuery
 } from '@tanstack/solid-query';
 import { hc } from "hono/client";
-import { myExerciseType } from "../../src/routes/exercise";
+import { myExerciseType } from "../../backend/src/routes/exercise";
 const client=hc<myExerciseType>('http://localhost:3001/api/exercise')
 
 

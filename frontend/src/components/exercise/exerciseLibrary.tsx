@@ -1,6 +1,6 @@
 import { For,Show } from "solid-js";
 import Modal from "../modal";
-import { Exercise } from "../../../../src/db/schema";
+import { Exercise } from "../../../../backend/src/db/schema";
 
 type props={
    equipmentSelected:string,

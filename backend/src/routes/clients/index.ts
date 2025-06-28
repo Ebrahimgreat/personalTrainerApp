@@ -4,10 +4,8 @@ import { and, between, desc, eq, inArray, isNotNull, like, lte, max } from "driz
 import { clerkMiddleware,getAuth } from "@hono/clerk-auth";
 import { workoutTable,workoutDetailsTable,usersTable, userProgrammeTable,exerciseTable,  measurementsTable, measurementsDataTable, programmesTable } from "../../db/schema";
 import { createClerkClient } from "@clerk/backend";
-import { programmeDetails } from "../../../../frontend/src/components/programmeDetails";
 import { info } from "console";
 import { idSchema} from "../../zod/idSchema";
-import WorkoutStats from "../../../../frontend/src/components/clientPage/workoutStats/workoutStats";
 import { weightSchema } from "../../zod/weightSchema";
 import { deleteMeasurementSchema, insertMeasurementMultipleSchema, insertWeightSchema, measurementSchema, updateMeasurementSchema } from "../../zod/measurementsSchema";
 import { clientDeletionSchema, clientUpdateSchema } from "../../zod/clientSchema";

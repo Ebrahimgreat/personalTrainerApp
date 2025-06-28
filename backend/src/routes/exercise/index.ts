@@ -4,7 +4,6 @@ import { db } from "../../db/db.js";
 import { like } from "drizzle-orm";
 import { customExerciseTable, exerciseTable, usersTable } from "../../db/schema.js";
 import { eq,and} from "drizzle-orm";
-import { exercise } from "../../../../frontend/src/components/CreateExerciseForm.js";
 import { Exercise, ExerciseDetailed } from "../../types/Exercise/exercise.js";
 import { getAuth } from "@hono/clerk-auth";
 import { custom } from "zod";

@@ -23,15 +23,15 @@ import { useAuth } from "clerk-solidjs";
 import Button from './components/ui/button';
 import Tabs, { TabsContent, TabsIndicator, TabsList, TabsTrigger } from "./components/ui/tabs";
 const tabBarItems:string[]=['Overview','Assigned Programme','Body Measurements', 'Weekly Stats', 'Exercise Statistics','Settings']
-import {MeasurementType} from "../../src/routes/measurements";
-import { clientWorkoutHistoryType } from "../../src/routes/clients";
+import {MeasurementType} from "../../backend/src/routes/measurements";
+import { clientWorkoutHistoryType } from "../../backend/src/routes/clients";
 import { hc, InferResponseType } from "hono/client";
 import { getAuth } from "@hono/clerk-auth";
 import WorkoutHistory from "./components/clientPage/Manager/assignedProgramme/workoutHistory";
 import type { WorkoutHistoryType } from "./types/workoutHistory";
 const client=hc<MeasurementType>('http://localhost:3001/api/measurements')
 import { Suspense } from "solid-js";
-import { measurementsData, programmeWorkout, workout } from "../../drizzle/schema";
+import { measurementsData, programmeWorkout, workout } from "../../backend/drizzle/schema";
 import { Badge } from "./components/ui/ui/badge";
 import { ref } from "process";
 import { createSign } from "crypto";
