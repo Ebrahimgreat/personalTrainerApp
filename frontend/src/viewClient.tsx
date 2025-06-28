@@ -473,7 +473,7 @@ const submitMeasurement=async()=>{
    
 
     try{
-        return;
+    
         const token=await getToken();
         const data=await fetch(`http://localhost:3001/api/clients/${id}/measurement/storeMultiple`,{
             method:'POST',

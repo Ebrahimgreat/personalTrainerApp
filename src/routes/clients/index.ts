@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { db } from "../../db/db";
 import { and, between, desc, eq, inArray, isNotNull, like, lte, max } from "drizzle-orm";
 import { clerkMiddleware,getAuth } from "@hono/clerk-auth";
-import { workoutTable,workoutDetailsTable,usersTable, userProgrammeTable,exerciseTable, weightTable, measurementsTable, measurementsDataTable, programmesTable } from "../../db/schema";
+import { workoutTable,workoutDetailsTable,usersTable, userProgrammeTable,exerciseTable,  measurementsTable, measurementsDataTable, programmesTable } from "../../db/schema";
 import { createClerkClient } from "@clerk/backend";
 import { programmeDetails } from "../../../frontend/src/components/programmeDetails";
 import { info } from "console";
@@ -131,7 +131,7 @@ clientRoutes.get('/:id/programmes',async(c)=>{
   if(auth?.userId){
     return c.json({Error:"Unable to verify user"});
   }
-  const id=c.req.param('id');
+  const id=Number(c.req.param('id'));
   const userProgramme=await db.query.userProgrammeTable.findFirst({
     
     where:and(
@@ -227,7 +227,7 @@ clientRoutes.post('/:id/updateProgramme',async(c)=>{
 
 clientRoutes.get('/:id/measurements',async(c)=>{
   const auth=getAuth(c);
-  if(auth?.userId){
+  if(!auth?.userId){
     return c.json({Error:"Unable to verify User"});
   }
 
@@ -240,8 +240,8 @@ clientRoutes.get('/:id/measurements',async(c)=>{
   }
   const id=Number(c.req.param('id'));
   const result=idSchema.safeParse({id});
-  const query:number=Number(c.req.query('id'));
-  const searchId:number=query?? null;
+  const query=Number(c.req.query('id'));
+  const searchId:number=query?? 0
 
 
 
@@ -255,7 +255,7 @@ clientRoutes.get('/:id/measurements',async(c)=>{
  
 
 
-  const measurements:Measurement=data.map((item)=>({
+  const measurements=data.map((item)=>({
     id:item.measurementsData.id,
   name:item.measurements.name,
   created_at:item.measurementsData.created_at,
@@ -294,12 +294,13 @@ clientRoutes.post('/:id/measurement/delete',async(c)=>{
 })
 
 clientRoutes.post('/:id/measurement/storeMultiple',async(c)=>{
-  const id=c.req.param('id')
+  const id=Number(c.req.param('id'))
   const auth=getAuth(c);
   if(!auth?.userId){
     return c.json({message:"Unverified"})
   }
   const data=await c.req.json();
+
 
   const verfication=insertMeasurementMultipleSchema.safeParse(data);
   if(verfication.error){
@@ -369,7 +370,7 @@ const clientWorkoutHistory=clientRoutes.get('/:id/workoutHistory',async(c)=>{
   }
 
 
-  const workout:workoutHistory=await db.query.workoutTable.findMany({
+  const workout=await db.query.workoutTable.findMany({
     where:eq(workoutTable.user_id,id),
   
  
@@ -396,15 +397,15 @@ for(let i=0; i<workout.length; i++)
     return c.json({message:verfication.error.flatten()})
   }
 }
-const workoutToSend:workoutHistory=workout;
-return c.json(workoutToSend)
+
+return c.json(workout)
 
 })
 
 
 clientRoutes.get('/:id',async(c)=>{
 
-const id=c.req.param('id');
+const id=Number(c.req.param('id'));
 
 const data=await db.query.usersTable.findFirst({
   where:eq(usersTable.id,id)
@@ -421,7 +422,7 @@ return c.json(data)
 clientRoutes.post('/:id/weights/store',async(c)=>{
 
 
-  const id=c.req.param('id')
+  const id=Number(c.req.param('id'))
 const auth=getAuth(c);
 if(!auth?.userId){
   return c.json({message:"Unverified"})
@@ -473,32 +474,26 @@ clientRoutes.post('/:id/weights/store',async(c)=>{
   
 })
 
-clientRoutes.get('/:id/weights',async(c)=>{
-  const id=c.req.param('id')
-
-  const weight=await db.query.weightTable.findFirst();
-  return c.json(weight)
-
-})
 
 
 clientRoutes.get('/:id/stats',async(c)=>{
 
 
-  const exercise_id=c.req.query('id');
- const query=c.req.param('id')
+  const exercise_id=Number(c.req.query('exercise_id'));
+ const query=Number(c.req.param('id'))
 
 
  type Stats={
   created_at:string,
   exercise:{
     name:string,
-    id:number
-  }
-  reps:number,
+    id:number,
+    reps:number,
   weight:number,
   rir:number,
   set:number
+  }
+  
  }
 type ExerciseDetailed={
   id:number,
@@ -513,16 +508,7 @@ type ExerciseDetailed={
 
   
  }
- let stats:maximumExercise={
-  maximumWeight:0,
-  exercise:{
-    name:'',
  
-    id:Number(query),
-    target:'',
-    equipment:'',
-  }
- }
 
 
 const data=await db.select().from(workoutDetailsTable).innerJoin(exerciseTable,eq(workoutDetailsTable.exercise_id,exerciseTable.id)).innerJoin(workoutTable,eq(workoutDetailsTable.workout_id,workoutTable.id)).where(and(eq(workoutTable.user_id,query),eq(exerciseTable.id,exercise_id)))
@@ -531,13 +517,14 @@ const data=await db.select().from(workoutDetailsTable).innerJoin(exerciseTable,e
   
 
   const statsWorkout:Stats[]=data.map((item)=>({
-    created_at:item.workout.created_at,
+    created_at:item.workout.created_at || '',
     exercise:{
-      name:item.exercise.name,
-      weight:item.workoutDetails.weight,
-      reps:item.workoutDetails.reps,
-      set:item.workoutDetails.set,
-      rir:item.workoutDetails.rir
+      id:item.exercise.id || 0,
+      name:item.exercise.name|| '',
+      weight:item.workoutDetails.weight ||0,
+      reps:item.workoutDetails.reps || 0,
+      set:item.workoutDetails.set || 0,
+      rir:item.workoutDetails.rir || 0
     }
 
   }))
@@ -654,7 +641,7 @@ clientRoutes.post('/:id/workout/store',async(c)=>{
   if(workoutVerification.error){
     return c.json({message:"Failed To verify"})
   }
-  const insertRecord=await db.insert(workoutTable).values({name:body.workout.name,date:body.workout.date,user_id:id}).returning();
+  const insertRecord=await db.insert(workoutTable).values({name:body.workout.name,created_at:body.workout.date,user_id:id}).returning();
    for(let i=0; i<body.workout.workout.length; i++)
    {
     const newRecord=await db.insert(workoutDetailsTable).values({workout_id:insertRecord[0].id,set:body.workout.workout[i].exercise.set,reps:body.workout.workout[i].reps,weight:body.workout.workout[i].weight,exercise_id:body.workout.workout[i].id})
