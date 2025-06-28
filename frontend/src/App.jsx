@@ -5,7 +5,7 @@ import Signup from "./signup";
 import Home from './home';
 import Weight from './weight';
 
-import globalSearch from './globalSearch';
+
 import createNutrition from './createNutrition';
 import Testing from './testing';
 import Workout from './workout';
