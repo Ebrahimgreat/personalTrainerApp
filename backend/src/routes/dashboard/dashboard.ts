@@ -2,14 +2,11 @@ import { Hono } from "hono";
 import { db, } from "../../db/db.js";
 
 import { eq,sum,sql } from "drizzle-orm";
-import { nutritionTable } from "../../db/schema.js";
 import { usersTable } from "../../db/schema.js";
-import { weightTable } from "../../db/schema.js";
 import { unionAll } from 'drizzle-orm/sqlite-core'
 import { clerkMiddleware,getAuth } from "@hono/clerk-auth";
 
 import { union } from "zod";
-import { use } from "chai";
 const dashboardRoutes=new Hono();
 
 

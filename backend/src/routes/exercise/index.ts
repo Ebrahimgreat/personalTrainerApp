@@ -4,7 +4,6 @@ import { db } from "../../db/db.js";
 import { like } from "drizzle-orm";
 import { customExerciseTable, exerciseTable, usersTable } from "../../db/schema.js";
 import { eq,and} from "drizzle-orm";
-import { Exercise, ExerciseDetailed } from "../../types/Exercise/exercise.js";
 import { getAuth } from "@hono/clerk-auth";
 import { custom } from "zod";
 import { customExerciseSchema } from "../../zod/customExerciseSchema.js";
@@ -53,9 +52,19 @@ const myExerciseRoute=exerciseRoutes.get('/all',async(c)=>{
   }))
 
 
+  type ExerciseDetailed={
+    id:number,
+
+    name:string,
+    equipment:string,
+    target:string,
+    instructions?:string,
+    photo?:string
+  }
+
   const body=await db.select().from(exerciseTable).where(filters.length?  and (...filters): undefined);
 
- const newBody:ExerciseDetailed[]=body.flatMap((item)=>({
+ const newBody=body.flatMap((item)=>({
   id:item?.id?? '',
   name:item?.name ?? '',
   equipment:item?.name ?? '',

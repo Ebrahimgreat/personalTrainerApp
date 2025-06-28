@@ -1,22 +1,20 @@
 import { Hono } from 'hono';
 import { usersTable } from './db/schema.js';
-import { nutritionTable } from './db/schema.js';
-import { weightTable } from './db/schema.js';
+
 import { db } from './db/db.js';
 import {basicAuth} from "hono/basic-auth";
 import { sql,eq,and} from 'drizzle-orm';
 import{cors} from 'hono/cors';
 import { ParamsSchema,UserSchema } from './zod/schemas.js';
-import weightRoutes from './routes/weight/index.js';
 import nutritionRoutes from './routes/nutrition/index.js';
 import dashboardRoutes from './routes/dashboard/dashboard.js';
-import workoutRoutes from './routes/workout/index.js';
-import customFoodRoute from './routes/customFood/food.js';
+
+
 import exerciseRoutes from './routes/exercise/index.js';
 import{cache} from "hono/cache";
 import{clerkMiddleware,getAuth} from '@hono/clerk-auth';
 import programmeRoutes from './routes/programme/index.js';
-import userProgrammeRoute from './routes/userProgramme/index.js';
+
 import clientRoutes from './routes/clients/index.js';
 import latestActivitiesRoutes from './routes/latestActivities/index.js';
 import {stream,streamText,streamSSE} from 'hono/streaming';
@@ -236,10 +234,7 @@ return c.json(options)
 
 
 const route=app.route('/api/programme',programmeRoutes);
-app.route('/api/customFoods',customFoodRoute)
-app.route('/api/weight',weightRoutes)
-app.route('/api/workout',workoutRoutes)
-app.route('/api/userProgramme',userProgrammeRoute)
+
 app.route('/api/activity',latestActivitiesRoutes)
 app.route('/api/roomMembers',roomMembers);
 app.route('/api/measurements',measurementRoute)
