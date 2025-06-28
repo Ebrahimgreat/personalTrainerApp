@@ -190,15 +190,7 @@ app.post('/api/email-check',async(c)=>{
 })
 
 
-app.get('/api/roles',async(c)=>{
 
- 
-  const auth=getAuth(c);
-  if(!auth){
-    return c.json('not found');
-  }
-  return c.json(auth.sessionClaims?.metadata)
-})
 
 app.post('/api/login',async(c)=>{
 const body=await c.req.json();

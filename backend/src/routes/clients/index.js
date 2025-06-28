@@ -1,12 +1,12 @@
 import { Hono } from "hono";
 import { db } from "../../db/db";
-import { and, eq, inArray, isNotNull, like } from "drizzle-orm";
+import { and, eq, isNotNull, like } from "drizzle-orm";
 import { getAuth } from "@hono/clerk-auth";
 import { workoutTable, workoutDetailsTable, usersTable, userProgrammeTable, exerciseTable, measurementsTable, measurementsDataTable } from "../../db/schema";
 import { createClerkClient } from "@clerk/backend";
 import { idSchema } from "../../zod/idSchema";
 import { weightSchema } from "../../zod/weightSchema";
-import { deleteMeasurementSchema, insertMeasurementMultipleSchema, insertWeightSchema, measurementSchema, updateMeasurementSchema } from "../../zod/measurementsSchema";
+import { deleteMeasurementSchema, insertMeasurementMultipleSchema, insertWeightSchema, updateMeasurementSchema } from "../../zod/measurementsSchema";
 import { clientDeletionSchema, clientUpdateSchema } from "../../zod/clientSchema";
 import { workoutSchema } from "../../zod/workoutSchema";
 import { workoutHistorySchema } from "../../zod/workoutHistorySchema";
@@ -33,61 +33,6 @@ clientRoutes.post('/delete', async (c) => {
     }
     const data = await db.delete(usersTable).where(eq(usersTable.id, body.id));
     return c.json("Data deleted");
-});
-clientRoutes.get('/:id/workoutStats', async (c) => {
-    let dateArray = [];
-    let startDate = new Date();
-    const query = String((c.req.query('date')));
-    if (query != '') {
-        startDate = new Date(query);
-    }
-    dateArray = addDays(startDate, 7);
-    const id = Number(c.req.param('id'));
-    const parse = idSchema.safeParse({ id });
-    if (!parse.success) {
-        return c.json({ error: '"Walidation Error"' });
-    }
-    const workout = await db
-        .select()
-        .from(workoutDetailsTable)
-        .innerJoin(workoutTable, eq(workoutDetailsTable.workout_id, workoutTable.id))
-        .innerJoin(exerciseTable, eq(workoutDetailsTable.exercise_id, exerciseTable.id))
-        .where(and(eq(workoutTable.user_id, id), inArray(workoutTable.created_at, dateArray)));
-    return c.json(workout);
-    const myStats = new Map();
-    const type = ['Chest', 'Biceps', 'Legs', 'Triceps', 'Back', 'Abs'];
-    for (let i = 0; i < type.length; i++) {
-        myStats.set(type[i], {
-            totalSets: 0,
-            totalVolume: 0
-        });
-    }
-    for (let i = 0; i < workout.length; i++) {
-        if (myStats.has(workout[i].exercise.type)) {
-            console.log("YES");
-            const currentStats = myStats.get(workout[i].exercise.type) || { totalSets: 0, totalVolume: 0 };
-            const newVolume = currentStats.totalVolume + Number(workout[i].workoutDetails.weight);
-            const newSets = currentStats.totalSets + 1;
-            myStats.set(String(workout[i].exercise.type), {
-                totalVolume: newVolume,
-                totalSets: newSets
-            });
-        }
-    }
-    let myArray = [];
-    for (let i = 0; i < type.length; i++) {
-        if (myStats.has(type[i])) {
-            const volume = myStats.get(type[i]);
-            myArray.push({
-                equipmentName: type[i],
-                stats: {
-                    totalSets: volume?.totalSets ?? 0,
-                    totalVolume: volume?.totalVolume ?? 0
-                }
-            });
-        }
-    }
-    return c.json(myArray);
 });
 const mainClientRoute = clientRoutes.get('/', async (c) => {
     /*
@@ -142,7 +87,7 @@ clientRoutes.get('/:id/programmes', async (c) => {
     if (auth?.userId) {
         return c.json({ Error: "Unable to verify user" });
     }
-    const id = c.req.param('id');
+    const id = Number(c.req.param('id'));
     const userProgramme = await db.query.userProgrammeTable.findFirst({
         where: and(eq(userProgrammeTable.user_id, id), eq(userProgrammeTable.status, 'active')),
         with: {
@@ -180,27 +125,6 @@ clientRoutes.get('/:id/programmes', async (c) => {
         return c.json({ message: verfication.error.format() });
     }
     return c.json(userProgramme);
-    const programme = {
-        status: userProgramme?.status ?? "",
-        id: Number(userProgramme?.programme?.id),
-        name: (userProgramme.programme?.name ?? ""),
-        description: userProgramme.programme?.description ?? "",
-        workout: userProgramme.programme?.programmeWorkout?.map((value) => ({
-            id: value.id,
-            name: value.name,
-            details: value.programmeDetails?.map((detail) => ({
-                id: detail.id,
-                repRange: detail.repRange,
-                set: detail.sets,
-                exercise: {
-                    id: detail.exercise.id,
-                    name: detail.exercise.name,
-                    equipment: detail.exercise.equipment
-                }
-            }))
-        }))
-    };
-    return c.json(programme);
 });
 clientRoutes.post('/:id/updateProgramme', async (c) => {
     const id = Number(c.req.param('id'));
@@ -225,13 +149,13 @@ clientRoutes.post('/:id/updateProgramme', async (c) => {
 //Measurements
 clientRoutes.get('/:id/measurements', async (c) => {
     const auth = getAuth(c);
-    if (auth?.userId) {
+    if (!auth?.userId) {
         return c.json({ Error: "Unable to verify User" });
     }
     const id = Number(c.req.param('id'));
     const result = idSchema.safeParse({ id });
     const query = Number(c.req.query('id'));
-    const searchId = query ?? null;
+    const searchId = query ?? 0;
     if (!result.success) {
         return c.json({ error: 'validation Failed' });
     }
@@ -258,7 +182,7 @@ clientRoutes.post('/:id/measurement/delete', async (c) => {
     return c.json(data);
 });
 clientRoutes.post('/:id/measurement/storeMultiple', async (c) => {
-    const id = c.req.param('id');
+    const id = Number(c.req.param('id'));
     const auth = getAuth(c);
     if (!auth?.userId) {
         return c.json({ message: "Unverified" });
@@ -323,18 +247,17 @@ const clientWorkoutHistory = clientRoutes.get('/:id/workoutHistory', async (c) =
             return c.json({ message: verfication.error.flatten() });
         }
     }
-    const workoutToSend = workout;
-    return c.json(workoutToSend);
+    return c.json(workout);
 });
 clientRoutes.get('/:id', async (c) => {
-    const id = c.req.param('id');
+    const id = Number(c.req.param('id'));
     const data = await db.query.usersTable.findFirst({
         where: eq(usersTable.id, id)
     });
     return c.json(data);
 });
 clientRoutes.post('/:id/weights/store', async (c) => {
-    const id = c.req.param('id');
+    const id = Number(c.req.param('id'));
     const auth = getAuth(c);
     if (!auth?.userId) {
         return c.json({ message: "Unverified" });
@@ -346,26 +269,6 @@ clientRoutes.post('/:id/weights/store', async (c) => {
     }
     const newRecord = await db.insert(measurementsDataTable).values({ value: verfication.data.scaleWeight, created_at: verfication.data.created_at, user_id: id, measurement_id: 4 }).returning();
     return c.json(newRecord);
-});
-clientRoutes.post('/:id/measurements/store', async (c) => {
-    const body = await c.req.json();
-    return c.json(body);
-    const id = Number(c.req.param('id'));
-    const verification = idSchema.safeParse({ id });
-    if (!verification.success) {
-        return c.json("Error has occured");
-    }
-    return c.json("no error has occured");
-    let measurements = [
-        { created_at: '2025-01-01', value: 85, measurement_id: 5, user_id }
-    ];
-    for (let i = 0; i < measurements.length; i++) {
-        const verfication = measurementSchema.safeParse(measurements[i]);
-        if (!verfication.success) {
-            return c.json("Error has been occured");
-        }
-    }
-    return c.json('No Error');
 });
 clientRoutes.post('/:id/weights/store', async (c) => {
     const id = Number(c.req.param('id'));
@@ -390,32 +293,19 @@ clientRoutes.post('/:id/weights/store', async (c) => {
     console.log("Weight inserted");
     return c.json("Weight Has been stored");
 });
-clientRoutes.get('/:id/weights', async (c) => {
-    const id = c.req.param('id');
-    const weight = await db.query.weightTable.findFirst();
-    return c.json(weight);
-});
 clientRoutes.get('/:id/stats', async (c) => {
-    const exercise_id = c.req.query('id');
-    const query = c.req.param('id');
-    let stats = {
-        maximumWeight: 0,
-        exercise: {
-            name: '',
-            id: Number(query),
-            target: '',
-            equipment: '',
-        }
-    };
+    const exercise_id = Number(c.req.query('exercise_id'));
+    const query = Number(c.req.param('id'));
     const data = await db.select().from(workoutDetailsTable).innerJoin(exerciseTable, eq(workoutDetailsTable.exercise_id, exerciseTable.id)).innerJoin(workoutTable, eq(workoutDetailsTable.workout_id, workoutTable.id)).where(and(eq(workoutTable.user_id, query), eq(exerciseTable.id, exercise_id)));
     const statsWorkout = data.map((item) => ({
-        created_at: item.workout.created_at,
+        created_at: item.workout.created_at || '',
         exercise: {
-            name: item.exercise.name,
-            weight: item.workoutDetails.weight,
-            reps: item.workoutDetails.reps,
-            set: item.workoutDetails.set,
-            rir: item.workoutDetails.rir
+            id: item.exercise.id || 0,
+            name: item.exercise.name || '',
+            weight: item.workoutDetails.weight || 0,
+            reps: item.workoutDetails.reps || 0,
+            set: item.workoutDetails.set || 0,
+            rir: item.workoutDetails.rir || 0
         }
     }));
     return c.json(statsWorkout);
@@ -465,7 +355,7 @@ clientRoutes.post('/:id/workout/store', async (c) => {
     if (workoutVerification.error) {
         return c.json({ message: "Failed To verify" });
     }
-    const insertRecord = await db.insert(workoutTable).values({ name: body.workout.name, date: body.workout.date, user_id: id }).returning();
+    const insertRecord = await db.insert(workoutTable).values({ name: body.workout.name, created_at: body.workout.date, user_id: id }).returning();
     for (let i = 0; i < body.workout.workout.length; i++) {
         const newRecord = await db.insert(workoutDetailsTable).values({ workout_id: insertRecord[0].id, set: body.workout.workout[i].exercise.set, reps: body.workout.workout[i].reps, weight: body.workout.workout[i].weight, exercise_id: body.workout.workout[i].id });
     }

@@ -26,6 +26,9 @@ programmeRoutes.post('/store', async (c) => {
     const userFind = await db.query.usersTable.findFirst({
         where: eq(usersTable.user_id, auth.userId)
     });
+    if (!userFind) {
+        return c.json({ message: "User does not exist" });
+    }
     const body = await db.insert(programmesTable).values({
         user_id: userFind.id,
         name: 'Untitled'
@@ -39,9 +42,15 @@ programmeRoutes.post('/update', async (c) => {
 });
 const programmes = programmeRoutes.get('/', async (c) => {
     const auth = getAuth(c);
+    if (!auth?.userId) {
+        return c.json({ message: "Unverified" });
+    }
     const user = await db.query.usersTable.findFirst({
-        where: eq(usersTable.user_id, auth?.userId)
+        where: eq(usersTable.user_id, auth?.userId),
     });
+    if (!user) {
+        return c.json({ message: "Unable to find user" });
+    }
     const data = await db.query.programmesTable.findMany({
         where: or(eq(programmesTable.user_id, user?.id), eq(programmesTable.assigned_to, user?.id)),
         orderBy: [desc(programmesTable.id)],
@@ -50,18 +59,18 @@ const programmes = programmeRoutes.get('/', async (c) => {
                 with: {
                     programmeDetails: {
                         with: {
-                            exercise: true
-                        }
-                    }
-                }
-            }
-        }
+                            exercise: true,
+                        },
+                    },
+                },
+            },
+        },
     });
     const programme = data.map((item) => ({
         id: item.id,
         name: item.name,
         description: item.description,
-        workout: item.programmeWorkout?.map((value) => ({
+        workout: item.programmeWorkout.map((value) => ({
             id: value.id,
             name: value.name,
             details: value.programmeDetails.map((detail) => ({
@@ -71,25 +80,15 @@ const programmes = programmeRoutes.get('/', async (c) => {
                 exercise: {
                     id: detail.exercise.id,
                     name: detail.exercise.name,
-                    equipment: detail.exercise.equipment
-                }
-            }))
-        }))
+                    equipment: detail.exercise.equipment,
+                },
+            })),
+        })),
     }));
     return c.json(programme);
 });
-programmeRoutes.get('/client', async (c) => {
-    const query = c.req.query('name');
-    const data = await db.query.usersTable.findMany({
-        where: eq(usersTable.name, query)
-    });
-    if (data.length == 0) {
-        return c.json('0');
-    }
-    return c.json(data);
-});
 programmeRoutes.get('/details', async (c) => {
-    const data = c.req.query('id');
+    const data = Number(c.req.query('id'));
     const body = await db.query.programmesTable.findFirst({
         where: eq(programmesTable.id, data),
         with: {

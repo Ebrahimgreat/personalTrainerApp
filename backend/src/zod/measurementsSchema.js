@@ -14,9 +14,7 @@ const measurementFieldSchema = z.object({
     value: z.number()
 });
 const insertMeasurementMultipleSchema = z.object({
-    measurement: {
-        created_at: z.string()
-    },
+    created_at: z.string(),
     measurement: z.array(measurementFieldSchema)
 });
 const deleteMeasurementSchema = z.object({

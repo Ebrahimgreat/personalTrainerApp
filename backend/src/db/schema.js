@@ -1,5 +1,5 @@
 // Converted to Postgres-compatible Drizzle schema using `pg-core`
-import { pgTable, serial, text, integer, numeric, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, integer, timestamp, real } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 export const usersTable = pgTable('users', {
     id: serial('id').primaryKey(),
@@ -17,38 +17,12 @@ export const measurementsDataTable = pgTable('measurementsData', {
     id: serial('id').primaryKey(),
     user_id: integer('user_id').notNull().references(() => usersTable.id),
     measurement_id: integer('measurement_id').references(() => measurementsTable.id),
-    value: numeric('value'),
+    value: real('value'),
     created_at: timestamp('created_at', { mode: 'string' })
-});
-export const weightTable = pgTable('weight', {
-    id: serial('id').primaryKey(),
-    scaleWeight: numeric('scaleWeight'),
-    created_at: timestamp('created_at'),
-    trendWeight: numeric('trendWeight'),
-    user_id: integer('user_id').notNull().references(() => usersTable.id),
-});
-export const nutritionTable = pgTable('nutrition', {
-    id: serial('id').primaryKey(),
-    calories: numeric('calories'),
-    protein: numeric('protein'),
-    fat: numeric('fat'),
-    carbs: numeric('carbs'),
-    created_at: timestamp('created_at'),
-    user_id: integer('user_id').notNull().references(() => usersTable.id),
 });
 export const weightUnitsTable = pgTable('weightUnits', {
     id: serial('id').primaryKey(),
     unit: text('unit').notNull(),
-});
-export const customFoodTable = pgTable('foodsTable', {
-    id: serial('id').primaryKey(),
-    foodName: text('foodName'),
-    defaultProtein: numeric('defaultProtein'),
-    defaultServing: numeric('defaultServing'),
-    defaultCalories: numeric('defaultCalories'),
-    defaultCarbs: numeric('defaultCarbs'),
-    defaultFat: numeric('defaultFat'),
-    user_id: integer('user_id').references(() => usersTable.id),
 });
 export const heightUnitTable = pgTable('heightUnit', {
     id: serial('id').primaryKey(),
@@ -83,7 +57,7 @@ export const workoutTable = pgTable('workout', {
     user_id: integer('user_id').references(() => usersTable.id),
     name: text('name'),
     programme_id: integer('programme_id').references(() => programmesTable.id),
-    created_at: timestamp('created_at'),
+    created_at: timestamp('created_at', { mode: 'string' }),
 });
 export const userProgrammeTable = pgTable('userProgramme', {
     id: serial('id').primaryKey(),
@@ -129,19 +103,16 @@ export const messagesTable = pgTable('messages', {
 export const workoutDetailsTable = pgTable('workoutDetails', {
     id: serial('id').primaryKey(),
     workout_id: integer('workout_id').references(() => workoutTable.id),
-    set: numeric('set'),
-    reps: numeric('reps'),
-    weight: numeric('weight'),
-    rir: numeric('rir'),
+    set: real('set'),
+    reps: real('reps'),
+    weight: real('weight'),
+    rir: real('rir'),
     exercise_id: integer('exercise_id').references(() => exerciseTable.id),
 });
 //Relations
 export const userRelations = relations(usersTable, ({ many }) => ({
-    weight: many(weightTable),
-    nutrients: many(nutritionTable),
     measurementData: many(measurementsDataTable),
     workout: many(workoutTable),
-    customFood: many(customFoodTable),
     programmes: many(programmesTable),
     userProgramme: many(userProgrammeTable),
     rooms: many(roomsTable),
@@ -206,18 +177,6 @@ export const parent_child = relations(usersTable, ({ one, many }) => ({
     }),
     children: many(usersTable, {
         relationName: 'children'
-    })
-}));
-export const weightRelations = relations(weightTable, ({ one }) => ({
-    user: one(usersTable, {
-        fields: [weightTable.user_id],
-        references: [usersTable.id]
-    })
-}));
-export const nutritionRelations = relations(nutritionTable, ({ one }) => ({
-    user: one(usersTable, {
-        fields: [nutritionTable.user_id],
-        references: [usersTable.id]
     })
 }));
 export const customExerciseRelationWithUser = relations(customExerciseTable, ({ one }) => ({
@@ -306,12 +265,6 @@ export const programmeDetailRelationWithExercise = relations(programmeDetailsTab
     exercise: one(exerciseTable, {
         fields: [programmeDetailsTable.exercise_id],
         references: [exerciseTable.id]
-    })
-}));
-export const customFoodRelation = relations(customFoodTable, ({ one }) => ({
-    user: one(usersTable, {
-        fields: [customFoodTable.user_id],
-        references: [usersTable.id]
     })
 }));
 export const activtiesRelation = relations(latestActivitiesTable, ({ one }) => ({
