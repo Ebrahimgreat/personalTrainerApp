@@ -129,6 +129,7 @@ const token=await getToken()
         
       
         <div class="flex flex-col">
+     
 <SignedIn>
 <Suspense fallback={
   <div class="flex justify-center items-center p-4">
@@ -138,7 +139,7 @@ const token=await getToken()
       <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"/>
     </svg>
     <span>
-        Loading
+        Loading.....
     </span>
   </div>
 }> 

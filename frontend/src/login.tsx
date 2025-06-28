@@ -5,7 +5,6 @@ import { useSignIn } from "clerk-solidjs";
 import { redirect, reload, useNavigate, usePreloadRoute } from "@solidjs/router";
 import { useAuth } from "clerk-solidjs";
 import { createEffect } from "solid-js";
-import { create } from "domain";
 type login={
     email:string,
     password:String

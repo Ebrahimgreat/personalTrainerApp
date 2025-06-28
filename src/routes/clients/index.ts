@@ -4,18 +4,13 @@ import { and, between, desc, eq, inArray, isNotNull, like, lte, max } from "driz
 import { clerkMiddleware,getAuth } from "@hono/clerk-auth";
 import { workoutTable,workoutDetailsTable,usersTable, userProgrammeTable,exerciseTable, weightTable, measurementsTable, measurementsDataTable, programmesTable } from "../../db/schema";
 import { createClerkClient } from "@clerk/backend";
-import { number, set } from "zod";
 import { programmeDetails } from "../../../frontend/src/components/programmeDetails";
-import { Exercise, ExerciseDetailed } from "../../types/Exercise/exercise";
 import { Client, DetailedClient } from "../../types/client/client";
 import { info } from "console";
-import { DetailedWorkout, Workout, workoutDetails } from "../../types/workout/workout";
 import { idSchema} from "../../zod/idSchema";
 import WorkoutStats from "../../../frontend/src/components/clientPage/workoutStats/workoutStats";
 import { weightSchema } from "../../zod/weightSchema";
-import { Measurements } from "../../types/measurements";
 import { deleteMeasurementSchema, insertMeasurementMultipleSchema, insertWeightSchema, measurementSchema, updateMeasurementSchema } from "../../zod/measurementsSchema";
-import { Programme } from "../../types/userProgramme/programme";
 import { clientDeletionSchema, clientUpdateSchema } from "../../zod/clientSchema";
 import { workoutSchema } from "../../zod/workoutSchema";
 import { workoutHistory, workoutHistorySchema } from "../../zod/workoutHistorySchema";
@@ -63,105 +58,7 @@ clientRoutes.post('/delete',async(c)=>{
   
 })
 
-clientRoutes.get('/:id/workoutStats',async(c)=>{
-  let dateArray:string[]=[];
-  let startDate:Date=new Date();
-  
-  const query:string= String((c.req.query('date')))
-  if(query!=''){
-    startDate= new Date(query);
-    
-  }
- 
 
-  dateArray=addDays(startDate,7);
-
-
-
-
- 
-
-  const id=Number(c.req.param('id'))
-  const parse=idSchema.safeParse({id})
-  if(!parse.success){
-    return c.json({error:'"Walidation Error"'})
-  }
-const workout = await db
-  .select()
-  .from(workoutDetailsTable)
-  .innerJoin(workoutTable, eq(workoutDetailsTable.workout_id, workoutTable.id))
-  .innerJoin(exerciseTable, eq(workoutDetailsTable.exercise_id, exerciseTable.id))
-  .where(
-    and(
-      eq(workoutTable.user_id, id),
-      inArray(workoutTable.created_at, dateArray)
-    )
-  );
-return c.json(workout)
-type bodyPart={
-  equipmentName:string,
-  stats:bodyPartStats
-
-}
-type bodyPartStats={
-
-  totalSets:number,
-  totalVolume:number,
-}
-const myStats=new Map<string,{totalSets:number; totalVolume:number}>();
-const type=['Chest','Biceps','Legs','Triceps','Back','Abs'];
-for(let i=0; i<type.length; i++)
-{
-  myStats.set(type[i],{
-    totalSets:0,
-    totalVolume:0
-  })
-}
-
-for(let i=0; i<workout.length; i++){
-  if(myStats.has(workout[i].exercise.type)){
-    console.log("YES")
-    const currentStats=myStats.get(workout[i].exercise.type) || {totalSets:0,totalVolume:0}
-    const newVolume=currentStats.totalVolume+Number(workout[i].workoutDetails.weight)
-    const newSets=currentStats.totalSets+1;
-  
-
-   myStats.set(String(workout[i].exercise.type),{
-    totalVolume:newVolume,
-    totalSets:newSets
-   })
-
-  }
-
-}
-
-
-let myArray:bodyPart[]=[];
-
-
-for(let i=0; i<type.length; i++){
-  if(myStats.has(type[i])){
-    const volume=myStats.get(type[i]);
-  
-      myArray.push({
-        equipmentName:type[i],
-          stats:{
-            totalSets:volume?.totalSets??0,
-            totalVolume:volume?.totalVolume??0
-
-          }
-        })
-      }
-     
-
-   
-  
-}
-return c.json(myArray)
-
-
-
-});
 
 const mainClientRoute=clientRoutes.get('/',async(c)=>{
   /*
@@ -284,34 +181,6 @@ clientRoutes.get('/:id/programmes',async(c)=>{
  
 
   return c.json(userProgramme)
-
-
-  
-const programme:Programme={
-  status:userProgramme?.status?? "",
-  id:Number(userProgramme?.programme?.id),
-  name:(userProgramme.programme?.name?? ""),
-  description:userProgramme.programme?.description?? "",
-  workout:userProgramme.programme?.programmeWorkout?.map((value)=>({
-    id:value.id,
-    name:value.name,
-    details:value.programmeDetails?.map((detail)=>({
-      id:detail.id,
-      repRange:detail.repRange,
-      set:detail.sets,
-    exercise:{
-      id:detail.exercise.id,
-      name:detail.exercise.name,
-      equipment:detail.exercise.equipment
-
-    }
-    }))
-  }))
-  
-
-}
-
-  return c.json(programme);
 })
 
 
@@ -579,31 +448,6 @@ return c.json(newRecord)
 
 
 
-clientRoutes.post('/:id/measurements/store',async(c)=>{
-  const body=await c.req.json();
-  return c.json(body)
-  const id=Number(c.req.param('id'));
-  
-  const verification=idSchema.safeParse({id});
-  if(!verification.success){
-    return c.json("Error has occured")
-  }
-  return c.json("no error has occured")
-
-
-let measurements:Measurements[]=[
-  {created_at:'2025-01-01',value:85,measurement_id:5,user_id}
-]
-for(let i=0; i<measurements.length; i++)
-{
-  const verfication=measurementSchema.safeParse(measurements[i]);
-  if(!verfication.success){
-    return c.json("Error has been occured")
-  }
-}
-return c.json('No Error')
-});
-
 
 
 
@@ -663,7 +507,13 @@ clientRoutes.get('/:id/stats',async(c)=>{
   rir:number,
   set:number
  }
-
+type ExerciseDetailed={
+  id:number,
+  equipment:string,
+  type:string,
+  photo?:string,
+  instructions?:string
+}
  type maximumExercise={
   maximumWeight:number,
   exercise:ExerciseDetailed,

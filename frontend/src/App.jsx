@@ -40,6 +40,7 @@ import { QueryClientProvider } from "@tanstack/solid-query";
 
 function Layout(props)
 {
+  
 
   
 
@@ -51,9 +52,8 @@ function Layout(props)
     <>
   <header>
 
-    
 
-HI
+
 <SignedIn>
  
 <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
@@ -117,7 +117,7 @@ function App() {
     
 
     <ClerkProvider publishableKey='pk_test_aHVnZS1zZWFob3JzZS00NC5jbGVyay5hY2NvdW50cy5kZXYk'>
-        
+    
      
 <ClerkLoading>
   <div class="flex items-center justify-center">

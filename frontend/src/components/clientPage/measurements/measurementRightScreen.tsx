@@ -40,12 +40,7 @@ function MeasurementScreen(props:props)
      <h1 class="text-center font-bold text-2xl text-gray-800 mb-6">
         {props.measurement.name}
         </h1>
-        <Show when={props.measurement.measurement.length==0}>
-            <p class="text-center text-gray-500">
-              No measurements Found
-              </p>
-        </Show>
-
+        
 
        
         <Show when={props.measurement?.measurement.length>0}>
@@ -105,17 +100,7 @@ function MeasurementScreen(props:props)
                    <p class="text-lg font-semibold text-gray-700">
                    {item.value}
                    </p>
-                  <Show when={item.trend}>
-
-           
-                    <span>
-                        Trend
-                    </span>
-         
-                   <p class="text-lg font-semibold">
-                    {item.trend}
-                   </p>
-</Show>             
+                  
 
                    </div>}
             </For>

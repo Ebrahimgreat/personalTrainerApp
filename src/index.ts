@@ -58,28 +58,7 @@ const myRoute=app.get('/api/funny',
 
 
 
-app.get('/children',async(c)=>{
-  const body=await db.query.usersTable.findFirst({
-    with:{
-      children:true
-    }
-  })
 
-  return c.html(
-    `<html>
-    <h1> Hello Ebrahim
-    </h1>
-    <p>
-    This is Your Clients ${body.children.map((item)=>item.name)}
-    </p>
-    <input type="text" placeholder="Write a message">
-
-
-    `
-  )
-
-
-})
 
 let users=new Map<number,{socket:WebSocket; roomId:number,reciever:number}>();
 let messages=new Map<number,string>();
