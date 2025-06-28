@@ -53,7 +53,7 @@ function Layout(props)
 
     
 
-
+HI
 <SignedIn>
  
 <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
