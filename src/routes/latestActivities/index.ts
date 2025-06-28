@@ -1,6 +1,6 @@
 import { getAuth } from "@hono/clerk-auth";
 import { Hono } from "hono";
-import { db } from "../../db";
+import { db } from "../../db/db";
 import { latestActivitiesTable, usersTable } from "../../db/schema";
 import { eq,or } from "drizzle-orm";
 const latestActivitiesRoutes=new Hono();

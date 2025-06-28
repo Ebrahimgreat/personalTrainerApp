@@ -1,16 +1,20 @@
 import { Hono } from "hono";
 import { exerciseSchema } from "../../zod/exerciseSchema.js";
-import { db } from "../../db/index.js";
+import { db } from "../../db/db.js";
 import { like } from "drizzle-orm";
-import { customExerciseTable, exerciseTable } from "../../db/schema.js";
+import { customExerciseTable, exerciseTable, usersTable } from "../../db/schema.js";
 import { eq,and} from "drizzle-orm";
 import { exercise } from "../../../frontend/src/components/CreateExerciseForm.js";
 import { Exercise, ExerciseDetailed } from "../../types/Exercise/exercise.js";
+import { getAuth } from "@hono/clerk-auth";
+import { custom } from "zod";
+import { customExerciseSchema } from "../../zod/customExerciseSchema.js";
 const exerciseRoutes=new Hono();
 
 
-exerciseRoutes.get('/all',async(c)=>{
-  
+const myExerciseRoute=exerciseRoutes.get('/all',async(c)=>{
+
+ 
   const exerciseName:string= c.req.query('exerciseName') || '';
   const type:string= c.req.query('type') || '';
   const equipment:string=c.req.query('equipment')|| '';
@@ -39,6 +43,7 @@ exerciseRoutes.get('/all',async(c)=>{
 
 
   const body1=await db.select().from(customExerciseTable).where(filters.length? and(...filtersCustomExercise):undefined)
+
   const body2=body1.flatMap((item)=>({
     id:item.id,
     name:item.name,
@@ -50,6 +55,7 @@ exerciseRoutes.get('/all',async(c)=>{
 
 
   const body=await db.select().from(exerciseTable).where(filters.length?  and (...filters): undefined);
+
  const newBody:ExerciseDetailed[]=body.flatMap((item)=>({
   id:item?.id?? '',
   name:item?.name ?? '',
@@ -59,8 +65,9 @@ exerciseRoutes.get('/all',async(c)=>{
   target:item?.type?? ''
 
  }))
-let newArray=newBody.concat(body);
-return c.json(newArray);
+ const mergedArray=[...new Set([...newBody,...body2])]
+ return c.json(mergedArray)
+
 
 
 
@@ -77,21 +84,24 @@ exerciseRoutes.get('/',async(c)=>{
     return c.json(body);
 })
 exerciseRoutes.post('/store',async(c)=>{
-    const body=await c.req.json();
+   const auth=getAuth(c);
+   if(!auth?.userId){
+    return c.json({message:"Unverified"})
+   }
+   const userFind=await db.query.usersTable.findFirst({
+    where:eq(usersTable.user_id,auth.userId)
+   });
+const data= await c.req.json();
+const verfication=customExerciseSchema.safeParse(data);
+if(verfication.error){
+  return c.json({error:verfication.error.flatten()})
+}
+const insertRecord=await db.insert(customExerciseTable).values({name:data.name,equipment:data.equipment,instructions:data.instructions,type:data.type,user_id:userFind?.id}).returning();
+return c.json(insertRecord)
 
 
-    const result=exerciseSchema.safeParse(body);
-    if(!result.success)
-    {
-        return c.json('failed sir')
-    }
 
-      await db.insert(exerciseTable).values({
-        name:body.name,
-        description:body.description
-      })
-      return c.json("Accepted")
-    }
-
+  }
 )
 export default exerciseRoutes;
+export type myExerciseType=typeof myExerciseRoute;

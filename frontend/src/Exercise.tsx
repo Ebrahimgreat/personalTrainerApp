@@ -1,35 +1,90 @@
 import { createEffect, createResource, createSignal, For,Show } from "solid-js";
-import Button from "./components/button";
+import Button from "./components/ui/button";
 import { createStore } from "solid-js/store";
 import { useNavigate } from "@solidjs/router";
 import AboutExercise from "./components/exercise/about";
 import ExerciseInstructions from "./components/exercise/instructions";
-import { create } from "domain";
-import ExerciseLibrary from "./components/exercise/exerciseLibrary";
-type myexercise={
-    name:string,
-    type:string,
-    instructions:string
-    equipment:string,
-    targetMuscleGroup:string
+import {
+    useQuery
+} from '@tanstack/solid-query';
+import { hc } from "hono/client";
+import { myExerciseType } from "../../src/routes/exercise";
+const client=hc<myExerciseType>('http://localhost:3001/api/exercise')
 
-}
+
+
+import ExerciseLibrary from "./components/exercise/exerciseLibrary";
+import CreateExercise from "./components/exercise/createExercise";
+import Dialog, { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./components/ui/dialog";
+import {TextField,TextFieldLabel,TextFieldRoot} from "./components/ui/textfield";
+import { TextArea } from "@kobalte/core/text-field";
+import { getAuth } from "@hono/clerk-auth";
+import { useAuth } from "clerk-solidjs";
+type myExercises=Awaited<ReturnType<typeof client.all.$get>>;
 const equipment:string[]=['Barbell','Dumbell','KettleBells','Body Weight','Cable','Machine']
 const bodyPart:string[]=['Chest','Quads','Hamstrings','Rear Delts','Tricpes']
 const[typeSelected,setTypeSelected]=createSignal('Type')
 const[searchExercise,setSearchExercise]=createSignal('')
 const [equipmentSelected,setEquipment]=createSignal('Equipment')
+type exercise={
+    name:string,
+    type:string
+    equipment:string,
+    instructions:string
+}
+
+const [newExercise,setNewExercise]=createStore<exercise>({
+    name:"",
+    type:"Chest",
+    equipment:"Barbell",
+    instructions:""
+    
+})
+
+
 function Exercise()
 {
+    const {getToken,isSignedIn}=useAuth();
+
+
+    const submitExercise=async(event:Event)=>{
+        event.preventDefault();
+        try{
+            const token=await getToken();
+            const data=await fetch('http://localhost:3001/api/exercise/store',{
+                method:"POST",
+                headers:{
+                    'Authorization':`Bearer ${token}`,
+                    
+                },
+                body:JSON.stringify({
+                    name:newExercise.name,
+                    equipment:newExercise.equipment,
+                    type:newExercise.type,
+                    instructions:newExercise.instructions
+
+                })
+            })
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    }
     const navigate=useNavigate();
     
     const filters=['Chest','Triceps','Bicep','Quads','Hamstrings'];
    
     const fetchData=async()=>{
-        const response=await fetch(`http://localhost:3001/api/exercise/all?exerciseName=${searchExercise()}&type=${typeSelected()}&equipment=${equipmentSelected()}`,{
-            method:'GET'
+        const response=await client.all.$get({
+            query:{
+                searchExercise:searchExercise(),
+                type:typeSelected(),
+                equipment:equipmentSelected()
+            }
         })
-        return response.json();
+      
+        return await response.json();
     }
   
 
@@ -39,9 +94,9 @@ function Exercise()
     ([search,type,equipment])=>fetchData());
     const [myExerciseSelected,setMyExerciseSelected]=createStore<myexercise>({
         name:'',
-        type:'',
+        type:'Chest',
         instructions:'',
-        equipment:'',
+        equipment:'Barbell',
         targetMuscleGroup:''
 
     })
@@ -57,6 +112,13 @@ function Exercise()
 
    }
 
+   createEffect(()=>{
+    if(!isSignedIn()){
+   navigate('/')
+    }
+ 
+  })
+
 createEffect(()=>{
     if(typeSelected()==='No option')
     {
@@ -68,6 +130,7 @@ createEffect(()=>{
     }
 })
 
+
     
     const[exercise,setExerciseSelected]=createSignal('')
 
@@ -77,16 +140,117 @@ createEffect(()=>{
     return(
         <div class="flex flex-col w-full">
 
+
+<Show
+  when={myExercises.loading}>
+    <div class="flex justify-center items-center p-4">
+      <svg class="size-6 text-gray-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24" stroke="currentColor">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z" />
+      </svg>
+      <span>Loading</span>
+    </div>
+
+  </Show>
+
+         
+
 <h1 class="text-3xl font-semi-bold text-gray-900 ">
                 Exercises
         
          
             </h1>
+            <div class="flex flex-row justify-between mb-10">
+
+
             <p class="text-gray-600 text-sm">
                 Search For existing exercises,view them and create your custom exercises
             </p>
+       <Dialog>
+        <DialogTrigger>
+<Button>
+    Create Exercise
+</Button>
+        </DialogTrigger>
+        <DialogContent class="bg-white flex flex-col">
+
+
+<form onSubmit={submitExercise}>
+
+
+
+        <DialogHeader>
+            <DialogTitle>
+                Create Exercise
+            </DialogTitle>
+            <DialogDescription>
+                This will create a new exercise
+            </DialogDescription>
+        </DialogHeader>
+        <TextFieldRoot class="flex flex-col">
+
+            <TextFieldLabel>
+                Name
+            </TextFieldLabel>
+
+     
+        <TextField required value={newExercise.name} onChange={(e)=>setNewExercise('name',e.currentTarget.value)}>
+
+        </TextField>
+
+        <TextFieldLabel>
+              Equipment
+            </TextFieldLabel>
+            <select required value={newExercise.equipment} onChange={(e)=>setNewExercise('equipment',e.currentTarget.value)}>
+                <For each={equipment}>
+                    {(item)=><option>
+                        {item}
+                        </option>}
+                </For>
+                
+            </select>
+
+            <TextFieldLabel>
+                Type
+                
+            </TextFieldLabel>
+
+            <select value={newExercise.type} onChange={(e)=>setNewExercise('type',e.currentTarget.value)}>
+                <For each={bodyPart}>
+                    {(item)=><option value={item}>
+                        {item}
+                        </option>}
+                </For>
+                
+            </select>
            
-         
+
+
+            <TextFieldLabel>
+              Instructions
+                
+            </TextFieldLabel>
+         <TextArea required value={newExercise.instructions} onChange={(e)=>setNewExercise('instructions')} class="border">
+            </TextArea>
+
+
+            
+    
+        </TextFieldRoot>
+        <DialogFooter>
+            <Button type="button">
+                Cancel
+            </Button>
+            <Button type="submit">
+                Submit
+            </Button>
+        </DialogFooter>
+        </form>
+        </DialogContent>
+       </Dialog>
+           
+         </div>
 
          
 

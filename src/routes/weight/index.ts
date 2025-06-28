@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { db } from "../../db/index.js";
+import { db } from "../../db/db.js";
 import { eq,avg,desc,sum,count } from "drizzle-orm";
 import { latestActivitiesTable, usersTable, weightTable } from "../../db/schema.js";
 import { weightSchema,removeWeightSchema } from "../../zod/weightSchema.js";

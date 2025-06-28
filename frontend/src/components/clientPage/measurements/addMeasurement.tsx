@@ -1,4 +1,4 @@
-import { For, Show } from "solid-js"
+import { createSignal, For, Show } from "solid-js"
 type Measurements={
     id:number
     name:string,
@@ -6,23 +6,34 @@ type Measurements={
 }
 type props={
     measurements:Measurements[],
-    updateMeasurement:(key:number,item:number)=>void;
+    measurementDate:string,
+    updateMeasurement:(key:number,item:number)=>void,
+    submitMeasurement:()=>void,
+    updateDate:(item:string)=>void,
+    setCloseDialog:(item:boolean)=>void
 
 }
 import Button from "../../ui/button"
 import { TextField, TextFieldRoot } from "../../ui/textfield"
+
+
+
+
 function AddMeasurement(props:props)
 {
 
 
-
+const submitMeasurement=()=>{
+    props.submitMeasurement();
+    props.setCloseDialog(false)
+}
     return(
         
         <div class="flex flex-col">
             <label>
                 Date 
             </label>
-            <input type="date" class="border">
+            <input value={props.measurementDate} onChange={(e)=>props.updateDate(e.currentTarget.value)} type="date" class="border">
             </input>
             <div class="grid grid-cols-2 gap-x-3 mb-2">
 
@@ -37,7 +48,7 @@ function AddMeasurement(props:props)
                             <TextFieldRoot>
 
                     
-                            <TextField type="number" onChange={(e)=>props.updateMeasurement(key(),Number(e.currentTarget.value))}  class="border shadow-md focus:outline-none ">
+                            <TextField value={item.value} type="number" onChange={(e)=>props.updateMeasurement(key(),Number(e.currentTarget.value))}  class="border shadow-md focus:outline-none ">
                             </TextField>
                             </TextFieldRoot>
                             </div>}
@@ -45,7 +56,7 @@ function AddMeasurement(props:props)
 
             </Show>
             </div>
-           <Button  class="bg-gray-500" variant="default">
+           <Button onClick={()=>submitMeasurement()} variant="default">
             Submit
            </Button>
 

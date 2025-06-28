@@ -1,6 +1,6 @@
 import { getAuth } from "@hono/clerk-auth";
 import { Hono } from "hono";
-import { db } from "../../db";
+import { db } from "../../db/db";
 import { eq } from "drizzle-orm";
 import { roomMembersTable, roomsTable, usersTable } from "../../db/schema";
 

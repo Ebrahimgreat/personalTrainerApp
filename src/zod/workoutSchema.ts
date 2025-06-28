@@ -1,31 +1,26 @@
 import {z} from 'zod';
 
-const workoutSchema=z.object({
-exercise_id:z.number().openapi({
-    example:1212
-}),
-name:z.string().openapi({
-    example:'squat',
-}),
-set:z.number().openapi({
-    example:1212
-}),
-reps:z.number().openapi({
-    example:12121
-}),
-weight:z.number().openapi({
-    example:1212
-}),
-rir:z.number().openapi({
-    example:1212
-}),
-workout_id:z.number().openapi({
-    example:1
-})
 
 
 
-})
+
+const exercise = z.object({
+    set: z.number(),
+    reps: z.number(),
+    weight: z.number()
+  });
+  
+  const workoutExercise = z.object({
+    id: z.number(),
+    name: z.string(),
+    exercise: z.array(exercise)
+  });
+  
+  const workoutSchema = z.object({
+    name: z.string(),
+    date: z.string(),
+    workout: z.array(workoutExercise)
+  });
 
 
 

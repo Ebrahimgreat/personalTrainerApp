@@ -1,1 +1,0 @@
-ALTER TABLE `users` ADD `parent_id` integer REFERENCES users(id);

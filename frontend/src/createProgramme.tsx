@@ -44,7 +44,7 @@ import CreateExercise from "./components/createExercise";
 import { create } from "domain";
 import { updateFields } from "./components/createClientForm";
 import TotalWorkouts from "./components/programmeComponent/totalWorkouts";
-import CreateNewProgramme from "./components/programmeComponent/createNewProgramme";
+import CreateNewProgramme from "./components/programmeComponent/programmeDescription";
 import EditExercises from "./components/programmeComponent/editExercises";
 import ExerciseLibrary from "./components/exercise/exerciseLibrary";
 

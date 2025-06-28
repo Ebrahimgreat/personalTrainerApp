@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { db, } from "../../db/index.js";
+import { db, } from "../../db/db.js";
 import { eq,sum } from "drizzle-orm";
 import { nutritionTable } from "../../db/schema.js";
 import { nutritionSchema, removeNutritionSchema } from "../../zod/nutirtionSchema.js";

@@ -23,6 +23,12 @@ function ClientStats(props:props){
         Stats Overview
         </h1>
      
+
+     <Show when={props.stats.length==0}>
+        <p class="text-gray-600 text-center">
+            No Stats can be found
+        </p>
+     </Show>
         <Show when={props.stats}>
             
         
@@ -32,7 +38,7 @@ function ClientStats(props:props){
             <p class="text-sm">
 
       
-            {item.created_at}
+            {new Date(item.created_at).toLocaleDateString()}
             </p>
             <p>
                  {item.exercise.name}

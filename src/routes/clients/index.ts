@@ -1,8 +1,8 @@
 import { Hono } from "hono";
-import { db } from "../../db";
-import { and, between, eq, inArray, isNotNull, like, lte, max } from "drizzle-orm";
+import { db } from "../../db/db";
+import { and, between, desc, eq, inArray, isNotNull, like, lte, max } from "drizzle-orm";
 import { clerkMiddleware,getAuth } from "@hono/clerk-auth";
-import { workoutTable,workoutDetailsTable,usersTable, userProgrammeTable,exerciseTable, weightTable, measurementsTable, measurementsDataTable } from "../../db/schema";
+import { workoutTable,workoutDetailsTable,usersTable, userProgrammeTable,exerciseTable, weightTable, measurementsTable, measurementsDataTable, programmesTable } from "../../db/schema";
 import { createClerkClient } from "@clerk/backend";
 import { number, set } from "zod";
 import { programmeDetails } from "../../../frontend/src/components/programmeDetails";
@@ -14,9 +14,14 @@ import { idSchema} from "../../zod/idSchema";
 import WorkoutStats from "../../../frontend/src/components/clientPage/workoutStats/workoutStats";
 import { weightSchema } from "../../zod/weightSchema";
 import { Measurements } from "../../types/measurements";
-import { measurementSchema } from "../../zod/measurementsSchema";
+import { deleteMeasurementSchema, insertMeasurementMultipleSchema, insertWeightSchema, measurementSchema, updateMeasurementSchema } from "../../zod/measurementsSchema";
 import { Programme } from "../../types/userProgramme/programme";
+import { clientDeletionSchema, clientUpdateSchema } from "../../zod/clientSchema";
+import { workoutSchema } from "../../zod/workoutSchema";
+import { workoutHistory, workoutHistorySchema } from "../../zod/workoutHistorySchema";
+import { updateClientProgrammeSchema, userProgrammeSchema } from "../../zod/clientProgrammeschema";
 const clientRoutes=new Hono();
+
 
 
 
@@ -41,6 +46,23 @@ console.log(dateString)
 
 
 
+clientRoutes.post('/delete',async(c)=>{
+  const auth=getAuth(c);
+  if(!auth?.userId){
+    return c.json({message:"Unverfied"})
+  }
+
+  const body=await c.req.json();
+  const verfication=clientDeletionSchema.safeParse(body);
+  if(verfication.error)
+  {
+    return c.json({message:"Error"})
+  }
+  const data=await db.delete(usersTable).where(eq(usersTable.id,body.id))
+  return c.json("Data deleted")
+  
+})
+
 clientRoutes.get('/:id/workoutStats',async(c)=>{
   let dateArray:string[]=[];
   let startDate:Date=new Date();
@@ -56,6 +78,7 @@ clientRoutes.get('/:id/workoutStats',async(c)=>{
 
 
 
+
  
 
   const id=Number(c.req.param('id'))
@@ -63,8 +86,18 @@ clientRoutes.get('/:id/workoutStats',async(c)=>{
   if(!parse.success){
     return c.json({error:'"Walidation Error"'})
   }
-const workout=await db.select().from(workoutDetailsTable).innerJoin(workoutTable,eq(workoutDetailsTable.workout_id,workoutTable.id)).where(and(eq(workoutTable.user_id,id),inArray(workoutTable.created_at,dateArray))).innerJoin(exerciseTable,eq(workoutDetailsTable.exercise_id,exerciseTable.id))
-
+const workout = await db
+  .select()
+  .from(workoutDetailsTable)
+  .innerJoin(workoutTable, eq(workoutDetailsTable.workout_id, workoutTable.id))
+  .innerJoin(exerciseTable, eq(workoutDetailsTable.exercise_id, exerciseTable.id))
+  .where(
+    and(
+      eq(workoutTable.user_id, id),
+      inArray(workoutTable.created_at, dateArray)
+    )
+  );
+return c.json(workout)
 type bodyPart={
   equipmentName:string,
   stats:bodyPartStats
@@ -130,7 +163,7 @@ return c.json(myArray)
 
 });
 
-clientRoutes.get('/',async(c)=>{
+const mainClientRoute=clientRoutes.get('/',async(c)=>{
   /*
   @route Get/Clients
   Fetch all Clients for a user with a 
@@ -198,8 +231,6 @@ clientRoutes.get('/:id/programmes',async(c)=>{
   @returns{Programme}} Active Programme with their details and exercise
   */
 
-
-  
   const auth=getAuth(c);
   if(auth?.userId){
     return c.json({Error:"Unable to verify user"});
@@ -214,12 +245,25 @@ clientRoutes.get('/:id/programmes',async(c)=>{
     ),
     with:{
      programme:{
+      columns:{
+        assigned_to:false,
+        
+      },
       with:{
         programmeWorkout:{
           with:{
             programmeDetails:{
+              columns:{
+                programme_workoutId:false,
+
+              },
              with:{
-              exercise:true
+              exercise:{
+                columns:{
+                  instructions:false,
+              photo:false
+                }
+              }
              }
             }
           }
@@ -232,6 +276,14 @@ clientRoutes.get('/:id/programmes',async(c)=>{
   if(!userProgramme){
     return c.json({})
   }
+
+  const verfication=userProgrammeSchema.safeParse(userProgramme);
+  if(verfication.error){
+    return c.json({message:verfication.error.format()})
+  }
+ 
+
+  return c.json(userProgramme)
 
 
   
@@ -265,6 +317,46 @@ const programme:Programme={
 
 
 
+
+
+
+
+
+
+clientRoutes.post('/:id/updateProgramme',async(c)=>{
+  const id=Number(c.req.param('id'))
+  const auth=getAuth(c);
+  if(auth?.userId){
+   return c.json({messsage:"Verification Failed"})
+  }
+  const data=await c.req.json();
+  const verfication= updateClientProgrammeSchema.safeParse(data);
+  if(verfication.error){
+    return c.json({messsage:"Error"})
+  }
+  const programmeFind=await db.query.userProgrammeTable.findFirst({
+    where:and(
+      eq(userProgrammeTable.status,'active'),
+      eq(userProgrammeTable.user_id,id)
+    )
+
+  })
+  if(programmeFind){
+    const dataUpdata=await db.update(userProgrammeTable).set({status:'not active'}).where(eq(userProgrammeTable.programme_id,programmeFind.id))
+  }
+  const newData=await db.insert(userProgrammeTable).values({programme_id:data.id,user_id:id,status:'active'}).returning();
+  return c.json(newData)
+  
+
+
+
+
+})
+
+
+//Measurements
+
+
 clientRoutes.get('/:id/measurements',async(c)=>{
   const auth=getAuth(c);
   if(auth?.userId){
@@ -272,11 +364,11 @@ clientRoutes.get('/:id/measurements',async(c)=>{
   }
 
 
-  type UserMeasurement={
+  type Measurement={
+    id:number,
     name:string,
     created_at:string,
     value:number,
-    trend?:number
   }
   const id=Number(c.req.param('id'));
   const result=idSchema.safeParse({id});
@@ -290,42 +382,24 @@ clientRoutes.get('/:id/measurements',async(c)=>{
   }
   
   
-  const data= await db.select().from(measurementsDataTable).innerJoin(measurementsTable,eq(measurementsDataTable.measurement_id,measurementsTable.id)).where(and(eq(measurementsDataTable.user_id,id),eq(measurementsTable.id,searchId))).limit(7)
+  const data= await db.select().from(measurementsDataTable).innerJoin(measurementsTable,eq(measurementsDataTable.measurement_id,measurementsTable.id)).where(and(eq(measurementsDataTable.user_id,id),eq(measurementsTable.id,searchId)));
  
- if(searchId!=5){
+ 
 
-  const measurements:UserMeasurement=data.map((item)=>({
+
+  const measurements:Measurement=data.map((item)=>({
+    id:item.measurementsData.id,
   name:item.measurements.name,
   created_at:item.measurementsData.created_at,
   value:item.measurementsData.value,
 
- }))
+
  
- return c.json(measurements)
-
-}
-else{
-
-  let trendWeight:number=0;
-  let measurements:UserMeasurement[]=[]
-  for(let i=0; i<data.length; i++)
-  {
-    console.log(data[i].measurementsData.value)
-    const trend:number=Number(data[i].measurementsData?.value??0)
-    const trendWeight:number=trend/(i+1)
-  measurements.push({
-    name:data[i].measurements.name,
-    created_at:data[i].measurementsData.created_at?? "",
-    value:Number(data[i].measurementsData.value?? 0),
-    trend:trend
-
-  })
-
-  }
+  }))
   return c.json(measurements)
  
+ 
 
-}
  
 
 });
@@ -335,13 +409,85 @@ else{
 
 
 
+clientRoutes.post('/:id/measurement/delete',async(c)=>{
+  const auth=getAuth(c);
+  if(!auth?.userId){
+    return c.json({message:"Unverfied"})
+  }
+  const response= await c.req.json();
 
-clientRoutes.get('/:id/workoutHistory',async(c)=>{
+  const verification=deleteMeasurementSchema.safeParse(response);
+  if(verification.error){
+    return c.json({message:verification.error.flatten()})
+  }
+  const data=await db.delete(measurementsDataTable).where(eq(measurementsDataTable.id,verification.data.id)).returning();
+  return c.json(data)
+  
+})
+
+clientRoutes.post('/:id/measurement/storeMultiple',async(c)=>{
+  const id=c.req.param('id')
+  const auth=getAuth(c);
+  if(!auth?.userId){
+    return c.json({message:"Unverified"})
+  }
+  const data=await c.req.json();
+
+  const verfication=insertMeasurementMultipleSchema.safeParse(data);
+  if(verfication.error){
+    return c.json({message:verfication.error.message});
+  }
+  for(let i=0; i<verfication.data.measurement.length; i++)
+  {
+    if(verfication.data.measurement[i].value!=0)
+    {
+      const data=await db.insert(measurementsDataTable).values({measurement_id:verfication.data.measurement[i].id,user_id:id,created_at:verfication.data.created_at})
+
+
+
+    }
+  }
+
+  return c.json(data)
+})
+
+
+
+
+
+
+
+
+
+
+clientRoutes.post('/:id/measurementUpdate',async(c)=>{
+  const id=Number(c.req.param('id'))
+  const auth=getAuth(c);
+  if(!auth?.userId){
+    return c.json("Unverfied");
+  }
+  const data=await c.req.json();
+
+
+  const verification=updateMeasurementSchema.safeParse(data);
+  if(verification.error){
+    return c.json("ERROR BODD")
+  }
+  const dataToUpdate=await db.update(measurementsDataTable).set({created_at:data.created_at,value:data.value,user_id:id}).where(eq(measurementsDataTable.id,data.id)).returning();
+  return c.json(dataToUpdate);
+})
+
+
+
+
+
+
+
+const clientWorkoutHistory=clientRoutes.get('/:id/workoutHistory',async(c)=>{
   const auth=getAuth(c);
   if(auth?.userId){
     return c.json({Error:"Unable to verify User"});
   }
-
 
 
 
@@ -354,10 +500,10 @@ clientRoutes.get('/:id/workoutHistory',async(c)=>{
     return c.json({error:'Validation Failed'})
   }
 
-  const workout=await db.query.workoutTable.findMany({
-    where:and(eq(workoutTable.user_id,id),
-    like(workoutTable.created_at,`%${date}%`)
-  ),
+
+  const workout:workoutHistory=await db.query.workoutTable.findMany({
+    where:eq(workoutTable.user_id,id),
+  
  
     with:{
       programme:true,
@@ -375,38 +521,15 @@ clientRoutes.get('/:id/workoutHistory',async(c)=>{
   })
 
 
-
-
-  const myWorkout:DetailedWorkout[]=workout.map((item)=>({
-    id:item.id,
-    name:item?.name?? "",
-    created_at:item.created_at,
-    programme:{
-      name:item.programme?.name?? "",
-      description:item.programme?.description?? "",
-      
-    },
-  
-    
-    workout:item.workoutDetail.map((value:workoutDetails)=>({
-      id:value.id,
-    reps:value.reps,
-    sets:value.set,
-    weight:value.weight,
-    rir:value.rir,
-    exercise:{
-      name:value.exercise.name,
-      id:value.exercise.id
-    }
-
-
-    }))
-   
-
-  }))
- 
-
-  return c.json(myWorkout)
+for(let i=0; i<workout.length; i++)
+{
+  const verfication=workoutHistorySchema.safeParse(workout[i])
+  if(verfication.error){
+    return c.json({message:verfication.error.flatten()})
+  }
+}
+const workoutToSend:workoutHistory=workout;
+return c.json(workoutToSend)
 
 })
 
@@ -421,100 +544,14 @@ type clientInfo={
 }
 
 
+const data=await db.query.usersTable.findFirst({
+  where:eq(usersTable.id,id)
+
+});
+return c.json(data)
 
 
 
-const response=await db.query.usersTable.findFirst({
-  where:eq(usersTable.id,id),
-  columns:{
-    password:false,
-    parent_id:false,
-    user_id:false
-    
-  },
-  with:{
-    userProgramme:{
-    
-      with:{
-        programme:{
-          columns:{
-            user_id:false,
-            assigned_to:false
-
-          },
-          with:{
-           programmeWorkout:{
-            with:{
-              programmeDetails:true
-            }
-           }
-          }
-        }
-        
-      }
-    },
-    measurementData:{
-      with:{
-        measurement:true
-      }
-   
-    },
-
-    
-  
-    workout:{
-      with:{
-        workoutDetail:{
-          with:{
-            exercise:true
-          }
-        }
-      }
-    }
-  
-
-  }
-
-})
-
-
-
-
-
-
-const information:clientInfo={
-  client:{
-    name:response?.name??'Unkown',
-    age:response?.age?? 18,
-    measurement:response?.measurementData?.map((item)=>({
-      id:item.id
-    })),
-    programme:{
-        name:response?.userProgramme?.[0]?.programme?.name?? 'No Programme',
-        description:response?.userProgramme?.[0]?.programme?.description?? 'No Description'
-
-    },
-    workout:response?.workout.map((item)=>({
-      name:item?.name?? '',
-      created_at:item.created_at,
-      workoutDetail:item.workoutDetail.map((value)=>({
-        id:value.id,
-        set:value.set,
-        reps:value.reps,
-        name:value.exercise.name,
-        exercise_id:value.exercise.id,
-
-
-      }))
-    }))
-    
-      
-      
-    }
-
-}
-
-return c.json(information)
 
 
 })
@@ -522,23 +559,20 @@ return c.json(information)
 clientRoutes.post('/:id/weights/store',async(c)=>{
 
 
-  
-  const body:Weight=c.req.json();
-  return c.json(body)
-  const id=Number(c.req.param('id'));
-  const verification=idSchema.safeParse({id});
-  if(!verification.success){
-    return c.json('Error has occcured');
+  const id=c.req.param('id')
+const auth=getAuth(c);
+if(!auth?.userId){
+  return c.json({message:"Unverified"})
+}
+const data=await c.req.json();
 
-  }
-  const measurement=await db.insert(measurementsDataTable).values({
-    measurement_id:5,
-    user_id:id,
-    created_at:body.created_at,
-    value:body.scaleWeight,
-   
-  })
-  return c.json("Data has been created")
+const verfication=insertWeightSchema.safeParse(data);
+
+if(verfication.error){
+return c.json({message:verfication.error.flatten()})
+}
+const newRecord=await db.insert(measurementsDataTable).values({value:verfication.data.scaleWeight,created_at:verfication.data.created_at,user_id:id,measurement_id:4}).returning();
+return c.json(newRecord)
 
 
 })
@@ -647,9 +681,10 @@ clientRoutes.get('/:id/stats',async(c)=>{
   }
  }
 
+
 const data=await db.select().from(workoutDetailsTable).innerJoin(exerciseTable,eq(workoutDetailsTable.exercise_id,exerciseTable.id)).innerJoin(workoutTable,eq(workoutDetailsTable.workout_id,workoutTable.id)).where(and(eq(workoutTable.user_id,query),eq(exerciseTable.id,exercise_id)))
 
- 
+
   
 
   const statsWorkout:Stats[]=data.map((item)=>({
@@ -671,6 +706,23 @@ return c.json(statsWorkout);
 
 
 
+
+
+clientRoutes.post('/:id/updateInformation',async(c)=>{
+  const id=Number(c.req.param('id'))
+  const auth=getAuth(c);
+  if(!auth?.userId){
+    return c.json({message:"Verification of User Failed"})
+  }
+  const data=await c.req.json();
+const verifcationOfData=clientUpdateSchema.safeParse(data);
+if(verifcationOfData.error){
+  return c.json({message:"Verfication Failed"})
+}
+const updateInformation=await db.update(usersTable).set({name:data.name,age:data.age,notes:data.notes}).where(eq(usersTable.id,id));
+return c.json(updateInformation)
+
+})
 
 
 
@@ -754,8 +806,20 @@ clientRoutes.post('/:id/workout/store',async(c)=>{
 
   }
   
-  const body:workout=await c.req.json();
-  return c.json(body)
+  const body=await c.req.json();
+  const workoutVerification=workoutSchema.safeParse(body.workout);
+  if(workoutVerification.error){
+    return c.json({message:"Failed To verify"})
+  }
+  const insertRecord=await db.insert(workoutTable).values({name:body.workout.name,date:body.workout.date,user_id:id}).returning();
+   for(let i=0; i<body.workout.workout.length; i++)
+   {
+    const newRecord=await db.insert(workoutDetailsTable).values({workout_id:insertRecord[0].id,set:body.workout.workout[i].exercise.set,reps:body.workout.workout[i].reps,weight:body.workout.workout[i].weight,exercise_id:body.workout.workout[i].id})
+
+   }
+ return c.json({message:"Workout Added"})
   
 })
 export default clientRoutes;
+export type mainClientType= typeof mainClientRoute;
+export type clientWorkoutHistoryType= typeof clientWorkoutHistory

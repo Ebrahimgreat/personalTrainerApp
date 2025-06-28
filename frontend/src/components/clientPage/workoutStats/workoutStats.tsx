@@ -4,7 +4,7 @@
 
 import Button from "../../ui/button"
 import { createSign } from "crypto"
-import { For,createSignal } from "solid-js"
+import { For,Show,createSignal } from "solid-js"
 
 
 type bodyPart={
@@ -58,6 +58,11 @@ function WorkoutStats(props:props)
     Next
   </Button>
 </div>
+
+
+
+
+
         <h1 class="font-bold text-center">
          Weekly Stats 
      <span class="text-gray-900">
@@ -66,9 +71,15 @@ function WorkoutStats(props:props)
     </span>
 
         </h1>
-    
+
   
-     
+
+     <Show when={props?.stats.length>0} fallback={<p class="text-center text-gray-500">
+No Workout Found
+     </p>
+     }>
+
+
        
     <For each={props.stats}>
         {(item)=><div class="flex flex-row justify-between  px-3 py-3 gap-x-4">
@@ -90,7 +101,7 @@ function WorkoutStats(props:props)
             </div>}
         </For>
 
-
+</Show>
     </div>)
     
 }

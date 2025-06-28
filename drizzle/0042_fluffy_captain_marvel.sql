@@ -1,1 +1,0 @@
-ALTER TABLE `measurementsData` ADD `value` numeric;

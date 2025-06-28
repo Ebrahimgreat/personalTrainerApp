@@ -1,1 +1,0 @@
-ALTER TABLE `nutrition` ADD `carbs` numeric;

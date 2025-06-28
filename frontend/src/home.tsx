@@ -1,8 +1,8 @@
-import { createEffect, createMemo, createResource, onCleanup } from "solid-js";
+import { createEffect, createMemo, createResource, onCleanup, Suspense } from "solid-js";
 import { createSignal,Switch, Match, Show ,For} from "solid-js";
 import { createStore } from "solid-js/store";
-import { useNavigate } from "@solidjs/router";
-import { SignedOut, useAuth } from "clerk-solidjs";
+import { redirect, useNavigate } from "@solidjs/router";
+import { SignedIn, SignedOut, useAuth } from "clerk-solidjs";
 import { UserProfile,OrganizationProfile } from "clerk-solidjs";
 
 import Button from "./components/button";
@@ -51,10 +51,6 @@ function home()
 
 
 
-createEffect(()=>{
-    
-    console.log(isSignedIn)
-})
 
     const navigate=useNavigate();
 
@@ -115,17 +111,43 @@ const token=await getToken()
     const [myValue]=createResource(fetchData);
 
 
- 
+ createEffect(()=>{
+   if(!isSignedIn()){
+  navigate('/')
+   }
+
+ })
     return(
+
+       
         
+      
+
+     
+
       
         
       
         <div class="flex flex-col">
-
-
-
+<SignedIn>
+<Suspense fallback={
+  <div class="flex justify-center items-center p-4">
+    <svg class="size-6 text-gray-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"/>
+    </svg>
+    <span>
+        Loading
+    </span>
+  </div>
+}> 
   
+
+
+
+
+            
                 <Show when={myValue()}>
 
                    <h1 class=" font-bold">
@@ -195,6 +217,7 @@ Total Clients
                 </ul>
 
             </CardHeader>
+            
           </Card>
          
 
@@ -206,7 +229,8 @@ Total Clients
 
 
 
-
+</Suspense>
+</SignedIn>
             </div>
 
 

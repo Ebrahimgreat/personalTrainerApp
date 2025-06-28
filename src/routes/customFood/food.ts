@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { db } from "../../db/index.js";
+import { db } from "../../db/db.js";
 import { eq,like } from "drizzle-orm";
 import { customFoodTable } from "../../db/schema.js";
 import { error } from "console";

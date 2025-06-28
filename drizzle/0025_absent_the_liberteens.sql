@@ -1,1 +1,0 @@
-ALTER TABLE `programme` ADD `assigned_to` integer REFERENCES users(id);

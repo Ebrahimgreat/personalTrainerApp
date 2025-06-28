@@ -53,9 +53,6 @@ function AddClient(props:props)
                 <TextField required onchange={(e)=>props.setClientName(e.currentTarget.value)} value={props.client.name} id="name" type="text" placeholder="name"/>
                 <TextField required onchange={(e)=>props.setClientAge(Number(e.currentTarget.value))} value={props.client.name} id="age" type="number" placeholder="age"/>
 
-                <TextField required onchange={(e)=>props.setClientEmail(e.currentTarget.value)} value={props.client.name} id="email" type="email" placeholder="email">
-
-                </TextField>
              
                 </TextFieldRoot>
                

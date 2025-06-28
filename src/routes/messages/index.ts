@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { db } from "../../db";
+import { db } from "../../db/db";
 import { messagesTable, usersTable } from "../../db/schema";
 import { eq,or } from "drizzle-orm";
 import { getAuth } from "@hono/clerk-auth";

@@ -7,8 +7,15 @@ import {programmeDetails, updateProgrammeDetails} from "./components/programmeDe
 import ViewClient from "./viewClient";
 import { useSearchParams } from "@solidjs/router";
 import ClientCreater from "./components/client/clientHome";
+import{AppType} from '../../src/index';
+import { hc } from "hono/client";
+import { mainClientType } from "../../src/routes/clients";
+import { AlertDialog } from "@kobalte/core/alert-dialog";
+import { AlertDialogTrigger } from "./components/ui/alert-dialog";
+import Button from "./components/ui/button";
+import Dialog, { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./components/ui/dialog";
 
-
+import {TextField, TextFieldLabel, TextFieldRoot } from "./components/ui/textfield";
 
 type newClient={
     name:string,
@@ -20,12 +27,12 @@ type newClient={
 
 function Clients()
 {
+    const{isSignedIn}=useAuth();
     const {getToken}=useAuth();
     const{signUp}=useSignUp()
 
-    
     const[emailTaken,setEmailTaken]=createSignal('');
-    const[passwordValidation,setPasswordValidation]=createSignal(0);
+
     
     const[newClient,setNewClient]=createStore<newClient>({
         name:'',
@@ -36,40 +43,34 @@ function Clients()
     })
     
 
-    const verifyEmail=async()=>{
+
+    const deleteClient=async(item:number)=>{
         try{
+   
             const token=await getToken();
-            const data=await fetch('http://localhost:3001/api/email-check',{
-                method:'POST',
+            const data=await fetch('http://localhost:3001/api/clients/delete',{
+                method:"POST",
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                },
                 body:JSON.stringify({
-                    email:newClient.email
+                    id:Number(item)
                 })
             })
-            const result=await data.json();
-            if(result==='User Exists'){
-                console.log("YES SIR")
-               setEmailTaken('Email Already Taken')
-
-            }
-            else{
-                setEmailTaken('')
-            }
+            setOpen(false)
+            refetch();
         }
         catch(error){
             console.log(error)
         }
-    }
 
-    const addNewClient=async()=>{
+    }
+   
+    const addNewClient=async(event:Event)=>{
+        event?.preventDefault();
         console.log('yes')
       try{
 
-        verifyEmail();
-        if(emailTaken()==='Email Already Taken')
-        {
-            console.log("YES SIR")
-            return;
-        }
 
         const token=await getToken();
         const data=await fetch('http://localhost:3001/api/client/store',{
@@ -80,13 +81,11 @@ function Clients()
             },
             body:JSON.stringify({
                 name:newClient.name,
-                age:newClient.age,
-                email:newClient.email,
-                password:newClient.password,
-                confirmPassword:newClient.confirmPassword
+                age:newClient.age
              
             })
         })
+        setOpen(false)
         refetch();
       }
       catch(error){
@@ -102,7 +101,7 @@ function Clients()
     const navigate=useNavigate();
     
     const getClients=async()=>{
-        const {getToken}=useAuth();
+     
     const token=await getToken();
         const response=await fetch(`http://localhost:3001/api/clients?name=${search()}`,{
             method:'GET',
@@ -116,6 +115,7 @@ function Clients()
 
   
     const[myClients,{refetch}]=createResource(search,getClients);
+    const[open,setOpen]=createSignal(false)
 
     const fetchProgrammes=async()=>{
         const reponse=await fetch('http://localhost:3001/api/programme');
@@ -130,16 +130,18 @@ const showClient=(id:number)=>{
 }
 
 
-    const viewProgramme=async(id:number)=>{
-      
-    }
-    
-    createEffect(()=>{
-        console.log("Password",newClient.confirmPassword)
-    })
 
+ 
     const[programme,setProgramme]=createResource(fetchProgrammes)
     const columns:string[]=['Client','Assigned Programme']
+
+
+    createEffect(()=>{
+        if(!isSignedIn()){
+       navigate('/')
+        }
+     
+      })
     return(
 
 
@@ -147,9 +149,15 @@ const showClient=(id:number)=>{
 
         <div class="flex  flex-col">
 
+<Show when={myClients.loading}>
+                Loading.....
+                </Show>
+           
+
 <h1 class="text-3xl font-semi-bold text-gray-900 ">
                 Clients 
                 </h1>
+                {myClients.error? "Error has occured" :""}
                 <span class="font-extralight">
                     Manage Your Clients
                 </span>
@@ -157,13 +165,64 @@ const showClient=(id:number)=>{
          
            
        
-         <Show when={myClients.loading}>
-                Loading.....
-                </Show>
+
+
+<Dialog open={open()} onOpenChange={setOpen}>
+    <DialogTrigger class="mb-10">
+        <Button>
+            Add Client
+        </Button>
+    </DialogTrigger>
+    <DialogContent class="bg-white">
+        <DialogHeader>
+            <DialogTitle>
+                New Client
+            </DialogTitle>
+            <DialogDescription>
+                This action will create a new client
+            </DialogDescription>
+
+           
+        </DialogHeader>
+
+        <form onSubmit={addNewClient}>
+
+      
+       <TextFieldRoot>
 
 
 
-          <ClientCreater setClientEmail={(item)=>setNewClient('email',item)}    emailMessage={emailTaken()} setClientName={(item)=>setNewClient('name',item)} setClientAge={(item)=>setNewClient('age',item)}       addNewClient={addNewClient} newClient={newClient} searchClient={search()} setSearchString={(item)=>setSearch(item)} onClientName={(index)=>showClient(index)} myClients={myClients()}>
+       <TextFieldLabel>
+        Name
+        </TextFieldLabel>
+
+        <TextField value={newClient.name} onChange={(e)=>setNewClient('name',e.currentTarget.value)} type="text">
+
+        </TextField>
+
+
+        <TextFieldLabel>
+           Age
+        </TextFieldLabel>
+
+        <TextField type="number" onChange={(e)=>setNewClient('age',Number(e.currentTarget.value))} value={newClient.age}>
+            
+        </TextField>
+        </TextFieldRoot>
+        <DialogFooter class="mt-10">
+            <Button onClick={()=>setOpen(false)} class="mr-10">
+                Cancel
+            </Button>
+            <Button type="submit">
+                Submit
+            </Button>
+        </DialogFooter>
+        </form>
+    </DialogContent>
+
+    </Dialog>
+
+          <ClientCreater deleteClient={(item)=>deleteClient(item)}  setClientAge={(item)=>setNewClient('age',item)}       addNewClient={addNewClient} newClient={newClient} searchClient={search()} setSearchString={(item)=>setSearch(item)} onClientName={(index)=>showClient(index)} myClients={myClients()}>
                 
                 </ClientCreater>
 

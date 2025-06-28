@@ -1,14 +1,12 @@
 
-type clientProps={
+type props={
     name:string,
-    email:string,
     notes:string,
     age:number,
-    dob:string,
-    height:number
+    onChange:(fieldName:string,value:string)=>void
 }
 
-function Settings(props:clientProps)
+function Settings(props:props)
 {
     return(
    
@@ -28,22 +26,13 @@ function Settings(props:clientProps)
 <div class="mb-2">
 
 
-            <input disabled value={props.name?props.name:''} class={`disabled: cursor-not-allowed w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500`} type="text">
+            <input onChange={(e)=>props.onChange('name',e.currentTarget.value)} value={props.name?props.name:''} class={`w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500`} type="text">
             </input>
             </div>
 
-            <div class="mb-2">
+          
      
-            <label class="text-gray-600">
-                Email
 
-            </label>
-       
-
-            <input disabled value={props.email?props.email:''} class={`disabled:cursor-not-allowed w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500`} type="text">
-
-            </input>
-            </div>
             <div class="mb-2">
 
    
@@ -51,7 +40,7 @@ function Settings(props:clientProps)
               Notes
 
             </label>
-            <input value={props.notes? props.notes:''} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500" type="text">
+            <input onChange={(e)=>props.onChange('notes',e.currentTarget.value)} value={props.notes? props.notes:''} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500" type="text">
 
           
 
@@ -66,32 +55,11 @@ function Settings(props:clientProps)
             </label>
 
 
-            <input value={props.age? props.age:18} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500" type="number">
+            <input onChange={(e)=>props.onChange('age',e.currentTarget.value)} value={props.age? props.age:18} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500" type="number">
             
             </input>
             </div>
-            <div class="mb-2">
-
-      
-
-            <label class="text-gray-600">
-             Date Of Birth
-
-            </label>
-
-            <input value={props.dob? props.dob:''} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500" type="text">
-            
-</input>
-<label class="text-gray-600">
-    Height
-</label>
-
-<input value={props.height? props.height:''} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-blut-500" type="text">
-            
-            </input>
-
-
-</div>
+           
         </div>
     )
 }

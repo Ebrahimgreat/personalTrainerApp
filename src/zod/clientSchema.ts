@@ -1,5 +1,21 @@
 import{z} from "@hono/zod-openapi";
 import { object } from "zod";
+
+
+
+const clientUpdateSchema=z.object({
+    name:z.string(),
+    age:z.number(),
+    notes:z.string()
+
+
+
+})
+
+
+
+
+
 const clientSchema=z.object({
     name:z.string().openapi({
         example:"Ebrahim",
@@ -15,4 +31,9 @@ const clientSchema=z.object({
    
 
 })
-export  {clientSchema};
+
+const clientDeletionSchema=z.object({
+    id:z.number()
+
+})
+export  {clientSchema,clientDeletionSchema,clientUpdateSchema};

@@ -1,5 +1,6 @@
 import { For,Show } from "solid-js";
 import Modal from "../modal";
+import { Exercise } from "../../../../src/db/schema";
 
 type props={
    equipmentSelected:string,
@@ -16,7 +17,7 @@ type props={
    setTypeSelected:(item:string)=>void,
    setEquipment:(item:string)=>void,
    setSearchSelected:(item:string)=>void,
-   updatingExercise:(item:object)=>void,
+   updatingExercise:(item:Exercise)=>void,
 
 }
 function ExerciseLibrary(props:props){

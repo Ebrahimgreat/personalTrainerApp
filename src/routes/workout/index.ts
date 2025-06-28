@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { workoutSchema,workoutDeletionSchema } from "../../zod/workoutSchema.js";
-import { db } from "../../db/index.js";
+import { db } from "../../db/db.js";
 import { eq } from "drizzle-orm";
 
 import { usersTable, weightTable, workoutDetailsTable, workoutTable } from "../../db/schema.js";

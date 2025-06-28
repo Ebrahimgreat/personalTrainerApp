@@ -172,7 +172,7 @@ createEffect(()=>{
 
 
 <h1 class="text-3xl font-semi-bold text-gray-900 ">
-               Create Workout
+               Create Workout  {props.programmeExercises.length}
         
          
             </h1>
@@ -200,8 +200,8 @@ createEffect(()=>{
             
            
           
-        {props.programmeExercises.length}
-        <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-x-4" >
+
+        <div class="grid grid-cols-1s md:grid-cols-2 w-full gap-x-4" >
 
         
            

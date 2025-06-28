@@ -1,158 +1,154 @@
-import { sqliteTable, AnySQLiteColumn, integer, text, foreignKey, numeric } from "drizzle-orm/sqlite-core"
-  import { sql } from "drizzle-orm"
+import { pgTable, integer, text, serial, numeric, timestamp } from "drizzle-orm/pg-core"
+import { sql } from "drizzle-orm"
 
-export const heightUnit = sqliteTable("heightUnit", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	unit: text().notNull(),
+
+
+export const measurements = pgTable("measurements", {
+	id: integer().primaryKey().generatedAlwaysAsIdentity({ name: "measurements_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 2147483647, cache: 1 }),
 });
 
-export const weightUnits = sqliteTable("weightUnits", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	unit: text().notNull(),
+export const exercise = pgTable("exercise", {
+	id: integer().primaryKey().generatedAlwaysAsIdentity({ name: "exercise_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 2147483647, cache: 1 }),
+	name: text().notNull(),
+	type: text().notNull(),
+	equipment: text().notNull(),
 });
 
-export const workoutDetails = sqliteTable("workoutDetails", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	workoutId: integer("workout_id").references(() => workout.id),
-	set: numeric(),
-	reps: numeric(),
-	weight: numeric(),
-	rir: numeric(),
-	exerciseId: integer("exercise_id").references(() => exercise.id),
+export const users = pgTable("users", {
+	id: integer().primaryKey().generatedAlwaysAsIdentity({ name: "users_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 2147483647, cache: 1 }),
+	age: integer().notNull(),
+	name: text().notNull(),
+	email: text().notNull(),
 });
 
-export const foodsTable = sqliteTable("foodsTable", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
+export const customExercise = pgTable("customExercise", {
+	id: serial().primaryKey().notNull(),
+	name: text(),
+	equipment: text(),
+	targetMuscleGroup: text(),
+	type: text(),
+	instructions: text(),
+	photo: text(),
+	userId: integer("user_id"),
+});
+
+export const foodsTable = pgTable("foodsTable", {
+	id: serial().primaryKey().notNull(),
+	foodName: text(),
 	defaultProtein: numeric(),
 	defaultServing: numeric(),
 	defaultCalories: numeric(),
 	defaultCarbs: numeric(),
 	defaultFat: numeric(),
-	userId: integer("user_id").references(() => users.id),
-	foodName: text(),
+	userId: integer("user_id"),
 });
 
-export const exercise = sqliteTable("exercise", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	name: text(),
-	type: text(),
-	instructions: text(),
-	equipment: text(),
-	targetMuscleGroup: text(),
-	photo: text(),
+export const heightUnit = pgTable("heightUnit", {
+	id: serial().primaryKey().notNull(),
+	unit: text().notNull(),
 });
 
-export const users = sqliteTable("users", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	name: text().notNull(),
-	age: integer().notNull(),
-	userId: numeric("user_id"),
-	parentId: integer("parent_id"),
-});
-
-export const programme = sqliteTable("programme", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	name: text(),
-	description: text(),
-	userId: integer("user_id").references(() => users.id),
-	assignedTo: integer("assigned_to").references(() => users.id),
-});
-
-export const userProgramme = sqliteTable("userProgramme", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	userId: integer("user_id").references(() => users.id),
-	programmeId: integer("programme_id").references(() => programme.id),
-	status: text(),
-});
-
-export const latestActivities = sqliteTable("latestActivities", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	senderId: integer("sender_id").references(() => users.id),
-	recieverId: integer("reciever_id").references(() => users.id),
+export const latestActivities = pgTable("latestActivities", {
+	id: serial().primaryKey().notNull(),
+	senderId: integer("sender_id"),
+	recieverId: integer("reciever_id"),
 	message: text(),
 });
 
-export const programmeWorkout = sqliteTable("programmeWorkout", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	name: text().notNull(),
-	programmeId: integer("programme_id").references(() => programme.id),
+export const measurementsData = pgTable("measurementsData", {
+	id: serial().primaryKey().notNull(),
+	userId: integer("user_id").notNull(),
+	measurementId: integer("measurement_id"),
+	value: numeric(),
+	createdAt: timestamp("created_at", { mode: 'string' }),
 });
 
-export const programmeDetails = sqliteTable("programmeDetails", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	exerciseId: integer("exercise_id").references(() => exercise.id),
-	repRange: text(),
-	programmeWorkoutId: integer("programme_workoutId").references(() => programmeWorkout.id),
-	sets: integer(),
-});
-
-export const roomMembers = sqliteTable("roomMembers", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	userId: integer("user_id").references(() => users.id),
-	roomId: integer("room_id").references(() => rooms.id),
-});
-
-export const rooms = sqliteTable("rooms", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	name: text(),
-	userId: integer("user_id").references(() => users.id),
-});
-
-export const messages = sqliteTable("messages", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
+export const messages = pgTable("messages", {
+	id: serial().primaryKey().notNull(),
 	content: text(),
-	createdAt: numeric("created_at"),
-	userId: integer("user_id").references(() => users.id),
-	roomId: integer("room_id").references(() => rooms.id),
+	createdAt: timestamp("created_at", { mode: 'string' }),
+	userId: integer("user_id"),
+	roomId: integer("room_id"),
 });
 
-export const customExercise = sqliteTable("customExercise", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	name: text(),
-	equipment: text(),
-	targetMuscleGroup: text(),
-	type: text(),
-	instructions: text(),
-	photo: text(),
-	userId: integer("user_id").references(() => users.id),
-});
-
-export const workout = sqliteTable("workout", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	userId: integer("user_id").references(() => users.id),
-	name: text(),
-	programmeId: integer("programme_id").references(() => programme.id),
-	createdAt: text("created_at"),
-});
-
-export const nutrition = sqliteTable("nutrition", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
+export const nutrition = pgTable("nutrition", {
+	id: serial().primaryKey().notNull(),
 	calories: numeric(),
 	protein: numeric(),
 	fat: numeric(),
 	carbs: numeric(),
-	createdAt: text("created_at"),
-	userId: integer("user_id").notNull().references(() => users.id),
+	createdAt: timestamp("created_at", { mode: 'string' }),
+	userId: integer("user_id").notNull(),
 });
 
-export const weight = sqliteTable("weight", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	scaleWeight: numeric(),
-	createdAt: text("created_at"),
-	trendWeight: numeric(),
-	userId: integer("user_id").notNull().references(() => users.id),
+export const programmeDetails = pgTable("programmeDetails", {
+	id: serial().primaryKey().notNull(),
+	exerciseId: integer("exercise_id"),
+	repRange: text(),
+	programmeWorkoutId: integer("programme_workoutId"),
+	sets: integer(),
 });
 
-export const measurements = sqliteTable("measurements", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
+export const programmeWorkout = pgTable("programmeWorkout", {
+	id: serial().primaryKey().notNull(),
 	name: text().notNull(),
+	programmeId: integer("programme_id"),
 });
 
-export const measurementsData = sqliteTable("measurementsData", {
-	id: integer().primaryKey({ autoIncrement: true }).notNull(),
-	userId: integer("user_id").notNull().references(() => users.id),
-	measurementId: integer("measurement_id").references(() => measurements.id),
-	createdAt: text("created_at"),
-	value: numeric(),
+export const programme = pgTable("programme", {
+	id: serial().primaryKey().notNull(),
+	name: text(),
+	description: text(),
+	userId: integer("user_id"),
+	assignedTo: integer("assigned_to"),
 });
 
+export const roomMembers = pgTable("roomMembers", {
+	id: serial().primaryKey().notNull(),
+	userId: integer("user_id"),
+	roomId: integer("room_id"),
+});
+
+export const rooms = pgTable("rooms", {
+	id: serial().primaryKey().notNull(),
+	name: text(),
+	userId: integer("user_id"),
+});
+
+export const userProgramme = pgTable("userProgramme", {
+	id: serial().primaryKey().notNull(),
+	userId: integer("user_id"),
+	programmeId: integer("programme_id"),
+	status: text(),
+});
+
+export const weight = pgTable("weight", {
+	id: serial().primaryKey().notNull(),
+	scaleWeight: numeric(),
+	createdAt: timestamp("created_at", { mode: 'string' }),
+	trendWeight: numeric(),
+	userId: integer("user_id").notNull(),
+});
+
+export const weightUnits = pgTable("weightUnits", {
+	id: serial().primaryKey().notNull(),
+	unit: text().notNull(),
+});
+
+export const workoutDetails = pgTable("workoutDetails", {
+	id: serial().primaryKey().notNull(),
+	workoutId: integer("workout_id"),
+	set: numeric(),
+	reps: numeric(),
+	weight: numeric(),
+	rir: numeric(),
+	exerciseId: integer("exercise_id"),
+});
+
+export const workout = pgTable("workout", {
+	id: serial().primaryKey().notNull(),
+	userId: integer("user_id"),
+	name: text(),
+	programmeId: integer("programme_id"),
+	createdAt: timestamp("created_at", { mode: 'string' }),
+});

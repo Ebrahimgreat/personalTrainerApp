@@ -5,22 +5,32 @@ import { AlertDialogTrigger,AlertDialog, AlertDialogContent, AlertDialogHeader, 
 import Button from "../../ui/button"
 import Card, { CardTitle,CardHeader,CardDescription } from "../../ui/card"
 import {Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../ui/dialog"
+
+
+
+
 type Measurement={
-    id:number,
+    measurement_id:number,
+   name:string
+   measurement:MeasurementArray[]
+}
+type MeasurementArray={
     created_at:string,
-    value:number,
-    trend?:number
+    id:number,
+    value:number
 }
 
 type props={
-    name:string,
-    measurement:Measurement[]
+    measurement:Measurement,
+    updateMeasurement:(key:number,fieldName:string,value:string,id:number)=>void,
+    deleteMeasurement:(item:number)=>void
+
     
     
 
 }
 
-const[editMeasurement,setEditMeasurement]=createSignal('')
+
 
 
 function MeasurementScreen(props:props)
@@ -28,9 +38,9 @@ function MeasurementScreen(props:props)
   
     return(<div class="bg-white shadow-xl">
      <h1 class="text-center font-bold text-2xl text-gray-800 mb-6">
-        {props?.name ?? ""}
+        {props.measurement.name}
         </h1>
-        <Show when={props.measurement.length==0}>
+        <Show when={props.measurement.measurement.length==0}>
             <p class="text-center text-gray-500">
               No measurements Found
               </p>
@@ -38,9 +48,9 @@ function MeasurementScreen(props:props)
 
 
        
-        <Show when={props.measurement.length}>
-            <For each={props.measurement}>
-                {(item)=><div class="flex flex-row justify-between items-center bg-gray-100 p-4">
+        <Show when={props.measurement?.measurement.length>0}>
+            <For each={props.measurement.measurement}>
+                {(item,key)=><div class="flex flex-row justify-between items-center bg-gray-100 p-4">
 
                <Dialog>
                 <form>
@@ -63,12 +73,12 @@ function MeasurementScreen(props:props)
                                 <label>
                                    Date
                                 </label>
-                                <input type="date">
+                                <input onChange={(e)=>props.updateMeasurement(key(),'created_at',e.currentTarget.value,item.id)} value={new Date(item.created_at).toLocaleDateString()} type="date">
                                 </input>
                                 <label>
                                    Value
                                 </label>
-                                <input type="number" class="border">
+                                <input onChange={(e)=>props.updateMeasurement(key(),'value',e.currentTarget.value,item.id)} value={item.value}  type="number" class="border">
                                 </input>
 
                                
@@ -76,12 +86,10 @@ function MeasurementScreen(props:props)
                         </div>
                         <DialogFooter>
                            
-                            <Button>
+                            <Button onClick={()=>props.deleteMeasurement(item.id)}>
                                 Delete
                             </Button>
-                            <Button>
-                               Edit
-                            </Button>
+                            
                         </DialogFooter>
 
 

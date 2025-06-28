@@ -38,7 +38,7 @@ props.addWeight()
     return(
 
         <div class="h-full w-full">
-            
+    
             <div class="">
              
       
@@ -48,7 +48,7 @@ props.addWeight()
           <div class="mb-4">
 
  <select value={props.clientName}>
-<option>
+<option value={props.clientName}>
   {props.clientName}
 </option>
  </select>

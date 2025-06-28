@@ -1,27 +1,71 @@
 import { Hono } from "hono";
-import { db } from "../../db";
-import { eq,or } from "drizzle-orm";
-import { programmesTable, usersTable } from "../../db/schema";
+import { db } from "../../db/db";
+import { desc, eq,or } from "drizzle-orm";
+import { programmesTable, programmeWorkoutTable, usersTable } from "../../db/schema";
 import { getAuth } from "@hono/clerk-auth";
-import { Programme } from "../../types/userProgramme/programme";
+import { programme } from "../../types/programme/programme";
 import userProgrammeRoute from "../userProgramme";
+import { programmeDeletionSchema } from "../../zod/programmeSchema";
 const programmeRoutes=new Hono();
 
 
-programmeRoutes.post('/store',async(c)=>{
+programmeRoutes.post('/delete',async(c)=>{
+  const auth=getAuth(c);
+  if(!auth?.userId){
+    return c.json({message:"Authentication Error"})
+  }
   const body=await c.req.json();
-  return c.json(body)
+  const verification= programmeDeletionSchema.safeParse(body)
+  if(verification.error){
+    return c.json({message:"Error Verification"})
+  }
+  const data=await db.delete(programmesTable).where(eq(programmesTable.id,body.id))
+  return c.json("Item Deleted");
+});
+
+
+
+programmeRoutes.post('/store',async(c)=>{
+  const auth=getAuth(c);
+  if(!auth?.userId)
+  {
+    return c.json({error:"Unable to Verify User"});
+  }
+  
+  const userFind=await db.query.usersTable.findFirst({
+    where:eq(usersTable.user_id,auth.userId)
+  })
+
+  const body=await db.insert(programmesTable).values({
+    user_id:userFind.id,
+    name:'Untitled'
+  }).returning({id:programmesTable.id});
+  return c.json(body);
+
+
 })
-programmeRoutes.get('/',async(c)=>{
+
+programmeRoutes.post('/update',async(c)=>{
+  const data=await c.req.json();
+const programme=await db.update(programmesTable).set({name:data?.name,description:data.description}).where(eq(programmesTable.id,data.id)).returning();
+return c.json("UPdated")
+
+
+})
+const programmes=programmeRoutes.get('/',async(c)=>{
   const auth=getAuth(c);
   const user=await db.query.usersTable.findFirst({
     where:eq(usersTable.user_id,auth?.userId)
   })
+  
+
+
 
 
 
     const data=await db.query.programmesTable.findMany({
       where:or(eq(programmesTable.user_id,user?.id),eq(programmesTable.assigned_to,user?.id)),
+      orderBy:[desc(programmesTable.id)],
       
       
         with:{
@@ -45,7 +89,7 @@ programmeRoutes.get('/',async(c)=>{
     })
 
     
-  const programme:Programme=data.map((item)=>({
+  const programme:programme=data.map((item)=>({
     id:item.id,
    name:item.name,
    description:item.description,
@@ -88,32 +132,20 @@ return c.json(data)
 
 programmeRoutes.get('/details',async(c)=>{
     const data= c.req.query('id')
-    const body=await db.query.programmesTable.findMany({
+    const body=await db.query.programmesTable.findFirst({
         where:eq(programmesTable.id,data),
         with:{
-            
-            programmeWorkout:{
-                with:{
-                    programmeDetails:{
-                      with:{
-                        exercise:true
-                      }
-                    }
-                }
-            },
-            
-            
-            userProgramme:{
-                with:{
-                    user:true,
-                   
-                }
-            }
+          programmeWorkout:true
         }
-
+           
         
     })
     return c.json(body)
     
 })
+
+
+
+
 export default programmeRoutes;
+export type myProgrammeType=typeof programmes;

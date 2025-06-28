@@ -1,1 +1,0 @@
-ALTER TABLE `weight` ADD `created_at` timestamp;

@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { usersTable } from './db/schema.js';
 import { nutritionTable } from './db/schema.js';
 import { weightTable } from './db/schema.js';
-import { db } from './db/index.js';
+import { db } from './db/db.js';
 import {basicAuth} from "hono/basic-auth";
 import { sql,eq,and} from 'drizzle-orm';
 import{cors} from 'hono/cors';
@@ -32,8 +32,9 @@ import { createRoute } from '@hono/zod-openapi';
 import measurementRoute from './routes/measurements/index.js';
 import { createClerkClient, EmailAddress } from '@clerk/backend';
 import {clientSchema} from './zod/clientSchema.js';
-
-
+import templateRoutes from './routes/template/index.js';
+import {zValidator} from '@hono/zod-validator';
+import {z} from '@hono/zod-openapi';
 
 app.get('/',async(c)=>{
   return c.json("Hello Ebrahim");
@@ -46,6 +47,16 @@ app.use('*',
 
 
   
+const myRoute=app.get('/api/funny',
+(c)=>{
+  return c.json({
+    name:'Ebrahim',
+    email:'ebrahimgreat@gmail.com',
+    age:23
+  });
+});
+
+
 
 app.get('/children',async(c)=>{
   const body=await db.query.usersTable.findFirst({
@@ -258,7 +269,7 @@ app.route('/api/exercise',exerciseRoutes);
 app.route('/api/nutrition',nutritionRoutes)
 app.route('/api/dashboard',dashboardRoutes)
 app.route('/api/clients',clientRoutes)
-
+app.route('/api/template',templateRoutes);
 app.route('/api/messages',messageRoute);
 
 
@@ -270,7 +281,7 @@ app.post('/api/client/store',async(c)=>{
 
   if(!auth?.userId)
   {
-    return c.json("Error")
+    return c.json("Validation Has been Failed")
   }
 
 
@@ -278,31 +289,19 @@ app.post('/api/client/store',async(c)=>{
     where:eq(usersTable.user_id,auth.userId)
   })
 
-  
+
 
   const query=await c.req.json();
 
+   const data=await db.insert(usersTable).values({
+    name:query.name,
+    age:query.age,
+    parent_id:userFind?.id
+   }).returning()
 
-  
 
-  try{
-
-    const data=await db.insert(usersTable).values({
-      name:query.name,
-      age:query.age,
-      parent_id:userFind?.id,
-      email:query.email,
-      
-    });
-
-return c.json("Record Created",{data:data});
- }
- catch(error)
- {
-
-  console.log("ERROR",error)
-  return c.json("Error");
- }
+ 
+ return c.json({message:data})
 
   
 })
@@ -343,6 +342,7 @@ app.post('/api/login',async(c)=>{
 
 
   
+  
 })
 
 
@@ -380,3 +380,5 @@ export default{
   
 }
 console.log('Bun running')
+
+export type AppType=typeof myRoute;

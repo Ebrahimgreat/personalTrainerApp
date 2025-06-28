@@ -1,11 +1,11 @@
-import { For } from "solid-js"
+import { createSignal, For } from "solid-js"
 const tabBar:string[]=['Overview','WorkoutProgramme','Exercise Statistics']
 import { useNavigate } from "@solidjs/router"
 import CreateWeight from "../../weight/createWeight"
 import CreateWorkout from "../../workout/createWorkout"
 import { Button } from "../../ui/button";
 import AddMeasurement from "../measurements/addMeasurement"
-import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../ui/dialog"
+import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../../ui/dialog"
 
 
 type programmeExercise={
@@ -53,10 +53,12 @@ type Measurement={
 }
 type props={
     programmeTypes:programmeTypes[],
+    measurementDate:string,
+    updateMeasurementDate:(item:string)=>void,
   updateProgrammeType:(item:number)=>void,
     programmeTypeSelected:programmeTypes,
     
-    programmeExercise:programmeExercise[]
+    programmeExercise:[]
     measurements:Measurement[],
     showProgramme:string,
     setShowProgramme:(item:string)=>void,
@@ -83,12 +85,14 @@ type props={
  updateWorkout:(key:number,internalKey:number,value:number,field:string)=>void,
    removeItem:(id:number,value:number,key:number)=>void,
    submitWorkout:()=>void
+   submitMeasurement:()=>void
 
 }
 
 
 function ManagerClientHeader(props:props)
 {
+    const[open,setOpen]=createSignal<boolean>(false)
     function updateSearchString(item:string)
     {
         console.log("item",item)
@@ -139,7 +143,7 @@ function ManagerClientHeader(props:props)
     </span>
    
 
-    <Dialog>
+    <Dialog open={open()} onOpenChange={setOpen}>
         <DialogTrigger>
             <Button variant="outline">
 
@@ -152,13 +156,17 @@ function ManagerClientHeader(props:props)
             <DialogContent class="bg-white w-full  ">
 <DialogHeader>
 
+
             <DialogTitle>
                 New Measurement
             </DialogTitle>
+            <DialogDescription>
+             All values must be entered in inches. Ensure accurate input to help track your progress effectively.
+            </DialogDescription>
         
 
          
-            <AddMeasurement updateMeasurement={(key,number)=>props.updateMeasurement(key,number)} measurements={props.measurements}/>
+            <AddMeasurement setCloseDialog={()=>setOpen(false)}   measurementDate={props.measurementDate} updateDate={(item)=>props.updateMeasurementDate(item)} submitMeasurement={()=>props.submitMeasurement()}   updateMeasurement={(key,number)=>props.updateMeasurement(key,number)} measurements={props.measurements}/>
 
     </DialogHeader>
     </DialogContent>

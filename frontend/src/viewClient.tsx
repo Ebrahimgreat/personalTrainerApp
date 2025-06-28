@@ -10,7 +10,6 @@ import ClientStats from "./components/clientPage/stats/clientStats";
 import Settings from "./components/clientPage/Manager/settings";
 import { useNavigate } from "@solidjs/router";
 import BodyWeight from "./components/clientPage/bodyWeight";
-import WorkoutHistory from "./components/clientPage/Manager/assignedProgramme/workoutHistory";
 import AssignedProgramme from "./components/clientPage/Manager/assignedProgramme/assignedProgramme";
 import Notes from "./components/clientPage/overview/notes";
 import WorkoutProgramme from "./components/clientPage/Manager/workoutProgramme";
@@ -24,16 +23,49 @@ import { useAuth } from "clerk-solidjs";
 import Button from './components/ui/button';
 import Tabs, { TabsContent, TabsIndicator, TabsList, TabsTrigger } from "./components/ui/tabs";
 const tabBarItems:string[]=['Overview','Assigned Programme','Body Measurements', 'Weekly Stats', 'Exercise Statistics','Settings']
+import {MeasurementType} from "../../src/routes/measurements";
+import { clientWorkoutHistoryType } from "../../src/routes/clients";
+import { hc, InferResponseType } from "hono/client";
+import { getAuth } from "@hono/clerk-auth";
+import WorkoutHistory from "./components/clientPage/Manager/assignedProgramme/workoutHistory";
+import type { WorkoutHistoryType } from "./types/workoutHistory";
+const client=hc<MeasurementType>('http://localhost:3001/api/measurements')
+import { Suspense } from "solid-js";
+import { measurementsData, programmeWorkout, workout } from "../../drizzle/schema";
+import { Badge } from "./components/ui/ui/badge";
+import { ref } from "process";
+import { createSign } from "crypto";
 
-
-type Measurement={
-    id:number,
-    name:string
+type clientDetails={
+    name:string,
+    age:number,
+    notes:string
 }
+
+
+type measurementArray={
+    id:number,
+    created_at:string,
+    value:number
+}
+type Measurement={
+    name:string,
+    measurement_id:number,
+    measurement:measurementArray[]
+    
+}
+
 type MeasurementStore={
+    created_at:string,
+    measurement:measurementFields[]
+
+}
+type measurementFields={
+
     id:number,
     name:string,
-    value:number
+    value:number,
+
 }
 
 type Weight={
@@ -106,6 +138,7 @@ type detailedExercise={
     equipment:string,
 
 }
+
 
 
 const[showProgramme,setShowProgramme]=createSignal('No Programme')
@@ -276,6 +309,8 @@ function ViewClient(
 
 {
 
+    
+
 
     const{getToken}=useAuth();
 
@@ -297,12 +332,13 @@ function ViewClient(
 
     const[weight,setWeight]=createStore<Weight>({
         scaleWeight:0,
-        created_at:new Date().toLocaleDateString()
+        created_at: new Date().toISOString().slice(0, 10)
 
     })
 const [measurement,setMeasurement]=createStore<Measurement>({
-    id:0,
-    name:''
+    measurement_id:0,
+    name:'',
+    measurement:[]
 
 });
 
@@ -317,20 +353,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     const id=location.search.slice(4)
     
 
-    const fetchWorkoutStats=async()=>{
-        try{
-            const data=await fetch(`http://localhost:3001/api/clients/${id}/workoutStats?date=${startDate()}`,{
-                method:"GET"
-            })
-            return data.json();
-
-        }
-        catch(error){
-            console.log(error)
-        }
-
-    }
-
+    
     const fetchAllExercises=async()=>{
         try{
             const data=await fetch(`http://localhost:3001/api/exercise/all?exerciseName=${searchString()}&type=${type()}&equipment=${equipment()}`,{
@@ -345,10 +368,13 @@ const [measurement,setMeasurement]=createStore<Measurement>({
 
     }
 
-    const fetchExercises=async()=>{
+    const fetchWorkoutHistory=async()=>{
         try{
-            const data=await fetch(`http://localhost:3001/api/clients/${id}/workoutHistory?date=${workoutHistoryDate()}`,{
-                method:'GET'
+
+           
+            const data=await fetch(`http://localhost:3001/api/clients/${id}/workoutHistory`,{
+                method:'GET',
+                headers:{}
             })
             return data.json();
         }
@@ -359,7 +385,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
 
   
     const exerciseId=createMemo(()=>exercise.id)
-    const measurementId=createMemo(()=>measurement.id)
+    const measurementId=createMemo(()=>measurement.measurement_id)
     const fetchStats=async()=>{
         try{
             const data=await fetch(`http://localhost:3001/api/clients/${id}/stats?id=${exerciseId()}`,{
@@ -405,13 +431,14 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     const fetchMeasurements=async()=>{
         try{
             const token=await getToken();
-            const data=await fetch('http://localhost:3001/api/measurements',{
+           const data=await fetch(`http://localhost:3001/api/measurements`,{
                 method:'GET',
                 headers:{
                  'Authorization':`Bearer ${token}`
                 }
             })
-            return data.json()
+            
+        return data.json();
         }
         catch(error){
             console.log(error)
@@ -428,20 +455,48 @@ const [measurement,setMeasurement]=createStore<Measurement>({
         }
     }
 
-const updateMeasurement=(key:number,value:number)=>{
+const updateMeasurement=async(key:number,value:number)=>{
+    console.log("HELLO THREER")
   
-  
-    setMeasurementStore(key,(current)=>({
+    setMeasurementStore('measurement',key,(current)=>({
         ...current,
         value:value
-
     }))
+  
 
+    console.log(measurementStore.measurement)
+    
+
+}
+
+const submitMeasurement=async()=>{
+   
+
+    try{
+        return;
+        const token=await getToken();
+        const data=await fetch(`http://localhost:3001/api/clients/${id}/measurement/storeMultiple`,{
+            method:'POST',
+            headers:{
+                'Authorization':`Bearer ${token}`
+            },
+            body:JSON.stringify({
+                measurement:measurementStore.measurement,
+                created_at:measurementStore.created_at
+            
+            })
+        })
+        
+    }
+    catch(error){
+        console.log(error)
+    }
 }
 
        
 
 const submitWorkout=async()=>{
+    console.log("HI")
    const token=await getToken();
    try{
     const data=await fetch(`http://localhost:3001/api/clients/${id}/workout/store`,{
@@ -450,6 +505,7 @@ const submitWorkout=async()=>{
             'Authorization':`Bearer ${token}`
         },
         body:JSON.stringify({
+          
             workout:myWorkout
 
         })
@@ -475,9 +531,6 @@ const addWeight=async()=>
   
     try{
         console.log('hi');
-        console.log(weight.scaleWeight)
-        console.log(weight.created_at)
-        return;
 
         const token=await getToken();
         const data=await fetch(`http://localhost:3001/api/clients/${id}/weights/store`,{
@@ -500,14 +553,56 @@ const addWeight=async()=>
 }
 
 
-    const[exercises,myExercises]=createResource(workoutHistoryDate,fetchExercises)
-    const[programmes,myProgrammes]=createResource(fetchProgrammes);
-    const programmeId=createMemo(()=>programmes()?.id)
-    const[workoutStats]=createResource(fetchWorkoutStats);
+
+const updateShowProgramme=async(item:string)=>{
+    confirm("This will reset the workout")
+    setShowProgramme(item)
+    setMyWorkout('workout',[])
+
+}
+
+
+
+
+//Resources
+   
+    const[workoutHistory]=createResource<WorkoutHistoryType[]>(fetchWorkoutHistory)
+    const[programmes,{refetch:refetchProgrammes}]=createResource(fetchProgrammes);
+    const programmeId=createMemo(()=>programmes()?.programme_id)
     const[clientStats,setClientStats]=createResource(exerciseId,fetchStats)
     const[measurements]=createResource(fetchMeasurements)
     const[measurementData]=createResource(measurementId, fetchMeasurementsData);
     const[allProgrammes]=createResource(fetchAllProgrammes);
+
+
+//MeasurementSavings
+
+
+const [measurementSaving,setMeasurementSaving]=createSignal(false)
+const[measurementDeletionIndicator,setMeasurementDeletionIndicator]=createSignal<boolean>(false)
+
+
+
+
+
+
+    const updateProgramme=async(item:number)=>{
+        try{
+         const data=await fetch(`http://localhost:3001/api/clients/${id}/updateProgramme`,{
+             method:'POST',
+             body:JSON.stringify({
+                id:item
+                
+             })
+         })
+        refetchProgrammes();
+        }
+        catch(error){
+         console.log(error)
+        }
+     }
+     
+     
     const [allExercises] = createResource<exerciseInformation>(
 
         () => [searchString(), type(), equipment()],
@@ -529,29 +624,34 @@ const addWeight=async()=>
         }
         
     }
-    const [myClient]=createResource(getClientDetails)
+    const [myClient,{refetch}]=createResource(getClientDetails)
 
 
   createEffect(()=>{
     console.log(exerciseId())
   })
-  const[measurementStore,setMeasurementStore]=createStore<MeasurementStore[]>([]);
+  const[measurementStore,setMeasurementStore]=createStore<MeasurementStore>({
+    created_at: new Date().toISOString().slice(0, 10),
+    measurement:[]
+  })
 
 
   
   createEffect(()=>{
   if(measurements()){
+    
 for(let i=0; i<measurements().length; i++){
-setMeasurementStore((current)=>[
-    ...current,{
-        id:measurements()[i].id,
-        name:measurements()[i].name,
-        value:0
-    }
-])
+    setMeasurementStore('measurement',((current)=>[
+        ...current,{
+            id:measurements()[i].id,
+            name:measurements()[i].name,
+            value:0
+        }
+    ]))
+
+
 }
-
-
+console.log(measurementStore)
 
 
 
@@ -569,120 +669,290 @@ setMeasurementStore((current)=>[
   })
   const[programmeTypes,setProgrammTypes]=createStore<programmeType[]>([])
 const[programmeNames,setProgrammeNames]=createSignal(false)
+const[autoSavingIndicatorClient,setAutosSavingIndicatorClient]=createSignal<boolean>(false)
 const[workoutFind,setWorkoutFind]=createSignal<number>(0)
- 
- 
+const[initialExercisePut,setInitalExercisePut]=createSignal(-1)
 
 
- createEffect(()=>{
-    if(programmes() && programmes().workout){
+
+
+ const[client,setMyClient]=createStore<clientDetails>({
+    name:'',
+    notes:"",
+    age:15
+ })
+
+
+
+
+
+ const deletingMeasurement=(id:number)=>async()=>{
+ setMeasurement('measurement',((current)=>current.filter((item)=>item.id!=id)))
+ setMeasurementDeletionIndicator(true)
+
+ const timeout=setTimeout(()=>{
+    setMeasurementDeletionIndicator(false)
+ },2000)
+
+ try{
+    const token=await getToken();
+    const data=await fetch(`http://localhost:3001/api/clients/${id}/measurement/delete`,{
+        method:"POST",
+        headers:{
+            'Authorization':`Bearer ${token}`
+        },
+        
+        body:JSON.stringify({
+            id:id
+        })
+    })
+ }
+ catch(error){
+    console.log(error)
+ }
+ }
+
+const updatingMeasurement=(key:number,field:string,item:string)=>async()=>{
+   console.log("HI")
+console.log(measurement.measurement)
+    const token=await getToken();
+ 
+    if(field=='value'){
+   setMeasurement('measurement',key,(current)=>({
+    ...current,
+    value:Number(item),
+    
+   }))
+}
+else if(field=='created_at'){
+    console.log("YES SIR")
+   setMeasurement('measurement',key,(current)=>({
+    ...current,
+    created_at:item,
+
+   }))
+}
+setMeasurementSaving(true)
+const timeout=setTimeout(()=>{
+    setMeasurementSaving(false)
+ },2000)
+
+
+
+
+try{
+    const data=await fetch(`http://localhost:3001/api/clients/${id}/measurementUpdate`,{
+        headers:{
+            'Authorization':`Bearer ${token}`
+        },
+        method:"POST",
+        body:JSON.stringify({
+            id:measurement.measurement[key].id,
+            measurement_id:measurement.measurement_id,
+            value:Number(measurement.measurement[key].value),
+            created_at:measurement.measurement[key].created_at
+        })
+    })
+}
+catch(error){
+    console.log(error)
+}
+
+}
+
+
+
+
+ const updateClient=(fieldName:string,value:string)=>async()=>{
    
- 
- 
+    if(fieldName==='name'){
+        setMyClient('name',value)
+    }
+    if(fieldName==='age'){
+        setMyClient('age',Number(value))
+    }
+    if(fieldName==='notes'){
+        setMyClient('notes',value)
+    }
+   if(client.name!=myClient().name || client.age!=myClient().age || client.notes!=myClient().notes){
+    setAutosSavingIndicatorClient(true)
 
+    const timeout=setTimeout(()=>{
+        setAutosSavingIndicatorClient(false)
+     },2000)
 
-     if(programmeNames()==false){
-        console.log("FALSE")
-            
-  setProgrammeType('id',programmes().workout[workoutFind()].id)
-  setProgrammeType('name',programmes().workout[workoutFind()].name)
+     const token=await getToken();
+     try{
+        const data=await fetch(`http://localhost:3001/api/clients/${id}/updateInformation`,{
+            method:'POST',
+            headers:{
+              'Authorization':`Bearer ${token}`
+              
+            },
+            body:JSON.stringify({
+                name:client.name,
+                age:client.age,
+                notes:client.notes
+                
+            })
 
-
-     for(let i=0; i<programmes().workout.length; i++){
-         setProgrammTypes((current)=>[
-         ...current,{
-             id:programmes().workout[i].id,
-             name:programmes().workout[i].name
-         }
-         ])
- 
- 
+        })
        
-     
- }
-}
-setProgrammeNames(true)
-setProgrammeExercise([])
+     }
+     catch(error){
+        console.log(error)
+     }
 
-if(programmeNames()==true){
-    console.log("TRUE")
-console.log(programmeTypeSelected.id,"IDs")
-    const findWorkoutType=programmes().workout.findIndex(item=>item.id==programmeTypeSelected.id);
-    console.log(findWorkoutType,"FIND")
-    setWorkoutFind(findWorkoutType)
-    console.log("Workout Find","YES")
-    if(workoutFind()===-1){
-       return;
+
+   }
+
+ }
+
+
+
+
+
+
+createEffect(()=>{
+    if(myClient() ){
+        setMyClient('age',myClient().age)
+        setMyClient('name', myClient().name),
+        setMyClient('notes',myClient().notes)
+
+    }
+    console.log("Client",client)
+})
+
+
+
+createEffect(() => {
+    if (programmes() && initialExercisePut() === -1) {
+      console.log("YES SIR");
+  
+      const workouts = programmes()?.programme?.programmeWorkout??[];
+  
+      // Set programme types
+      for (let i = 0; i < workouts.length; i++) {
+        setProgrammTypes((current) => [
+          ...current,
+          {
+            id: workouts[i].id,
+            name: workouts[i].name,
+          },
+        ]);
+      }
+  
+      console.log("Programme Type Selected", programmeTypeSelected.id);
+  
+      const details = workouts[0]?.programmeDetails;
+      if (details && details.length > 0) {
+        for (let i = 0; i < details.length; i++) {
+          setProgrammeExercise((current) => [
+            ...current,
+            {
+              id: details[i].exercise.id,
+              name: details[i].exercise.name,
+              equipment: details[i].exercise.equipment,
+            },
+          ]);
+        }
+  
+      }
+      setInitalExercisePut(0)
+      console.log(programmeExercise)
+    }
+  });
+
+
+createEffect(()=>{
+    console.log(programmeTypeSelected.id)
+    const workouts = programmes()?.programme?.programmeWorkout?? [];
+ const workoutToFind=workouts.findIndex((item)=>item.id==programmeTypeSelected.id);
+if(workoutToFind!=-1){
+    setProgrammeExercise([])
+    const details=workouts[workoutToFind].programmeDetails;
+    for(let i=0; i<details.length; i++){
+        setProgrammeExercise((current)=>[
+            ...current,{
+                id:details[i].exercise.id,
+                name:details[i].exercise.name,
+                equipment:details[i].exercise.equipment
+            }
+        ])
+        
     }
 }
+})
 
- for(let i=0; i<programmes().workout[workoutFind()]?.details.length; i++)
- {
-     
- 
-           
-     setProgrammeExercise((current)=>[
-         ...current,{
-             id:programmes().workout[workoutFind()].details[i].exercise.id,
-             name:programmes().workout[workoutFind()].details[i].exercise.name,
-             equipment:programmes().workout[workoutFind()].details[i].exercise.equipment
- 
-            
- 
-         }
-     ])
- }
- 
- 
- 
-     
+
+createEffect(()=>{
+   if(measurementData()){
+    console.log(measurementData())
+    setMeasurement('measurement',[])
+  for(let i=0; i<measurementData().length; i++){
+  setMeasurement('measurement',(current)=>[
+    ...current,{
+        created_at:new Date(measurementData()[i].created_at).toISOString().slice(0,10),
+        value:measurementData()[i].value,
+        id:measurementData()[i].id
     }
-    console.log("Progamme Exercise",programmeExercise)
-
- 
-  })
+  ])
+  }
 
 
+   }
+})
 
 
-
-
-
+createEffect(()=>{
+    console.log(measurementStore.measurement)
+})
 
 
     return(
         <div class="flex flex-col">
+            
+       
+
+          <Show when={myClient.loading}>
+Loading
+          </Show>
           
+     
 
             <Show when={myClient()}>
 
 
-                    
 
+ <Show when={autoSavingIndicatorClient() || measurementSaving() || measurementDeletionIndicator()}>
+  
+                        <Badge class="bg-blue-50 text-blue-600 border border-blue-100 animate-pulse w-32">
+             
+             {autoSavingIndicatorClient()? "Updating Client": ""}
+             {measurementSaving()? "Updating Meadurement": ""}
+             {measurementDeletionIndicator()? "Deleting Measurement": ""}
+            </Badge>
+ </Show>
 
  
-                   <ManagerClientHeader updateProgrammeType={(item)=>setProgrammeType('id',item)}  programmeTypeSelected={programmeTypeSelected} programmeTypes={programmeTypes} showProgramme={showProgramme()} setShowProgramme={(item:string)=>setShowProgramme(item)} programmeExercise={programmeExercise}  updateWorkout={(id,value,key,field)=>updateWorkout(id,value,key,field)}   submitWorkout={submitWorkout} updateMeasurement={(key,item)=>updateMeasurement(key,item)}
-                     measurements={measurementStore}  weight={weight.scaleWeight} weightCreated={weight.created_at} updateScaleWeight={(item)=>setWeight('scaleWeight',item)} updateWeightDate={(item)=>setWeight('created_at',item)}  addWeight={addWeight}  removeItem={(number,value,key)=>removeItem(number,value,key)} setDate={(item)=>setMyWorkout('date',item)} setWorkoutName={(item)=>setMyWorkout('name',item)} myExercise={myWorkout.workout} workoutName={myWorkout.name}    searchString={searchString()} setSearchString={(item)=>setSearchString(item) } equipment={equipment()} setEquipment={(item)=>setEquipment(item)}  setType={(item)=>setType(item)}    type={type()} addExercise={(item)=>addExercise(item)} name={myClient().client.name} exercises={allExercises()}/ >
+                   <ManagerClientHeader measurementDate={measurementStore.created_at} updateMeasurementDate={(item)=>setMeasurementStore('created_at',item)} submitMeasurement={()=>submitMeasurement()}  updateProgrammeType={(item)=>setProgrammeType('id',item)}  programmeTypeSelected={programmeTypeSelected} programmeTypes={programmeTypes} showProgramme={showProgramme()} setShowProgramme={(item:string)=>updateShowProgramme(item)} programmeExercise={programmeExercise}  updateWorkout={(id,value,key,field)=>updateWorkout(id,value,key,field)}   submitWorkout={submitWorkout} updateMeasurement={(key,item)=>updateMeasurement(key,item)}
+                     measurements={measurementStore.measurement}  weight={weight.scaleWeight} weightCreated={weight.created_at} updateScaleWeight={(item)=>setWeight('scaleWeight',item)} updateWeightDate={(item)=>setWeight('created_at',item)}  addWeight={addWeight}  removeItem={(number,value,key)=>removeItem(number,value,key)} setDate={(item)=>setMyWorkout('date',item)} setWorkoutName={(item)=>setMyWorkout('name',item)} myExercise={myWorkout.workout} workoutName={myWorkout.name}    searchString={searchString()} setSearchString={(item)=>setSearchString(item) } equipment={equipment()} setEquipment={(item)=>setEquipment(item)}  setType={(item)=>setType(item)}    type={type()} addExercise={(item)=>addExercise(item)} name={client.name} exercises={allExercises()}/ >
                  
                  
                  
                  
-            <Tabs  defaultValue="Overview" class="w-400px">
+            <Tabs   defaultValue="Overview" class="w-400px">
                         <TabsList class="flex overflow-x-auto whitespace-nowrap no scrollbar gap-2">
 
                             
-                            <TabsTrigger  value="overview">
-                                Overview
-                            </TabsTrigger>
+                            
                             <TabsTrigger value="assignedProgramme">
                                Assigned Programme
                             </TabsTrigger>
-                            <TabsTrigger value="bodyMeasurements">
+                            <TabsTrigger class="" value="bodyMeasurements">
                               Body Measurements
                             </TabsTrigger>
-                            <TabsTrigger value="weeklyStats">
-                             Weekly Stats
-                            </TabsTrigger>
+                            
 
 
                             <TabsTrigger value="exerciseStats">
@@ -696,7 +966,7 @@ console.log(programmeTypeSelected.id,"IDs")
 
 
 
-                            <TabsIndicator class="bg-gray-300" variant="block"/>
+                            <TabsIndicator class="bg-gray-300 cursor-pointer" variant="block"/>
 
                         </TabsList>
                         <TabsContent value="exerciseStats">
@@ -724,13 +994,7 @@ console.log(programmeTypeSelected.id,"IDs")
 
 </div>
                         </TabsContent>
-                        <TabsContent value="overview">
-                        <WorkoutProgrammeOverview name={myClient().client.programme.name}/>
-               
-                        </TabsContent>
-    
-                 
-                 
+           
                  
           
           
@@ -769,7 +1033,7 @@ console.log(programmeTypeSelected.id,"IDs")
 
               
             
-              <Settings  name={myClient().client.name} email={myClient().client.email} age={myClient().client.age}>
+              <Settings onChange={(fieldName,value)=>updateClient(fieldName,value)()}  name={client.name} notes={client.notes}    age={client.age}>
                   </Settings>
               
       </TabsContent>
@@ -779,39 +1043,47 @@ console.log(programmeTypeSelected.id,"IDs")
     <div class="min-h-screen">
 
   
-    <MeasurementLibrary setMeasurementId={(item)=>setMeasurement('id',item)  } setMeasurementName={(item)=>setMeasurement('name',item)}  measurements={measurements()}>
+    <MeasurementLibrary setMeasurementId={(item)=>setMeasurement('measurement_id',item)  } setMeasurementName={(item)=>setMeasurement('name',item)}  measurements={measurements()}>
 
     </MeasurementLibrary>
     </div>
     
-    <MeasurementScreen measurement={measurementData()} name={measurement.name}></MeasurementScreen>
+    <Show when={measurementData.loading}>
+        Loading
+    </Show>
+    <MeasurementScreen deleteMeasurement={(id:number)=>deletingMeasurement(id)()} updateMeasurement={(key,field,item,id)=>updatingMeasurement(key,field,item)()}    measurement={measurement} ></MeasurementScreen>
     </div>
 </TabsContent>
        
 
-             <TabsContent value="weeklyStats">
-      
-                <WorkoutStats endDate={endDate()} startDate={startDate()} setStartDate={(item)=>setStartDate(item)} stats={workoutStats()}>
-
-                </WorkoutStats>
-            
-</TabsContent>
 <TabsContent value="assignedProgramme">
 
 
+
+<Show when={programmes.loading}>
+  Updating Programming...
+</Show>
           
                 <div class="grid grid-cols-2 gap-x-3">
-                    <AssignedProgramme programme_id={programmeId()} allProgramme={allProgrammes()} programme={programmes()}  >
+                    <AssignedProgramme updateProgramme={(item)=>updateProgramme(item)} programme_id={programmeId()} allProgramme={allProgrammes()} programme={programmes()}  >
 
                     </AssignedProgramme>
                     
      
-          <WorkoutHistory date={workoutHistoryDate()} setDate={(item)=>setWorkoutHistoryDate(item)} workout={exercises()}></WorkoutHistory>
+     <Show when={workoutHistory()}>
+
+
+
+     
+          <WorkoutHistory date={workoutHistoryDate()} setDate={(item)=>setWorkoutHistoryDate(item)} workout={workoutHistory()}></WorkoutHistory>
+              
+              </Show>
                </div>
      
            </TabsContent>
               </Tabs>
               </Show>
+              
             </div>
 
      
