@@ -5,7 +5,6 @@ import { clerkMiddleware,getAuth } from "@hono/clerk-auth";
 import { workoutTable,workoutDetailsTable,usersTable, userProgrammeTable,exerciseTable, weightTable, measurementsTable, measurementsDataTable, programmesTable } from "../../db/schema";
 import { createClerkClient } from "@clerk/backend";
 import { programmeDetails } from "../../../frontend/src/components/programmeDetails";
-import { Client, DetailedClient } from "../../types/client/client";
 import { info } from "console";
 import { idSchema} from "../../zod/idSchema";
 import WorkoutStats from "../../../frontend/src/components/clientPage/workoutStats/workoutStats";
@@ -406,12 +405,6 @@ return c.json(workoutToSend)
 clientRoutes.get('/:id',async(c)=>{
 
 const id=c.req.param('id');
-
-
-type clientInfo={
-  client:DetailedClient
-}
-
 
 const data=await db.query.usersTable.findFirst({
   where:eq(usersTable.id,id)
