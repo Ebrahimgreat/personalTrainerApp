@@ -4,9 +4,7 @@ import{Router,Route,A, useNavigate, redirect} from '@solidjs/router';
 import Signup from "./signup";
 import Home from './home';
 import Weight from './weight';
-import nutrition from './nutrition';
-import SearchNutrition from "./searchNutrition";
-import nutritionShow from './nutrition.show';
+
 import globalSearch from './globalSearch';
 import createNutrition from './createNutrition';
 import Testing from './testing';
@@ -143,12 +141,8 @@ function App() {
           <Route path='/home' component={Home}/>
           <Route path="/exercise" component={exerciseLibrary}/>
           <Route path='/weights' component={Weight}/>
-          <Route path='/nutrition' component={nutrition}/>
+        
        
-          <Route path="/nutrition/search" component={SearchNutrition}/>
-          <Route path="/nutrition/show" component={nutritionShow}/>
-          <Route path="/nutrition/globalsearch" component={globalSearch}/>
-          <Route path="/nutrition/create" component={createNutrition}/>
           <Route path="/testing" component={Testing}/>
           <Route path="/workout" component={Workout} />
 
