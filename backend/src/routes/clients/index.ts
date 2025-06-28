@@ -12,6 +12,7 @@ import { clientDeletionSchema, clientUpdateSchema } from "../../zod/clientSchema
 import { workoutSchema } from "../../zod/workoutSchema";
 import { workoutHistory, workoutHistorySchema } from "../../zod/workoutHistorySchema";
 import { updateClientProgrammeSchema, userProgrammeSchema } from "../../zod/clientProgrammeschema";
+import { messages } from "../../../drizzle/schema";
 const clientRoutes=new Hono();
 
 
@@ -185,7 +186,9 @@ clientRoutes.get('/:id/programmes',async(c)=>{
 
 
 
-
+clientRoutes.get('/hello',async(c)=>{
+  return c.json({message:"Hi"})
+})
 
 
 

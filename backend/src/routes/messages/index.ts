@@ -1,3 +1,4 @@
+/*
 import { Hono } from "hono";
 import { db } from "../../db/db";
 import { messagesTable, usersTable } from "../../db/schema";
@@ -37,3 +38,4 @@ messageRoute.get('/',async(c)=>{
  return c.json(data)
 })
 export default messageRoute;
+*/

@@ -89,7 +89,10 @@ templateRoutes.post('/store', async (c) => {
     return c.json(newData);
 });
 const myTemplate = templateRoutes.get('/', async (c) => {
-    const id = c.req.query('id');
+    const id = Number(c.req.query('id'));
+    if (!id) {
+        return c.json({ message: "Please Provide template id" });
+    }
     const data = await db.query.programmeWorkoutTable.findFirst({
         where: eq(programmeWorkout.id, id),
         with: {

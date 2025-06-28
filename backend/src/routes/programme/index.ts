@@ -86,27 +86,7 @@ const programmes = programmeRoutes.get('/', async (c) => {
     },
   });
 
-  const programme = data.map((item) => ({
-    id: item.id,
-    name: item.name,
-    description: item.description,
-    workout: item.programmeWorkout.map((value:any) => ({
-      id: value.id,
-      name: value.name,
-      details: value.programmeDetails.map((detail:any) => ({
-        id: detail.id,
-        repRange: detail.repRange,
-        sets: detail.sets,
-        exercise: {
-          id: detail.exercise.id,
-          name: detail.exercise.name,
-          equipment: detail.exercise.equipment,
-        },
-      })),
-    })),
-  }));
-
-  return c.json(programme);
+  return c.json(data);
 });
 
 

@@ -1,3 +1,5 @@
+
+/*
 import { getAuth } from "@hono/clerk-auth";
 import { Hono } from "hono";
 import { db } from "../../db/db";
@@ -46,4 +48,5 @@ roomMembers.get('/',async(c)=>{
 
 });
 
-export default roomMembers;
+export default roomMembers
+*/

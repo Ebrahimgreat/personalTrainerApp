@@ -9,13 +9,17 @@ dashboardRoutes.get('/', async (c) => {
     if (!auth?.userId) {
         return c.json({ error: 'Unauthorized' });
     }
-    const data2 = await db.query.usersTable.findFirst();
+    const userToFind = await db.query.usersTable.findFirst({
+        where: eq(usersTable.user_id, auth.userId)
+    });
+    if (!userToFind) {
+        return c.json({ message: 'User cannot be found' });
+    }
     const person = await db.query.usersTable.findMany({
-        where: eq(usersTable.user_id, auth.userId),
+        where: eq(usersTable.id, userToFind.id),
         with: {
             children: true,
             workout: true,
-            weight: true
         }
     });
     if (person.length == 0) {

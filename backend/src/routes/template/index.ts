@@ -114,9 +114,12 @@ templateRoutes.post('/store',async(c)=>{
 })
 const myTemplate=templateRoutes.get('/',async(c)=>{
  
-    const id=c.req.query('id');
+    const id=Number(c.req.query('id'));
+    if(!id){
+        return c.json({message:"Please Provide template id"})
+    }
 
-    const data:ProgrammeWorkout=await db.query.programmeWorkoutTable.findFirst({
+    const data=await db.query.programmeWorkoutTable.findFirst({
         where:eq(programmeWorkout.id,id),
         with:{
             programmeDetails:{

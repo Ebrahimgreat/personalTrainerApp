@@ -7,6 +7,7 @@ import { unionAll } from 'drizzle-orm/sqlite-core'
 import { clerkMiddleware,getAuth } from "@hono/clerk-auth";
 
 import { union } from "zod";
+
 const dashboardRoutes=new Hono();
 
 
@@ -17,15 +18,22 @@ dashboardRoutes.get('/',async(c)=>{
   if(!auth?.userId){
     return c.json({error:'Unauthorized'});
   }
+ 
+  const userToFind=await db.query.usersTable.findFirst({
+    where:eq(usersTable.user_id,auth.userId)
+  })
 
-  const data2=await db.query.usersTable.findFirst();
 
+
+if(!userToFind){
+  return c.json({message:'User cannot be found'})
+}
   const person=await db.query.usersTable.findMany({
-    where:eq(usersTable.user_id,auth.userId),
+    where:eq(usersTable.id,userToFind.id),
     with:{
         children:true,
         workout:true,
-        weight:true
+    
     }
   })
  if(person.length==0){

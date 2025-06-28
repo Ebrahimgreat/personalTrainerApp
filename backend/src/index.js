@@ -3,7 +3,6 @@ import { usersTable } from './db/schema.js';
 import { db } from './db/db.js';
 import { eq } from 'drizzle-orm';
 import { cors } from 'hono/cors';
-import nutritionRoutes from './routes/nutrition/index.js';
 import dashboardRoutes from './routes/dashboard/dashboard.js';
 import exerciseRoutes from './routes/exercise/index.js';
 import { clerkMiddleware, getAuth } from '@hono/clerk-auth';
@@ -12,8 +11,6 @@ import clientRoutes from './routes/clients/index.js';
 import latestActivitiesRoutes from './routes/latestActivities/index.js';
 import { stream } from 'hono/streaming';
 import { createBunWebSocket } from 'hono/bun';
-import messageRoute from './routes/messages/index.js';
-import roomMembers from './routes/roomMember/index.js';
 const app = new Hono();
 const { upgradeWebSocket, websocket } = createBunWebSocket();
 const cacheStore = new Map();
@@ -33,63 +30,99 @@ const myRoute = app.get('/api/funny', (c) => {
 });
 let users = new Map();
 let messages = new Map();
-app.get('/ws', upgradeWebSocket((_) => {
-    return {
-        onClose: (_, ws) => {
-        },
-        onOpen(_, ws) {
-            //Web Socket opened
-            console.log('web socket opened');
-        },
-        onMessage(event, ws) {
-            console.log("I am running");
-            let timer = 0;
-            const data = JSON.parse(event.data);
-            if (data.type === 'left') {
-                console.log("The User has Been Deleted");
-                users.delete(data.sender);
-            }
-            if (users.size >= 2) {
-                const currentTime = new Date().toLocaleTimeString();
-                users.forEach((item) => {
-                    if (item.reciever === data.reciever) {
-                        item.socket.send(event.data);
-                    }
-                });
-                console.log(data);
-            }
-            /*if(users.size>=2)
-            {
-              console.log('SIZE is 2')
-              console.log(event.data)
-             const data=(JSON.parse(event.data))
-            users.forEach((item,key)=>{
-              console.log(key)
-              console.log(data.sender)
-              if(key==data.sender)
-              {
-                console.log("YES SIR SENDING DATA")
-                item.send(event.data)
-              }
-            
-            })
-             
-              return;
-            }
-              */
-            users.set(data.sender, {
-                socket: ws,
-                roomId: data.roomNumber,
-                reciever: data.sender
-            });
-            console.log("The users size is", users.size);
-        },
-        onError: (event, ws) => {
-            console.log('error');
-            ws.send('error e');
+/*
+app.get('/ws',upgradeWebSocket((_)=>{
+
+
+  return{
+
+  
+    onClose:(_,ws)=>{
+     
+
+ 
+    },
+   onOpen(_,ws){
+    //Web Socket opened
+    console.log('web socket opened')
+    
+ },
+
+
+
+   
+   onMessage(event,ws){
+    console.log("I am running")
+   let timer:number=0;
+
+   const data=JSON.parse(event.data);
+   if(data.type==='left'){
+    console.log("The User has Been Deleted")
+    users.delete(data.sender)
+  
+   }
+
+
+    if(users.size>=2)
+    {
+      const currentTime=new Date().toLocaleTimeString();
+      users.forEach((item)=>{
+        if(item.reciever===data.reciever)
+        {
+          
+         
+         item.socket.send(event.data)
         }
-    };
-}));
+      })
+      console.log(data)
+    }
+  
+    
+
+    /*if(users.size>=2)
+    {
+      console.log('SIZE is 2')
+      console.log(event.data)
+     const data=(JSON.parse(event.data))
+    users.forEach((item,key)=>{
+      console.log(key)
+      console.log(data.sender)
+      if(key==data.sender)
+      {
+        console.log("YES SIR SENDING DATA")
+        item.send(event.data)
+      }
+    
+    })
+     
+      return;
+    }
+      
+   
+
+  
+    
+    
+users.set(data.sender,{
+ socket:ws,
+  roomId:data.roomNumber,
+  reciever:data.sender
+})
+
+console.log("The users size is",users.size);
+
+
+ 
+  },
+    onError:(event,ws)=>{
+      console.log('error')
+      ws.send('error e')
+    }
+  }
+
+  
+}))
+*/
 app.use('/api/*', cors());
 app.use('/api/*', clerkMiddleware());
 app.use('/api2/*', cors({
@@ -98,24 +131,7 @@ app.use('/api2/*', cors({
     credentials: true,
 }));
 app.get('/hello', async (c) => {
-    return c.json({ message: 'HLI' });
-});
-app.post('/api/email-check', async (c) => {
-    const body = await c.req.json();
-    const user = await db.query.usersTable.findFirst({
-        where: eq(usersTable.email, body.email)
-    });
-    if (!user) {
-        return c.json("Not Exist");
-    }
-    return c.json("User Exists");
-});
-app.get('/api/roles', async (c) => {
-    const auth = getAuth(c);
-    if (!auth) {
-        return c.json('not found');
-    }
-    return c.json(auth.sessionClaims?.metadata);
+    return c.json({ message: 'HII' });
 });
 app.post('/api/login', async (c) => {
     const body = await c.req.json();
@@ -141,16 +157,13 @@ app.get('/api/search', async (c) => {
     };
     return c.json(options);
 });
-const route = app.route('/api/programme', programmeRoutes);
+app.route('/api/programme', programmeRoutes);
 app.route('/api/activity', latestActivitiesRoutes);
-app.route('/api/roomMembers', roomMembers);
 app.route('/api/measurements', measurementRoute);
 app.route('/api/exercise', exerciseRoutes);
-app.route('/api/nutrition', nutritionRoutes);
 app.route('/api/dashboard', dashboardRoutes);
 app.route('/api/clients', clientRoutes);
 app.route('/api/template', templateRoutes);
-app.route('/api/messages', messageRoute);
 app.post('/api/client/store', async (c) => {
     const auth = getAuth(c);
     if (!auth?.userId) {

@@ -126,6 +126,9 @@ clientRoutes.get('/:id/programmes', async (c) => {
     }
     return c.json(userProgramme);
 });
+clientRoutes.get('/hello', async (c) => {
+    return c.json({ message: "Hi" });
+});
 clientRoutes.post('/:id/updateProgramme', async (c) => {
     const id = Number(c.req.param('id'));
     const auth = getAuth(c);

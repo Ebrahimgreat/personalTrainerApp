@@ -6,7 +6,6 @@ import {basicAuth} from "hono/basic-auth";
 import { sql,eq,and} from 'drizzle-orm';
 import{cors} from 'hono/cors';
 import { ParamsSchema,UserSchema } from './zod/schemas.js';
-import nutritionRoutes from './routes/nutrition/index.js';
 import dashboardRoutes from './routes/dashboard/dashboard.js';
 
 
@@ -20,8 +19,6 @@ import latestActivitiesRoutes from './routes/latestActivities/index.js';
 import {stream,streamText,streamSSE} from 'hono/streaming';
 import type { ServerWebSocket } from 'bun';
 import {createBunWebSocket} from 'hono/bun';
-import messageRoute from './routes/messages/index.js';
-import roomMembers from './routes/roomMember/index.js';
 const app = new Hono()
 const{upgradeWebSocket,websocket}=createBunWebSocket<ServerWebSocket>()
 const cacheStore=new Map();
@@ -63,8 +60,9 @@ let messages=new Map<number,string>();
 
 
 
-
+/*
 app.get('/ws',upgradeWebSocket((_)=>{
+
 
   return{
 
@@ -129,7 +127,7 @@ app.get('/ws',upgradeWebSocket((_)=>{
      
       return;
     }
-      */
+      
    
 
   
@@ -154,7 +152,7 @@ console.log("The users size is",users.size);
 
   
 }))
-
+*/
 
 
 
@@ -170,24 +168,12 @@ app.use('/api2/*',
   })
 )
 app.get('/hello',async(c)=>{
- return c.json({message:'HLI'})
+ return c.json({message:'HII'})
   
 
 
 })
-app.post('/api/email-check',async(c)=>{
-  const body=await c.req.json();
 
-  const user=await db.query.usersTable.findFirst({
-    where:eq(usersTable.email,body.email)
-  });
-  if(!user){
-    return c.json("Not Exist");
-  }
- return c.json("User Exists")
-
-
-})
 
 
 
@@ -225,18 +211,16 @@ return c.json(options)
 
 
 
-const route=app.route('/api/programme',programmeRoutes);
+app.route('/api/programme',programmeRoutes);
 
 app.route('/api/activity',latestActivitiesRoutes)
-app.route('/api/roomMembers',roomMembers);
+
 app.route('/api/measurements',measurementRoute)
 
 app.route('/api/exercise',exerciseRoutes);
-app.route('/api/nutrition',nutritionRoutes)
 app.route('/api/dashboard',dashboardRoutes)
 app.route('/api/clients',clientRoutes)
 app.route('/api/template',templateRoutes);
-app.route('/api/messages',messageRoute);
 
 
 
