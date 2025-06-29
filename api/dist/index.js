@@ -18430,7 +18430,7 @@ use chrome, FireFox or Internet Explorer 11`);
   /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 });
 
-// node_modules/dotenv/package.json
+// api/node_modules/dotenv/package.json
 var require_package = __commonJS((exports, module) => {
   module.exports = {
     name: "dotenv",
@@ -18495,7 +18495,7 @@ var require_package = __commonJS((exports, module) => {
   };
 });
 
-// node_modules/dotenv/lib/main.js
+// api/node_modules/dotenv/lib/main.js
 var require_main = __commonJS((exports, module) => {
   var fs = (() => ({}));
   var path = (init_path(), __toCommonJS(exports_path));
@@ -18762,7 +18762,7 @@ var require_main = __commonJS((exports, module) => {
   module.exports = DotenvModule;
 });
 
-// node_modules/dotenv/lib/env-options.js
+// api/node_modules/dotenv/lib/env-options.js
 var require_env_options = __commonJS((exports, module) => {
   var options = {};
   if (process.env.DOTENV_CONFIG_ENCODING != null) {
@@ -18783,7 +18783,7 @@ var require_env_options = __commonJS((exports, module) => {
   module.exports = options;
 });
 
-// node_modules/dotenv/lib/cli-options.js
+// api/node_modules/dotenv/lib/cli-options.js
 var require_cli_options = __commonJS((exports, module) => {
   var re = /^dotenv_config_(encoding|path|debug|override|DOTENV_KEY)=(.+)$/;
   module.exports = function optionMatcher(args) {
@@ -18797,14 +18797,14 @@ var require_cli_options = __commonJS((exports, module) => {
   };
 });
 
-// node_modules/dotenv/config.js
+// api/node_modules/dotenv/config.js
 var require_config = __commonJS(() => {
   (function() {
     require_main().config(Object.assign({}, require_env_options(), require_cli_options()(process.argv)));
   })();
 });
 
-// node_modules/map-obj/index.js
+// api/node_modules/map-obj/index.js
 var require_map_obj = __commonJS((exports, module) => {
   var isObject = (value) => typeof value === "object" && value !== null;
   var mapObjectSkip = Symbol("skip");
@@ -18850,7 +18850,7 @@ var require_map_obj = __commonJS((exports, module) => {
   module.exports.mapObjectSkip = mapObjectSkip;
 });
 
-// node_modules/tslib/tslib.es6.mjs
+// api/node_modules/tslib/tslib.es6.mjs
 var exports_tslib_es6 = {};
 __export(exports_tslib_es6, {
   default: () => tslib_es6_default,
@@ -18861,7 +18861,7 @@ __export(exports_tslib_es6, {
   __setFunctionName: () => __setFunctionName,
   __runInitializers: () => __runInitializers,
   __rewriteRelativeImportExtension: () => __rewriteRelativeImportExtension,
-  __rest: () => __rest2,
+  __rest: () => __rest,
   __read: () => __read,
   __propKey: () => __propKey,
   __param: () => __param,
@@ -18896,7 +18896,7 @@ function __extends(d4, b3) {
   }
   d4.prototype = b3 === null ? Object.create(b3) : (__.prototype = b3.prototype, new __);
 }
-function __rest2(s2, e) {
+function __rest(s2, e) {
   var t = {};
   for (var p4 in s2)
     if (Object.prototype.hasOwnProperty.call(s2, p4) && e.indexOf(p4) < 0)
@@ -19407,7 +19407,7 @@ var init_tslib_es6 = __esm(() => {
   tslib_es6_default = {
     __extends,
     __assign,
-    __rest: __rest2,
+    __rest,
     __decorate,
     __param,
     __esDecorate,
@@ -19440,7 +19440,7 @@ var init_tslib_es6 = __esm(() => {
   };
 });
 
-// node_modules/lower-case/dist/index.js
+// api/node_modules/lower-case/dist/index.js
 var require_dist = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.lowerCase = exports.localeLowerCase = undefined;
@@ -19488,7 +19488,7 @@ var require_dist = __commonJS((exports) => {
   exports.lowerCase = lowerCase;
 });
 
-// node_modules/no-case/dist/index.js
+// api/node_modules/no-case/dist/index.js
 var require_dist2 = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.noCase = undefined;
@@ -19519,7 +19519,7 @@ var require_dist2 = __commonJS((exports) => {
   }
 });
 
-// node_modules/dot-case/dist/index.js
+// api/node_modules/dot-case/dist/index.js
 var require_dist3 = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.dotCase = undefined;
@@ -19534,7 +19534,7 @@ var require_dist3 = __commonJS((exports) => {
   exports.dotCase = dotCase;
 });
 
-// node_modules/snake-case/dist/index.js
+// api/node_modules/snake-case/dist/index.js
 var require_dist4 = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.snakeCase = undefined;
@@ -19549,7 +19549,7 @@ var require_dist4 = __commonJS((exports) => {
   exports.snakeCase = snakeCase;
 });
 
-// node_modules/snakecase-keys/index.js
+// api/node_modules/snakecase-keys/index.js
 var require_snakecase_keys = __commonJS((exports, module) => {
   var map = require_map_obj();
   var { snakeCase } = require_dist4();
@@ -19583,11 +19583,11 @@ var require_snakecase_keys = __commonJS((exports, module) => {
   }
 });
 
-// node_modules/cookie/dist/index.js
+// api/node_modules/cookie/dist/index.js
 var require_dist5 = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
-  exports.parse = parse3;
-  exports.serialize = serialize2;
+  exports.parse = parse2;
+  exports.serialize = serialize;
   var cookieNameRegExp = /^[\u0021-\u003A\u003C\u003E-\u007E]+$/;
   var cookieValueRegExp = /^[\u0021-\u003A\u003C-\u007E]*$/;
   var domainValueRegExp = /^([.]?[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)([.][a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)*$/i;
@@ -19598,7 +19598,7 @@ var require_dist5 = __commonJS((exports) => {
     C.prototype = Object.create(null);
     return C;
   })();
-  function parse3(str, options) {
+  function parse2(str, options) {
     const obj = new NullObject;
     const len = str.length;
     if (len < 2)
@@ -19644,7 +19644,7 @@ var require_dist5 = __commonJS((exports) => {
     }
     return min;
   }
-  function serialize2(name, val, options) {
+  function serialize(name, val, options) {
     const enc = options?.encode || encodeURIComponent;
     if (!cookieNameRegExp.test(name)) {
       throw new TypeError(`argument name is invalid: ${name}`);
@@ -19738,7 +19738,12 @@ var require_dist5 = __commonJS((exports) => {
   }
 });
 
-// node_modules/hono/dist/compose.js
+// api/node_modules/hono/dist/adapter/vercel/handler.js
+var handle = (app) => (req) => {
+  return app.fetch(req);
+};
+
+// api/node_modules/hono/dist/compose.js
 var compose = (middleware, onError, onNotFound) => {
   return (context, next) => {
     let index = -1;
@@ -19782,7 +19787,7 @@ var compose = (middleware, onError, onNotFound) => {
   };
 };
 
-// node_modules/hono/dist/utils/body.js
+// api/node_modules/hono/dist/utils/body.js
 var parseBody = async (request, options = /* @__PURE__ */ Object.create(null)) => {
   const { all = false, dot = false } = options;
   const headers = request instanceof HonoRequest ? request.raw.headers : request.headers;
@@ -19846,7 +19851,7 @@ var handleParsingNestedValues = (form, key, value) => {
   });
 };
 
-// node_modules/hono/dist/utils/url.js
+// api/node_modules/hono/dist/utils/url.js
 var splitPath = (path) => {
   const paths = path.split("/");
   if (paths[0] === "") {
@@ -20041,7 +20046,7 @@ var getQueryParams = (url, key) => {
 };
 var decodeURIComponent_ = decodeURIComponent;
 
-// node_modules/hono/dist/request.js
+// api/node_modules/hono/dist/request.js
 var tryDecodeURIComponent = (str) => tryDecode(str, decodeURIComponent_);
 var HonoRequest = class {
   raw;
@@ -20149,7 +20154,7 @@ var HonoRequest = class {
   }
 };
 
-// node_modules/hono/dist/utils/html.js
+// api/node_modules/hono/dist/utils/html.js
 var HtmlEscapedCallbackPhase = {
   Stringify: 1,
   BeforeStream: 2,
@@ -20187,7 +20192,7 @@ var resolveCallback = async (str, phase, preserveCallbacks, context, buffer) => 
   }
 };
 
-// node_modules/hono/dist/context.js
+// api/node_modules/hono/dist/context.js
 var TEXT_PLAIN = "text/plain; charset=UTF-8";
 var setHeaders = (headers, map = {}) => {
   for (const key of Object.keys(map)) {
@@ -20428,7 +20433,7 @@ var Context = class {
   };
 };
 
-// node_modules/hono/dist/router.js
+// api/node_modules/hono/dist/router.js
 var METHOD_NAME_ALL = "ALL";
 var METHOD_NAME_ALL_LOWERCASE = "all";
 var METHODS = ["get", "post", "put", "delete", "options", "patch"];
@@ -20436,10 +20441,10 @@ var MESSAGE_MATCHER_IS_ALREADY_BUILT = "Can not add a route since the matcher is
 var UnsupportedPathError = class extends Error {
 };
 
-// node_modules/hono/dist/utils/constants.js
+// api/node_modules/hono/dist/utils/constants.js
 var COMPOSED_HANDLER = "__COMPOSED_HANDLER";
 
-// node_modules/hono/dist/hono-base.js
+// api/node_modules/hono/dist/hono-base.js
 var notFoundHandler = (c) => {
   return c.text("404 Not Found", 404);
 };
@@ -20651,7 +20656,7 @@ var Hono = class {
   };
 };
 
-// node_modules/hono/dist/router/reg-exp-router/node.js
+// api/node_modules/hono/dist/router/reg-exp-router/node.js
 var LABEL_REG_EXP_STR = "[^/]+";
 var ONLY_WILDCARD_REG_EXP_STR = ".*";
 var TAIL_WILDCARD_REG_EXP_STR = "(?:|/.*)";
@@ -20752,7 +20757,7 @@ var Node = class {
   }
 };
 
-// node_modules/hono/dist/router/reg-exp-router/trie.js
+// api/node_modules/hono/dist/router/reg-exp-router/trie.js
 var Trie = class {
   #context = { varIndex: 0 };
   #root = new Node;
@@ -20808,7 +20813,7 @@ var Trie = class {
   }
 };
 
-// node_modules/hono/dist/router/reg-exp-router/router.js
+// api/node_modules/hono/dist/router/reg-exp-router/router.js
 var emptyParam = [];
 var nullMatcher = [/^$/, [], /* @__PURE__ */ Object.create(null)];
 var wildcardRegExpCache = /* @__PURE__ */ Object.create(null);
@@ -20990,7 +20995,7 @@ var RegExpRouter = class {
   }
 };
 
-// node_modules/hono/dist/router/smart-router/router.js
+// api/node_modules/hono/dist/router/smart-router/router.js
 var SmartRouter = class {
   name = "SmartRouter";
   #routers = [];
@@ -21045,7 +21050,7 @@ var SmartRouter = class {
   }
 };
 
-// node_modules/hono/dist/router/trie-router/node.js
+// api/node_modules/hono/dist/router/trie-router/node.js
 var emptyParams = /* @__PURE__ */ Object.create(null);
 var Node2 = class {
   #methods;
@@ -21201,7 +21206,7 @@ var Node2 = class {
   }
 };
 
-// node_modules/hono/dist/router/trie-router/router.js
+// api/node_modules/hono/dist/router/trie-router/router.js
 var TrieRouter = class {
   name = "TrieRouter";
   #node;
@@ -21223,7 +21228,7 @@ var TrieRouter = class {
   }
 };
 
-// node_modules/hono/dist/hono.js
+// api/node_modules/hono/dist/hono.js
 var Hono2 = class extends Hono {
   constructor(options = {}) {
     super(options);
@@ -21233,7 +21238,7 @@ var Hono2 = class extends Hono {
   }
 };
 
-// node_modules/drizzle-orm/entity.js
+// api/node_modules/drizzle-orm/entity.js
 var entityKind = Symbol.for("drizzle:entityKind");
 var hasOwnEntityKind = Symbol.for("drizzle:hasOwnEntityKind");
 function is(value, type) {
@@ -21258,7 +21263,7 @@ function is(value, type) {
   return false;
 }
 
-// node_modules/drizzle-orm/column.js
+// api/node_modules/drizzle-orm/column.js
 class Column {
   constructor(table, config) {
     this.table = table;
@@ -21308,7 +21313,7 @@ class Column {
   }
 }
 
-// node_modules/drizzle-orm/column-builder.js
+// api/node_modules/drizzle-orm/column-builder.js
 class ColumnBuilder {
   static [entityKind] = "ColumnBuilder";
   config;
@@ -21364,10 +21369,10 @@ class ColumnBuilder {
   }
 }
 
-// node_modules/drizzle-orm/table.utils.js
+// api/node_modules/drizzle-orm/table.utils.js
 var TableName = Symbol.for("drizzle:Name");
 
-// node_modules/drizzle-orm/pg-core/foreign-keys.js
+// api/node_modules/drizzle-orm/pg-core/foreign-keys.js
 class ForeignKeyBuilder {
   static [entityKind] = "PgForeignKeyBuilder";
   reference;
@@ -21421,17 +21426,17 @@ class ForeignKey {
   }
 }
 
-// node_modules/drizzle-orm/tracing-utils.js
+// api/node_modules/drizzle-orm/tracing-utils.js
 function iife(fn, ...args) {
   return fn(...args);
 }
 
-// node_modules/drizzle-orm/pg-core/unique-constraint.js
+// api/node_modules/drizzle-orm/pg-core/unique-constraint.js
 function uniqueKeyName(table, columns) {
   return `${table[TableName]}_${columns.join("_")}_unique`;
 }
 
-// node_modules/drizzle-orm/pg-core/utils/array.js
+// api/node_modules/drizzle-orm/pg-core/utils/array.js
 function parsePgArrayValue(arrayString, startFrom, inQuotes) {
   for (let i = startFrom;i < arrayString.length; i++) {
     const char = arrayString[i];
@@ -21507,7 +21512,7 @@ function makePgArray(array) {
   }).join(",")}}`;
 }
 
-// node_modules/drizzle-orm/pg-core/columns/common.js
+// api/node_modules/drizzle-orm/pg-core/columns/common.js
 class PgColumnBuilder extends ColumnBuilder {
   foreignKeyConfigs = [];
   static [entityKind] = "PgColumnBuilder";
@@ -21640,7 +21645,7 @@ class PgArray extends PgColumn {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/columns/enum.js
+// api/node_modules/drizzle-orm/pg-core/columns/enum.js
 class PgEnumObjectColumn extends PgColumn {
   static [entityKind] = "PgEnumObjectColumn";
   enum;
@@ -21670,7 +21675,7 @@ class PgEnumColumn extends PgColumn {
   }
 }
 
-// node_modules/drizzle-orm/subquery.js
+// api/node_modules/drizzle-orm/subquery.js
 class Subquery {
   static [entityKind] = "Subquery";
   constructor(sql, fields, alias, isWith = false, usedTables = []) {
@@ -21689,10 +21694,10 @@ class WithSubquery extends Subquery {
   static [entityKind] = "WithSubquery";
 }
 
-// node_modules/drizzle-orm/version.js
+// api/node_modules/drizzle-orm/version.js
 var version = "0.44.2";
 
-// node_modules/drizzle-orm/tracing.js
+// api/node_modules/drizzle-orm/tracing.js
 var otel;
 var rawTracer;
 var tracer = {
@@ -21719,10 +21724,10 @@ var tracer = {
   }
 };
 
-// node_modules/drizzle-orm/view-common.js
+// api/node_modules/drizzle-orm/view-common.js
 var ViewBaseConfig = Symbol.for("drizzle:ViewBaseConfig");
 
-// node_modules/drizzle-orm/table.js
+// api/node_modules/drizzle-orm/table.js
 var Schema = Symbol.for("drizzle:Schema");
 var Columns = Symbol.for("drizzle:Columns");
 var ExtraConfigColumns = Symbol.for("drizzle:ExtraConfigColumns");
@@ -21766,7 +21771,7 @@ function getTableUniqueName(table) {
   return `${table[Schema] ?? "public"}.${table[TableName]}`;
 }
 
-// node_modules/drizzle-orm/sql/sql.js
+// api/node_modules/drizzle-orm/sql/sql.js
 function isSQLWrapper(value) {
   return value !== null && value !== undefined && typeof value.getSQL === "function";
 }
@@ -22146,7 +22151,7 @@ Subquery.prototype.getSQL = function() {
   return new SQL([this]);
 };
 
-// node_modules/drizzle-orm/alias.js
+// api/node_modules/drizzle-orm/alias.js
 class ColumnAliasProxyHandler {
   constructor(table) {
     this.table = table;
@@ -22225,7 +22230,7 @@ function mapColumnsInSQLToAlias(query, alias) {
   }));
 }
 
-// node_modules/drizzle-orm/utils.js
+// api/node_modules/drizzle-orm/utils.js
 function mapResultRow(columns, row, joinsNotNullableMap) {
   const nullifyMap = {};
   const result = columns.reduce((result2, { path, field }, columnIndex) => {
@@ -22376,7 +22381,7 @@ function isConfig(data) {
   return false;
 }
 
-// node_modules/drizzle-orm/pg-core/columns/int.common.js
+// api/node_modules/drizzle-orm/pg-core/columns/int.common.js
 class PgIntColumnBaseBuilder extends PgColumnBuilder {
   static [entityKind] = "PgIntColumnBaseBuilder";
   generatedAlwaysAsIdentity(sequence) {
@@ -22415,7 +22420,7 @@ class PgIntColumnBaseBuilder extends PgColumnBuilder {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/columns/bigint.js
+// api/node_modules/drizzle-orm/pg-core/columns/bigint.js
 class PgBigInt53Builder extends PgIntColumnBaseBuilder {
   static [entityKind] = "PgBigInt53Builder";
   constructor(name) {
@@ -22466,7 +22471,7 @@ function bigint(a, b) {
   return new PgBigInt64Builder(name);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/bigserial.js
+// api/node_modules/drizzle-orm/pg-core/columns/bigserial.js
 class PgBigSerial53Builder extends PgColumnBuilder {
   static [entityKind] = "PgBigSerial53Builder";
   constructor(name) {
@@ -22520,7 +22525,7 @@ function bigserial(a, b) {
   return new PgBigSerial64Builder(name);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/boolean.js
+// api/node_modules/drizzle-orm/pg-core/columns/boolean.js
 class PgBooleanBuilder extends PgColumnBuilder {
   static [entityKind] = "PgBooleanBuilder";
   constructor(name) {
@@ -22541,7 +22546,7 @@ function boolean(name) {
   return new PgBooleanBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/char.js
+// api/node_modules/drizzle-orm/pg-core/columns/char.js
 class PgCharBuilder extends PgColumnBuilder {
   static [entityKind] = "PgCharBuilder";
   constructor(name, config) {
@@ -22567,7 +22572,7 @@ function char(a, b = {}) {
   return new PgCharBuilder(name, config);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/cidr.js
+// api/node_modules/drizzle-orm/pg-core/columns/cidr.js
 class PgCidrBuilder extends PgColumnBuilder {
   static [entityKind] = "PgCidrBuilder";
   constructor(name) {
@@ -22588,7 +22593,7 @@ function cidr(name) {
   return new PgCidrBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/custom.js
+// api/node_modules/drizzle-orm/pg-core/columns/custom.js
 class PgCustomColumnBuilder extends PgColumnBuilder {
   static [entityKind] = "PgCustomColumnBuilder";
   constructor(name, fieldConfig, customTypeParams) {
@@ -22629,7 +22634,7 @@ function customType(customTypeParams) {
   };
 }
 
-// node_modules/drizzle-orm/pg-core/columns/date.common.js
+// api/node_modules/drizzle-orm/pg-core/columns/date.common.js
 class PgDateColumnBaseBuilder extends PgColumnBuilder {
   static [entityKind] = "PgDateColumnBaseBuilder";
   defaultNow() {
@@ -22637,7 +22642,7 @@ class PgDateColumnBaseBuilder extends PgColumnBuilder {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/columns/date.js
+// api/node_modules/drizzle-orm/pg-core/columns/date.js
 class PgDateBuilder extends PgDateColumnBaseBuilder {
   static [entityKind] = "PgDateBuilder";
   constructor(name) {
@@ -22685,7 +22690,7 @@ function date(a, b) {
   return new PgDateStringBuilder(name);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/double-precision.js
+// api/node_modules/drizzle-orm/pg-core/columns/double-precision.js
 class PgDoublePrecisionBuilder extends PgColumnBuilder {
   static [entityKind] = "PgDoublePrecisionBuilder";
   constructor(name) {
@@ -22712,7 +22717,7 @@ function doublePrecision(name) {
   return new PgDoublePrecisionBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/inet.js
+// api/node_modules/drizzle-orm/pg-core/columns/inet.js
 class PgInetBuilder extends PgColumnBuilder {
   static [entityKind] = "PgInetBuilder";
   constructor(name) {
@@ -22733,7 +22738,7 @@ function inet(name) {
   return new PgInetBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/integer.js
+// api/node_modules/drizzle-orm/pg-core/columns/integer.js
 class PgIntegerBuilder extends PgIntColumnBaseBuilder {
   static [entityKind] = "PgIntegerBuilder";
   constructor(name) {
@@ -22760,7 +22765,7 @@ function integer(name) {
   return new PgIntegerBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/interval.js
+// api/node_modules/drizzle-orm/pg-core/columns/interval.js
 class PgIntervalBuilder extends PgColumnBuilder {
   static [entityKind] = "PgIntervalBuilder";
   constructor(name, intervalConfig) {
@@ -22787,7 +22792,7 @@ function interval(a, b = {}) {
   return new PgIntervalBuilder(name, config);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/json.js
+// api/node_modules/drizzle-orm/pg-core/columns/json.js
 class PgJsonBuilder extends PgColumnBuilder {
   static [entityKind] = "PgJsonBuilder";
   constructor(name) {
@@ -22824,7 +22829,7 @@ function json(name) {
   return new PgJsonBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/jsonb.js
+// api/node_modules/drizzle-orm/pg-core/columns/jsonb.js
 class PgJsonbBuilder extends PgColumnBuilder {
   static [entityKind] = "PgJsonbBuilder";
   constructor(name) {
@@ -22861,7 +22866,7 @@ function jsonb(name) {
   return new PgJsonbBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/line.js
+// api/node_modules/drizzle-orm/pg-core/columns/line.js
 class PgLineBuilder extends PgColumnBuilder {
   static [entityKind] = "PgLineBuilder";
   constructor(name) {
@@ -22917,7 +22922,7 @@ function line(a, b) {
   return new PgLineABCBuilder(name);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/macaddr.js
+// api/node_modules/drizzle-orm/pg-core/columns/macaddr.js
 class PgMacaddrBuilder extends PgColumnBuilder {
   static [entityKind] = "PgMacaddrBuilder";
   constructor(name) {
@@ -22938,7 +22943,7 @@ function macaddr(name) {
   return new PgMacaddrBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/macaddr8.js
+// api/node_modules/drizzle-orm/pg-core/columns/macaddr8.js
 class PgMacaddr8Builder extends PgColumnBuilder {
   static [entityKind] = "PgMacaddr8Builder";
   constructor(name) {
@@ -22959,7 +22964,7 @@ function macaddr8(name) {
   return new PgMacaddr8Builder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/numeric.js
+// api/node_modules/drizzle-orm/pg-core/columns/numeric.js
 class PgNumericBuilder extends PgColumnBuilder {
   static [entityKind] = "PgNumericBuilder";
   constructor(name, precision, scale) {
@@ -23074,7 +23079,7 @@ function numeric(a, b) {
   return mode === "number" ? new PgNumericNumberBuilder(name, config?.precision, config?.scale) : mode === "bigint" ? new PgNumericBigIntBuilder(name, config?.precision, config?.scale) : new PgNumericBuilder(name, config?.precision, config?.scale);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/point.js
+// api/node_modules/drizzle-orm/pg-core/columns/point.js
 class PgPointTupleBuilder extends PgColumnBuilder {
   static [entityKind] = "PgPointTupleBuilder";
   constructor(name) {
@@ -23136,7 +23141,7 @@ function point(a, b) {
   return new PgPointObjectBuilder(name);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/postgis_extension/utils.js
+// api/node_modules/drizzle-orm/pg-core/columns/postgis_extension/utils.js
 function hexToBytes(hex) {
   const bytes = [];
   for (let c = 0;c < hex.length; c += 2) {
@@ -23175,7 +23180,7 @@ function parseEWKB(hex) {
   throw new Error("Unsupported geometry type");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/postgis_extension/geometry.js
+// api/node_modules/drizzle-orm/pg-core/columns/postgis_extension/geometry.js
 class PgGeometryBuilder extends PgColumnBuilder {
   static [entityKind] = "PgGeometryBuilder";
   constructor(name) {
@@ -23230,7 +23235,7 @@ function geometry(a, b) {
   return new PgGeometryObjectBuilder(name);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/real.js
+// api/node_modules/drizzle-orm/pg-core/columns/real.js
 class PgRealBuilder extends PgColumnBuilder {
   static [entityKind] = "PgRealBuilder";
   constructor(name, length) {
@@ -23261,7 +23266,7 @@ function real(name) {
   return new PgRealBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/serial.js
+// api/node_modules/drizzle-orm/pg-core/columns/serial.js
 class PgSerialBuilder extends PgColumnBuilder {
   static [entityKind] = "PgSerialBuilder";
   constructor(name) {
@@ -23284,7 +23289,7 @@ function serial(name) {
   return new PgSerialBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/smallint.js
+// api/node_modules/drizzle-orm/pg-core/columns/smallint.js
 class PgSmallIntBuilder extends PgIntColumnBaseBuilder {
   static [entityKind] = "PgSmallIntBuilder";
   constructor(name) {
@@ -23311,7 +23316,7 @@ function smallint(name) {
   return new PgSmallIntBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/smallserial.js
+// api/node_modules/drizzle-orm/pg-core/columns/smallserial.js
 class PgSmallSerialBuilder extends PgColumnBuilder {
   static [entityKind] = "PgSmallSerialBuilder";
   constructor(name) {
@@ -23334,7 +23339,7 @@ function smallserial(name) {
   return new PgSmallSerialBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/text.js
+// api/node_modules/drizzle-orm/pg-core/columns/text.js
 class PgTextBuilder extends PgColumnBuilder {
   static [entityKind] = "PgTextBuilder";
   constructor(name, config) {
@@ -23358,7 +23363,7 @@ function text(a, b = {}) {
   return new PgTextBuilder(name, config);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/time.js
+// api/node_modules/drizzle-orm/pg-core/columns/time.js
 class PgTimeBuilder extends PgDateColumnBaseBuilder {
   constructor(name, withTimezone, precision) {
     super(name, "string", "PgTime");
@@ -23392,7 +23397,7 @@ function time(a, b = {}) {
   return new PgTimeBuilder(name, config.withTimezone ?? false, config.precision);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/timestamp.js
+// api/node_modules/drizzle-orm/pg-core/columns/timestamp.js
 class PgTimestampBuilder extends PgDateColumnBaseBuilder {
   static [entityKind] = "PgTimestampBuilder";
   constructor(name, withTimezone, precision) {
@@ -23460,7 +23465,7 @@ function timestamp(a, b = {}) {
   return new PgTimestampBuilder(name, config?.withTimezone ?? false, config?.precision);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/uuid.js
+// api/node_modules/drizzle-orm/pg-core/columns/uuid.js
 class PgUUIDBuilder extends PgColumnBuilder {
   static [entityKind] = "PgUUIDBuilder";
   constructor(name) {
@@ -23484,7 +23489,7 @@ function uuid(name) {
   return new PgUUIDBuilder(name ?? "");
 }
 
-// node_modules/drizzle-orm/pg-core/columns/varchar.js
+// api/node_modules/drizzle-orm/pg-core/columns/varchar.js
 class PgVarcharBuilder extends PgColumnBuilder {
   static [entityKind] = "PgVarcharBuilder";
   constructor(name, config) {
@@ -23510,7 +23515,7 @@ function varchar(a, b = {}) {
   return new PgVarcharBuilder(name, config);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/vector_extension/bit.js
+// api/node_modules/drizzle-orm/pg-core/columns/vector_extension/bit.js
 class PgBinaryVectorBuilder extends PgColumnBuilder {
   static [entityKind] = "PgBinaryVectorBuilder";
   constructor(name, config) {
@@ -23534,7 +23539,7 @@ function bit(a, b) {
   return new PgBinaryVectorBuilder(name, config);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/vector_extension/halfvec.js
+// api/node_modules/drizzle-orm/pg-core/columns/vector_extension/halfvec.js
 class PgHalfVectorBuilder extends PgColumnBuilder {
   static [entityKind] = "PgHalfVectorBuilder";
   constructor(name, config) {
@@ -23564,7 +23569,7 @@ function halfvec(a, b) {
   return new PgHalfVectorBuilder(name, config);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/vector_extension/sparsevec.js
+// api/node_modules/drizzle-orm/pg-core/columns/vector_extension/sparsevec.js
 class PgSparseVectorBuilder extends PgColumnBuilder {
   static [entityKind] = "PgSparseVectorBuilder";
   constructor(name, config) {
@@ -23588,7 +23593,7 @@ function sparsevec(a, b) {
   return new PgSparseVectorBuilder(name, config);
 }
 
-// node_modules/drizzle-orm/pg-core/columns/vector_extension/vector.js
+// api/node_modules/drizzle-orm/pg-core/columns/vector_extension/vector.js
 class PgVectorBuilder extends PgColumnBuilder {
   static [entityKind] = "PgVectorBuilder";
   constructor(name, config) {
@@ -23618,7 +23623,7 @@ function vector(a, b) {
   return new PgVectorBuilder(name, config);
 }
 
-// node_modules/drizzle-orm/query-promise.js
+// api/node_modules/drizzle-orm/query-promise.js
 class QueryPromise {
   static [entityKind] = "QueryPromise";
   [Symbol.toStringTag] = "QueryPromise";
@@ -23639,7 +23644,7 @@ class QueryPromise {
   }
 }
 
-// node_modules/drizzle-orm/selection-proxy.js
+// api/node_modules/drizzle-orm/selection-proxy.js
 class SelectionProxyHandler {
   static [entityKind] = "SelectionProxyHandler";
   config;
@@ -23691,7 +23696,7 @@ class SelectionProxyHandler {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/columns/all.js
+// api/node_modules/drizzle-orm/pg-core/columns/all.js
 function getPgColumnBuilders() {
   return {
     bigint,
@@ -23729,7 +23734,7 @@ function getPgColumnBuilders() {
   };
 }
 
-// node_modules/drizzle-orm/pg-core/table.js
+// api/node_modules/drizzle-orm/pg-core/table.js
 var InlineForeignKeys = Symbol.for("drizzle:PgInlineForeignKeys");
 var EnableRLS = Symbol.for("drizzle:EnableRLS");
 
@@ -23777,7 +23782,7 @@ var pgTable = (name, columns, extraConfig) => {
   return pgTableWithSchema(name, columns, extraConfig, undefined);
 };
 
-// node_modules/drizzle-orm/pg-core/primary-keys.js
+// api/node_modules/drizzle-orm/pg-core/primary-keys.js
 class PrimaryKeyBuilder {
   static [entityKind] = "PgPrimaryKeyBuilder";
   columns;
@@ -23805,7 +23810,7 @@ class PrimaryKey {
   }
 }
 
-// node_modules/drizzle-orm/casing.js
+// api/node_modules/drizzle-orm/casing.js
 function toSnakeCase(input) {
   const words = input.replace(/['\u2019]/g, "").match(/[\da-z]+|[A-Z]+(?![a-z])|[A-Z][\da-z]+/g) ?? [];
   return words.map((word) => word.toLowerCase()).join("_");
@@ -23858,7 +23863,7 @@ class CasingCache {
   }
 }
 
-// node_modules/drizzle-orm/errors.js
+// api/node_modules/drizzle-orm/errors.js
 class DrizzleError extends Error {
   static [entityKind] = "DrizzleError";
   constructor({ message, cause }) {
@@ -23868,7 +23873,7 @@ class DrizzleError extends Error {
   }
 }
 
-// node_modules/drizzle-orm/sql/expressions/conditions.js
+// api/node_modules/drizzle-orm/sql/expressions/conditions.js
 function bindIfParam(value, column) {
   if (isDriverValueEncoder(column) && !isSQLWrapper(value) && !is(value, Param) && !is(value, Placeholder) && !is(value, Column) && !is(value, Table) && !is(value, View)) {
     return new Param(value, column);
@@ -23973,7 +23978,7 @@ function notIlike(column, value) {
   return sql`${column} not ilike ${value}`;
 }
 
-// node_modules/drizzle-orm/sql/expressions/select.js
+// api/node_modules/drizzle-orm/sql/expressions/select.js
 function asc(column) {
   return sql`${column} asc`;
 }
@@ -23981,7 +23986,7 @@ function desc(column) {
   return sql`${column} desc`;
 }
 
-// node_modules/drizzle-orm/relations.js
+// api/node_modules/drizzle-orm/relations.js
 class Relation {
   constructor(sourceTable, referencedTable, relationName) {
     this.sourceTable = sourceTable;
@@ -24207,20 +24212,12 @@ function mapRelationalRow(tablesConfig, tableConfig, row, buildQueryResultSelect
   return result;
 }
 
-// node_modules/drizzle-orm/sql/functions/aggregate.js
-function count(expression) {
-  return sql`count(${expression || sql.raw("*")})`.mapWith(Number);
-}
-function sum(expression) {
-  return sql`sum(${expression})`.mapWith(String);
-}
-
-// node_modules/drizzle-orm/pg-core/view-base.js
+// api/node_modules/drizzle-orm/pg-core/view-base.js
 class PgViewBase extends View {
   static [entityKind] = "PgViewBase";
 }
 
-// node_modules/drizzle-orm/pg-core/dialect.js
+// api/node_modules/drizzle-orm/pg-core/dialect.js
 class PgDialect {
   static [entityKind] = "PgDialect";
   casing;
@@ -24778,7 +24775,7 @@ class PgDialect {
   }
 }
 
-// node_modules/drizzle-orm/query-builders/query-builder.js
+// api/node_modules/drizzle-orm/query-builders/query-builder.js
 class TypedQueryBuilder {
   static [entityKind] = "TypedQueryBuilder";
   getSelectedFields() {
@@ -24786,7 +24783,7 @@ class TypedQueryBuilder {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/query-builders/select.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/select.js
 class PgSelectBuilder {
   static [entityKind] = "PgSelectBuilder";
   fields;
@@ -25104,7 +25101,7 @@ var intersectAll = createSetOperator("intersect", true);
 var except = createSetOperator("except", false);
 var exceptAll = createSetOperator("except", true);
 
-// node_modules/drizzle-orm/pg-core/query-builders/query-builder.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/query-builder.js
 class QueryBuilder {
   static [entityKind] = "PgQueryBuilder";
   dialect;
@@ -25182,7 +25179,7 @@ class QueryBuilder {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/utils.js
+// api/node_modules/drizzle-orm/pg-core/utils.js
 function extractUsedTable(table) {
   if (is(table, PgTable)) {
     return [table[Schema] ? `${table[Schema]}.${table[Table.Symbol.BaseName]}` : table[Table.Symbol.BaseName]];
@@ -25196,7 +25193,7 @@ function extractUsedTable(table) {
   return [];
 }
 
-// node_modules/drizzle-orm/pg-core/query-builders/delete.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/delete.js
 class PgDeleteBase extends QueryPromise {
   constructor(table, session, dialect, withList) {
     super();
@@ -25256,7 +25253,7 @@ class PgDeleteBase extends QueryPromise {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/query-builders/insert.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/insert.js
 class PgInsertBuilder {
   constructor(table, session, dialect, withList, overridingSystemValue_) {
     this.table = table;
@@ -25379,7 +25376,7 @@ class PgInsertBase extends QueryPromise {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/query-builders/refresh-materialized-view.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/refresh-materialized-view.js
 class PgRefreshMaterializedView extends QueryPromise {
   constructor(view, session, dialect) {
     super();
@@ -25430,7 +25427,7 @@ class PgRefreshMaterializedView extends QueryPromise {
   };
 }
 
-// node_modules/drizzle-orm/pg-core/query-builders/update.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/update.js
 class PgUpdateBuilder {
   constructor(table, session, dialect, withList) {
     this.table = table;
@@ -25584,7 +25581,7 @@ class PgUpdateBase extends QueryPromise {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/query-builders/count.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/count.js
 class PgCountBuilder extends SQL {
   constructor(params) {
     super(PgCountBuilder.buildEmbeddedCount(params.source, params.filters).queryChunks);
@@ -25625,7 +25622,7 @@ class PgCountBuilder extends SQL {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/query-builders/query.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/query.js
 class RelationalQueryBuilder {
   constructor(fullSchema, schema, tableNamesMap, table, tableConfig, dialect, session) {
     this.fullSchema = fullSchema;
@@ -25708,7 +25705,7 @@ class PgRelationalQuery extends QueryPromise {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/query-builders/raw.js
+// api/node_modules/drizzle-orm/pg-core/query-builders/raw.js
 class PgRaw extends QueryPromise {
   constructor(execute, sql2, query, mapBatchResult) {
     super();
@@ -25735,7 +25732,7 @@ class PgRaw extends QueryPromise {
   }
 }
 
-// node_modules/drizzle-orm/pg-core/db.js
+// api/node_modules/drizzle-orm/pg-core/db.js
 class PgDatabase {
   constructor(dialect, session, schema) {
     this.dialect = dialect;
@@ -25861,7 +25858,7 @@ class PgDatabase {
   }
 }
 
-// node_modules/drizzle-orm/cache/core/cache.js
+// api/node_modules/drizzle-orm/cache/core/cache.js
 class Cache {
   static [entityKind] = "Cache";
 }
@@ -25887,7 +25884,7 @@ async function hashQuery(sql2, params) {
   return hashHex;
 }
 
-// node_modules/drizzle-orm/errors/index.js
+// api/node_modules/drizzle-orm/errors/index.js
 class DrizzleQueryError extends Error {
   constructor(query, params, cause) {
     super(`Failed query: ${query}
@@ -25901,7 +25898,7 @@ params: ${params}`);
   }
 }
 
-// node_modules/drizzle-orm/pg-core/session.js
+// api/node_modules/drizzle-orm/pg-core/session.js
 class PgPreparedQuery {
   constructor(query, cache, queryMetadata, cacheConfig) {
     this.query = query;
@@ -26005,7 +26002,7 @@ class PgSession {
   }
 }
 
-// node_modules/drizzle-orm/logger.js
+// api/node_modules/drizzle-orm/logger.js
 class ConsoleLogWriter {
   static [entityKind] = "ConsoleLogWriter";
   write(message) {
@@ -26037,7 +26034,7 @@ class NoopLogger {
   logQuery() {}
 }
 
-// src/db/schema.js
+// api/src/db/schema.js
 var usersTable = pgTable("users", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -26054,38 +26051,12 @@ var measurementsDataTable = pgTable("measurementsData", {
   id: serial("id").primaryKey(),
   user_id: integer("user_id").notNull().references(() => usersTable.id),
   measurement_id: integer("measurement_id").references(() => measurementsTable.id),
-  value: numeric("value"),
+  value: real("value"),
   created_at: timestamp("created_at", { mode: "string" })
-});
-var weightTable = pgTable("weight", {
-  id: serial("id").primaryKey(),
-  scaleWeight: numeric("scaleWeight"),
-  created_at: timestamp("created_at"),
-  trendWeight: numeric("trendWeight"),
-  user_id: integer("user_id").notNull().references(() => usersTable.id)
-});
-var nutritionTable = pgTable("nutrition", {
-  id: serial("id").primaryKey(),
-  calories: numeric("calories"),
-  protein: numeric("protein"),
-  fat: numeric("fat"),
-  carbs: numeric("carbs"),
-  created_at: timestamp("created_at"),
-  user_id: integer("user_id").notNull().references(() => usersTable.id)
 });
 var weightUnitsTable = pgTable("weightUnits", {
   id: serial("id").primaryKey(),
   unit: text("unit").notNull()
-});
-var customFoodTable = pgTable("foodsTable", {
-  id: serial("id").primaryKey(),
-  foodName: text("foodName"),
-  defaultProtein: numeric("defaultProtein"),
-  defaultServing: numeric("defaultServing"),
-  defaultCalories: numeric("defaultCalories"),
-  defaultCarbs: numeric("defaultCarbs"),
-  defaultFat: numeric("defaultFat"),
-  user_id: integer("user_id").references(() => usersTable.id)
 });
 var heightUnitTable = pgTable("heightUnit", {
   id: serial("id").primaryKey(),
@@ -26120,7 +26091,7 @@ var workoutTable = pgTable("workout", {
   user_id: integer("user_id").references(() => usersTable.id),
   name: text("name"),
   programme_id: integer("programme_id").references(() => programmesTable.id),
-  created_at: timestamp("created_at")
+  created_at: timestamp("created_at", { mode: "string" })
 });
 var userProgrammeTable = pgTable("userProgramme", {
   id: serial("id").primaryKey(),
@@ -26166,18 +26137,15 @@ var messagesTable = pgTable("messages", {
 var workoutDetailsTable = pgTable("workoutDetails", {
   id: serial("id").primaryKey(),
   workout_id: integer("workout_id").references(() => workoutTable.id),
-  set: numeric("set"),
-  reps: numeric("reps"),
-  weight: numeric("weight"),
-  rir: numeric("rir"),
+  set: real("set"),
+  reps: real("reps"),
+  weight: real("weight"),
+  rir: real("rir"),
   exercise_id: integer("exercise_id").references(() => exerciseTable.id)
 });
 var userRelations = relations(usersTable, ({ many }) => ({
-  weight: many(weightTable),
-  nutrients: many(nutritionTable),
   measurementData: many(measurementsDataTable),
   workout: many(workoutTable),
-  customFood: many(customFoodTable),
   programmes: many(programmesTable),
   userProgramme: many(userProgrammeTable),
   rooms: many(roomsTable),
@@ -26240,18 +26208,6 @@ var parent_child = relations(usersTable, ({ one, many }) => ({
   }),
   children: many(usersTable, {
     relationName: "children"
-  })
-}));
-var weightRelations = relations(weightTable, ({ one }) => ({
-  user: one(usersTable, {
-    fields: [weightTable.user_id],
-    references: [usersTable.id]
-  })
-}));
-var nutritionRelations = relations(nutritionTable, ({ one }) => ({
-  user: one(usersTable, {
-    fields: [nutritionTable.user_id],
-    references: [usersTable.id]
   })
 }));
 var customExerciseRelationWithUser = relations(customExerciseTable, ({ one }) => ({
@@ -26339,12 +26295,6 @@ var programmeDetailRelationWithExercise = relations(programmeDetailsTable, ({ on
     references: [exerciseTable.id]
   })
 }));
-var customFoodRelation = relations(customFoodTable, ({ one }) => ({
-  user: one(usersTable, {
-    fields: [customFoodTable.user_id],
-    references: [usersTable.id]
-  })
-}));
 var activtiesRelation = relations(latestActivitiesTable, ({ one }) => ({
   sender: one(usersTable, {
     fields: [latestActivitiesTable.sender_id],
@@ -26358,7 +26308,7 @@ var activtiesRelation = relations(latestActivitiesTable, ({ one }) => ({
   })
 }));
 
-// node_modules/@neondatabase/serverless/index.mjs
+// api/node_modules/@neondatabase/serverless/index.mjs
 var So = Object.create;
 var Ie = Object.defineProperty;
 var Eo = Object.getOwnPropertyDescriptor;
@@ -31262,7 +31212,7 @@ buffer/index.js:
    *)
 */
 
-// node_modules/drizzle-orm/neon-http/session.js
+// api/node_modules/drizzle-orm/neon-http/session.js
 var rawQueryConfig = {
   arrayMode: false,
   fullResults: true
@@ -31381,7 +31331,7 @@ class NeonHttpSession extends PgSession {
   }
 }
 
-// node_modules/drizzle-orm/neon-http/driver.js
+// api/node_modules/drizzle-orm/neon-http/driver.js
 class NeonHttpDriver {
   constructor(client, dialect, options = {}) {
     this.client = client;
@@ -31499,7 +31449,7 @@ function drizzle(...params) {
   drizzle2.mock = mock;
 })(drizzle || (drizzle = {}));
 
-// src/db/schema.ts
+// api/src/db/schema.ts
 var exports_schema = {};
 __export(exports_schema, {
   workoutTable: () => workoutTable2,
@@ -31509,8 +31459,6 @@ __export(exports_schema, {
   workoutDetailRelationWithExercise: () => workoutDetailRelationWithExercise2,
   workoutDetailRelation: () => workoutDetailRelation2,
   weightUnitsTable: () => weightUnitsTable2,
-  weightTable: () => weightTable2,
-  weightRelations: () => weightRelations2,
   usersTable: () => usersTable2,
   userRelations: () => userRelations2,
   userProgrammeTable: () => userProgrammeTable2,
@@ -31530,8 +31478,6 @@ __export(exports_schema, {
   programmeDetailsRelationWithProgramme: () => programmeDetailsRelationWithProgramme2,
   programmeDetailRelationWithExercise: () => programmeDetailRelationWithExercise2,
   parent_child: () => parent_child2,
-  nutritionTable: () => nutritionTable2,
-  nutritionRelations: () => nutritionRelations2,
   messagesTable: () => messagesTable2,
   messagesRelations: () => messagesRelations2,
   measurementsTable: () => measurementsTable2,
@@ -31542,8 +31488,6 @@ __export(exports_schema, {
   heightUnitTable: () => heightUnitTable2,
   exerciseWorkoutRelation: () => exerciseWorkoutRelation2,
   exerciseTable: () => exerciseTable2,
-  customFoodTable: () => customFoodTable2,
-  customFoodRelation: () => customFoodRelation2,
   customExerciseTable: () => customExerciseTable2,
   customExerciseRelationWithUser: () => customExerciseRelationWithUser2,
   childRelationwithParent: () => childRelationwithParent2,
@@ -31565,38 +31509,12 @@ var measurementsDataTable2 = pgTable("measurementsData", {
   id: serial("id").primaryKey(),
   user_id: integer("user_id").notNull().references(() => usersTable2.id),
   measurement_id: integer("measurement_id").references(() => measurementsTable2.id),
-  value: numeric("value"),
+  value: real("value"),
   created_at: timestamp("created_at", { mode: "string" })
-});
-var weightTable2 = pgTable("weight", {
-  id: serial("id").primaryKey(),
-  scaleWeight: numeric("scaleWeight"),
-  created_at: timestamp("created_at"),
-  trendWeight: numeric("trendWeight"),
-  user_id: integer("user_id").notNull().references(() => usersTable2.id)
-});
-var nutritionTable2 = pgTable("nutrition", {
-  id: serial("id").primaryKey(),
-  calories: numeric("calories"),
-  protein: numeric("protein"),
-  fat: numeric("fat"),
-  carbs: numeric("carbs"),
-  created_at: timestamp("created_at"),
-  user_id: integer("user_id").notNull().references(() => usersTable2.id)
 });
 var weightUnitsTable2 = pgTable("weightUnits", {
   id: serial("id").primaryKey(),
   unit: text("unit").notNull()
-});
-var customFoodTable2 = pgTable("foodsTable", {
-  id: serial("id").primaryKey(),
-  foodName: text("foodName"),
-  defaultProtein: numeric("defaultProtein"),
-  defaultServing: numeric("defaultServing"),
-  defaultCalories: numeric("defaultCalories"),
-  defaultCarbs: numeric("defaultCarbs"),
-  defaultFat: numeric("defaultFat"),
-  user_id: integer("user_id").references(() => usersTable2.id)
 });
 var heightUnitTable2 = pgTable("heightUnit", {
   id: serial("id").primaryKey(),
@@ -31631,7 +31549,7 @@ var workoutTable2 = pgTable("workout", {
   user_id: integer("user_id").references(() => usersTable2.id),
   name: text("name"),
   programme_id: integer("programme_id").references(() => programmesTable2.id),
-  created_at: timestamp("created_at")
+  created_at: timestamp("created_at", { mode: "string" })
 });
 var userProgrammeTable2 = pgTable("userProgramme", {
   id: serial("id").primaryKey(),
@@ -31677,18 +31595,15 @@ var messagesTable2 = pgTable("messages", {
 var workoutDetailsTable2 = pgTable("workoutDetails", {
   id: serial("id").primaryKey(),
   workout_id: integer("workout_id").references(() => workoutTable2.id),
-  set: numeric("set"),
-  reps: numeric("reps"),
-  weight: numeric("weight"),
-  rir: numeric("rir"),
+  set: real("set"),
+  reps: real("reps"),
+  weight: real("weight"),
+  rir: real("rir"),
   exercise_id: integer("exercise_id").references(() => exerciseTable2.id)
 });
 var userRelations2 = relations(usersTable2, ({ many }) => ({
-  weight: many(weightTable2),
-  nutrients: many(nutritionTable2),
   measurementData: many(measurementsDataTable2),
   workout: many(workoutTable2),
-  customFood: many(customFoodTable2),
   programmes: many(programmesTable2),
   userProgramme: many(userProgrammeTable2),
   rooms: many(roomsTable2),
@@ -31751,18 +31666,6 @@ var parent_child2 = relations(usersTable2, ({ one, many }) => ({
   }),
   children: many(usersTable2, {
     relationName: "children"
-  })
-}));
-var weightRelations2 = relations(weightTable2, ({ one }) => ({
-  user: one(usersTable2, {
-    fields: [weightTable2.user_id],
-    references: [usersTable2.id]
-  })
-}));
-var nutritionRelations2 = relations(nutritionTable2, ({ one }) => ({
-  user: one(usersTable2, {
-    fields: [nutritionTable2.user_id],
-    references: [usersTable2.id]
   })
 }));
 var customExerciseRelationWithUser2 = relations(customExerciseTable2, ({ one }) => ({
@@ -31850,12 +31753,6 @@ var programmeDetailRelationWithExercise2 = relations(programmeDetailsTable2, ({ 
     references: [exerciseTable2.id]
   })
 }));
-var customFoodRelation2 = relations(customFoodTable2, ({ one }) => ({
-  user: one(usersTable2, {
-    fields: [customFoodTable2.user_id],
-    references: [usersTable2.id]
-  })
-}));
 var activtiesRelation2 = relations(latestActivitiesTable2, ({ one }) => ({
   sender: one(usersTable2, {
     fields: [latestActivitiesTable2.sender_id],
@@ -31869,14 +31766,14 @@ var activtiesRelation2 = relations(latestActivitiesTable2, ({ one }) => ({
   })
 }));
 
-// src/db/db.js
+// api/src/db/db.js
 var import_dotenv = __toESM(require_main(), 1);
 var import_config = __toESM(require_config(), 1);
 import_dotenv.config({ path: ".env" });
 var sql2 = cs(process.env.DATABASE_URL);
 var db = drizzle(sql2, { schema: exports_schema });
 
-// node_modules/hono/dist/middleware/cors/index.js
+// api/node_modules/hono/dist/middleware/cors/index.js
 var cors = (options) => {
   const defaults = {
     origin: "*",
@@ -31953,92 +31850,4096 @@ var cors = (options) => {
   };
 };
 
-// node_modules/@asteasolutions/zod-to-openapi/dist/index.mjs
-function __rest(s2, e) {
-  var t = {};
-  for (var p4 in s2)
-    if (Object.prototype.hasOwnProperty.call(s2, p4) && e.indexOf(p4) < 0)
-      t[p4] = s2[p4];
-  if (s2 != null && typeof Object.getOwnPropertySymbols === "function")
-    for (var i = 0, p4 = Object.getOwnPropertySymbols(s2);i < p4.length; i++) {
-      if (e.indexOf(p4[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p4[i]))
-        t[p4[i]] = s2[p4[i]];
+// api/node_modules/@clerk/shared/dist/chunk-I6MTSTOF.mjs
+var DEV_OR_STAGING_SUFFIXES = [
+  ".lcl.dev",
+  ".stg.dev",
+  ".lclstage.dev",
+  ".stgstage.dev",
+  ".dev.lclclerk.com",
+  ".stg.lclclerk.com",
+  ".accounts.lclclerk.com",
+  "accountsstage.dev",
+  "accounts.dev"
+];
+
+// api/node_modules/@clerk/shared/dist/chunk-7ELT755Q.mjs
+var __typeError = (msg) => {
+  throw TypeError(msg);
+};
+var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
+var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
+var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
+var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
+var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
+
+// api/node_modules/@clerk/shared/dist/chunk-N2V3PKFE.mjs
+var defaultOptions = {
+  initialDelay: 125,
+  maxDelayBetweenRetries: 0,
+  factor: 2,
+  shouldRetry: (_3, iteration) => iteration < 5,
+  retryImmediately: false,
+  jitter: true
+};
+var RETRY_IMMEDIATELY_DELAY = 100;
+var sleep = async (ms2) => new Promise((s2) => setTimeout(s2, ms2));
+var applyJitter = (delay, jitter) => {
+  return jitter ? delay * (1 + Math.random()) : delay;
+};
+var createExponentialDelayAsyncFn = (opts) => {
+  let timesCalled = 0;
+  const calculateDelayInMs = () => {
+    const constant = opts.initialDelay;
+    const base = opts.factor;
+    let delay = constant * Math.pow(base, timesCalled);
+    delay = applyJitter(delay, opts.jitter);
+    return Math.min(opts.maxDelayBetweenRetries || delay, delay);
+  };
+  return async () => {
+    await sleep(calculateDelayInMs());
+    timesCalled++;
+  };
+};
+var retry = async (callback, options = {}) => {
+  let iterations = 0;
+  const { shouldRetry, initialDelay, maxDelayBetweenRetries, factor, retryImmediately, jitter } = {
+    ...defaultOptions,
+    ...options
+  };
+  const delay = createExponentialDelayAsyncFn({
+    initialDelay,
+    maxDelayBetweenRetries,
+    factor,
+    jitter
+  });
+  while (true) {
+    try {
+      return await callback();
+    } catch (e) {
+      iterations++;
+      if (!shouldRetry(e, iterations)) {
+        throw e;
+      }
+      if (retryImmediately && iterations === 1) {
+        await sleep(applyJitter(RETRY_IMMEDIATELY_DELAY, jitter));
+      } else {
+        await delay();
+      }
     }
-  return t;
-}
-function isZodType(schema, typeName) {
-  var _a;
-  return ((_a = schema === null || schema === undefined ? undefined : schema._def) === null || _a === undefined ? undefined : _a.typeName) === typeName;
-}
-function preserveMetadataFromModifier(zod, modifier) {
-  const zodModifier = zod.ZodType.prototype[modifier];
-  zod.ZodType.prototype[modifier] = function(...args) {
-    const result = zodModifier.apply(this, args);
-    result._def.openapi = this._def.openapi;
-    return result;
+  }
+};
+
+// api/node_modules/@clerk/shared/dist/chunk-TETGTEI2.mjs
+var isomorphicAtob = (data) => {
+  if (typeof atob !== "undefined" && typeof atob === "function") {
+    return atob(data);
+  } else if (typeof global !== "undefined" && global.Buffer) {
+    return new global.Buffer(data, "base64").toString();
+  }
+  return data;
+};
+
+// api/node_modules/@clerk/shared/dist/chunk-KOH7GTJO.mjs
+var isomorphicBtoa = (data) => {
+  if (typeof btoa !== "undefined" && typeof btoa === "function") {
+    return btoa(data);
+  } else if (typeof global !== "undefined" && global.Buffer) {
+    return new global.Buffer(data).toString("base64");
+  }
+  return data;
+};
+
+// api/node_modules/@clerk/shared/dist/chunk-G3VP5PJE.mjs
+var PUBLISHABLE_KEY_LIVE_PREFIX = "pk_live_";
+var PUBLISHABLE_KEY_TEST_PREFIX = "pk_test_";
+function parsePublishableKey(key, options = {}) {
+  key = key || "";
+  if (!key || !isPublishableKey(key)) {
+    if (options.fatal && !key) {
+      throw new Error("Publishable key is missing. Ensure that your publishable key is correctly configured. Double-check your environment configuration for your keys, or access them here: https://dashboard.clerk.com/last-active?path=api-keys");
+    }
+    if (options.fatal && !isPublishableKey(key)) {
+      throw new Error("Publishable key not valid.");
+    }
+    return null;
+  }
+  const instanceType = key.startsWith(PUBLISHABLE_KEY_LIVE_PREFIX) ? "production" : "development";
+  let frontendApi = isomorphicAtob(key.split("_")[2]);
+  frontendApi = frontendApi.slice(0, -1);
+  if (options.proxyUrl) {
+    frontendApi = options.proxyUrl;
+  } else if (instanceType !== "development" && options.domain) {
+    frontendApi = `clerk.${options.domain}`;
+  }
+  return {
+    instanceType,
+    frontendApi
   };
 }
-function extendZodWithOpenApi(zod) {
-  if (typeof zod.ZodType.prototype.openapi !== "undefined") {
+function isPublishableKey(key = "") {
+  try {
+    const hasValidPrefix = key.startsWith(PUBLISHABLE_KEY_LIVE_PREFIX) || key.startsWith(PUBLISHABLE_KEY_TEST_PREFIX);
+    const hasValidFrontendApiPostfix = isomorphicAtob(key.split("_")[2] || "").endsWith("$");
+    return hasValidPrefix && hasValidFrontendApiPostfix;
+  } catch {
+    return false;
+  }
+}
+function createDevOrStagingUrlCache() {
+  const devOrStagingUrlCache = /* @__PURE__ */ new Map;
+  return {
+    isDevOrStagingUrl: (url) => {
+      if (!url) {
+        return false;
+      }
+      const hostname = typeof url === "string" ? url : url.hostname;
+      let res = devOrStagingUrlCache.get(hostname);
+      if (res === undefined) {
+        res = DEV_OR_STAGING_SUFFIXES.some((s2) => hostname.endsWith(s2));
+        devOrStagingUrlCache.set(hostname, res);
+      }
+      return res;
+    }
+  };
+}
+function isDevelopmentFromSecretKey(apiKey) {
+  return apiKey.startsWith("test_") || apiKey.startsWith("sk_test_");
+}
+async function getCookieSuffix(publishableKey, subtle = globalThis.crypto.subtle) {
+  const data = new TextEncoder().encode(publishableKey);
+  const digest = await subtle.digest("sha-1", data);
+  const stringDigest = String.fromCharCode(...new Uint8Array(digest));
+  return isomorphicBtoa(stringDigest).replace(/\+/gi, "-").replace(/\//gi, "_").substring(0, 8);
+}
+var getSuffixedCookieName = (cookieName, cookieSuffix) => {
+  return `${cookieName}_${cookieSuffix}`;
+};
+
+// api/node_modules/@clerk/shared/dist/chunk-7HPDNZ3R.mjs
+var isTestEnvironment = () => {
+  try {
+    return false;
+  } catch {}
+  return false;
+};
+var isProductionEnvironment = () => {
+  try {
+    return false;
+  } catch {}
+  return false;
+};
+
+// api/node_modules/@clerk/shared/dist/chunk-UEY4AZIP.mjs
+var displayedWarnings = /* @__PURE__ */ new Set;
+var deprecated = (fnName, warning, key) => {
+  const hideWarning = isTestEnvironment() || isProductionEnvironment();
+  const messageId = key ?? fnName;
+  if (displayedWarnings.has(messageId) || hideWarning) {
     return;
   }
-  zod.ZodType.prototype.openapi = function(refOrOpenapi, metadata) {
-    var _a, _b2, _c, _d2, _e, _f;
-    const openapi = typeof refOrOpenapi === "string" ? metadata : refOrOpenapi;
-    const _g = openapi !== null && openapi !== undefined ? openapi : {}, { param } = _g, restOfOpenApi = __rest(_g, ["param"]);
-    const _internal = Object.assign(Object.assign({}, (_a = this._def.openapi) === null || _a === undefined ? undefined : _a._internal), typeof refOrOpenapi === "string" ? { refId: refOrOpenapi } : undefined);
-    const resultMetadata = Object.assign(Object.assign(Object.assign({}, (_b2 = this._def.openapi) === null || _b2 === undefined ? undefined : _b2.metadata), restOfOpenApi), ((_d2 = (_c = this._def.openapi) === null || _c === undefined ? undefined : _c.metadata) === null || _d2 === undefined ? undefined : _d2.param) || param ? {
-      param: Object.assign(Object.assign({}, (_f = (_e = this._def.openapi) === null || _e === undefined ? undefined : _e.metadata) === null || _f === undefined ? undefined : _f.param), param)
-    } : undefined);
-    const result = new this.constructor(Object.assign(Object.assign({}, this._def), { openapi: Object.assign(Object.assign({}, Object.keys(_internal).length > 0 ? { _internal } : undefined), Object.keys(resultMetadata).length > 0 ? { metadata: resultMetadata } : undefined) }));
-    if (isZodType(this, "ZodObject")) {
-      const originalExtend = this.extend;
-      result.extend = function(...args) {
-        var _a2, _b3, _c2, _d3, _e2, _f2;
-        const extendedResult = originalExtend.apply(this, args);
-        extendedResult._def.openapi = {
-          _internal: {
-            extendedFrom: ((_b3 = (_a2 = this._def.openapi) === null || _a2 === undefined ? undefined : _a2._internal) === null || _b3 === undefined ? undefined : _b3.refId) ? { refId: (_d3 = (_c2 = this._def.openapi) === null || _c2 === undefined ? undefined : _c2._internal) === null || _d3 === undefined ? undefined : _d3.refId, schema: this } : (_e2 = this._def.openapi) === null || _e2 === undefined ? undefined : _e2._internal.extendedFrom
-          },
-          metadata: (_f2 = extendedResult._def.openapi) === null || _f2 === undefined ? undefined : _f2.metadata
-        };
-        return extendedResult;
-      };
+  displayedWarnings.add(messageId);
+  console.warn(`Clerk - DEPRECATION WARNING: "${fnName}" is deprecated and will be removed in the next major release.
+${warning}`);
+};
+
+// api/node_modules/@clerk/shared/dist/chunk-3JHIKPLN.mjs
+function parseErrors(data = []) {
+  return data.length > 0 ? data.map(parseError) : [];
+}
+function parseError(error) {
+  return {
+    code: error.code,
+    message: error.message,
+    longMessage: error.long_message,
+    meta: {
+      paramName: error?.meta?.param_name,
+      sessionId: error?.meta?.session_id,
+      emailAddresses: error?.meta?.email_addresses,
+      identifiers: error?.meta?.identifiers,
+      zxcvbn: error?.meta?.zxcvbn
     }
-    return result;
   };
-  preserveMetadataFromModifier(zod, "optional");
-  preserveMetadataFromModifier(zod, "nullable");
-  preserveMetadataFromModifier(zod, "default");
-  preserveMetadataFromModifier(zod, "transform");
-  preserveMetadataFromModifier(zod, "refine");
-  const zodDeepPartial = zod.ZodObject.prototype.deepPartial;
-  zod.ZodObject.prototype.deepPartial = function() {
-    const initialShape = this._def.shape();
-    const result = zodDeepPartial.apply(this);
-    const resultShape = result._def.shape();
-    Object.entries(resultShape).forEach(([key, value]) => {
-      var _a, _b2;
-      value._def.openapi = (_b2 = (_a = initialShape[key]) === null || _a === undefined ? undefined : _a._def) === null || _b2 === undefined ? undefined : _b2.openapi;
-    });
-    result._def.openapi = undefined;
-    return result;
+}
+var ClerkAPIResponseError = class _ClerkAPIResponseError extends Error {
+  constructor(message, { data, status, clerkTraceId, retryAfter }) {
+    super(message);
+    this.toString = () => {
+      let message2 = `[${this.name}]
+Message:${this.message}
+Status:${this.status}
+Serialized errors: ${this.errors.map((e) => JSON.stringify(e))}`;
+      if (this.clerkTraceId) {
+        message2 += `
+Clerk Trace ID: ${this.clerkTraceId}`;
+      }
+      return message2;
+    };
+    Object.setPrototypeOf(this, _ClerkAPIResponseError.prototype);
+    this.status = status;
+    this.message = message;
+    this.clerkTraceId = clerkTraceId;
+    this.retryAfter = retryAfter;
+    this.clerkError = true;
+    this.errors = parseErrors(data);
+  }
+};
+var DefaultMessages = Object.freeze({
+  InvalidProxyUrlErrorMessage: `The proxyUrl passed to Clerk is invalid. The expected value for proxyUrl is an absolute URL or a relative path with a leading '/'. (key={{url}})`,
+  InvalidPublishableKeyErrorMessage: `The publishableKey passed to Clerk is invalid. You can get your Publishable key at https://dashboard.clerk.com/last-active?path=api-keys. (key={{key}})`,
+  MissingPublishableKeyErrorMessage: `Missing publishableKey. You can get your key at https://dashboard.clerk.com/last-active?path=api-keys.`,
+  MissingSecretKeyErrorMessage: `Missing secretKey. You can get your key at https://dashboard.clerk.com/last-active?path=api-keys.`,
+  MissingClerkProvider: `{{source}} can only be used within the <ClerkProvider /> component. Learn more: https://clerk.com/docs/components/clerk-provider`
+});
+function buildErrorThrower({ packageName, customMessages }) {
+  let pkg = packageName;
+  const messages = {
+    ...DefaultMessages,
+    ...customMessages
   };
-  const zodPick = zod.ZodObject.prototype.pick;
-  zod.ZodObject.prototype.pick = function(...args) {
-    const result = zodPick.apply(this, args);
-    result._def.openapi = undefined;
-    return result;
-  };
-  const zodOmit = zod.ZodObject.prototype.omit;
-  zod.ZodObject.prototype.omit = function(...args) {
-    const result = zodOmit.apply(this, args);
-    result._def.openapi = undefined;
-    return result;
+  function buildMessage(rawMessage, replacements) {
+    if (!replacements) {
+      return `${pkg}: ${rawMessage}`;
+    }
+    let msg = rawMessage;
+    const matches = rawMessage.matchAll(/{{([a-zA-Z0-9-_]+)}}/g);
+    for (const match of matches) {
+      const replacement = (replacements[match[1]] || "").toString();
+      msg = msg.replace(`{{${match[1]}}}`, replacement);
+    }
+    return `${pkg}: ${msg}`;
+  }
+  return {
+    setPackageName({ packageName: packageName2 }) {
+      if (typeof packageName2 === "string") {
+        pkg = packageName2;
+      }
+      return this;
+    },
+    setMessages({ customMessages: customMessages2 }) {
+      Object.assign(messages, customMessages2 || {});
+      return this;
+    },
+    throwInvalidPublishableKeyError(params) {
+      throw new Error(buildMessage(messages.InvalidPublishableKeyErrorMessage, params));
+    },
+    throwInvalidProxyUrl(params) {
+      throw new Error(buildMessage(messages.InvalidProxyUrlErrorMessage, params));
+    },
+    throwMissingPublishableKeyError() {
+      throw new Error(buildMessage(messages.MissingPublishableKeyErrorMessage));
+    },
+    throwMissingSecretKeyError() {
+      throw new Error(buildMessage(messages.MissingSecretKeyErrorMessage));
+    },
+    throwMissingClerkProviderError(params) {
+      throw new Error(buildMessage(messages.MissingClerkProvider, params));
+    },
+    throw(message) {
+      throw new Error(buildMessage(message));
+    }
   };
 }
 
-// node_modules/zod/dist/esm/v3/external.js
+// api/node_modules/@clerk/backend/dist/chunk-LWOXHF4E.mjs
+var errorThrower = buildErrorThrower({ packageName: "@clerk/backend" });
+var { isDevOrStagingUrl } = createDevOrStagingUrlCache();
+
+// api/node_modules/@clerk/backend/dist/chunk-5JS2VYLU.mjs
+var TokenVerificationErrorCode = {
+  InvalidSecretKey: "clerk_key_invalid"
+};
+var TokenVerificationErrorReason = {
+  TokenExpired: "token-expired",
+  TokenInvalid: "token-invalid",
+  TokenInvalidAlgorithm: "token-invalid-algorithm",
+  TokenInvalidAuthorizedParties: "token-invalid-authorized-parties",
+  TokenInvalidSignature: "token-invalid-signature",
+  TokenNotActiveYet: "token-not-active-yet",
+  TokenIatInTheFuture: "token-iat-in-the-future",
+  TokenVerificationFailed: "token-verification-failed",
+  InvalidSecretKey: "secret-key-invalid",
+  LocalJWKMissing: "jwk-local-missing",
+  RemoteJWKFailedToLoad: "jwk-remote-failed-to-load",
+  RemoteJWKInvalid: "jwk-remote-invalid",
+  RemoteJWKMissing: "jwk-remote-missing",
+  JWKFailedToResolve: "jwk-failed-to-resolve",
+  JWKKidMismatch: "jwk-kid-mismatch"
+};
+var TokenVerificationErrorAction = {
+  ContactSupport: "Contact support@clerk.com",
+  EnsureClerkJWT: "Make sure that this is a valid Clerk generate JWT.",
+  SetClerkJWTKey: "Set the CLERK_JWT_KEY environment variable.",
+  SetClerkSecretKey: "Set the CLERK_SECRET_KEY environment variable.",
+  EnsureClockSync: "Make sure your system clock is in sync (e.g. turn off and on automatic time synchronization)."
+};
+var TokenVerificationError = class _TokenVerificationError extends Error {
+  constructor({
+    action,
+    message,
+    reason
+  }) {
+    super(message);
+    Object.setPrototypeOf(this, _TokenVerificationError.prototype);
+    this.reason = reason;
+    this.message = message;
+    this.action = action;
+  }
+  getFullMessage() {
+    return `${[this.message, this.action].filter((m3) => m3).join(" ")} (reason=${this.reason}, token-carrier=${this.tokenCarrier})`;
+  }
+};
+
+// api/node_modules/@clerk/backend/dist/runtime/browser/crypto.mjs
+var webcrypto = crypto;
+
+// api/node_modules/@clerk/backend/dist/chunk-AT3FJU3M.mjs
+var globalFetch = fetch.bind(globalThis);
+var runtime = {
+  crypto: webcrypto,
+  get fetch() {
+    return globalFetch;
+  },
+  AbortController: globalThis.AbortController,
+  Blob: globalThis.Blob,
+  FormData: globalThis.FormData,
+  Headers: globalThis.Headers,
+  Request: globalThis.Request,
+  Response: globalThis.Response
+};
+var base64url = {
+  parse(string, opts) {
+    return parse(string, base64UrlEncoding, opts);
+  },
+  stringify(data, opts) {
+    return stringify(data, base64UrlEncoding, opts);
+  }
+};
+var base64UrlEncoding = {
+  chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
+  bits: 6
+};
+function parse(string, encoding, opts = {}) {
+  if (!encoding.codes) {
+    encoding.codes = {};
+    for (let i = 0;i < encoding.chars.length; ++i) {
+      encoding.codes[encoding.chars[i]] = i;
+    }
+  }
+  if (!opts.loose && string.length * encoding.bits & 7) {
+    throw new SyntaxError("Invalid padding");
+  }
+  let end = string.length;
+  while (string[end - 1] === "=") {
+    --end;
+    if (!opts.loose && !((string.length - end) * encoding.bits & 7)) {
+      throw new SyntaxError("Invalid padding");
+    }
+  }
+  const out = new (opts.out ?? Uint8Array)(end * encoding.bits / 8 | 0);
+  let bits = 0;
+  let buffer = 0;
+  let written = 0;
+  for (let i = 0;i < end; ++i) {
+    const value = encoding.codes[string[i]];
+    if (value === undefined) {
+      throw new SyntaxError("Invalid character " + string[i]);
+    }
+    buffer = buffer << encoding.bits | value;
+    bits += encoding.bits;
+    if (bits >= 8) {
+      bits -= 8;
+      out[written++] = 255 & buffer >> bits;
+    }
+  }
+  if (bits >= encoding.bits || 255 & buffer << 8 - bits) {
+    throw new SyntaxError("Unexpected end of data");
+  }
+  return out;
+}
+function stringify(data, encoding, opts = {}) {
+  const { pad = true } = opts;
+  const mask = (1 << encoding.bits) - 1;
+  let out = "";
+  let bits = 0;
+  let buffer = 0;
+  for (let i = 0;i < data.length; ++i) {
+    buffer = buffer << 8 | 255 & data[i];
+    bits += 8;
+    while (bits > encoding.bits) {
+      bits -= encoding.bits;
+      out += encoding.chars[mask & buffer >> bits];
+    }
+  }
+  if (bits) {
+    out += encoding.chars[mask & buffer << encoding.bits - bits];
+  }
+  if (pad) {
+    while (out.length * encoding.bits & 7) {
+      out += "=";
+    }
+  }
+  return out;
+}
+var algToHash = {
+  RS256: "SHA-256",
+  RS384: "SHA-384",
+  RS512: "SHA-512"
+};
+var RSA_ALGORITHM_NAME = "RSASSA-PKCS1-v1_5";
+var jwksAlgToCryptoAlg = {
+  RS256: RSA_ALGORITHM_NAME,
+  RS384: RSA_ALGORITHM_NAME,
+  RS512: RSA_ALGORITHM_NAME
+};
+var algs = Object.keys(algToHash);
+function getCryptoAlgorithm(algorithmName) {
+  const hash = algToHash[algorithmName];
+  const name = jwksAlgToCryptoAlg[algorithmName];
+  if (!hash || !name) {
+    throw new Error(`Unsupported algorithm ${algorithmName}, expected one of ${algs.join(",")}.`);
+  }
+  return {
+    hash: { name: algToHash[algorithmName] },
+    name: jwksAlgToCryptoAlg[algorithmName]
+  };
+}
+var isArrayString = (s2) => {
+  return Array.isArray(s2) && s2.length > 0 && s2.every((a3) => typeof a3 === "string");
+};
+var assertAudienceClaim = (aud, audience) => {
+  const audienceList = [audience].flat().filter((a3) => !!a3);
+  const audList = [aud].flat().filter((a3) => !!a3);
+  const shouldVerifyAudience = audienceList.length > 0 && audList.length > 0;
+  if (!shouldVerifyAudience) {
+    return;
+  }
+  if (typeof aud === "string") {
+    if (!audienceList.includes(aud)) {
+      throw new TokenVerificationError({
+        action: TokenVerificationErrorAction.EnsureClerkJWT,
+        reason: TokenVerificationErrorReason.TokenVerificationFailed,
+        message: `Invalid JWT audience claim (aud) ${JSON.stringify(aud)}. Is not included in "${JSON.stringify(audienceList)}".`
+      });
+    }
+  } else if (isArrayString(aud)) {
+    if (!aud.some((a3) => audienceList.includes(a3))) {
+      throw new TokenVerificationError({
+        action: TokenVerificationErrorAction.EnsureClerkJWT,
+        reason: TokenVerificationErrorReason.TokenVerificationFailed,
+        message: `Invalid JWT audience claim array (aud) ${JSON.stringify(aud)}. Is not included in "${JSON.stringify(audienceList)}".`
+      });
+    }
+  }
+};
+var assertHeaderType = (typ) => {
+  if (typeof typ === "undefined") {
+    return;
+  }
+  if (typ !== "JWT") {
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.EnsureClerkJWT,
+      reason: TokenVerificationErrorReason.TokenInvalid,
+      message: `Invalid JWT type ${JSON.stringify(typ)}. Expected "JWT".`
+    });
+  }
+};
+var assertHeaderAlgorithm = (alg) => {
+  if (!algs.includes(alg)) {
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.EnsureClerkJWT,
+      reason: TokenVerificationErrorReason.TokenInvalidAlgorithm,
+      message: `Invalid JWT algorithm ${JSON.stringify(alg)}. Supported: ${algs}.`
+    });
+  }
+};
+var assertSubClaim = (sub) => {
+  if (typeof sub !== "string") {
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.EnsureClerkJWT,
+      reason: TokenVerificationErrorReason.TokenVerificationFailed,
+      message: `Subject claim (sub) is required and must be a string. Received ${JSON.stringify(sub)}.`
+    });
+  }
+};
+var assertAuthorizedPartiesClaim = (azp, authorizedParties) => {
+  if (!azp || !authorizedParties || authorizedParties.length === 0) {
+    return;
+  }
+  if (!authorizedParties.includes(azp)) {
+    throw new TokenVerificationError({
+      reason: TokenVerificationErrorReason.TokenInvalidAuthorizedParties,
+      message: `Invalid JWT Authorized party claim (azp) ${JSON.stringify(azp)}. Expected "${authorizedParties}".`
+    });
+  }
+};
+var assertExpirationClaim = (exp, clockSkewInMs) => {
+  if (typeof exp !== "number") {
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.EnsureClerkJWT,
+      reason: TokenVerificationErrorReason.TokenVerificationFailed,
+      message: `Invalid JWT expiry date claim (exp) ${JSON.stringify(exp)}. Expected number.`
+    });
+  }
+  const currentDate = new Date(Date.now());
+  const expiryDate = /* @__PURE__ */ new Date(0);
+  expiryDate.setUTCSeconds(exp);
+  const expired = expiryDate.getTime() <= currentDate.getTime() - clockSkewInMs;
+  if (expired) {
+    throw new TokenVerificationError({
+      reason: TokenVerificationErrorReason.TokenExpired,
+      message: `JWT is expired. Expiry date: ${expiryDate.toUTCString()}, Current date: ${currentDate.toUTCString()}.`
+    });
+  }
+};
+var assertActivationClaim = (nbf, clockSkewInMs) => {
+  if (typeof nbf === "undefined") {
+    return;
+  }
+  if (typeof nbf !== "number") {
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.EnsureClerkJWT,
+      reason: TokenVerificationErrorReason.TokenVerificationFailed,
+      message: `Invalid JWT not before date claim (nbf) ${JSON.stringify(nbf)}. Expected number.`
+    });
+  }
+  const currentDate = new Date(Date.now());
+  const notBeforeDate = /* @__PURE__ */ new Date(0);
+  notBeforeDate.setUTCSeconds(nbf);
+  const early = notBeforeDate.getTime() > currentDate.getTime() + clockSkewInMs;
+  if (early) {
+    throw new TokenVerificationError({
+      reason: TokenVerificationErrorReason.TokenNotActiveYet,
+      message: `JWT cannot be used prior to not before date claim (nbf). Not before date: ${notBeforeDate.toUTCString()}; Current date: ${currentDate.toUTCString()};`
+    });
+  }
+};
+var assertIssuedAtClaim = (iat, clockSkewInMs) => {
+  if (typeof iat === "undefined") {
+    return;
+  }
+  if (typeof iat !== "number") {
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.EnsureClerkJWT,
+      reason: TokenVerificationErrorReason.TokenVerificationFailed,
+      message: `Invalid JWT issued at date claim (iat) ${JSON.stringify(iat)}. Expected number.`
+    });
+  }
+  const currentDate = new Date(Date.now());
+  const issuedAtDate = /* @__PURE__ */ new Date(0);
+  issuedAtDate.setUTCSeconds(iat);
+  const postIssued = issuedAtDate.getTime() > currentDate.getTime() + clockSkewInMs;
+  if (postIssued) {
+    throw new TokenVerificationError({
+      reason: TokenVerificationErrorReason.TokenIatInTheFuture,
+      message: `JWT issued at date claim (iat) is in the future. Issued at date: ${issuedAtDate.toUTCString()}; Current date: ${currentDate.toUTCString()};`
+    });
+  }
+};
+function pemToBuffer(secret) {
+  const trimmed = secret.replace(/-----BEGIN.*?-----/g, "").replace(/-----END.*?-----/g, "").replace(/\s/g, "");
+  const decoded = isomorphicAtob(trimmed);
+  const buffer = new ArrayBuffer(decoded.length);
+  const bufView = new Uint8Array(buffer);
+  for (let i = 0, strLen = decoded.length;i < strLen; i++) {
+    bufView[i] = decoded.charCodeAt(i);
+  }
+  return bufView;
+}
+function importKey(key, algorithm, keyUsage) {
+  if (typeof key === "object") {
+    return runtime.crypto.subtle.importKey("jwk", key, algorithm, false, [keyUsage]);
+  }
+  const keyData = pemToBuffer(key);
+  const format = keyUsage === "sign" ? "pkcs8" : "spki";
+  return runtime.crypto.subtle.importKey(format, keyData, algorithm, false, [keyUsage]);
+}
+var DEFAULT_CLOCK_SKEW_IN_SECONDS = 5 * 1000;
+async function hasValidSignature(jwt, key) {
+  const { header, signature, raw: raw2 } = jwt;
+  const encoder = new TextEncoder;
+  const data = encoder.encode([raw2.header, raw2.payload].join("."));
+  const algorithm = getCryptoAlgorithm(header.alg);
+  try {
+    const cryptoKey = await importKey(key, algorithm, "verify");
+    const verified = await runtime.crypto.subtle.verify(algorithm.name, cryptoKey, signature, data);
+    return { data: verified };
+  } catch (error) {
+    return {
+      errors: [
+        new TokenVerificationError({
+          reason: TokenVerificationErrorReason.TokenInvalidSignature,
+          message: error?.message
+        })
+      ]
+    };
+  }
+}
+function decodeJwt(token) {
+  const tokenParts = (token || "").toString().split(".");
+  if (tokenParts.length !== 3) {
+    return {
+      errors: [
+        new TokenVerificationError({
+          reason: TokenVerificationErrorReason.TokenInvalid,
+          message: `Invalid JWT form. A JWT consists of three parts separated by dots.`
+        })
+      ]
+    };
+  }
+  const [rawHeader, rawPayload, rawSignature] = tokenParts;
+  const decoder = new TextDecoder;
+  const header = JSON.parse(decoder.decode(base64url.parse(rawHeader, { loose: true })));
+  const payload = JSON.parse(decoder.decode(base64url.parse(rawPayload, { loose: true })));
+  const signature = base64url.parse(rawSignature, { loose: true });
+  const data = {
+    header,
+    payload,
+    signature,
+    raw: {
+      header: rawHeader,
+      payload: rawPayload,
+      signature: rawSignature,
+      text: token
+    }
+  };
+  return { data };
+}
+async function verifyJwt(token, options) {
+  const { audience, authorizedParties, clockSkewInMs, key } = options;
+  const clockSkew = clockSkewInMs || DEFAULT_CLOCK_SKEW_IN_SECONDS;
+  const { data: decoded, errors } = decodeJwt(token);
+  if (errors) {
+    return { errors };
+  }
+  const { header, payload } = decoded;
+  try {
+    const { typ, alg } = header;
+    assertHeaderType(typ);
+    assertHeaderAlgorithm(alg);
+    const { azp, sub, aud, iat, exp, nbf } = payload;
+    assertSubClaim(sub);
+    assertAudienceClaim([aud], [audience]);
+    assertAuthorizedPartiesClaim(azp, authorizedParties);
+    assertExpirationClaim(exp, clockSkew);
+    assertActivationClaim(nbf, clockSkew);
+    assertIssuedAtClaim(iat, clockSkew);
+  } catch (err) {
+    return { errors: [err] };
+  }
+  const { data: signatureValid, errors: signatureErrors } = await hasValidSignature(decoded, key);
+  if (signatureErrors) {
+    return {
+      errors: [
+        new TokenVerificationError({
+          action: TokenVerificationErrorAction.EnsureClerkJWT,
+          reason: TokenVerificationErrorReason.TokenVerificationFailed,
+          message: `Error verifying JWT signature. ${signatureErrors[0]}`
+        })
+      ]
+    };
+  }
+  if (!signatureValid) {
+    return {
+      errors: [
+        new TokenVerificationError({
+          reason: TokenVerificationErrorReason.TokenInvalidSignature,
+          message: "JWT signature is invalid."
+        })
+      ]
+    };
+  }
+  return { data: payload };
+}
+
+// api/node_modules/@clerk/backend/dist/chunk-DR4A5GLJ.mjs
+var import_snakecase_keys = __toESM(require_snakecase_keys(), 1);
+
+// api/node_modules/@clerk/shared/dist/chunk-E3NYSYOB.mjs
+var TYPES_TO_OBJECTS = {
+  strict_mfa: {
+    afterMinutes: 10,
+    level: "multi_factor"
+  },
+  strict: {
+    afterMinutes: 10,
+    level: "second_factor"
+  },
+  moderate: {
+    afterMinutes: 60,
+    level: "second_factor"
+  },
+  lax: {
+    afterMinutes: 1440,
+    level: "second_factor"
+  }
+};
+var ALLOWED_LEVELS = /* @__PURE__ */ new Set(["first_factor", "second_factor", "multi_factor"]);
+var ALLOWED_TYPES = /* @__PURE__ */ new Set(["strict_mfa", "strict", "moderate", "lax"]);
+var isValidMaxAge = (maxAge) => typeof maxAge === "number" && maxAge > 0;
+var isValidLevel = (level) => ALLOWED_LEVELS.has(level);
+var isValidVerificationType = (type) => ALLOWED_TYPES.has(type);
+var checkOrgAuthorization = (params, options) => {
+  const { orgId, orgRole, orgPermissions } = options;
+  if (!params.role && !params.permission) {
+    return null;
+  }
+  if (!orgId || !orgRole || !orgPermissions) {
+    return null;
+  }
+  if (params.permission) {
+    return orgPermissions.includes(params.permission);
+  }
+  if (params.role) {
+    return orgRole === params.role;
+  }
+  return null;
+};
+var validateReverificationConfig = (config2) => {
+  if (!config2) {
+    return false;
+  }
+  const convertConfigToObject = (config22) => {
+    if (typeof config22 === "string") {
+      return TYPES_TO_OBJECTS[config22];
+    }
+    return config22;
+  };
+  const isValidStringValue = typeof config2 === "string" && isValidVerificationType(config2);
+  const isValidObjectValue = typeof config2 === "object" && isValidLevel(config2.level) && isValidMaxAge(config2.afterMinutes);
+  if (isValidStringValue || isValidObjectValue) {
+    return convertConfigToObject.bind(null, config2);
+  }
+  return false;
+};
+var checkReverificationAuthorization = (params, { factorVerificationAge }) => {
+  if (!params.reverification || !factorVerificationAge) {
+    return null;
+  }
+  const isValidReverification = validateReverificationConfig(params.reverification);
+  if (!isValidReverification) {
+    return null;
+  }
+  const { level, afterMinutes } = isValidReverification();
+  const [factor1Age, factor2Age] = factorVerificationAge;
+  const isValidFactor1 = factor1Age !== -1 ? afterMinutes > factor1Age : null;
+  const isValidFactor2 = factor2Age !== -1 ? afterMinutes > factor2Age : null;
+  switch (level) {
+    case "first_factor":
+      return isValidFactor1;
+    case "second_factor":
+      return factor2Age !== -1 ? isValidFactor2 : isValidFactor1;
+    case "multi_factor":
+      return factor2Age === -1 ? isValidFactor1 : isValidFactor1 && isValidFactor2;
+  }
+};
+var createCheckAuthorization = (options) => {
+  return (params) => {
+    if (!options.userId) {
+      return false;
+    }
+    const orgAuthorization = checkOrgAuthorization(params, options);
+    const reverificationAuthorization = checkReverificationAuthorization(params, options);
+    if ([orgAuthorization, reverificationAuthorization].some((a3) => a3 === null)) {
+      return [orgAuthorization, reverificationAuthorization].some((a3) => a3 === true);
+    }
+    return [orgAuthorization, reverificationAuthorization].every((a3) => a3 === true);
+  };
+};
+
+// api/node_modules/@clerk/backend/dist/chunk-DR4A5GLJ.mjs
+var import_cookie = __toESM(require_dist5(), 1);
+
+// api/node_modules/@clerk/shared/dist/chunk-JJHTUJGL.mjs
+function _3(r) {
+  for (var n = [], e = 0;e < r.length; ) {
+    var a3 = r[e];
+    if (a3 === "*" || a3 === "+" || a3 === "?") {
+      n.push({
+        type: "MODIFIER",
+        index: e,
+        value: r[e++]
+      });
+      continue;
+    }
+    if (a3 === "\\") {
+      n.push({
+        type: "ESCAPED_CHAR",
+        index: e++,
+        value: r[e++]
+      });
+      continue;
+    }
+    if (a3 === "{") {
+      n.push({
+        type: "OPEN",
+        index: e,
+        value: r[e++]
+      });
+      continue;
+    }
+    if (a3 === "}") {
+      n.push({
+        type: "CLOSE",
+        index: e,
+        value: r[e++]
+      });
+      continue;
+    }
+    if (a3 === ":") {
+      for (var u3 = "", t = e + 1;t < r.length; ) {
+        var c3 = r.charCodeAt(t);
+        if (c3 >= 48 && c3 <= 57 || c3 >= 65 && c3 <= 90 || c3 >= 97 && c3 <= 122 || c3 === 95) {
+          u3 += r[t++];
+          continue;
+        }
+        break;
+      }
+      if (!u3)
+        throw new TypeError("Missing parameter name at ".concat(e));
+      n.push({
+        type: "NAME",
+        index: e,
+        value: u3
+      }), e = t;
+      continue;
+    }
+    if (a3 === "(") {
+      var o = 1, m3 = "", t = e + 1;
+      if (r[t] === "?")
+        throw new TypeError('Pattern cannot start with "?" at '.concat(t));
+      for (;t < r.length; ) {
+        if (r[t] === "\\") {
+          m3 += r[t++] + r[t++];
+          continue;
+        }
+        if (r[t] === ")") {
+          if (o--, o === 0) {
+            t++;
+            break;
+          }
+        } else if (r[t] === "(" && (o++, r[t + 1] !== "?"))
+          throw new TypeError("Capturing groups are not allowed at ".concat(t));
+        m3 += r[t++];
+      }
+      if (o)
+        throw new TypeError("Unbalanced pattern at ".concat(e));
+      if (!m3)
+        throw new TypeError("Missing pattern at ".concat(e));
+      n.push({
+        type: "PATTERN",
+        index: e,
+        value: m3
+      }), e = t;
+      continue;
+    }
+    n.push({
+      type: "CHAR",
+      index: e,
+      value: r[e++]
+    });
+  }
+  return n.push({
+    type: "END",
+    index: e,
+    value: ""
+  }), n;
+}
+function F(r, n) {
+  n === undefined && (n = {});
+  for (var e = _3(r), a3 = n.prefixes, u3 = a3 === undefined ? "./" : a3, t = n.delimiter, c3 = t === undefined ? "/#?" : t, o = [], m3 = 0, h4 = 0, p4 = "", f3 = function(l2) {
+    if (h4 < e.length && e[h4].type === l2)
+      return e[h4++].value;
+  }, w = function(l2) {
+    var v2 = f3(l2);
+    if (v2 !== undefined)
+      return v2;
+    var E4 = e[h4], N3 = E4.type, S3 = E4.index;
+    throw new TypeError("Unexpected ".concat(N3, " at ").concat(S3, ", expected ").concat(l2));
+  }, d4 = function() {
+    for (var l2 = "", v2;v2 = f3("CHAR") || f3("ESCAPED_CHAR"); )
+      l2 += v2;
+    return l2;
+  }, M2 = function(l2) {
+    for (var v2 = 0, E4 = c3;v2 < E4.length; v2++) {
+      var N3 = E4[v2];
+      if (l2.indexOf(N3) > -1)
+        return true;
+    }
+    return false;
+  }, A2 = function(l2) {
+    var v2 = o[o.length - 1], E4 = l2 || (v2 && typeof v2 == "string" ? v2 : "");
+    if (v2 && !E4)
+      throw new TypeError('Must have text between two parameters, missing text after "'.concat(v2.name, '"'));
+    return !E4 || M2(E4) ? "[^".concat(s2(c3), "]+?") : "(?:(?!".concat(s2(E4), ")[^").concat(s2(c3), "])+?");
+  };h4 < e.length; ) {
+    var T4 = f3("CHAR"), x4 = f3("NAME"), C = f3("PATTERN");
+    if (x4 || C) {
+      var g3 = T4 || "";
+      u3.indexOf(g3) === -1 && (p4 += g3, g3 = ""), p4 && (o.push(p4), p4 = ""), o.push({
+        name: x4 || m3++,
+        prefix: g3,
+        suffix: "",
+        pattern: C || A2(g3),
+        modifier: f3("MODIFIER") || ""
+      });
+      continue;
+    }
+    var i = T4 || f3("ESCAPED_CHAR");
+    if (i) {
+      p4 += i;
+      continue;
+    }
+    p4 && (o.push(p4), p4 = "");
+    var R2 = f3("OPEN");
+    if (R2) {
+      var g3 = d4(), y4 = f3("NAME") || "", O4 = f3("PATTERN") || "", b3 = d4();
+      w("CLOSE"), o.push({
+        name: y4 || (O4 ? m3++ : ""),
+        pattern: y4 && !O4 ? A2(g3) : O4,
+        prefix: g3,
+        suffix: b3,
+        modifier: f3("MODIFIER") || ""
+      });
+      continue;
+    }
+    w("END");
+  }
+  return o;
+}
+function H2(r, n) {
+  var e = [], a3 = P3(r, e, n);
+  return I3(a3, e, n);
+}
+function I3(r, n, e) {
+  e === undefined && (e = {});
+  var a3 = e.decode, u3 = a3 === undefined ? function(t) {
+    return t;
+  } : a3;
+  return function(t) {
+    var c3 = r.exec(t);
+    if (!c3)
+      return false;
+    for (var o = c3[0], m3 = c3.index, h4 = /* @__PURE__ */ Object.create(null), p4 = function(w) {
+      if (c3[w] === undefined)
+        return "continue";
+      var d4 = n[w - 1];
+      d4.modifier === "*" || d4.modifier === "+" ? h4[d4.name] = c3[w].split(d4.prefix + d4.suffix).map(function(M2) {
+        return u3(M2, d4);
+      }) : h4[d4.name] = u3(c3[w], d4);
+    }, f3 = 1;f3 < c3.length; f3++)
+      p4(f3);
+    return {
+      path: o,
+      index: m3,
+      params: h4
+    };
+  };
+}
+function s2(r) {
+  return r.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
+}
+function D2(r) {
+  return r && r.sensitive ? "" : "i";
+}
+function $2(r, n) {
+  if (!n)
+    return r;
+  for (var e = /\((?:\?<(.*?)>)?(?!\?)/g, a3 = 0, u3 = e.exec(r.source);u3; )
+    n.push({
+      name: u3[1] || a3++,
+      prefix: "",
+      suffix: "",
+      modifier: "",
+      pattern: ""
+    }), u3 = e.exec(r.source);
+  return r;
+}
+function W(r, n, e) {
+  var a3 = r.map(function(u3) {
+    return P3(u3, n, e).source;
+  });
+  return new RegExp("(?:".concat(a3.join("|"), ")"), D2(e));
+}
+function L4(r, n, e) {
+  return U4(F(r, e), n, e);
+}
+function U4(r, n, e) {
+  e === undefined && (e = {});
+  for (var a3 = e.strict, u3 = a3 === undefined ? false : a3, t = e.start, c3 = t === undefined ? true : t, o = e.end, m3 = o === undefined ? true : o, h4 = e.encode, p4 = h4 === undefined ? function(v2) {
+    return v2;
+  } : h4, f3 = e.delimiter, w = f3 === undefined ? "/#?" : f3, d4 = e.endsWith, M2 = d4 === undefined ? "" : d4, A2 = "[".concat(s2(M2), "]|$"), T4 = "[".concat(s2(w), "]"), x4 = c3 ? "^" : "", C = 0, g3 = r;C < g3.length; C++) {
+    var i = g3[C];
+    if (typeof i == "string")
+      x4 += s2(p4(i));
+    else {
+      var R2 = s2(p4(i.prefix)), y4 = s2(p4(i.suffix));
+      if (i.pattern)
+        if (n && n.push(i), R2 || y4)
+          if (i.modifier === "+" || i.modifier === "*") {
+            var O4 = i.modifier === "*" ? "?" : "";
+            x4 += "(?:".concat(R2, "((?:").concat(i.pattern, ")(?:").concat(y4).concat(R2, "(?:").concat(i.pattern, "))*)").concat(y4, ")").concat(O4);
+          } else
+            x4 += "(?:".concat(R2, "(").concat(i.pattern, ")").concat(y4, ")").concat(i.modifier);
+        else {
+          if (i.modifier === "+" || i.modifier === "*")
+            throw new TypeError('Can not repeat "'.concat(i.name, '" without a prefix and suffix'));
+          x4 += "(".concat(i.pattern, ")").concat(i.modifier);
+        }
+      else
+        x4 += "(?:".concat(R2).concat(y4, ")").concat(i.modifier);
+    }
+  }
+  if (m3)
+    u3 || (x4 += "".concat(T4, "?")), x4 += e.endsWith ? "(?=".concat(A2, ")") : "$";
+  else {
+    var b3 = r[r.length - 1], l2 = typeof b3 == "string" ? T4.indexOf(b3[b3.length - 1]) > -1 : b3 === undefined;
+    u3 || (x4 += "(?:".concat(T4, "(?=").concat(A2, "))?")), l2 || (x4 += "(?=".concat(T4, "|").concat(A2, ")"));
+  }
+  return new RegExp(x4, D2(e));
+}
+function P3(r, n, e) {
+  return r instanceof RegExp ? $2(r, n) : Array.isArray(r) ? W(r, n, e) : L4(r, n, e);
+}
+function match(str, options) {
+  try {
+    return H2(str, options);
+  } catch (e) {
+    throw new Error(`Invalid path and options: Consult the documentation of path-to-regexp here: https://github.com/pillarjs/path-to-regexp/tree/6.x
+${e.message}`);
+  }
+}
+
+// api/node_modules/@clerk/backend/dist/chunk-DR4A5GLJ.mjs
+var API_URL = "https://api.clerk.com";
+var API_VERSION = "v1";
+var USER_AGENT = `${"@clerk/backend"}@${"1.26.0"}`;
+var MAX_CACHE_LAST_UPDATED_AT_SECONDS = 5 * 60;
+var SUPPORTED_BAPI_VERSION = "2024-10-01";
+var Attributes = {
+  AuthToken: "__clerkAuthToken",
+  AuthSignature: "__clerkAuthSignature",
+  AuthStatus: "__clerkAuthStatus",
+  AuthReason: "__clerkAuthReason",
+  AuthMessage: "__clerkAuthMessage",
+  ClerkUrl: "__clerkUrl"
+};
+var Cookies = {
+  Session: "__session",
+  Refresh: "__refresh",
+  ClientUat: "__client_uat",
+  Handshake: "__clerk_handshake",
+  DevBrowser: "__clerk_db_jwt",
+  RedirectCount: "__clerk_redirect_count"
+};
+var QueryParameters = {
+  ClerkSynced: "__clerk_synced",
+  SuffixedCookies: "suffixed_cookies",
+  ClerkRedirectUrl: "__clerk_redirect_url",
+  DevBrowser: Cookies.DevBrowser,
+  Handshake: Cookies.Handshake,
+  HandshakeHelp: "__clerk_help",
+  LegacyDevBrowser: "__dev_session",
+  HandshakeReason: "__clerk_hs_reason"
+};
+var Headers2 = {
+  AuthToken: "x-clerk-auth-token",
+  AuthSignature: "x-clerk-auth-signature",
+  AuthStatus: "x-clerk-auth-status",
+  AuthReason: "x-clerk-auth-reason",
+  AuthMessage: "x-clerk-auth-message",
+  ClerkUrl: "x-clerk-clerk-url",
+  EnableDebug: "x-clerk-debug",
+  ClerkRequestData: "x-clerk-request-data",
+  ClerkRedirectTo: "x-clerk-redirect-to",
+  CloudFrontForwardedProto: "cloudfront-forwarded-proto",
+  Authorization: "authorization",
+  ForwardedPort: "x-forwarded-port",
+  ForwardedProto: "x-forwarded-proto",
+  ForwardedHost: "x-forwarded-host",
+  Accept: "accept",
+  Referrer: "referer",
+  UserAgent: "user-agent",
+  Origin: "origin",
+  Host: "host",
+  ContentType: "content-type",
+  SecFetchDest: "sec-fetch-dest",
+  Location: "location",
+  CacheControl: "cache-control"
+};
+var ContentTypes = {
+  Json: "application/json"
+};
+var constants = {
+  Attributes,
+  Cookies,
+  Headers: Headers2,
+  ContentTypes,
+  QueryParameters
+};
+var SEPARATOR = "/";
+var MULTIPLE_SEPARATOR_REGEX = new RegExp("(?<!:)" + SEPARATOR + "{1,}", "g");
+function joinPaths(...args) {
+  return args.filter((p4) => p4).join(SEPARATOR).replace(MULTIPLE_SEPARATOR_REGEX, SEPARATOR);
+}
+var AbstractAPI = class {
+  constructor(request) {
+    this.request = request;
+  }
+  requireId(id2) {
+    if (!id2) {
+      throw new Error("A valid resource ID is required.");
+    }
+  }
+};
+var basePath = "/accountless_applications";
+var AccountlessApplicationAPI = class extends AbstractAPI {
+  async createAccountlessApplication() {
+    return this.request({
+      method: "POST",
+      path: basePath
+    });
+  }
+  async completeAccountlessApplicationOnboarding() {
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath, "complete")
+    });
+  }
+};
+var basePath2 = "/allowlist_identifiers";
+var AllowlistIdentifierAPI = class extends AbstractAPI {
+  async getAllowlistIdentifierList() {
+    return this.request({
+      method: "GET",
+      path: basePath2,
+      queryParams: { paginated: true }
+    });
+  }
+  async createAllowlistIdentifier(params) {
+    return this.request({
+      method: "POST",
+      path: basePath2,
+      bodyParams: params
+    });
+  }
+  async deleteAllowlistIdentifier(allowlistIdentifierId) {
+    this.requireId(allowlistIdentifierId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath2, allowlistIdentifierId)
+    });
+  }
+};
+var basePath3 = "/clients";
+var ClientAPI = class extends AbstractAPI {
+  async getClientList(params = {}) {
+    return this.request({
+      method: "GET",
+      path: basePath3,
+      queryParams: { ...params, paginated: true }
+    });
+  }
+  async getClient(clientId) {
+    this.requireId(clientId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath3, clientId)
+    });
+  }
+  verifyClient(token) {
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath3, "verify"),
+      bodyParams: { token }
+    });
+  }
+};
+var basePath4 = "/domains";
+var DomainAPI = class extends AbstractAPI {
+  async deleteDomain(id2) {
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath4, id2)
+    });
+  }
+};
+var basePath5 = "/email_addresses";
+var EmailAddressAPI = class extends AbstractAPI {
+  async getEmailAddress(emailAddressId) {
+    this.requireId(emailAddressId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath5, emailAddressId)
+    });
+  }
+  async createEmailAddress(params) {
+    return this.request({
+      method: "POST",
+      path: basePath5,
+      bodyParams: params
+    });
+  }
+  async updateEmailAddress(emailAddressId, params = {}) {
+    this.requireId(emailAddressId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath5, emailAddressId),
+      bodyParams: params
+    });
+  }
+  async deleteEmailAddress(emailAddressId) {
+    this.requireId(emailAddressId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath5, emailAddressId)
+    });
+  }
+};
+var basePath6 = "/invitations";
+var InvitationAPI = class extends AbstractAPI {
+  async getInvitationList(params = {}) {
+    return this.request({
+      method: "GET",
+      path: basePath6,
+      queryParams: { ...params, paginated: true }
+    });
+  }
+  async createInvitation(params) {
+    return this.request({
+      method: "POST",
+      path: basePath6,
+      bodyParams: params
+    });
+  }
+  async revokeInvitation(invitationId) {
+    this.requireId(invitationId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath6, invitationId, "revoke")
+    });
+  }
+};
+var basePath7 = "/organizations";
+var OrganizationAPI = class extends AbstractAPI {
+  async getOrganizationList(params) {
+    return this.request({
+      method: "GET",
+      path: basePath7,
+      queryParams: params
+    });
+  }
+  async createOrganization(params) {
+    return this.request({
+      method: "POST",
+      path: basePath7,
+      bodyParams: params
+    });
+  }
+  async getOrganization(params) {
+    const { includeMembersCount } = params;
+    const organizationIdOrSlug = "organizationId" in params ? params.organizationId : params.slug;
+    this.requireId(organizationIdOrSlug);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath7, organizationIdOrSlug),
+      queryParams: {
+        includeMembersCount
+      }
+    });
+  }
+  async updateOrganization(organizationId, params) {
+    this.requireId(organizationId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath7, organizationId),
+      bodyParams: params
+    });
+  }
+  async updateOrganizationLogo(organizationId, params) {
+    this.requireId(organizationId);
+    const formData = new runtime.FormData;
+    formData.append("file", params?.file);
+    if (params?.uploaderUserId) {
+      formData.append("uploader_user_id", params?.uploaderUserId);
+    }
+    return this.request({
+      method: "PUT",
+      path: joinPaths(basePath7, organizationId, "logo"),
+      formData
+    });
+  }
+  async deleteOrganizationLogo(organizationId) {
+    this.requireId(organizationId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath7, organizationId, "logo")
+    });
+  }
+  async updateOrganizationMetadata(organizationId, params) {
+    this.requireId(organizationId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath7, organizationId, "metadata"),
+      bodyParams: params
+    });
+  }
+  async deleteOrganization(organizationId) {
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath7, organizationId)
+    });
+  }
+  async getOrganizationMembershipList(params) {
+    const { organizationId, ...queryParams } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath7, organizationId, "memberships"),
+      queryParams
+    });
+  }
+  async createOrganizationMembership(params) {
+    const { organizationId, ...bodyParams } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath7, organizationId, "memberships"),
+      bodyParams
+    });
+  }
+  async updateOrganizationMembership(params) {
+    const { organizationId, userId, ...bodyParams } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath7, organizationId, "memberships", userId),
+      bodyParams
+    });
+  }
+  async updateOrganizationMembershipMetadata(params) {
+    const { organizationId, userId, ...bodyParams } = params;
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath7, organizationId, "memberships", userId, "metadata"),
+      bodyParams
+    });
+  }
+  async deleteOrganizationMembership(params) {
+    const { organizationId, userId } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath7, organizationId, "memberships", userId)
+    });
+  }
+  async getOrganizationInvitationList(params) {
+    const { organizationId, ...queryParams } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath7, organizationId, "invitations"),
+      queryParams
+    });
+  }
+  async createOrganizationInvitation(params) {
+    const { organizationId, ...bodyParams } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath7, organizationId, "invitations"),
+      bodyParams
+    });
+  }
+  async getOrganizationInvitation(params) {
+    const { organizationId, invitationId } = params;
+    this.requireId(organizationId);
+    this.requireId(invitationId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath7, organizationId, "invitations", invitationId)
+    });
+  }
+  async revokeOrganizationInvitation(params) {
+    const { organizationId, invitationId, ...bodyParams } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath7, organizationId, "invitations", invitationId, "revoke"),
+      bodyParams
+    });
+  }
+  async getOrganizationDomainList(params) {
+    const { organizationId, ...queryParams } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath7, organizationId, "domains"),
+      queryParams
+    });
+  }
+  async createOrganizationDomain(params) {
+    const { organizationId, ...bodyParams } = params;
+    this.requireId(organizationId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath7, organizationId, "domains"),
+      bodyParams: {
+        ...bodyParams,
+        verified: bodyParams.verified ?? true
+      }
+    });
+  }
+  async updateOrganizationDomain(params) {
+    const { organizationId, domainId, ...bodyParams } = params;
+    this.requireId(organizationId);
+    this.requireId(domainId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath7, organizationId, "domains", domainId),
+      bodyParams
+    });
+  }
+  async deleteOrganizationDomain(params) {
+    const { organizationId, domainId } = params;
+    this.requireId(organizationId);
+    this.requireId(domainId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath7, organizationId, "domains", domainId)
+    });
+  }
+};
+var basePath8 = "/phone_numbers";
+var PhoneNumberAPI = class extends AbstractAPI {
+  async getPhoneNumber(phoneNumberId) {
+    this.requireId(phoneNumberId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath8, phoneNumberId)
+    });
+  }
+  async createPhoneNumber(params) {
+    return this.request({
+      method: "POST",
+      path: basePath8,
+      bodyParams: params
+    });
+  }
+  async updatePhoneNumber(phoneNumberId, params = {}) {
+    this.requireId(phoneNumberId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath8, phoneNumberId),
+      bodyParams: params
+    });
+  }
+  async deletePhoneNumber(phoneNumberId) {
+    this.requireId(phoneNumberId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath8, phoneNumberId)
+    });
+  }
+};
+var basePath9 = "/redirect_urls";
+var RedirectUrlAPI = class extends AbstractAPI {
+  async getRedirectUrlList() {
+    return this.request({
+      method: "GET",
+      path: basePath9,
+      queryParams: { paginated: true }
+    });
+  }
+  async getRedirectUrl(redirectUrlId) {
+    this.requireId(redirectUrlId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath9, redirectUrlId)
+    });
+  }
+  async createRedirectUrl(params) {
+    return this.request({
+      method: "POST",
+      path: basePath9,
+      bodyParams: params
+    });
+  }
+  async deleteRedirectUrl(redirectUrlId) {
+    this.requireId(redirectUrlId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath9, redirectUrlId)
+    });
+  }
+};
+var basePath10 = "/sessions";
+var SessionAPI = class extends AbstractAPI {
+  async getSessionList(params = {}) {
+    return this.request({
+      method: "GET",
+      path: basePath10,
+      queryParams: { ...params, paginated: true }
+    });
+  }
+  async getSession(sessionId) {
+    this.requireId(sessionId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath10, sessionId)
+    });
+  }
+  async revokeSession(sessionId) {
+    this.requireId(sessionId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath10, sessionId, "revoke")
+    });
+  }
+  async verifySession(sessionId, token) {
+    this.requireId(sessionId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath10, sessionId, "verify"),
+      bodyParams: { token }
+    });
+  }
+  async getToken(sessionId, template) {
+    this.requireId(sessionId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath10, sessionId, "tokens", template || "")
+    });
+  }
+  async refreshSession(sessionId, params) {
+    this.requireId(sessionId);
+    const { suffixed_cookies, ...restParams } = params;
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath10, sessionId, "refresh"),
+      bodyParams: restParams,
+      queryParams: { suffixed_cookies }
+    });
+  }
+};
+var basePath11 = "/sign_in_tokens";
+var SignInTokenAPI = class extends AbstractAPI {
+  async createSignInToken(params) {
+    return this.request({
+      method: "POST",
+      path: basePath11,
+      bodyParams: params
+    });
+  }
+  async revokeSignInToken(signInTokenId) {
+    this.requireId(signInTokenId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath11, signInTokenId, "revoke")
+    });
+  }
+};
+var basePath12 = "/users";
+var UserAPI = class extends AbstractAPI {
+  async getUserList(params = {}) {
+    const { limit, offset, orderBy, ...userCountParams } = params;
+    const [data, totalCount] = await Promise.all([
+      this.request({
+        method: "GET",
+        path: basePath12,
+        queryParams: params
+      }),
+      this.getCount(userCountParams)
+    ]);
+    return { data, totalCount };
+  }
+  async getUser(userId) {
+    this.requireId(userId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath12, userId)
+    });
+  }
+  async createUser(params) {
+    return this.request({
+      method: "POST",
+      path: basePath12,
+      bodyParams: params
+    });
+  }
+  async updateUser(userId, params = {}) {
+    this.requireId(userId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath12, userId),
+      bodyParams: params
+    });
+  }
+  async updateUserProfileImage(userId, params) {
+    this.requireId(userId);
+    const formData = new runtime.FormData;
+    formData.append("file", params?.file);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath12, userId, "profile_image"),
+      formData
+    });
+  }
+  async updateUserMetadata(userId, params) {
+    this.requireId(userId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath12, userId, "metadata"),
+      bodyParams: params
+    });
+  }
+  async deleteUser(userId) {
+    this.requireId(userId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath12, userId)
+    });
+  }
+  async getCount(params = {}) {
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath12, "count"),
+      queryParams: params
+    });
+  }
+  async getUserOauthAccessToken(userId, provider) {
+    this.requireId(userId);
+    const hasPrefix = provider.startsWith("oauth_");
+    const _provider = hasPrefix ? provider : `oauth_${provider}`;
+    if (hasPrefix) {
+      deprecated("getUserOauthAccessToken(userId, provider)", "Remove the `oauth_` prefix from the `provider` argument.");
+    }
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath12, userId, "oauth_access_tokens", _provider),
+      queryParams: { paginated: true }
+    });
+  }
+  async disableUserMFA(userId) {
+    this.requireId(userId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath12, userId, "mfa")
+    });
+  }
+  async getOrganizationMembershipList(params) {
+    const { userId, limit, offset } = params;
+    this.requireId(userId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath12, userId, "organization_memberships"),
+      queryParams: { limit, offset }
+    });
+  }
+  async verifyPassword(params) {
+    const { userId, password } = params;
+    this.requireId(userId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath12, userId, "verify_password"),
+      bodyParams: { password }
+    });
+  }
+  async verifyTOTP(params) {
+    const { userId, code } = params;
+    this.requireId(userId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath12, userId, "verify_totp"),
+      bodyParams: { code }
+    });
+  }
+  async banUser(userId) {
+    this.requireId(userId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath12, userId, "ban")
+    });
+  }
+  async unbanUser(userId) {
+    this.requireId(userId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath12, userId, "unban")
+    });
+  }
+  async lockUser(userId) {
+    this.requireId(userId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath12, userId, "lock")
+    });
+  }
+  async unlockUser(userId) {
+    this.requireId(userId);
+    return this.request({
+      method: "POST",
+      path: joinPaths(basePath12, userId, "unlock")
+    });
+  }
+  async deleteUserProfileImage(userId) {
+    this.requireId(userId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath12, userId, "profile_image")
+    });
+  }
+};
+var basePath13 = "/saml_connections";
+var SamlConnectionAPI = class extends AbstractAPI {
+  async getSamlConnectionList(params = {}) {
+    return this.request({
+      method: "GET",
+      path: basePath13,
+      queryParams: params
+    });
+  }
+  async createSamlConnection(params) {
+    return this.request({
+      method: "POST",
+      path: basePath13,
+      bodyParams: params
+    });
+  }
+  async getSamlConnection(samlConnectionId) {
+    this.requireId(samlConnectionId);
+    return this.request({
+      method: "GET",
+      path: joinPaths(basePath13, samlConnectionId)
+    });
+  }
+  async updateSamlConnection(samlConnectionId, params = {}) {
+    this.requireId(samlConnectionId);
+    return this.request({
+      method: "PATCH",
+      path: joinPaths(basePath13, samlConnectionId),
+      bodyParams: params
+    });
+  }
+  async deleteSamlConnection(samlConnectionId) {
+    this.requireId(samlConnectionId);
+    return this.request({
+      method: "DELETE",
+      path: joinPaths(basePath13, samlConnectionId)
+    });
+  }
+};
+var basePath14 = "/testing_tokens";
+var TestingTokenAPI = class extends AbstractAPI {
+  async createTestingToken() {
+    return this.request({
+      method: "POST",
+      path: basePath14
+    });
+  }
+};
+function assertValidSecretKey(val) {
+  if (!val || typeof val !== "string") {
+    throw Error("Missing Clerk Secret Key. Go to https://dashboard.clerk.com and get your key for your instance.");
+  }
+}
+function assertValidPublishableKey(val) {
+  parsePublishableKey(val, { fatal: true });
+}
+var AccountlessApplication = class _AccountlessApplication {
+  constructor(publishableKey, secretKey, claimUrl, apiKeysUrl) {
+    this.publishableKey = publishableKey;
+    this.secretKey = secretKey;
+    this.claimUrl = claimUrl;
+    this.apiKeysUrl = apiKeysUrl;
+  }
+  static fromJSON(data) {
+    return new _AccountlessApplication(data.publishable_key, data.secret_key, data.claim_url, data.api_keys_url);
+  }
+};
+var AllowlistIdentifier = class _AllowlistIdentifier {
+  constructor(id2, identifier, createdAt, updatedAt, invitationId) {
+    this.id = id2;
+    this.identifier = identifier;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.invitationId = invitationId;
+  }
+  static fromJSON(data) {
+    return new _AllowlistIdentifier(data.id, data.identifier, data.created_at, data.updated_at, data.invitation_id);
+  }
+};
+var SessionActivity = class _SessionActivity {
+  constructor(id2, isMobile, ipAddress, city, country, browserVersion, browserName, deviceType) {
+    this.id = id2;
+    this.isMobile = isMobile;
+    this.ipAddress = ipAddress;
+    this.city = city;
+    this.country = country;
+    this.browserVersion = browserVersion;
+    this.browserName = browserName;
+    this.deviceType = deviceType;
+  }
+  static fromJSON(data) {
+    return new _SessionActivity(data.id, data.is_mobile, data.ip_address, data.city, data.country, data.browser_version, data.browser_name, data.device_type);
+  }
+};
+var Session = class _Session {
+  constructor(id2, clientId, userId, status, lastActiveAt, expireAt, abandonAt, createdAt, updatedAt, lastActiveOrganizationId, latestActivity, actor = null) {
+    this.id = id2;
+    this.clientId = clientId;
+    this.userId = userId;
+    this.status = status;
+    this.lastActiveAt = lastActiveAt;
+    this.expireAt = expireAt;
+    this.abandonAt = abandonAt;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.lastActiveOrganizationId = lastActiveOrganizationId;
+    this.latestActivity = latestActivity;
+    this.actor = actor;
+  }
+  static fromJSON(data) {
+    return new _Session(data.id, data.client_id, data.user_id, data.status, data.last_active_at, data.expire_at, data.abandon_at, data.created_at, data.updated_at, data.last_active_organization_id, data.latest_activity && SessionActivity.fromJSON(data.latest_activity), data.actor);
+  }
+};
+var Client = class _Client {
+  constructor(id2, sessionIds, sessions, signInId, signUpId, lastActiveSessionId, createdAt, updatedAt) {
+    this.id = id2;
+    this.sessionIds = sessionIds;
+    this.sessions = sessions;
+    this.signInId = signInId;
+    this.signUpId = signUpId;
+    this.lastActiveSessionId = lastActiveSessionId;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
+  static fromJSON(data) {
+    return new _Client(data.id, data.session_ids, data.sessions.map((x4) => Session.fromJSON(x4)), data.sign_in_id, data.sign_up_id, data.last_active_session_id, data.created_at, data.updated_at);
+  }
+};
+var Cookies2 = class _Cookies {
+  constructor(cookies) {
+    this.cookies = cookies;
+  }
+  static fromJSON(data) {
+    return new _Cookies(data.cookies);
+  }
+};
+var DeletedObject = class _DeletedObject {
+  constructor(object, id2, slug, deleted) {
+    this.object = object;
+    this.id = id2;
+    this.slug = slug;
+    this.deleted = deleted;
+  }
+  static fromJSON(data) {
+    return new _DeletedObject(data.object, data.id || null, data.slug || null, data.deleted);
+  }
+};
+var Email = class _Email {
+  constructor(id2, fromEmailName, emailAddressId, toEmailAddress, subject, body, bodyPlain, status, slug, data, deliveredByClerk) {
+    this.id = id2;
+    this.fromEmailName = fromEmailName;
+    this.emailAddressId = emailAddressId;
+    this.toEmailAddress = toEmailAddress;
+    this.subject = subject;
+    this.body = body;
+    this.bodyPlain = bodyPlain;
+    this.status = status;
+    this.slug = slug;
+    this.data = data;
+    this.deliveredByClerk = deliveredByClerk;
+  }
+  static fromJSON(data) {
+    return new _Email(data.id, data.from_email_name, data.email_address_id, data.to_email_address, data.subject, data.body, data.body_plain, data.status, data.slug, data.data, data.delivered_by_clerk);
+  }
+};
+var IdentificationLink = class _IdentificationLink {
+  constructor(id2, type) {
+    this.id = id2;
+    this.type = type;
+  }
+  static fromJSON(data) {
+    return new _IdentificationLink(data.id, data.type);
+  }
+};
+var Verification = class _Verification {
+  constructor(status, strategy, externalVerificationRedirectURL = null, attempts = null, expireAt = null, nonce = null, message = null) {
+    this.status = status;
+    this.strategy = strategy;
+    this.externalVerificationRedirectURL = externalVerificationRedirectURL;
+    this.attempts = attempts;
+    this.expireAt = expireAt;
+    this.nonce = nonce;
+    this.message = message;
+  }
+  static fromJSON(data) {
+    return new _Verification(data.status, data.strategy, data.external_verification_redirect_url ? new URL(data.external_verification_redirect_url) : null, data.attempts, data.expire_at, data.nonce);
+  }
+};
+var EmailAddress = class _EmailAddress {
+  constructor(id2, emailAddress, verification, linkedTo) {
+    this.id = id2;
+    this.emailAddress = emailAddress;
+    this.verification = verification;
+    this.linkedTo = linkedTo;
+  }
+  static fromJSON(data) {
+    return new _EmailAddress(data.id, data.email_address, data.verification && Verification.fromJSON(data.verification), data.linked_to.map((link) => IdentificationLink.fromJSON(link)));
+  }
+};
+var ExternalAccount = class _ExternalAccount {
+  constructor(id2, provider, identificationId, externalId, approvedScopes, emailAddress, firstName, lastName, imageUrl, username, publicMetadata = {}, label, verification) {
+    this.id = id2;
+    this.provider = provider;
+    this.identificationId = identificationId;
+    this.externalId = externalId;
+    this.approvedScopes = approvedScopes;
+    this.emailAddress = emailAddress;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.imageUrl = imageUrl;
+    this.username = username;
+    this.publicMetadata = publicMetadata;
+    this.label = label;
+    this.verification = verification;
+  }
+  static fromJSON(data) {
+    return new _ExternalAccount(data.id, data.provider, data.identification_id, data.provider_user_id, data.approved_scopes, data.email_address, data.first_name, data.last_name, data.image_url || "", data.username, data.public_metadata, data.label, data.verification && Verification.fromJSON(data.verification));
+  }
+};
+var Invitation = class _Invitation {
+  constructor(id2, emailAddress, publicMetadata, createdAt, updatedAt, status, url, revoked) {
+    this.id = id2;
+    this.emailAddress = emailAddress;
+    this.publicMetadata = publicMetadata;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.status = status;
+    this.url = url;
+    this.revoked = revoked;
+    this._raw = null;
+  }
+  get raw() {
+    return this._raw;
+  }
+  static fromJSON(data) {
+    const res = new _Invitation(data.id, data.email_address, data.public_metadata, data.created_at, data.updated_at, data.status, data.url, data.revoked);
+    res._raw = data;
+    return res;
+  }
+};
+var ObjectType = {
+  AccountlessApplication: "accountless_application",
+  AllowlistIdentifier: "allowlist_identifier",
+  Client: "client",
+  Cookies: "cookies",
+  Email: "email",
+  EmailAddress: "email_address",
+  ExternalAccount: "external_account",
+  FacebookAccount: "facebook_account",
+  GoogleAccount: "google_account",
+  Invitation: "invitation",
+  OauthAccessToken: "oauth_access_token",
+  Organization: "organization",
+  OrganizationDomain: "organization_domain",
+  OrganizationInvitation: "organization_invitation",
+  OrganizationMembership: "organization_membership",
+  PhoneNumber: "phone_number",
+  RedirectUrl: "redirect_url",
+  SamlAccount: "saml_account",
+  Session: "session",
+  SignInAttempt: "sign_in_attempt",
+  SignInToken: "sign_in_token",
+  SignUpAttempt: "sign_up_attempt",
+  SmsMessage: "sms_message",
+  User: "user",
+  WaitlistEntry: "waitlist_entry",
+  Web3Wallet: "web3_wallet",
+  Token: "token",
+  TotalCount: "total_count",
+  TestingToken: "testing_token",
+  Role: "role",
+  Permission: "permission"
+};
+var OauthAccessToken = class _OauthAccessToken {
+  constructor(externalAccountId, provider, token, publicMetadata = {}, label, scopes, tokenSecret) {
+    this.externalAccountId = externalAccountId;
+    this.provider = provider;
+    this.token = token;
+    this.publicMetadata = publicMetadata;
+    this.label = label;
+    this.scopes = scopes;
+    this.tokenSecret = tokenSecret;
+  }
+  static fromJSON(data) {
+    return new _OauthAccessToken(data.external_account_id, data.provider, data.token, data.public_metadata, data.label || "", data.scopes, data.token_secret);
+  }
+};
+var Organization = class _Organization {
+  constructor(id2, name, slug, imageUrl, hasImage, createdAt, updatedAt, publicMetadata = {}, privateMetadata = {}, maxAllowedMemberships, adminDeleteEnabled, membersCount, createdBy) {
+    this.id = id2;
+    this.name = name;
+    this.slug = slug;
+    this.imageUrl = imageUrl;
+    this.hasImage = hasImage;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.publicMetadata = publicMetadata;
+    this.privateMetadata = privateMetadata;
+    this.maxAllowedMemberships = maxAllowedMemberships;
+    this.adminDeleteEnabled = adminDeleteEnabled;
+    this.membersCount = membersCount;
+    this.createdBy = createdBy;
+    this._raw = null;
+  }
+  get raw() {
+    return this._raw;
+  }
+  static fromJSON(data) {
+    const res = new _Organization(data.id, data.name, data.slug, data.image_url || "", data.has_image, data.created_at, data.updated_at, data.public_metadata, data.private_metadata, data.max_allowed_memberships, data.admin_delete_enabled, data.members_count, data.created_by);
+    res._raw = data;
+    return res;
+  }
+};
+var OrganizationInvitation = class _OrganizationInvitation {
+  constructor(id2, emailAddress, role, organizationId, createdAt, updatedAt, status, publicMetadata = {}, privateMetadata = {}) {
+    this.id = id2;
+    this.emailAddress = emailAddress;
+    this.role = role;
+    this.organizationId = organizationId;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.status = status;
+    this.publicMetadata = publicMetadata;
+    this.privateMetadata = privateMetadata;
+    this._raw = null;
+  }
+  get raw() {
+    return this._raw;
+  }
+  static fromJSON(data) {
+    const res = new _OrganizationInvitation(data.id, data.email_address, data.role, data.organization_id, data.created_at, data.updated_at, data.status, data.public_metadata, data.private_metadata);
+    res._raw = data;
+    return res;
+  }
+};
+var OrganizationMembership = class _OrganizationMembership {
+  constructor(id2, role, permissions, publicMetadata = {}, privateMetadata = {}, createdAt, updatedAt, organization, publicUserData) {
+    this.id = id2;
+    this.role = role;
+    this.permissions = permissions;
+    this.publicMetadata = publicMetadata;
+    this.privateMetadata = privateMetadata;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.organization = organization;
+    this.publicUserData = publicUserData;
+    this._raw = null;
+  }
+  get raw() {
+    return this._raw;
+  }
+  static fromJSON(data) {
+    const res = new _OrganizationMembership(data.id, data.role, data.permissions, data.public_metadata, data.private_metadata, data.created_at, data.updated_at, Organization.fromJSON(data.organization), OrganizationMembershipPublicUserData.fromJSON(data.public_user_data));
+    res._raw = data;
+    return res;
+  }
+};
+var OrganizationMembershipPublicUserData = class _OrganizationMembershipPublicUserData {
+  constructor(identifier, firstName, lastName, imageUrl, hasImage, userId) {
+    this.identifier = identifier;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.imageUrl = imageUrl;
+    this.hasImage = hasImage;
+    this.userId = userId;
+  }
+  static fromJSON(data) {
+    return new _OrganizationMembershipPublicUserData(data.identifier, data.first_name, data.last_name, data.image_url, data.has_image, data.user_id);
+  }
+};
+var PhoneNumber = class _PhoneNumber {
+  constructor(id2, phoneNumber, reservedForSecondFactor, defaultSecondFactor, verification, linkedTo) {
+    this.id = id2;
+    this.phoneNumber = phoneNumber;
+    this.reservedForSecondFactor = reservedForSecondFactor;
+    this.defaultSecondFactor = defaultSecondFactor;
+    this.verification = verification;
+    this.linkedTo = linkedTo;
+  }
+  static fromJSON(data) {
+    return new _PhoneNumber(data.id, data.phone_number, data.reserved_for_second_factor, data.default_second_factor, data.verification && Verification.fromJSON(data.verification), data.linked_to.map((link) => IdentificationLink.fromJSON(link)));
+  }
+};
+var RedirectUrl = class _RedirectUrl {
+  constructor(id2, url, createdAt, updatedAt) {
+    this.id = id2;
+    this.url = url;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
+  static fromJSON(data) {
+    return new _RedirectUrl(data.id, data.url, data.created_at, data.updated_at);
+  }
+};
+var SignInToken = class _SignInToken {
+  constructor(id2, userId, token, status, url, createdAt, updatedAt) {
+    this.id = id2;
+    this.userId = userId;
+    this.token = token;
+    this.status = status;
+    this.url = url;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
+  static fromJSON(data) {
+    return new _SignInToken(data.id, data.user_id, data.token, data.status, data.url, data.created_at, data.updated_at);
+  }
+};
+var SMSMessage = class _SMSMessage {
+  constructor(id2, fromPhoneNumber, toPhoneNumber, message, status, phoneNumberId, data) {
+    this.id = id2;
+    this.fromPhoneNumber = fromPhoneNumber;
+    this.toPhoneNumber = toPhoneNumber;
+    this.message = message;
+    this.status = status;
+    this.phoneNumberId = phoneNumberId;
+    this.data = data;
+  }
+  static fromJSON(data) {
+    return new _SMSMessage(data.id, data.from_phone_number, data.to_phone_number, data.message, data.status, data.phone_number_id, data.data);
+  }
+};
+var Token = class _Token {
+  constructor(jwt) {
+    this.jwt = jwt;
+  }
+  static fromJSON(data) {
+    return new _Token(data.jwt);
+  }
+};
+var SamlAccountConnection = class _SamlAccountConnection {
+  constructor(id2, name, domain, active, provider, syncUserAttributes, allowSubdomains, allowIdpInitiated, createdAt, updatedAt) {
+    this.id = id2;
+    this.name = name;
+    this.domain = domain;
+    this.active = active;
+    this.provider = provider;
+    this.syncUserAttributes = syncUserAttributes;
+    this.allowSubdomains = allowSubdomains;
+    this.allowIdpInitiated = allowIdpInitiated;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
+  static fromJSON(data) {
+    return new _SamlAccountConnection(data.id, data.name, data.domain, data.active, data.provider, data.sync_user_attributes, data.allow_subdomains, data.allow_idp_initiated, data.created_at, data.updated_at);
+  }
+};
+var SamlAccount = class _SamlAccount {
+  constructor(id2, provider, providerUserId, active, emailAddress, firstName, lastName, verification, samlConnection) {
+    this.id = id2;
+    this.provider = provider;
+    this.providerUserId = providerUserId;
+    this.active = active;
+    this.emailAddress = emailAddress;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.verification = verification;
+    this.samlConnection = samlConnection;
+  }
+  static fromJSON(data) {
+    return new _SamlAccount(data.id, data.provider, data.provider_user_id, data.active, data.email_address, data.first_name, data.last_name, data.verification && Verification.fromJSON(data.verification), data.saml_connection && SamlAccountConnection.fromJSON(data.saml_connection));
+  }
+};
+var Web3Wallet = class _Web3Wallet {
+  constructor(id2, web3Wallet, verification) {
+    this.id = id2;
+    this.web3Wallet = web3Wallet;
+    this.verification = verification;
+  }
+  static fromJSON(data) {
+    return new _Web3Wallet(data.id, data.web3_wallet, data.verification && Verification.fromJSON(data.verification));
+  }
+};
+var User = class _User {
+  constructor(id2, passwordEnabled, totpEnabled, backupCodeEnabled, twoFactorEnabled, banned, locked, createdAt, updatedAt, imageUrl, hasImage, primaryEmailAddressId, primaryPhoneNumberId, primaryWeb3WalletId, lastSignInAt, externalId, username, firstName, lastName, publicMetadata = {}, privateMetadata = {}, unsafeMetadata = {}, emailAddresses = [], phoneNumbers = [], web3Wallets = [], externalAccounts = [], samlAccounts = [], lastActiveAt, createOrganizationEnabled, createOrganizationsLimit = null, deleteSelfEnabled, legalAcceptedAt) {
+    this.id = id2;
+    this.passwordEnabled = passwordEnabled;
+    this.totpEnabled = totpEnabled;
+    this.backupCodeEnabled = backupCodeEnabled;
+    this.twoFactorEnabled = twoFactorEnabled;
+    this.banned = banned;
+    this.locked = locked;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.imageUrl = imageUrl;
+    this.hasImage = hasImage;
+    this.primaryEmailAddressId = primaryEmailAddressId;
+    this.primaryPhoneNumberId = primaryPhoneNumberId;
+    this.primaryWeb3WalletId = primaryWeb3WalletId;
+    this.lastSignInAt = lastSignInAt;
+    this.externalId = externalId;
+    this.username = username;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.publicMetadata = publicMetadata;
+    this.privateMetadata = privateMetadata;
+    this.unsafeMetadata = unsafeMetadata;
+    this.emailAddresses = emailAddresses;
+    this.phoneNumbers = phoneNumbers;
+    this.web3Wallets = web3Wallets;
+    this.externalAccounts = externalAccounts;
+    this.samlAccounts = samlAccounts;
+    this.lastActiveAt = lastActiveAt;
+    this.createOrganizationEnabled = createOrganizationEnabled;
+    this.createOrganizationsLimit = createOrganizationsLimit;
+    this.deleteSelfEnabled = deleteSelfEnabled;
+    this.legalAcceptedAt = legalAcceptedAt;
+    this._raw = null;
+  }
+  get raw() {
+    return this._raw;
+  }
+  static fromJSON(data) {
+    const res = new _User(data.id, data.password_enabled, data.totp_enabled, data.backup_code_enabled, data.two_factor_enabled, data.banned, data.locked, data.created_at, data.updated_at, data.image_url, data.has_image, data.primary_email_address_id, data.primary_phone_number_id, data.primary_web3_wallet_id, data.last_sign_in_at, data.external_id, data.username, data.first_name, data.last_name, data.public_metadata, data.private_metadata, data.unsafe_metadata, (data.email_addresses || []).map((x4) => EmailAddress.fromJSON(x4)), (data.phone_numbers || []).map((x4) => PhoneNumber.fromJSON(x4)), (data.web3_wallets || []).map((x4) => Web3Wallet.fromJSON(x4)), (data.external_accounts || []).map((x4) => ExternalAccount.fromJSON(x4)), (data.saml_accounts || []).map((x4) => SamlAccount.fromJSON(x4)), data.last_active_at, data.create_organization_enabled, data.create_organizations_limit, data.delete_self_enabled, data.legal_accepted_at);
+    res._raw = data;
+    return res;
+  }
+  get primaryEmailAddress() {
+    return this.emailAddresses.find(({ id: id2 }) => id2 === this.primaryEmailAddressId) ?? null;
+  }
+  get primaryPhoneNumber() {
+    return this.phoneNumbers.find(({ id: id2 }) => id2 === this.primaryPhoneNumberId) ?? null;
+  }
+  get primaryWeb3Wallet() {
+    return this.web3Wallets.find(({ id: id2 }) => id2 === this.primaryWeb3WalletId) ?? null;
+  }
+  get fullName() {
+    return [this.firstName, this.lastName].join(" ").trim() || null;
+  }
+};
+function deserialize(payload) {
+  let data, totalCount;
+  if (Array.isArray(payload)) {
+    const data2 = payload.map((item) => jsonToObject(item));
+    return { data: data2 };
+  } else if (isPaginated(payload)) {
+    data = payload.data.map((item) => jsonToObject(item));
+    totalCount = payload.total_count;
+    return { data, totalCount };
+  } else {
+    return { data: jsonToObject(payload) };
+  }
+}
+function isPaginated(payload) {
+  if (!payload || typeof payload !== "object" || !("data" in payload)) {
+    return false;
+  }
+  return Array.isArray(payload.data) && payload.data !== undefined;
+}
+function getCount(item) {
+  return item.total_count;
+}
+function jsonToObject(item) {
+  if (typeof item !== "string" && "object" in item && "deleted" in item) {
+    return DeletedObject.fromJSON(item);
+  }
+  switch (item.object) {
+    case ObjectType.AccountlessApplication:
+      return AccountlessApplication.fromJSON(item);
+    case ObjectType.AllowlistIdentifier:
+      return AllowlistIdentifier.fromJSON(item);
+    case ObjectType.Client:
+      return Client.fromJSON(item);
+    case ObjectType.Cookies:
+      return Cookies2.fromJSON(item);
+    case ObjectType.EmailAddress:
+      return EmailAddress.fromJSON(item);
+    case ObjectType.Email:
+      return Email.fromJSON(item);
+    case ObjectType.Invitation:
+      return Invitation.fromJSON(item);
+    case ObjectType.OauthAccessToken:
+      return OauthAccessToken.fromJSON(item);
+    case ObjectType.Organization:
+      return Organization.fromJSON(item);
+    case ObjectType.OrganizationInvitation:
+      return OrganizationInvitation.fromJSON(item);
+    case ObjectType.OrganizationMembership:
+      return OrganizationMembership.fromJSON(item);
+    case ObjectType.PhoneNumber:
+      return PhoneNumber.fromJSON(item);
+    case ObjectType.RedirectUrl:
+      return RedirectUrl.fromJSON(item);
+    case ObjectType.SignInToken:
+      return SignInToken.fromJSON(item);
+    case ObjectType.Session:
+      return Session.fromJSON(item);
+    case ObjectType.SmsMessage:
+      return SMSMessage.fromJSON(item);
+    case ObjectType.Token:
+      return Token.fromJSON(item);
+    case ObjectType.TotalCount:
+      return getCount(item);
+    case ObjectType.User:
+      return User.fromJSON(item);
+    default:
+      return item;
+  }
+}
+function buildRequest(options) {
+  const requestFn = async (requestOptions) => {
+    const {
+      secretKey,
+      requireSecretKey = true,
+      apiUrl = API_URL,
+      apiVersion = API_VERSION,
+      userAgent = USER_AGENT
+    } = options;
+    const { path, method, queryParams, headerParams, bodyParams, formData } = requestOptions;
+    if (requireSecretKey) {
+      assertValidSecretKey(secretKey);
+    }
+    const url = joinPaths(apiUrl, apiVersion, path);
+    const finalUrl = new URL(url);
+    if (queryParams) {
+      const snakecasedQueryParams = import_snakecase_keys.default({ ...queryParams });
+      for (const [key, val] of Object.entries(snakecasedQueryParams)) {
+        if (val) {
+          [val].flat().forEach((v2) => finalUrl.searchParams.append(key, v2));
+        }
+      }
+    }
+    const headers = {
+      "Clerk-API-Version": SUPPORTED_BAPI_VERSION,
+      "User-Agent": userAgent,
+      ...headerParams
+    };
+    if (secretKey) {
+      headers.Authorization = `Bearer ${secretKey}`;
+    }
+    let res;
+    try {
+      if (formData) {
+        res = await runtime.fetch(finalUrl.href, {
+          method,
+          headers,
+          body: formData
+        });
+      } else {
+        headers["Content-Type"] = "application/json";
+        const hasBody = method !== "GET" && bodyParams && Object.keys(bodyParams).length > 0;
+        const body = hasBody ? { body: JSON.stringify(import_snakecase_keys.default(bodyParams, { deep: false })) } : null;
+        res = await runtime.fetch(finalUrl.href, {
+          method,
+          headers,
+          ...body
+        });
+      }
+      const isJSONResponse = res?.headers && res.headers?.get(constants.Headers.ContentType) === constants.ContentTypes.Json;
+      const responseBody = await (isJSONResponse ? res.json() : res.text());
+      if (!res.ok) {
+        return {
+          data: null,
+          errors: parseErrors2(responseBody),
+          status: res?.status,
+          statusText: res?.statusText,
+          clerkTraceId: getTraceId(responseBody, res?.headers),
+          retryAfter: getRetryAfter(res?.headers)
+        };
+      }
+      return {
+        ...deserialize(responseBody),
+        errors: null
+      };
+    } catch (err) {
+      if (err instanceof Error) {
+        return {
+          data: null,
+          errors: [
+            {
+              code: "unexpected_error",
+              message: err.message || "Unexpected error"
+            }
+          ],
+          clerkTraceId: getTraceId(err, res?.headers)
+        };
+      }
+      return {
+        data: null,
+        errors: parseErrors2(err),
+        status: res?.status,
+        statusText: res?.statusText,
+        clerkTraceId: getTraceId(err, res?.headers),
+        retryAfter: getRetryAfter(res?.headers)
+      };
+    }
+  };
+  return withLegacyRequestReturn(requestFn);
+}
+function getTraceId(data, headers) {
+  if (data && typeof data === "object" && "clerk_trace_id" in data && typeof data.clerk_trace_id === "string") {
+    return data.clerk_trace_id;
+  }
+  const cfRay = headers?.get("cf-ray");
+  return cfRay || "";
+}
+function getRetryAfter(headers) {
+  const retryAfter = headers?.get("Retry-After");
+  if (!retryAfter)
+    return;
+  const value = parseInt(retryAfter, 10);
+  if (isNaN(value))
+    return;
+  return value;
+}
+function parseErrors2(data) {
+  if (!!data && typeof data === "object" && "errors" in data) {
+    const errors = data.errors;
+    return errors.length > 0 ? errors.map(parseError) : [];
+  }
+  return [];
+}
+function withLegacyRequestReturn(cb) {
+  return async (...args) => {
+    const { data, errors, totalCount, status, statusText, clerkTraceId, retryAfter } = await cb(...args);
+    if (errors) {
+      const error = new ClerkAPIResponseError(statusText || "", {
+        data: [],
+        status,
+        clerkTraceId,
+        retryAfter
+      });
+      error.errors = errors;
+      throw error;
+    }
+    if (typeof totalCount !== "undefined") {
+      return { data, totalCount };
+    }
+    return data;
+  };
+}
+function createBackendApiClient(options) {
+  const request = buildRequest(options);
+  return {
+    __experimental_accountlessApplications: new AccountlessApplicationAPI(buildRequest({ ...options, requireSecretKey: false })),
+    allowlistIdentifiers: new AllowlistIdentifierAPI(request),
+    clients: new ClientAPI(request),
+    emailAddresses: new EmailAddressAPI(request),
+    invitations: new InvitationAPI(request),
+    organizations: new OrganizationAPI(request),
+    phoneNumbers: new PhoneNumberAPI(request),
+    redirectUrls: new RedirectUrlAPI(request),
+    sessions: new SessionAPI(request),
+    signInTokens: new SignInTokenAPI(request),
+    users: new UserAPI(request),
+    domains: new DomainAPI(request),
+    samlConnections: new SamlConnectionAPI(request),
+    testingTokens: new TestingTokenAPI(request)
+  };
+}
+var createDebug = (data) => {
+  return () => {
+    const res = { ...data };
+    res.secretKey = (res.secretKey || "").substring(0, 7);
+    res.jwtKey = (res.jwtKey || "").substring(0, 7);
+    return { ...res };
+  };
+};
+function signedInAuthObject(authenticateContext, sessionToken, sessionClaims) {
+  const {
+    act: actor,
+    sid: sessionId,
+    org_id: orgId,
+    org_role: orgRole,
+    org_slug: orgSlug,
+    org_permissions: orgPermissions,
+    sub: userId,
+    fva,
+    sts
+  } = sessionClaims;
+  const apiClient = createBackendApiClient(authenticateContext);
+  const getToken = createGetToken({
+    sessionId,
+    sessionToken,
+    fetcher: async (...args) => (await apiClient.sessions.getToken(...args)).jwt
+  });
+  const factorVerificationAge = fva ?? null;
+  const sessionStatus = sts ?? null;
+  return {
+    actor,
+    sessionClaims,
+    sessionId,
+    sessionStatus,
+    userId,
+    orgId,
+    orgRole,
+    orgSlug,
+    orgPermissions,
+    factorVerificationAge,
+    getToken,
+    has: createCheckAuthorization({ orgId, orgRole, orgPermissions, userId, factorVerificationAge }),
+    debug: createDebug({ ...authenticateContext, sessionToken })
+  };
+}
+function signedOutAuthObject(debugData) {
+  return {
+    sessionClaims: null,
+    sessionId: null,
+    sessionStatus: null,
+    userId: null,
+    actor: null,
+    orgId: null,
+    orgRole: null,
+    orgSlug: null,
+    orgPermissions: null,
+    factorVerificationAge: null,
+    getToken: () => Promise.resolve(null),
+    has: () => false,
+    debug: createDebug(debugData)
+  };
+}
+var createGetToken = (params) => {
+  const { fetcher, sessionToken, sessionId } = params || {};
+  return async (options = {}) => {
+    if (!sessionId) {
+      return null;
+    }
+    if (options.template) {
+      return fetcher(sessionId, options.template);
+    }
+    return sessionToken;
+  };
+};
+var AuthStatus = {
+  SignedIn: "signed-in",
+  SignedOut: "signed-out",
+  Handshake: "handshake"
+};
+var AuthErrorReason = {
+  ClientUATWithoutSessionToken: "client-uat-but-no-session-token",
+  DevBrowserMissing: "dev-browser-missing",
+  DevBrowserSync: "dev-browser-sync",
+  PrimaryRespondsToSyncing: "primary-responds-to-syncing",
+  SatelliteCookieNeedsSyncing: "satellite-needs-syncing",
+  SessionTokenAndUATMissing: "session-token-and-uat-missing",
+  SessionTokenMissing: "session-token-missing",
+  SessionTokenExpired: "session-token-expired",
+  SessionTokenIATBeforeClientUAT: "session-token-iat-before-client-uat",
+  SessionTokenNBF: "session-token-nbf",
+  SessionTokenIatInTheFuture: "session-token-iat-in-the-future",
+  SessionTokenWithoutClientUAT: "session-token-but-no-client-uat",
+  ActiveOrganizationMismatch: "active-organization-mismatch",
+  UnexpectedError: "unexpected-error"
+};
+function signedIn(authenticateContext, sessionClaims, headers = new Headers, token) {
+  const authObject = signedInAuthObject(authenticateContext, token, sessionClaims);
+  return {
+    status: AuthStatus.SignedIn,
+    reason: null,
+    message: null,
+    proxyUrl: authenticateContext.proxyUrl || "",
+    publishableKey: authenticateContext.publishableKey || "",
+    isSatellite: authenticateContext.isSatellite || false,
+    domain: authenticateContext.domain || "",
+    signInUrl: authenticateContext.signInUrl || "",
+    signUpUrl: authenticateContext.signUpUrl || "",
+    afterSignInUrl: authenticateContext.afterSignInUrl || "",
+    afterSignUpUrl: authenticateContext.afterSignUpUrl || "",
+    isSignedIn: true,
+    toAuth: () => authObject,
+    headers,
+    token
+  };
+}
+function signedOut(authenticateContext, reason, message = "", headers = new Headers) {
+  return withDebugHeaders({
+    status: AuthStatus.SignedOut,
+    reason,
+    message,
+    proxyUrl: authenticateContext.proxyUrl || "",
+    publishableKey: authenticateContext.publishableKey || "",
+    isSatellite: authenticateContext.isSatellite || false,
+    domain: authenticateContext.domain || "",
+    signInUrl: authenticateContext.signInUrl || "",
+    signUpUrl: authenticateContext.signUpUrl || "",
+    afterSignInUrl: authenticateContext.afterSignInUrl || "",
+    afterSignUpUrl: authenticateContext.afterSignUpUrl || "",
+    isSignedIn: false,
+    headers,
+    toAuth: () => signedOutAuthObject({ ...authenticateContext, status: AuthStatus.SignedOut, reason, message }),
+    token: null
+  });
+}
+function handshake(authenticateContext, reason, message = "", headers) {
+  return withDebugHeaders({
+    status: AuthStatus.Handshake,
+    reason,
+    message,
+    publishableKey: authenticateContext.publishableKey || "",
+    isSatellite: authenticateContext.isSatellite || false,
+    domain: authenticateContext.domain || "",
+    proxyUrl: authenticateContext.proxyUrl || "",
+    signInUrl: authenticateContext.signInUrl || "",
+    signUpUrl: authenticateContext.signUpUrl || "",
+    afterSignInUrl: authenticateContext.afterSignInUrl || "",
+    afterSignUpUrl: authenticateContext.afterSignUpUrl || "",
+    isSignedIn: false,
+    headers,
+    toAuth: () => null,
+    token: null
+  });
+}
+var withDebugHeaders = (requestState) => {
+  const headers = new Headers(requestState.headers || {});
+  if (requestState.message) {
+    try {
+      headers.set(constants.Headers.AuthMessage, requestState.message);
+    } catch {}
+  }
+  if (requestState.reason) {
+    try {
+      headers.set(constants.Headers.AuthReason, requestState.reason);
+    } catch {}
+  }
+  if (requestState.status) {
+    try {
+      headers.set(constants.Headers.AuthStatus, requestState.status);
+    } catch {}
+  }
+  requestState.headers = headers;
+  return requestState;
+};
+var ClerkUrl = class extends URL {
+  isCrossOrigin(other) {
+    return this.origin !== new URL(other.toString()).origin;
+  }
+};
+var createClerkUrl = (...args) => {
+  return new ClerkUrl(...args);
+};
+var ClerkRequest = class extends Request {
+  constructor(input, init) {
+    const url = typeof input !== "string" && "url" in input ? input.url : String(input);
+    super(url, init || typeof input === "string" ? undefined : input);
+    this.clerkUrl = this.deriveUrlFromHeaders(this);
+    this.cookies = this.parseCookies(this);
+  }
+  toJSON() {
+    return {
+      url: this.clerkUrl.href,
+      method: this.method,
+      headers: JSON.stringify(Object.fromEntries(this.headers)),
+      clerkUrl: this.clerkUrl.toString(),
+      cookies: JSON.stringify(Object.fromEntries(this.cookies))
+    };
+  }
+  deriveUrlFromHeaders(req) {
+    const initialUrl = new URL(req.url);
+    const forwardedProto = req.headers.get(constants.Headers.ForwardedProto);
+    const forwardedHost = req.headers.get(constants.Headers.ForwardedHost);
+    const host = req.headers.get(constants.Headers.Host);
+    const protocol = initialUrl.protocol;
+    const resolvedHost = this.getFirstValueFromHeader(forwardedHost) ?? host;
+    const resolvedProtocol = this.getFirstValueFromHeader(forwardedProto) ?? protocol?.replace(/[:/]/, "");
+    const origin = resolvedHost && resolvedProtocol ? `${resolvedProtocol}://${resolvedHost}` : initialUrl.origin;
+    if (origin === initialUrl.origin) {
+      return createClerkUrl(initialUrl);
+    }
+    return createClerkUrl(initialUrl.pathname + initialUrl.search, origin);
+  }
+  getFirstValueFromHeader(value) {
+    return value?.split(",")[0];
+  }
+  parseCookies(req) {
+    const cookiesRecord = import_cookie.parse(this.decodeCookieValue(req.headers.get("cookie") || ""));
+    return new Map(Object.entries(cookiesRecord));
+  }
+  decodeCookieValue(str) {
+    return str ? str.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent) : str;
+  }
+};
+var createClerkRequest = (...args) => {
+  return args[0] instanceof ClerkRequest ? args[0] : new ClerkRequest(...args);
+};
+var cache = {};
+var lastUpdatedAt = 0;
+function getFromCache(kid) {
+  return cache[kid];
+}
+function getCacheValues() {
+  return Object.values(cache);
+}
+function setInCache(jwk, shouldExpire = true) {
+  cache[jwk.kid] = jwk;
+  lastUpdatedAt = shouldExpire ? Date.now() : -1;
+}
+var LocalJwkKid = "local";
+var PEM_HEADER = "-----BEGIN PUBLIC KEY-----";
+var PEM_TRAILER = "-----END PUBLIC KEY-----";
+var RSA_PREFIX = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA";
+var RSA_SUFFIX = "IDAQAB";
+function loadClerkJWKFromLocal(localKey) {
+  if (!getFromCache(LocalJwkKid)) {
+    if (!localKey) {
+      throw new TokenVerificationError({
+        action: TokenVerificationErrorAction.SetClerkJWTKey,
+        message: "Missing local JWK.",
+        reason: TokenVerificationErrorReason.LocalJWKMissing
+      });
+    }
+    const modulus = localKey.replace(/\r\n|\n|\r/g, "").replace(PEM_HEADER, "").replace(PEM_TRAILER, "").replace(RSA_PREFIX, "").replace(RSA_SUFFIX, "").replace(/\+/g, "-").replace(/\//g, "_");
+    setInCache({
+      kid: "local",
+      kty: "RSA",
+      alg: "RS256",
+      n: modulus,
+      e: "AQAB"
+    }, false);
+  }
+  return getFromCache(LocalJwkKid);
+}
+async function loadClerkJWKFromRemote({
+  secretKey,
+  apiUrl = API_URL,
+  apiVersion = API_VERSION,
+  kid,
+  skipJwksCache
+}) {
+  if (skipJwksCache || cacheHasExpired() || !getFromCache(kid)) {
+    if (!secretKey) {
+      throw new TokenVerificationError({
+        action: TokenVerificationErrorAction.ContactSupport,
+        message: "Failed to load JWKS from Clerk Backend or Frontend API.",
+        reason: TokenVerificationErrorReason.RemoteJWKFailedToLoad
+      });
+    }
+    const fetcher = () => fetchJWKSFromBAPI(apiUrl, secretKey, apiVersion);
+    const { keys } = await retry(fetcher);
+    if (!keys || !keys.length) {
+      throw new TokenVerificationError({
+        action: TokenVerificationErrorAction.ContactSupport,
+        message: "The JWKS endpoint did not contain any signing keys. Contact support@clerk.com.",
+        reason: TokenVerificationErrorReason.RemoteJWKFailedToLoad
+      });
+    }
+    keys.forEach((key) => setInCache(key));
+  }
+  const jwk = getFromCache(kid);
+  if (!jwk) {
+    const cacheValues = getCacheValues();
+    const jwkKeys = cacheValues.map((jwk2) => jwk2.kid).sort().join(", ");
+    throw new TokenVerificationError({
+      action: `Go to your Dashboard and validate your secret and public keys are correct. ${TokenVerificationErrorAction.ContactSupport} if the issue persists.`,
+      message: `Unable to find a signing key in JWKS that matches the kid='${kid}' of the provided session token. Please make sure that the __session cookie or the HTTP authorization header contain a Clerk-generated session JWT. The following kid is available: ${jwkKeys}`,
+      reason: TokenVerificationErrorReason.JWKKidMismatch
+    });
+  }
+  return jwk;
+}
+async function fetchJWKSFromBAPI(apiUrl, key, apiVersion) {
+  if (!key) {
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.SetClerkSecretKey,
+      message: "Missing Clerk Secret Key or API Key. Go to https://dashboard.clerk.com and get your key for your instance.",
+      reason: TokenVerificationErrorReason.RemoteJWKFailedToLoad
+    });
+  }
+  const url = new URL(apiUrl);
+  url.pathname = joinPaths(url.pathname, apiVersion, "/jwks");
+  const response = await runtime.fetch(url.href, {
+    headers: {
+      Authorization: `Bearer ${key}`,
+      "Clerk-API-Version": SUPPORTED_BAPI_VERSION,
+      "Content-Type": "application/json",
+      "User-Agent": USER_AGENT
+    }
+  });
+  if (!response.ok) {
+    const json2 = await response.json();
+    const invalidSecretKeyError = getErrorObjectByCode(json2?.errors, TokenVerificationErrorCode.InvalidSecretKey);
+    if (invalidSecretKeyError) {
+      const reason = TokenVerificationErrorReason.InvalidSecretKey;
+      throw new TokenVerificationError({
+        action: TokenVerificationErrorAction.ContactSupport,
+        message: invalidSecretKeyError.message,
+        reason
+      });
+    }
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.ContactSupport,
+      message: `Error loading Clerk JWKS from ${url.href} with code=${response.status}`,
+      reason: TokenVerificationErrorReason.RemoteJWKFailedToLoad
+    });
+  }
+  return response.json();
+}
+function cacheHasExpired() {
+  if (lastUpdatedAt === -1) {
+    return false;
+  }
+  const isExpired = Date.now() - lastUpdatedAt >= MAX_CACHE_LAST_UPDATED_AT_SECONDS * 1000;
+  if (isExpired) {
+    cache = {};
+  }
+  return isExpired;
+}
+var getErrorObjectByCode = (errors, code) => {
+  if (!errors) {
+    return null;
+  }
+  return errors.find((err) => err.code === code);
+};
+async function verifyToken(token, options) {
+  const { data: decodedResult, errors } = decodeJwt(token);
+  if (errors) {
+    return { errors };
+  }
+  const { header } = decodedResult;
+  const { kid } = header;
+  try {
+    let key;
+    if (options.jwtKey) {
+      key = loadClerkJWKFromLocal(options.jwtKey);
+    } else if (options.secretKey) {
+      key = await loadClerkJWKFromRemote({ ...options, kid });
+    } else {
+      return {
+        errors: [
+          new TokenVerificationError({
+            action: TokenVerificationErrorAction.SetClerkJWTKey,
+            message: "Failed to resolve JWK during verification.",
+            reason: TokenVerificationErrorReason.JWKFailedToResolve
+          })
+        ]
+      };
+    }
+    return await verifyJwt(token, { ...options, key });
+  } catch (error) {
+    return { errors: [error] };
+  }
+}
+var AuthenticateContext = class {
+  constructor(cookieSuffix, clerkRequest, options) {
+    this.cookieSuffix = cookieSuffix;
+    this.clerkRequest = clerkRequest;
+    this.initPublishableKeyValues(options);
+    this.initHeaderValues();
+    this.initCookieValues();
+    this.initHandshakeValues();
+    Object.assign(this, options);
+    this.clerkUrl = this.clerkRequest.clerkUrl;
+  }
+  get sessionToken() {
+    return this.sessionTokenInCookie || this.sessionTokenInHeader;
+  }
+  usesSuffixedCookies() {
+    const suffixedClientUat = this.getSuffixedCookie(constants.Cookies.ClientUat);
+    const clientUat = this.getCookie(constants.Cookies.ClientUat);
+    const suffixedSession = this.getSuffixedCookie(constants.Cookies.Session) || "";
+    const session = this.getCookie(constants.Cookies.Session) || "";
+    if (session && !this.tokenHasIssuer(session)) {
+      return false;
+    }
+    if (session && !this.tokenBelongsToInstance(session)) {
+      return true;
+    }
+    if (!suffixedClientUat && !suffixedSession) {
+      return false;
+    }
+    const { data: sessionData } = decodeJwt(session);
+    const sessionIat = sessionData?.payload.iat || 0;
+    const { data: suffixedSessionData } = decodeJwt(suffixedSession);
+    const suffixedSessionIat = suffixedSessionData?.payload.iat || 0;
+    if (suffixedClientUat !== "0" && clientUat !== "0" && sessionIat > suffixedSessionIat) {
+      return false;
+    }
+    if (suffixedClientUat === "0" && clientUat !== "0") {
+      return false;
+    }
+    if (this.instanceType !== "production") {
+      const isSuffixedSessionExpired = this.sessionExpired(suffixedSessionData);
+      if (suffixedClientUat !== "0" && clientUat === "0" && isSuffixedSessionExpired) {
+        return false;
+      }
+    }
+    if (!suffixedClientUat && suffixedSession) {
+      return false;
+    }
+    return true;
+  }
+  initPublishableKeyValues(options) {
+    assertValidPublishableKey(options.publishableKey);
+    this.publishableKey = options.publishableKey;
+    const pk = parsePublishableKey(this.publishableKey, {
+      fatal: true,
+      proxyUrl: options.proxyUrl,
+      domain: options.domain
+    });
+    this.instanceType = pk.instanceType;
+    this.frontendApi = pk.frontendApi;
+  }
+  initHeaderValues() {
+    this.sessionTokenInHeader = this.parseAuthorizationHeader(this.getHeader(constants.Headers.Authorization));
+    this.origin = this.getHeader(constants.Headers.Origin);
+    this.host = this.getHeader(constants.Headers.Host);
+    this.forwardedHost = this.getHeader(constants.Headers.ForwardedHost);
+    this.forwardedProto = this.getHeader(constants.Headers.CloudFrontForwardedProto) || this.getHeader(constants.Headers.ForwardedProto);
+    this.referrer = this.getHeader(constants.Headers.Referrer);
+    this.userAgent = this.getHeader(constants.Headers.UserAgent);
+    this.secFetchDest = this.getHeader(constants.Headers.SecFetchDest);
+    this.accept = this.getHeader(constants.Headers.Accept);
+  }
+  initCookieValues() {
+    this.sessionTokenInCookie = this.getSuffixedOrUnSuffixedCookie(constants.Cookies.Session);
+    this.refreshTokenInCookie = this.getSuffixedCookie(constants.Cookies.Refresh);
+    this.clientUat = Number.parseInt(this.getSuffixedOrUnSuffixedCookie(constants.Cookies.ClientUat) || "") || 0;
+  }
+  initHandshakeValues() {
+    this.devBrowserToken = this.getQueryParam(constants.QueryParameters.DevBrowser) || this.getSuffixedOrUnSuffixedCookie(constants.Cookies.DevBrowser);
+    this.handshakeToken = this.getQueryParam(constants.QueryParameters.Handshake) || this.getCookie(constants.Cookies.Handshake);
+    this.handshakeRedirectLoopCounter = Number(this.getCookie(constants.Cookies.RedirectCount)) || 0;
+  }
+  getQueryParam(name) {
+    return this.clerkRequest.clerkUrl.searchParams.get(name);
+  }
+  getHeader(name) {
+    return this.clerkRequest.headers.get(name) || undefined;
+  }
+  getCookie(name) {
+    return this.clerkRequest.cookies.get(name) || undefined;
+  }
+  getSuffixedCookie(name) {
+    return this.getCookie(getSuffixedCookieName(name, this.cookieSuffix)) || undefined;
+  }
+  getSuffixedOrUnSuffixedCookie(cookieName) {
+    if (this.usesSuffixedCookies()) {
+      return this.getSuffixedCookie(cookieName);
+    }
+    return this.getCookie(cookieName);
+  }
+  parseAuthorizationHeader(authorizationHeader) {
+    if (!authorizationHeader) {
+      return;
+    }
+    const [scheme, token] = authorizationHeader.split(" ", 2);
+    if (!token) {
+      return scheme;
+    }
+    if (scheme === "Bearer") {
+      return token;
+    }
+    return;
+  }
+  tokenHasIssuer(token) {
+    const { data, errors } = decodeJwt(token);
+    if (errors) {
+      return false;
+    }
+    return !!data.payload.iss;
+  }
+  tokenBelongsToInstance(token) {
+    if (!token) {
+      return false;
+    }
+    const { data, errors } = decodeJwt(token);
+    if (errors) {
+      return false;
+    }
+    const tokenIssuer = data.payload.iss.replace(/https?:\/\//gi, "");
+    return this.frontendApi === tokenIssuer;
+  }
+  sessionExpired(jwt) {
+    return !!jwt && jwt?.payload.exp <= Date.now() / 1000 >> 0;
+  }
+};
+var createAuthenticateContext = async (clerkRequest, options) => {
+  const cookieSuffix = options.publishableKey ? await getCookieSuffix(options.publishableKey, runtime.crypto.subtle) : "";
+  return new AuthenticateContext(cookieSuffix, clerkRequest, options);
+};
+var getCookieName = (cookieDirective) => {
+  return cookieDirective.split(";")[0]?.split("=")[0];
+};
+var getCookieValue = (cookieDirective) => {
+  return cookieDirective.split(";")[0]?.split("=")[1];
+};
+async function verifyHandshakeJwt(token, { key }) {
+  const { data: decoded, errors } = decodeJwt(token);
+  if (errors) {
+    throw errors[0];
+  }
+  const { header, payload } = decoded;
+  const { typ, alg } = header;
+  assertHeaderType(typ);
+  assertHeaderAlgorithm(alg);
+  const { data: signatureValid, errors: signatureErrors } = await hasValidSignature(decoded, key);
+  if (signatureErrors) {
+    throw new TokenVerificationError({
+      reason: TokenVerificationErrorReason.TokenVerificationFailed,
+      message: `Error verifying handshake token. ${signatureErrors[0]}`
+    });
+  }
+  if (!signatureValid) {
+    throw new TokenVerificationError({
+      reason: TokenVerificationErrorReason.TokenInvalidSignature,
+      message: "Handshake signature is invalid."
+    });
+  }
+  return payload;
+}
+async function verifyHandshakeToken(token, options) {
+  const { secretKey, apiUrl, apiVersion, jwksCacheTtlInMs, jwtKey, skipJwksCache } = options;
+  const { data, errors } = decodeJwt(token);
+  if (errors) {
+    throw errors[0];
+  }
+  const { kid } = data.header;
+  let key;
+  if (jwtKey) {
+    key = loadClerkJWKFromLocal(jwtKey);
+  } else if (secretKey) {
+    key = await loadClerkJWKFromRemote({ secretKey, apiUrl, apiVersion, kid, jwksCacheTtlInMs, skipJwksCache });
+  } else {
+    throw new TokenVerificationError({
+      action: TokenVerificationErrorAction.SetClerkJWTKey,
+      message: "Failed to resolve JWK during handshake verification.",
+      reason: TokenVerificationErrorReason.JWKFailedToResolve
+    });
+  }
+  return await verifyHandshakeJwt(token, {
+    key
+  });
+}
+var RefreshTokenErrorReason = {
+  NonEligibleNoCookie: "non-eligible-no-refresh-cookie",
+  NonEligibleNonGet: "non-eligible-non-get",
+  InvalidSessionToken: "invalid-session-token",
+  MissingApiClient: "missing-api-client",
+  MissingSessionToken: "missing-session-token",
+  MissingRefreshToken: "missing-refresh-token",
+  ExpiredSessionTokenDecodeFailed: "expired-session-token-decode-failed",
+  ExpiredSessionTokenMissingSidClaim: "expired-session-token-missing-sid-claim",
+  FetchError: "fetch-error",
+  UnexpectedSDKError: "unexpected-sdk-error",
+  UnexpectedBAPIError: "unexpected-bapi-error"
+};
+function assertSignInUrlExists(signInUrl, key) {
+  if (!signInUrl && isDevelopmentFromSecretKey(key)) {
+    throw new Error(`Missing signInUrl. Pass a signInUrl for dev instances if an app is satellite`);
+  }
+}
+function assertProxyUrlOrDomain(proxyUrlOrDomain) {
+  if (!proxyUrlOrDomain) {
+    throw new Error(`Missing domain and proxyUrl. A satellite application needs to specify a domain or a proxyUrl`);
+  }
+}
+function assertSignInUrlFormatAndOrigin(_signInUrl, origin) {
+  let signInUrl;
+  try {
+    signInUrl = new URL(_signInUrl);
+  } catch {
+    throw new Error(`The signInUrl needs to have a absolute url format.`);
+  }
+  if (signInUrl.origin === origin) {
+    throw new Error(`The signInUrl needs to be on a different origin than your satellite application.`);
+  }
+}
+function isRequestEligibleForHandshake(authenticateContext) {
+  const { accept, secFetchDest } = authenticateContext;
+  if (secFetchDest === "document" || secFetchDest === "iframe") {
+    return true;
+  }
+  if (!secFetchDest && accept?.startsWith("text/html")) {
+    return true;
+  }
+  return false;
+}
+function isRequestEligibleForRefresh(err, authenticateContext, request) {
+  return err.reason === TokenVerificationErrorReason.TokenExpired && !!authenticateContext.refreshTokenInCookie && request.method === "GET";
+}
+async function authenticateRequest(request, options) {
+  const authenticateContext = await createAuthenticateContext(createClerkRequest(request), options);
+  assertValidSecretKey(authenticateContext.secretKey);
+  if (authenticateContext.isSatellite) {
+    assertSignInUrlExists(authenticateContext.signInUrl, authenticateContext.secretKey);
+    if (authenticateContext.signInUrl && authenticateContext.origin) {
+      assertSignInUrlFormatAndOrigin(authenticateContext.signInUrl, authenticateContext.origin);
+    }
+    assertProxyUrlOrDomain(authenticateContext.proxyUrl || authenticateContext.domain);
+  }
+  const organizationSyncTargetMatchers = computeOrganizationSyncTargetMatchers(options.organizationSyncOptions);
+  function removeDevBrowserFromURL(url) {
+    const updatedURL = new URL(url);
+    updatedURL.searchParams.delete(constants.QueryParameters.DevBrowser);
+    updatedURL.searchParams.delete(constants.QueryParameters.LegacyDevBrowser);
+    return updatedURL;
+  }
+  function buildRedirectToHandshake({ handshakeReason }) {
+    const redirectUrl = removeDevBrowserFromURL(authenticateContext.clerkUrl);
+    const frontendApiNoProtocol = authenticateContext.frontendApi.replace(/http(s)?:\/\//, "");
+    const url = new URL(`https://${frontendApiNoProtocol}/v1/client/handshake`);
+    url.searchParams.append("redirect_url", redirectUrl?.href || "");
+    url.searchParams.append(constants.QueryParameters.SuffixedCookies, authenticateContext.usesSuffixedCookies().toString());
+    url.searchParams.append(constants.QueryParameters.HandshakeReason, handshakeReason);
+    if (authenticateContext.instanceType === "development" && authenticateContext.devBrowserToken) {
+      url.searchParams.append(constants.QueryParameters.DevBrowser, authenticateContext.devBrowserToken);
+    }
+    const toActivate = getOrganizationSyncTarget(authenticateContext.clerkUrl, options.organizationSyncOptions, organizationSyncTargetMatchers);
+    if (toActivate) {
+      const params = getOrganizationSyncQueryParams(toActivate);
+      params.forEach((value, key) => {
+        url.searchParams.append(key, value);
+      });
+    }
+    return new Headers({ [constants.Headers.Location]: url.href });
+  }
+  async function resolveHandshake() {
+    const headers = new Headers({
+      "Access-Control-Allow-Origin": "null",
+      "Access-Control-Allow-Credentials": "true"
+    });
+    const handshakePayload = await verifyHandshakeToken(authenticateContext.handshakeToken, authenticateContext);
+    const cookiesToSet = handshakePayload.handshake;
+    let sessionToken = "";
+    cookiesToSet.forEach((x4) => {
+      headers.append("Set-Cookie", x4);
+      if (getCookieName(x4).startsWith(constants.Cookies.Session)) {
+        sessionToken = getCookieValue(x4);
+      }
+    });
+    if (authenticateContext.instanceType === "development") {
+      const newUrl = new URL(authenticateContext.clerkUrl);
+      newUrl.searchParams.delete(constants.QueryParameters.Handshake);
+      newUrl.searchParams.delete(constants.QueryParameters.HandshakeHelp);
+      headers.append(constants.Headers.Location, newUrl.toString());
+      headers.set(constants.Headers.CacheControl, "no-store");
+    }
+    if (sessionToken === "") {
+      return signedOut(authenticateContext, AuthErrorReason.SessionTokenMissing, "", headers);
+    }
+    const { data, errors: [error] = [] } = await verifyToken(sessionToken, authenticateContext);
+    if (data) {
+      return signedIn(authenticateContext, data, headers, sessionToken);
+    }
+    if (authenticateContext.instanceType === "development" && (error?.reason === TokenVerificationErrorReason.TokenExpired || error?.reason === TokenVerificationErrorReason.TokenNotActiveYet || error?.reason === TokenVerificationErrorReason.TokenIatInTheFuture)) {
+      error.tokenCarrier = "cookie";
+      console.error(`Clerk: Clock skew detected. This usually means that your system clock is inaccurate. Clerk will attempt to account for the clock skew in development.
+
+To resolve this issue, make sure your system's clock is set to the correct time (e.g. turn off and on automatic time synchronization).
+
+---
+
+${error.getFullMessage()}`);
+      const { data: retryResult, errors: [retryError] = [] } = await verifyToken(sessionToken, {
+        ...authenticateContext,
+        clockSkewInMs: 86400000
+      });
+      if (retryResult) {
+        return signedIn(authenticateContext, retryResult, headers, sessionToken);
+      }
+      throw new Error(retryError?.message || "Clerk: Handshake retry failed.");
+    }
+    throw new Error(error?.message || "Clerk: Handshake failed.");
+  }
+  async function refreshToken(authenticateContext2) {
+    if (!options.apiClient) {
+      return {
+        data: null,
+        error: {
+          message: "An apiClient is needed to perform token refresh.",
+          cause: { reason: RefreshTokenErrorReason.MissingApiClient }
+        }
+      };
+    }
+    const { sessionToken: expiredSessionToken, refreshTokenInCookie: refreshToken2 } = authenticateContext2;
+    if (!expiredSessionToken) {
+      return {
+        data: null,
+        error: {
+          message: "Session token must be provided.",
+          cause: { reason: RefreshTokenErrorReason.MissingSessionToken }
+        }
+      };
+    }
+    if (!refreshToken2) {
+      return {
+        data: null,
+        error: {
+          message: "Refresh token must be provided.",
+          cause: { reason: RefreshTokenErrorReason.MissingRefreshToken }
+        }
+      };
+    }
+    const { data: decodeResult, errors: decodedErrors } = decodeJwt(expiredSessionToken);
+    if (!decodeResult || decodedErrors) {
+      return {
+        data: null,
+        error: {
+          message: "Unable to decode the expired session token.",
+          cause: { reason: RefreshTokenErrorReason.ExpiredSessionTokenDecodeFailed, errors: decodedErrors }
+        }
+      };
+    }
+    if (!decodeResult?.payload?.sid) {
+      return {
+        data: null,
+        error: {
+          message: "Expired session token is missing the `sid` claim.",
+          cause: { reason: RefreshTokenErrorReason.ExpiredSessionTokenMissingSidClaim }
+        }
+      };
+    }
+    try {
+      const response = await options.apiClient.sessions.refreshSession(decodeResult.payload.sid, {
+        format: "cookie",
+        suffixed_cookies: authenticateContext2.usesSuffixedCookies(),
+        expired_token: expiredSessionToken || "",
+        refresh_token: refreshToken2 || "",
+        request_origin: authenticateContext2.clerkUrl.origin,
+        request_headers: Object.fromEntries(Array.from(request.headers.entries()).map(([k3, v2]) => [k3, [v2]]))
+      });
+      return { data: response.cookies, error: null };
+    } catch (err) {
+      if (err?.errors?.length) {
+        if (err.errors[0].code === "unexpected_error") {
+          return {
+            data: null,
+            error: {
+              message: `Fetch unexpected error`,
+              cause: { reason: RefreshTokenErrorReason.FetchError, errors: err.errors }
+            }
+          };
+        }
+        return {
+          data: null,
+          error: {
+            message: err.errors[0].code,
+            cause: { reason: err.errors[0].code, errors: err.errors }
+          }
+        };
+      } else {
+        return {
+          data: null,
+          error: {
+            message: `Unexpected Server/BAPI error`,
+            cause: { reason: RefreshTokenErrorReason.UnexpectedBAPIError, errors: [err] }
+          }
+        };
+      }
+    }
+  }
+  async function attemptRefresh(authenticateContext2) {
+    const { data: cookiesToSet, error } = await refreshToken(authenticateContext2);
+    if (!cookiesToSet || cookiesToSet.length === 0) {
+      return { data: null, error };
+    }
+    const headers = new Headers;
+    let sessionToken = "";
+    cookiesToSet.forEach((x4) => {
+      headers.append("Set-Cookie", x4);
+      if (getCookieName(x4).startsWith(constants.Cookies.Session)) {
+        sessionToken = getCookieValue(x4);
+      }
+    });
+    const { data: jwtPayload, errors } = await verifyToken(sessionToken, authenticateContext2);
+    if (errors) {
+      return {
+        data: null,
+        error: {
+          message: `Clerk: unable to verify refreshed session token.`,
+          cause: { reason: RefreshTokenErrorReason.InvalidSessionToken, errors }
+        }
+      };
+    }
+    return { data: { jwtPayload, sessionToken, headers }, error: null };
+  }
+  function handleMaybeHandshakeStatus(authenticateContext2, reason, message, headers) {
+    if (isRequestEligibleForHandshake(authenticateContext2)) {
+      const handshakeHeaders = headers ?? buildRedirectToHandshake({ handshakeReason: reason });
+      if (handshakeHeaders.get(constants.Headers.Location)) {
+        handshakeHeaders.set(constants.Headers.CacheControl, "no-store");
+      }
+      const isRedirectLoop = setHandshakeInfiniteRedirectionLoopHeaders(handshakeHeaders);
+      if (isRedirectLoop) {
+        const msg = `Clerk: Refreshing the session token resulted in an infinite redirect loop. This usually means that your Clerk instance keys do not match - make sure to copy the correct publishable and secret keys from the Clerk dashboard.`;
+        console.log(msg);
+        return signedOut(authenticateContext2, reason, message);
+      }
+      return handshake(authenticateContext2, reason, message, handshakeHeaders);
+    }
+    return signedOut(authenticateContext2, reason, message);
+  }
+  function handleMaybeOrganizationSyncHandshake(authenticateContext2, auth) {
+    const organizationSyncTarget = getOrganizationSyncTarget(authenticateContext2.clerkUrl, options.organizationSyncOptions, organizationSyncTargetMatchers);
+    if (!organizationSyncTarget) {
+      return null;
+    }
+    let mustActivate = false;
+    if (organizationSyncTarget.type === "organization") {
+      if (organizationSyncTarget.organizationSlug && organizationSyncTarget.organizationSlug !== auth.orgSlug) {
+        mustActivate = true;
+      }
+      if (organizationSyncTarget.organizationId && organizationSyncTarget.organizationId !== auth.orgId) {
+        mustActivate = true;
+      }
+    }
+    if (organizationSyncTarget.type === "personalAccount" && auth.orgId) {
+      mustActivate = true;
+    }
+    if (!mustActivate) {
+      return null;
+    }
+    if (authenticateContext2.handshakeRedirectLoopCounter > 0) {
+      console.warn("Clerk: Organization activation handshake loop detected. This is likely due to an invalid organization ID or slug. Skipping organization activation.");
+      return null;
+    }
+    const handshakeState = handleMaybeHandshakeStatus(authenticateContext2, AuthErrorReason.ActiveOrganizationMismatch, "");
+    if (handshakeState.status !== "handshake") {
+      return null;
+    }
+    return handshakeState;
+  }
+  async function authenticateRequestWithTokenInHeader() {
+    const { sessionTokenInHeader } = authenticateContext;
+    try {
+      const { data, errors } = await verifyToken(sessionTokenInHeader, authenticateContext);
+      if (errors) {
+        throw errors[0];
+      }
+      return signedIn(authenticateContext, data, undefined, sessionTokenInHeader);
+    } catch (err) {
+      return handleError(err, "header");
+    }
+  }
+  function setHandshakeInfiniteRedirectionLoopHeaders(headers) {
+    if (authenticateContext.handshakeRedirectLoopCounter === 3) {
+      return true;
+    }
+    const newCounterValue = authenticateContext.handshakeRedirectLoopCounter + 1;
+    const cookieName = constants.Cookies.RedirectCount;
+    headers.append("Set-Cookie", `${cookieName}=${newCounterValue}; SameSite=Lax; HttpOnly; Max-Age=3`);
+    return false;
+  }
+  function handleHandshakeTokenVerificationErrorInDevelopment(error) {
+    if (error.reason === TokenVerificationErrorReason.TokenInvalidSignature) {
+      const msg = `Clerk: Handshake token verification failed due to an invalid signature. If you have switched Clerk keys locally, clear your cookies and try again.`;
+      throw new Error(msg);
+    }
+    throw new Error(`Clerk: Handshake token verification failed: ${error.getFullMessage()}.`);
+  }
+  async function authenticateRequestWithTokenInCookie() {
+    const hasActiveClient = authenticateContext.clientUat;
+    const hasSessionToken = !!authenticateContext.sessionTokenInCookie;
+    const hasDevBrowserToken = !!authenticateContext.devBrowserToken;
+    if (authenticateContext.handshakeToken) {
+      try {
+        return await resolveHandshake();
+      } catch (error) {
+        if (error instanceof TokenVerificationError && authenticateContext.instanceType === "development") {
+          handleHandshakeTokenVerificationErrorInDevelopment(error);
+        } else {
+          console.error("Clerk: unable to resolve handshake:", error);
+        }
+      }
+    }
+    if (authenticateContext.instanceType === "development" && authenticateContext.clerkUrl.searchParams.has(constants.QueryParameters.DevBrowser)) {
+      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.DevBrowserSync, "");
+    }
+    const isRequestEligibleForMultiDomainSync = authenticateContext.isSatellite && authenticateContext.secFetchDest === "document";
+    if (authenticateContext.instanceType === "production" && isRequestEligibleForMultiDomainSync) {
+      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.SatelliteCookieNeedsSyncing, "");
+    }
+    if (authenticateContext.instanceType === "development" && isRequestEligibleForMultiDomainSync && !authenticateContext.clerkUrl.searchParams.has(constants.QueryParameters.ClerkSynced)) {
+      const redirectURL = new URL(authenticateContext.signInUrl);
+      redirectURL.searchParams.append(constants.QueryParameters.ClerkRedirectUrl, authenticateContext.clerkUrl.toString());
+      const headers = new Headers({ [constants.Headers.Location]: redirectURL.toString() });
+      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.SatelliteCookieNeedsSyncing, "", headers);
+    }
+    const redirectUrl = new URL(authenticateContext.clerkUrl).searchParams.get(constants.QueryParameters.ClerkRedirectUrl);
+    if (authenticateContext.instanceType === "development" && !authenticateContext.isSatellite && redirectUrl) {
+      const redirectBackToSatelliteUrl = new URL(redirectUrl);
+      if (authenticateContext.devBrowserToken) {
+        redirectBackToSatelliteUrl.searchParams.append(constants.QueryParameters.DevBrowser, authenticateContext.devBrowserToken);
+      }
+      redirectBackToSatelliteUrl.searchParams.append(constants.QueryParameters.ClerkSynced, "true");
+      const headers = new Headers({ [constants.Headers.Location]: redirectBackToSatelliteUrl.toString() });
+      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.PrimaryRespondsToSyncing, "", headers);
+    }
+    if (authenticateContext.instanceType === "development" && !hasDevBrowserToken) {
+      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.DevBrowserMissing, "");
+    }
+    if (!hasActiveClient && !hasSessionToken) {
+      return signedOut(authenticateContext, AuthErrorReason.SessionTokenAndUATMissing, "");
+    }
+    if (!hasActiveClient && hasSessionToken) {
+      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.SessionTokenWithoutClientUAT, "");
+    }
+    if (hasActiveClient && !hasSessionToken) {
+      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.ClientUATWithoutSessionToken, "");
+    }
+    const { data: decodeResult, errors: decodedErrors } = decodeJwt(authenticateContext.sessionTokenInCookie);
+    if (decodedErrors) {
+      return handleError(decodedErrors[0], "cookie");
+    }
+    if (decodeResult.payload.iat < authenticateContext.clientUat) {
+      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.SessionTokenIATBeforeClientUAT, "");
+    }
+    try {
+      const { data, errors } = await verifyToken(authenticateContext.sessionTokenInCookie, authenticateContext);
+      if (errors) {
+        throw errors[0];
+      }
+      const signedInRequestState = signedIn(authenticateContext, data, undefined, authenticateContext.sessionTokenInCookie);
+      const handshakeRequestState = handleMaybeOrganizationSyncHandshake(authenticateContext, signedInRequestState.toAuth());
+      if (handshakeRequestState) {
+        return handshakeRequestState;
+      }
+      return signedInRequestState;
+    } catch (err) {
+      return handleError(err, "cookie");
+    }
+    return signedOut(authenticateContext, AuthErrorReason.UnexpectedError);
+  }
+  async function handleError(err, tokenCarrier) {
+    if (!(err instanceof TokenVerificationError)) {
+      return signedOut(authenticateContext, AuthErrorReason.UnexpectedError);
+    }
+    let refreshError;
+    if (isRequestEligibleForRefresh(err, authenticateContext, request)) {
+      const { data, error } = await attemptRefresh(authenticateContext);
+      if (data) {
+        return signedIn(authenticateContext, data.jwtPayload, data.headers, data.sessionToken);
+      }
+      if (error?.cause?.reason) {
+        refreshError = error.cause.reason;
+      } else {
+        refreshError = RefreshTokenErrorReason.UnexpectedSDKError;
+      }
+    } else {
+      if (request.method !== "GET") {
+        refreshError = RefreshTokenErrorReason.NonEligibleNonGet;
+      } else if (!authenticateContext.refreshTokenInCookie) {
+        refreshError = RefreshTokenErrorReason.NonEligibleNoCookie;
+      } else {
+        refreshError = null;
+      }
+    }
+    err.tokenCarrier = tokenCarrier;
+    const reasonToHandshake = [
+      TokenVerificationErrorReason.TokenExpired,
+      TokenVerificationErrorReason.TokenNotActiveYet,
+      TokenVerificationErrorReason.TokenIatInTheFuture
+    ].includes(err.reason);
+    if (reasonToHandshake) {
+      return handleMaybeHandshakeStatus(authenticateContext, convertTokenVerificationErrorReasonToAuthErrorReason({ tokenError: err.reason, refreshError }), err.getFullMessage());
+    }
+    return signedOut(authenticateContext, err.reason, err.getFullMessage());
+  }
+  if (authenticateContext.sessionTokenInHeader) {
+    return authenticateRequestWithTokenInHeader();
+  }
+  return authenticateRequestWithTokenInCookie();
+}
+var debugRequestState = (params) => {
+  const { isSignedIn, proxyUrl, reason, message, publishableKey, isSatellite, domain } = params;
+  return { isSignedIn, proxyUrl, reason, message, publishableKey, isSatellite, domain };
+};
+function computeOrganizationSyncTargetMatchers(options) {
+  let personalAccountMatcher = null;
+  if (options?.personalAccountPatterns) {
+    try {
+      personalAccountMatcher = match(options.personalAccountPatterns);
+    } catch (e) {
+      throw new Error(`Invalid personal account pattern "${options.personalAccountPatterns}": "${e}"`);
+    }
+  }
+  let organizationMatcher = null;
+  if (options?.organizationPatterns) {
+    try {
+      organizationMatcher = match(options.organizationPatterns);
+    } catch (e) {
+      throw new Error(`Clerk: Invalid organization pattern "${options.organizationPatterns}": "${e}"`);
+    }
+  }
+  return {
+    OrganizationMatcher: organizationMatcher,
+    PersonalAccountMatcher: personalAccountMatcher
+  };
+}
+function getOrganizationSyncTarget(url, options, matchers) {
+  if (!options) {
+    return null;
+  }
+  if (matchers.OrganizationMatcher) {
+    let orgResult;
+    try {
+      orgResult = matchers.OrganizationMatcher(url.pathname);
+    } catch (e) {
+      console.error(`Clerk: Failed to apply organization pattern "${options.organizationPatterns}" to a path`, e);
+      return null;
+    }
+    if (orgResult && "params" in orgResult) {
+      const params = orgResult.params;
+      if ("id" in params && typeof params.id === "string") {
+        return { type: "organization", organizationId: params.id };
+      }
+      if ("slug" in params && typeof params.slug === "string") {
+        return { type: "organization", organizationSlug: params.slug };
+      }
+      console.warn("Clerk: Detected an organization pattern match, but no organization ID or slug was found in the URL. Does the pattern include `:id` or `:slug`?");
+    }
+  }
+  if (matchers.PersonalAccountMatcher) {
+    let personalResult;
+    try {
+      personalResult = matchers.PersonalAccountMatcher(url.pathname);
+    } catch (e) {
+      console.error(`Failed to apply personal account pattern "${options.personalAccountPatterns}" to a path`, e);
+      return null;
+    }
+    if (personalResult) {
+      return { type: "personalAccount" };
+    }
+  }
+  return null;
+}
+function getOrganizationSyncQueryParams(toActivate) {
+  const ret = /* @__PURE__ */ new Map;
+  if (toActivate.type === "personalAccount") {
+    ret.set("organization_id", "");
+  }
+  if (toActivate.type === "organization") {
+    if (toActivate.organizationId) {
+      ret.set("organization_id", toActivate.organizationId);
+    }
+    if (toActivate.organizationSlug) {
+      ret.set("organization_id", toActivate.organizationSlug);
+    }
+  }
+  return ret;
+}
+var convertTokenVerificationErrorReasonToAuthErrorReason = ({
+  tokenError,
+  refreshError
+}) => {
+  switch (tokenError) {
+    case TokenVerificationErrorReason.TokenExpired:
+      return `${AuthErrorReason.SessionTokenExpired}-refresh-${refreshError}`;
+    case TokenVerificationErrorReason.TokenNotActiveYet:
+      return AuthErrorReason.SessionTokenNBF;
+    case TokenVerificationErrorReason.TokenIatInTheFuture:
+      return AuthErrorReason.SessionTokenIatInTheFuture;
+    default:
+      return AuthErrorReason.UnexpectedError;
+  }
+};
+function mergePreDefinedOptions(preDefinedOptions, options) {
+  return Object.keys(preDefinedOptions).reduce((obj, key) => {
+    return { ...obj, [key]: options[key] || obj[key] };
+  }, { ...preDefinedOptions });
+}
+var defaultOptions2 = {
+  secretKey: "",
+  jwtKey: "",
+  apiUrl: undefined,
+  apiVersion: undefined,
+  proxyUrl: "",
+  publishableKey: "",
+  isSatellite: false,
+  domain: "",
+  audience: ""
+};
+function createAuthenticateRequest(params) {
+  const buildTimeOptions = mergePreDefinedOptions(defaultOptions2, params.options);
+  const apiClient = params.apiClient;
+  const authenticateRequest2 = (request, options = {}) => {
+    const { apiUrl, apiVersion } = buildTimeOptions;
+    const runTimeOptions = mergePreDefinedOptions(buildTimeOptions, options);
+    return authenticateRequest(request, {
+      ...options,
+      ...runTimeOptions,
+      apiUrl,
+      apiVersion,
+      apiClient
+    });
+  };
+  return {
+    authenticateRequest: authenticateRequest2,
+    debugRequestState
+  };
+}
+
+// api/node_modules/@clerk/backend/dist/chunk-P263NW7Z.mjs
+function withLegacyReturn(cb) {
+  return async (...args) => {
+    const { data, errors } = await cb(...args);
+    if (errors) {
+      throw errors[0];
+    }
+    return data;
+  };
+}
+
+// api/node_modules/@clerk/shared/dist/chunk-RWYTRAIK.mjs
+function snakeToCamel(str) {
+  return str ? str.replace(/([-_][a-z])/g, (match2) => match2.toUpperCase().replace(/-|_/, "")) : "";
+}
+function camelToSnake(str) {
+  return str ? str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`) : "";
+}
+var createDeepObjectTransformer = (transform) => {
+  const deepTransform = (obj) => {
+    if (!obj) {
+      return obj;
+    }
+    if (Array.isArray(obj)) {
+      return obj.map((el2) => {
+        if (typeof el2 === "object" || Array.isArray(el2)) {
+          return deepTransform(el2);
+        }
+        return el2;
+      });
+    }
+    const copy = { ...obj };
+    const keys = Object.keys(copy);
+    for (const oldName of keys) {
+      const newName = transform(oldName.toString());
+      if (newName !== oldName) {
+        copy[newName] = copy[oldName];
+        delete copy[oldName];
+      }
+      if (typeof copy[newName] === "object") {
+        copy[newName] = deepTransform(copy[newName]);
+      }
+    }
+    return copy;
+  };
+  return deepTransform;
+};
+var deepCamelToSnake = createDeepObjectTransformer(camelToSnake);
+var deepSnakeToCamel = createDeepObjectTransformer(snakeToCamel);
+function isTruthy(value) {
+  if (typeof value === `boolean`) {
+    return value;
+  }
+  if (value === undefined || value === null) {
+    return false;
+  }
+  if (typeof value === `string`) {
+    if (value.toLowerCase() === `true`) {
+      return true;
+    }
+    if (value.toLowerCase() === `false`) {
+      return false;
+    }
+  }
+  const number = parseInt(value, 10);
+  if (isNaN(number)) {
+    return false;
+  }
+  if (number > 0) {
+    return true;
+  }
+  return false;
+}
+
+// api/node_modules/@clerk/shared/dist/chunk-L6WULBPV.mjs
+var DEFAULT_CACHE_TTL_MS = 86400000;
+var _storageKey;
+var _cacheTtl;
+var _TelemetryEventThrottler_instances;
+var generateKey_fn;
+var cache_get;
+var isValidBrowser_get;
+var TelemetryEventThrottler = class {
+  constructor() {
+    __privateAdd(this, _TelemetryEventThrottler_instances);
+    __privateAdd(this, _storageKey, "clerk_telemetry_throttler");
+    __privateAdd(this, _cacheTtl, DEFAULT_CACHE_TTL_MS);
+  }
+  isEventThrottled(payload) {
+    if (!__privateGet(this, _TelemetryEventThrottler_instances, isValidBrowser_get)) {
+      return false;
+    }
+    const now = Date.now();
+    const key = __privateMethod(this, _TelemetryEventThrottler_instances, generateKey_fn).call(this, payload);
+    const entry = __privateGet(this, _TelemetryEventThrottler_instances, cache_get)?.[key];
+    if (!entry) {
+      const updatedCache = {
+        ...__privateGet(this, _TelemetryEventThrottler_instances, cache_get),
+        [key]: now
+      };
+      localStorage.setItem(__privateGet(this, _storageKey), JSON.stringify(updatedCache));
+    }
+    const shouldInvalidate = entry && now - entry > __privateGet(this, _cacheTtl);
+    if (shouldInvalidate) {
+      const updatedCache = __privateGet(this, _TelemetryEventThrottler_instances, cache_get);
+      delete updatedCache[key];
+      localStorage.setItem(__privateGet(this, _storageKey), JSON.stringify(updatedCache));
+    }
+    return !!entry;
+  }
+};
+_storageKey = new WeakMap;
+_cacheTtl = new WeakMap;
+_TelemetryEventThrottler_instances = new WeakSet;
+generateKey_fn = function(event) {
+  const { sk: _sk, pk: _pk, payload, ...rest } = event;
+  const sanitizedEvent = {
+    ...payload,
+    ...rest
+  };
+  return JSON.stringify(Object.keys({
+    ...payload,
+    ...rest
+  }).sort().map((key) => sanitizedEvent[key]));
+};
+cache_get = function() {
+  const cacheString = localStorage.getItem(__privateGet(this, _storageKey));
+  if (!cacheString) {
+    return {};
+  }
+  return JSON.parse(cacheString);
+};
+isValidBrowser_get = function() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+  const storage = window.localStorage;
+  if (!storage) {
+    return false;
+  }
+  try {
+    const testKey = "test";
+    storage.setItem(testKey, testKey);
+    storage.removeItem(testKey);
+    return true;
+  } catch (err) {
+    const isQuotaExceededError = err instanceof DOMException && (err.name === "QuotaExceededError" || err.name === "NS_ERROR_DOM_QUOTA_REACHED");
+    if (isQuotaExceededError && storage.length > 0) {
+      storage.removeItem(__privateGet(this, _storageKey));
+    }
+    return false;
+  }
+};
+var DEFAULT_CONFIG = {
+  samplingRate: 1,
+  maxBufferSize: 5,
+  endpoint: "https://clerk-telemetry.com"
+};
+var _config;
+var _eventThrottler;
+var _metadata;
+var _buffer;
+var _pendingFlush;
+var _TelemetryCollector_instances;
+var shouldRecord_fn;
+var shouldBeSampled_fn;
+var scheduleFlush_fn;
+var flush_fn;
+var logEvent_fn;
+var getSDKMetadata_fn;
+var preparePayload_fn;
+var TelemetryCollector = class {
+  constructor(options) {
+    __privateAdd(this, _TelemetryCollector_instances);
+    __privateAdd(this, _config);
+    __privateAdd(this, _eventThrottler);
+    __privateAdd(this, _metadata, {});
+    __privateAdd(this, _buffer, []);
+    __privateAdd(this, _pendingFlush);
+    __privateSet(this, _config, {
+      maxBufferSize: options.maxBufferSize ?? DEFAULT_CONFIG.maxBufferSize,
+      samplingRate: options.samplingRate ?? DEFAULT_CONFIG.samplingRate,
+      disabled: options.disabled ?? false,
+      debug: options.debug ?? false,
+      endpoint: DEFAULT_CONFIG.endpoint
+    });
+    if (!options.clerkVersion && typeof window === "undefined") {
+      __privateGet(this, _metadata).clerkVersion = "";
+    } else {
+      __privateGet(this, _metadata).clerkVersion = options.clerkVersion ?? "";
+    }
+    __privateGet(this, _metadata).sdk = options.sdk;
+    __privateGet(this, _metadata).sdkVersion = options.sdkVersion;
+    __privateGet(this, _metadata).publishableKey = options.publishableKey ?? "";
+    const parsedKey = parsePublishableKey(options.publishableKey);
+    if (parsedKey) {
+      __privateGet(this, _metadata).instanceType = parsedKey.instanceType;
+    }
+    if (options.secretKey) {
+      __privateGet(this, _metadata).secretKey = options.secretKey.substring(0, 16);
+    }
+    __privateSet(this, _eventThrottler, new TelemetryEventThrottler);
+  }
+  get isEnabled() {
+    if (__privateGet(this, _metadata).instanceType !== "development") {
+      return false;
+    }
+    if (__privateGet(this, _config).disabled || typeof process !== "undefined" && isTruthy(process.env.CLERK_TELEMETRY_DISABLED)) {
+      return false;
+    }
+    if (typeof window !== "undefined" && !!window?.navigator?.webdriver) {
+      return false;
+    }
+    return true;
+  }
+  get isDebug() {
+    return __privateGet(this, _config).debug || typeof process !== "undefined" && isTruthy(process.env.CLERK_TELEMETRY_DEBUG);
+  }
+  record(event) {
+    const preparedPayload = __privateMethod(this, _TelemetryCollector_instances, preparePayload_fn).call(this, event.event, event.payload);
+    __privateMethod(this, _TelemetryCollector_instances, logEvent_fn).call(this, preparedPayload.event, preparedPayload);
+    if (!__privateMethod(this, _TelemetryCollector_instances, shouldRecord_fn).call(this, preparedPayload, event.eventSamplingRate)) {
+      return;
+    }
+    __privateGet(this, _buffer).push(preparedPayload);
+    __privateMethod(this, _TelemetryCollector_instances, scheduleFlush_fn).call(this);
+  }
+};
+_config = new WeakMap;
+_eventThrottler = new WeakMap;
+_metadata = new WeakMap;
+_buffer = new WeakMap;
+_pendingFlush = new WeakMap;
+_TelemetryCollector_instances = new WeakSet;
+shouldRecord_fn = function(preparedPayload, eventSamplingRate) {
+  return this.isEnabled && !this.isDebug && __privateMethod(this, _TelemetryCollector_instances, shouldBeSampled_fn).call(this, preparedPayload, eventSamplingRate);
+};
+shouldBeSampled_fn = function(preparedPayload, eventSamplingRate) {
+  const randomSeed = Math.random();
+  const toBeSampled = randomSeed <= __privateGet(this, _config).samplingRate && (typeof eventSamplingRate === "undefined" || randomSeed <= eventSamplingRate);
+  if (!toBeSampled) {
+    return false;
+  }
+  return !__privateGet(this, _eventThrottler).isEventThrottled(preparedPayload);
+};
+scheduleFlush_fn = function() {
+  if (typeof window === "undefined") {
+    __privateMethod(this, _TelemetryCollector_instances, flush_fn).call(this);
+    return;
+  }
+  const isBufferFull = __privateGet(this, _buffer).length >= __privateGet(this, _config).maxBufferSize;
+  if (isBufferFull) {
+    if (__privateGet(this, _pendingFlush)) {
+      const cancel = typeof cancelIdleCallback !== "undefined" ? cancelIdleCallback : clearTimeout;
+      cancel(__privateGet(this, _pendingFlush));
+    }
+    __privateMethod(this, _TelemetryCollector_instances, flush_fn).call(this);
+    return;
+  }
+  if (__privateGet(this, _pendingFlush)) {
+    return;
+  }
+  if ("requestIdleCallback" in window) {
+    __privateSet(this, _pendingFlush, requestIdleCallback(() => {
+      __privateMethod(this, _TelemetryCollector_instances, flush_fn).call(this);
+    }));
+  } else {
+    __privateSet(this, _pendingFlush, setTimeout(() => {
+      __privateMethod(this, _TelemetryCollector_instances, flush_fn).call(this);
+    }, 0));
+  }
+};
+flush_fn = function() {
+  fetch(new URL("/v1/event", __privateGet(this, _config).endpoint), {
+    method: "POST",
+    body: JSON.stringify({
+      events: __privateGet(this, _buffer)
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).catch(() => {
+    return;
+  }).then(() => {
+    __privateSet(this, _buffer, []);
+  }).catch(() => {
+    return;
+  });
+};
+logEvent_fn = function(event, payload) {
+  if (!this.isDebug) {
+    return;
+  }
+  if (typeof console.groupCollapsed !== "undefined") {
+    console.groupCollapsed("[clerk/telemetry]", event);
+    console.log(payload);
+    console.groupEnd();
+  } else {
+    console.log("[clerk/telemetry]", event, payload);
+  }
+};
+getSDKMetadata_fn = function() {
+  let sdkMetadata = {
+    name: __privateGet(this, _metadata).sdk,
+    version: __privateGet(this, _metadata).sdkVersion
+  };
+  if (typeof window !== "undefined" && window.Clerk) {
+    sdkMetadata = { ...sdkMetadata, ...window.Clerk.constructor.sdkMetadata };
+  }
+  return sdkMetadata;
+};
+preparePayload_fn = function(event, payload) {
+  const sdkMetadata = __privateMethod(this, _TelemetryCollector_instances, getSDKMetadata_fn).call(this);
+  return {
+    event,
+    cv: __privateGet(this, _metadata).clerkVersion ?? "",
+    it: __privateGet(this, _metadata).instanceType ?? "",
+    sdk: sdkMetadata.name,
+    sdkv: sdkMetadata.version,
+    ...__privateGet(this, _metadata).publishableKey ? { pk: __privateGet(this, _metadata).publishableKey } : {},
+    ...__privateGet(this, _metadata).secretKey ? { sk: __privateGet(this, _metadata).secretKey } : {},
+    payload
+  };
+};
+
+// api/node_modules/@clerk/backend/dist/index.mjs
+var verifyToken2 = withLegacyReturn(verifyToken);
+function createClerkClient(options) {
+  const opts = { ...options };
+  const apiClient = createBackendApiClient(opts);
+  const requestState = createAuthenticateRequest({ options: opts, apiClient });
+  const telemetry = new TelemetryCollector({
+    ...options.telemetry,
+    publishableKey: opts.publishableKey,
+    secretKey: opts.secretKey,
+    samplingRate: 0.1,
+    ...opts.sdkMetadata ? { sdk: opts.sdkMetadata.name, sdkVersion: opts.sdkMetadata.version } : {}
+  });
+  return {
+    ...apiClient,
+    ...requestState,
+    telemetry
+  };
+}
+
+// api/node_modules/hono/dist/helper/adapter/index.js
+var env = (c3, runtime2) => {
+  const global2 = globalThis;
+  const globalEnv = global2?.process?.env;
+  runtime2 ??= getRuntimeKey();
+  const runtimeEnvHandlers = {
+    bun: () => globalEnv,
+    node: () => globalEnv,
+    "edge-light": () => globalEnv,
+    deno: () => {
+      return Deno.env.toObject();
+    },
+    workerd: () => c3.env,
+    fastly: () => ({}),
+    other: () => ({})
+  };
+  return runtimeEnvHandlers[runtime2]();
+};
+var knownUserAgents = {
+  deno: "Deno",
+  bun: "Bun",
+  workerd: "Cloudflare-Workers",
+  node: "Node.js"
+};
+var getRuntimeKey = () => {
+  const global2 = globalThis;
+  const userAgentSupported = typeof navigator !== "undefined" && typeof navigator.userAgent === "string";
+  if (userAgentSupported) {
+    for (const [runtimeKey, userAgent] of Object.entries(knownUserAgents)) {
+      if (checkUserAgentEquals(userAgent)) {
+        return runtimeKey;
+      }
+    }
+  }
+  if (typeof global2?.EdgeRuntime === "string") {
+    return "edge-light";
+  }
+  if (global2?.fastly !== undefined) {
+    return "fastly";
+  }
+  if (global2?.process?.release?.name === "node") {
+    return "node";
+  }
+  return "other";
+};
+var checkUserAgentEquals = (platform) => {
+  const userAgent = navigator.userAgent;
+  return userAgent.startsWith(platform);
+};
+
+// api/node_modules/@hono/clerk-auth/dist/index.js
+var getAuth = (c3) => {
+  return c3.get("clerkAuth");
+};
+var clerkMiddleware = (options) => {
+  return async (c3, next) => {
+    const clerkEnv = env(c3);
+    const { secretKey, publishableKey, apiUrl, apiVersion, ...rest } = options || {
+      secretKey: clerkEnv.CLERK_SECRET_KEY || "",
+      publishableKey: clerkEnv.CLERK_PUBLISHABLE_KEY || "",
+      apiUrl: clerkEnv.CLERK_API_URL,
+      apiVersion: clerkEnv.CLERK_API_VERSION
+    };
+    if (!secretKey) {
+      throw new Error("Missing Clerk Secret key");
+    }
+    if (!publishableKey) {
+      throw new Error("Missing Clerk Publishable key");
+    }
+    const clerkClient = createClerkClient({
+      ...rest,
+      apiUrl,
+      apiVersion,
+      secretKey,
+      publishableKey
+    });
+    const requestState = await clerkClient.authenticateRequest(c3.req.raw, {
+      ...rest,
+      secretKey,
+      publishableKey
+    });
+    if (requestState.headers) {
+      requestState.headers.forEach((value, key) => c3.res.headers.append(key, value));
+      const locationHeader = requestState.headers.get("location");
+      if (locationHeader) {
+        return c3.redirect(locationHeader, 307);
+      } else if (requestState.status === "handshake") {
+        throw new Error("Clerk: unexpected handshake without redirect");
+      }
+    }
+    c3.set("clerkAuth", requestState.toAuth());
+    c3.set("clerk", clerkClient);
+    await next();
+  };
+};
+
+// api/src/routes/dashboard/dashboard.js
+var dashboardRoutes = new Hono2;
+dashboardRoutes.get("/", async (c3) => {
+  const auth = getAuth(c3);
+  if (!auth?.userId) {
+    return c3.json({ error: "Unauthorized" });
+  }
+  const userToFind = await db.query.usersTable.findFirst({
+    where: eq(usersTable.user_id, auth.userId)
+  });
+  if (!userToFind) {
+    return c3.json({ message: "User cannot be found" });
+  }
+  const person = await db.query.usersTable.findMany({
+    where: eq(usersTable.id, userToFind.id),
+    with: {
+      children: true,
+      workout: true
+    }
+  });
+  if (person.length == 0) {
+    return c3.json({ message: "No Clients" });
+  }
+  return c3.json(person);
+});
+var dashboard_default = dashboardRoutes;
+
+// api/node_modules/zod/dist/esm/v3/external.js
 var exports_external = {};
 __export(exports_external, {
   void: () => voidType,
@@ -32150,10 +36051,10 @@ __export(exports_external, {
   BRAND: () => BRAND
 });
 
-// node_modules/zod/dist/esm/v3/helpers/util.js
+// api/node_modules/zod/dist/esm/v3/helpers/util.js
 var util;
 (function(util2) {
-  util2.assertEqual = (_3) => {};
+  util2.assertEqual = (_4) => {};
   function assertIs(_arg) {}
   util2.assertIs = assertIs;
   function assertNever(_x) {
@@ -32201,7 +36102,7 @@ var util;
     return array.map((val) => typeof val === "string" ? `'${val}'` : val).join(separator);
   }
   util2.joinValues = joinValues;
-  util2.jsonStringifyReplacer = (_3, value) => {
+  util2.jsonStringifyReplacer = (_4, value) => {
     if (typeof value === "bigint") {
       return value.toString();
     }
@@ -32281,7 +36182,7 @@ var getParsedType = (data) => {
   }
 };
 
-// node_modules/zod/dist/esm/v3/ZodError.js
+// api/node_modules/zod/dist/esm/v3/ZodError.js
 var ZodIssueCode = util.arrayToEnum([
   "invalid_type",
   "invalid_literal",
@@ -32399,7 +36300,7 @@ ZodError.create = (issues) => {
   return error;
 };
 
-// node_modules/zod/dist/esm/v3/locales/en.js
+// api/node_modules/zod/dist/esm/v3/locales/en.js
 var errorMap = (issue, _ctx) => {
   let message;
   switch (issue.code) {
@@ -32500,7 +36401,7 @@ var errorMap = (issue, _ctx) => {
 };
 var en_default = errorMap;
 
-// node_modules/zod/dist/esm/v3/errors.js
+// api/node_modules/zod/dist/esm/v3/errors.js
 var overrideErrorMap = en_default;
 function setErrorMap(map) {
   overrideErrorMap = map;
@@ -32508,7 +36409,7 @@ function setErrorMap(map) {
 function getErrorMap() {
   return overrideErrorMap;
 }
-// node_modules/zod/dist/esm/v3/helpers/parseUtil.js
+// api/node_modules/zod/dist/esm/v3/helpers/parseUtil.js
 var makeIssue = (params) => {
   const { data, path, errorMaps, issueData } = params;
   const fullPath = [...path, ...issueData.path || []];
@@ -32565,12 +36466,12 @@ class ParseStatus {
   }
   static mergeArray(status, results) {
     const arrayValue = [];
-    for (const s2 of results) {
-      if (s2.status === "aborted")
+    for (const s3 of results) {
+      if (s3.status === "aborted")
         return INVALID;
-      if (s2.status === "dirty")
+      if (s3.status === "dirty")
         status.dirty();
-      arrayValue.push(s2.value);
+      arrayValue.push(s3.value);
     }
     return { status: status.value, value: arrayValue };
   }
@@ -32614,14 +36515,14 @@ var isAborted = (x4) => x4.status === "aborted";
 var isDirty = (x4) => x4.status === "dirty";
 var isValid = (x4) => x4.status === "valid";
 var isAsync = (x4) => typeof Promise !== "undefined" && x4 instanceof Promise;
-// node_modules/zod/dist/esm/v3/helpers/errorUtil.js
+// api/node_modules/zod/dist/esm/v3/helpers/errorUtil.js
 var errorUtil;
 (function(errorUtil2) {
   errorUtil2.errToObj = (message) => typeof message === "string" ? { message } : message || {};
   errorUtil2.toString = (message) => typeof message === "string" ? message : message?.message;
 })(errorUtil || (errorUtil = {}));
 
-// node_modules/zod/dist/esm/v3/types.js
+// api/node_modules/zod/dist/esm/v3/types.js
 class ParseInputLazyPath {
   constructor(parent, value, path, key) {
     this._cachedPath = [];
@@ -36006,4498 +39907,7 @@ var coerce = {
   date: (arg) => ZodDate.create({ ...arg, coerce: true })
 };
 var NEVER = INVALID;
-// node_modules/@hono/zod-openapi/dist/index.mjs
-extendZodWithOpenApi(exports_external);
-
-// src/zod/weightSchema.js
-var weightSchema = exports_external.object({
-  user_id: exports_external.number().openapi({
-    example: 1
-  }),
-  created_at: exports_external.string().date(),
-  scaleWeight: exports_external.number().openapi({
-    example: 73.2
-  })
-}).openapi("Weight");
-var removeWeightSchema = exports_external.object({
-  id: exports_external.number().openapi({
-    example: 1232
-  })
-});
-
-// node_modules/@clerk/shared/dist/chunk-I6MTSTOF.mjs
-var DEV_OR_STAGING_SUFFIXES = [
-  ".lcl.dev",
-  ".stg.dev",
-  ".lclstage.dev",
-  ".stgstage.dev",
-  ".dev.lclclerk.com",
-  ".stg.lclclerk.com",
-  ".accounts.lclclerk.com",
-  "accountsstage.dev",
-  "accounts.dev"
-];
-
-// node_modules/@clerk/shared/dist/chunk-7ELT755Q.mjs
-var __typeError = (msg) => {
-  throw TypeError(msg);
-};
-var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
-var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
-var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
-var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
-var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
-
-// node_modules/@clerk/shared/dist/chunk-N2V3PKFE.mjs
-var defaultOptions = {
-  initialDelay: 125,
-  maxDelayBetweenRetries: 0,
-  factor: 2,
-  shouldRetry: (_3, iteration) => iteration < 5,
-  retryImmediately: false,
-  jitter: true
-};
-var RETRY_IMMEDIATELY_DELAY = 100;
-var sleep = async (ms2) => new Promise((s2) => setTimeout(s2, ms2));
-var applyJitter = (delay, jitter) => {
-  return jitter ? delay * (1 + Math.random()) : delay;
-};
-var createExponentialDelayAsyncFn = (opts) => {
-  let timesCalled = 0;
-  const calculateDelayInMs = () => {
-    const constant = opts.initialDelay;
-    const base = opts.factor;
-    let delay = constant * Math.pow(base, timesCalled);
-    delay = applyJitter(delay, opts.jitter);
-    return Math.min(opts.maxDelayBetweenRetries || delay, delay);
-  };
-  return async () => {
-    await sleep(calculateDelayInMs());
-    timesCalled++;
-  };
-};
-var retry = async (callback, options = {}) => {
-  let iterations = 0;
-  const { shouldRetry, initialDelay, maxDelayBetweenRetries, factor, retryImmediately, jitter } = {
-    ...defaultOptions,
-    ...options
-  };
-  const delay = createExponentialDelayAsyncFn({
-    initialDelay,
-    maxDelayBetweenRetries,
-    factor,
-    jitter
-  });
-  while (true) {
-    try {
-      return await callback();
-    } catch (e) {
-      iterations++;
-      if (!shouldRetry(e, iterations)) {
-        throw e;
-      }
-      if (retryImmediately && iterations === 1) {
-        await sleep(applyJitter(RETRY_IMMEDIATELY_DELAY, jitter));
-      } else {
-        await delay();
-      }
-    }
-  }
-};
-
-// node_modules/@clerk/shared/dist/chunk-TETGTEI2.mjs
-var isomorphicAtob = (data) => {
-  if (typeof atob !== "undefined" && typeof atob === "function") {
-    return atob(data);
-  } else if (typeof global !== "undefined" && global.Buffer) {
-    return new global.Buffer(data, "base64").toString();
-  }
-  return data;
-};
-
-// node_modules/@clerk/shared/dist/chunk-KOH7GTJO.mjs
-var isomorphicBtoa = (data) => {
-  if (typeof btoa !== "undefined" && typeof btoa === "function") {
-    return btoa(data);
-  } else if (typeof global !== "undefined" && global.Buffer) {
-    return new global.Buffer(data).toString("base64");
-  }
-  return data;
-};
-
-// node_modules/@clerk/shared/dist/chunk-G3VP5PJE.mjs
-var PUBLISHABLE_KEY_LIVE_PREFIX = "pk_live_";
-var PUBLISHABLE_KEY_TEST_PREFIX = "pk_test_";
-function parsePublishableKey(key, options = {}) {
-  key = key || "";
-  if (!key || !isPublishableKey(key)) {
-    if (options.fatal && !key) {
-      throw new Error("Publishable key is missing. Ensure that your publishable key is correctly configured. Double-check your environment configuration for your keys, or access them here: https://dashboard.clerk.com/last-active?path=api-keys");
-    }
-    if (options.fatal && !isPublishableKey(key)) {
-      throw new Error("Publishable key not valid.");
-    }
-    return null;
-  }
-  const instanceType = key.startsWith(PUBLISHABLE_KEY_LIVE_PREFIX) ? "production" : "development";
-  let frontendApi = isomorphicAtob(key.split("_")[2]);
-  frontendApi = frontendApi.slice(0, -1);
-  if (options.proxyUrl) {
-    frontendApi = options.proxyUrl;
-  } else if (instanceType !== "development" && options.domain) {
-    frontendApi = `clerk.${options.domain}`;
-  }
-  return {
-    instanceType,
-    frontendApi
-  };
-}
-function isPublishableKey(key = "") {
-  try {
-    const hasValidPrefix = key.startsWith(PUBLISHABLE_KEY_LIVE_PREFIX) || key.startsWith(PUBLISHABLE_KEY_TEST_PREFIX);
-    const hasValidFrontendApiPostfix = isomorphicAtob(key.split("_")[2] || "").endsWith("$");
-    return hasValidPrefix && hasValidFrontendApiPostfix;
-  } catch {
-    return false;
-  }
-}
-function createDevOrStagingUrlCache() {
-  const devOrStagingUrlCache = /* @__PURE__ */ new Map;
-  return {
-    isDevOrStagingUrl: (url) => {
-      if (!url) {
-        return false;
-      }
-      const hostname = typeof url === "string" ? url : url.hostname;
-      let res = devOrStagingUrlCache.get(hostname);
-      if (res === undefined) {
-        res = DEV_OR_STAGING_SUFFIXES.some((s2) => hostname.endsWith(s2));
-        devOrStagingUrlCache.set(hostname, res);
-      }
-      return res;
-    }
-  };
-}
-function isDevelopmentFromSecretKey(apiKey) {
-  return apiKey.startsWith("test_") || apiKey.startsWith("sk_test_");
-}
-async function getCookieSuffix(publishableKey, subtle = globalThis.crypto.subtle) {
-  const data = new TextEncoder().encode(publishableKey);
-  const digest = await subtle.digest("sha-1", data);
-  const stringDigest = String.fromCharCode(...new Uint8Array(digest));
-  return isomorphicBtoa(stringDigest).replace(/\+/gi, "-").replace(/\//gi, "_").substring(0, 8);
-}
-var getSuffixedCookieName = (cookieName, cookieSuffix) => {
-  return `${cookieName}_${cookieSuffix}`;
-};
-
-// node_modules/@clerk/shared/dist/chunk-7HPDNZ3R.mjs
-var isTestEnvironment = () => {
-  try {
-    return false;
-  } catch {}
-  return false;
-};
-var isProductionEnvironment = () => {
-  try {
-    return false;
-  } catch {}
-  return false;
-};
-
-// node_modules/@clerk/shared/dist/chunk-UEY4AZIP.mjs
-var displayedWarnings = /* @__PURE__ */ new Set;
-var deprecated = (fnName, warning, key) => {
-  const hideWarning = isTestEnvironment() || isProductionEnvironment();
-  const messageId = key ?? fnName;
-  if (displayedWarnings.has(messageId) || hideWarning) {
-    return;
-  }
-  displayedWarnings.add(messageId);
-  console.warn(`Clerk - DEPRECATION WARNING: "${fnName}" is deprecated and will be removed in the next major release.
-${warning}`);
-};
-
-// node_modules/@clerk/shared/dist/chunk-3JHIKPLN.mjs
-function parseErrors(data = []) {
-  return data.length > 0 ? data.map(parseError) : [];
-}
-function parseError(error) {
-  return {
-    code: error.code,
-    message: error.message,
-    longMessage: error.long_message,
-    meta: {
-      paramName: error?.meta?.param_name,
-      sessionId: error?.meta?.session_id,
-      emailAddresses: error?.meta?.email_addresses,
-      identifiers: error?.meta?.identifiers,
-      zxcvbn: error?.meta?.zxcvbn
-    }
-  };
-}
-var ClerkAPIResponseError = class _ClerkAPIResponseError extends Error {
-  constructor(message, { data, status, clerkTraceId, retryAfter }) {
-    super(message);
-    this.toString = () => {
-      let message2 = `[${this.name}]
-Message:${this.message}
-Status:${this.status}
-Serialized errors: ${this.errors.map((e) => JSON.stringify(e))}`;
-      if (this.clerkTraceId) {
-        message2 += `
-Clerk Trace ID: ${this.clerkTraceId}`;
-      }
-      return message2;
-    };
-    Object.setPrototypeOf(this, _ClerkAPIResponseError.prototype);
-    this.status = status;
-    this.message = message;
-    this.clerkTraceId = clerkTraceId;
-    this.retryAfter = retryAfter;
-    this.clerkError = true;
-    this.errors = parseErrors(data);
-  }
-};
-var DefaultMessages = Object.freeze({
-  InvalidProxyUrlErrorMessage: `The proxyUrl passed to Clerk is invalid. The expected value for proxyUrl is an absolute URL or a relative path with a leading '/'. (key={{url}})`,
-  InvalidPublishableKeyErrorMessage: `The publishableKey passed to Clerk is invalid. You can get your Publishable key at https://dashboard.clerk.com/last-active?path=api-keys. (key={{key}})`,
-  MissingPublishableKeyErrorMessage: `Missing publishableKey. You can get your key at https://dashboard.clerk.com/last-active?path=api-keys.`,
-  MissingSecretKeyErrorMessage: `Missing secretKey. You can get your key at https://dashboard.clerk.com/last-active?path=api-keys.`,
-  MissingClerkProvider: `{{source}} can only be used within the <ClerkProvider /> component. Learn more: https://clerk.com/docs/components/clerk-provider`
-});
-function buildErrorThrower({ packageName, customMessages }) {
-  let pkg = packageName;
-  const messages = {
-    ...DefaultMessages,
-    ...customMessages
-  };
-  function buildMessage(rawMessage, replacements) {
-    if (!replacements) {
-      return `${pkg}: ${rawMessage}`;
-    }
-    let msg = rawMessage;
-    const matches = rawMessage.matchAll(/{{([a-zA-Z0-9-_]+)}}/g);
-    for (const match of matches) {
-      const replacement = (replacements[match[1]] || "").toString();
-      msg = msg.replace(`{{${match[1]}}}`, replacement);
-    }
-    return `${pkg}: ${msg}`;
-  }
-  return {
-    setPackageName({ packageName: packageName2 }) {
-      if (typeof packageName2 === "string") {
-        pkg = packageName2;
-      }
-      return this;
-    },
-    setMessages({ customMessages: customMessages2 }) {
-      Object.assign(messages, customMessages2 || {});
-      return this;
-    },
-    throwInvalidPublishableKeyError(params) {
-      throw new Error(buildMessage(messages.InvalidPublishableKeyErrorMessage, params));
-    },
-    throwInvalidProxyUrl(params) {
-      throw new Error(buildMessage(messages.InvalidProxyUrlErrorMessage, params));
-    },
-    throwMissingPublishableKeyError() {
-      throw new Error(buildMessage(messages.MissingPublishableKeyErrorMessage));
-    },
-    throwMissingSecretKeyError() {
-      throw new Error(buildMessage(messages.MissingSecretKeyErrorMessage));
-    },
-    throwMissingClerkProviderError(params) {
-      throw new Error(buildMessage(messages.MissingClerkProvider, params));
-    },
-    throw(message) {
-      throw new Error(buildMessage(message));
-    }
-  };
-}
-
-// node_modules/@clerk/backend/dist/chunk-LWOXHF4E.mjs
-var errorThrower = buildErrorThrower({ packageName: "@clerk/backend" });
-var { isDevOrStagingUrl } = createDevOrStagingUrlCache();
-
-// node_modules/@clerk/backend/dist/chunk-5JS2VYLU.mjs
-var TokenVerificationErrorCode = {
-  InvalidSecretKey: "clerk_key_invalid"
-};
-var TokenVerificationErrorReason = {
-  TokenExpired: "token-expired",
-  TokenInvalid: "token-invalid",
-  TokenInvalidAlgorithm: "token-invalid-algorithm",
-  TokenInvalidAuthorizedParties: "token-invalid-authorized-parties",
-  TokenInvalidSignature: "token-invalid-signature",
-  TokenNotActiveYet: "token-not-active-yet",
-  TokenIatInTheFuture: "token-iat-in-the-future",
-  TokenVerificationFailed: "token-verification-failed",
-  InvalidSecretKey: "secret-key-invalid",
-  LocalJWKMissing: "jwk-local-missing",
-  RemoteJWKFailedToLoad: "jwk-remote-failed-to-load",
-  RemoteJWKInvalid: "jwk-remote-invalid",
-  RemoteJWKMissing: "jwk-remote-missing",
-  JWKFailedToResolve: "jwk-failed-to-resolve",
-  JWKKidMismatch: "jwk-kid-mismatch"
-};
-var TokenVerificationErrorAction = {
-  ContactSupport: "Contact support@clerk.com",
-  EnsureClerkJWT: "Make sure that this is a valid Clerk generate JWT.",
-  SetClerkJWTKey: "Set the CLERK_JWT_KEY environment variable.",
-  SetClerkSecretKey: "Set the CLERK_SECRET_KEY environment variable.",
-  EnsureClockSync: "Make sure your system clock is in sync (e.g. turn off and on automatic time synchronization)."
-};
-var TokenVerificationError = class _TokenVerificationError extends Error {
-  constructor({
-    action,
-    message,
-    reason
-  }) {
-    super(message);
-    Object.setPrototypeOf(this, _TokenVerificationError.prototype);
-    this.reason = reason;
-    this.message = message;
-    this.action = action;
-  }
-  getFullMessage() {
-    return `${[this.message, this.action].filter((m3) => m3).join(" ")} (reason=${this.reason}, token-carrier=${this.tokenCarrier})`;
-  }
-};
-
-// node_modules/@clerk/backend/dist/runtime/browser/crypto.mjs
-var webcrypto = crypto;
-
-// node_modules/@clerk/backend/dist/chunk-AT3FJU3M.mjs
-var globalFetch = fetch.bind(globalThis);
-var runtime = {
-  crypto: webcrypto,
-  get fetch() {
-    return globalFetch;
-  },
-  AbortController: globalThis.AbortController,
-  Blob: globalThis.Blob,
-  FormData: globalThis.FormData,
-  Headers: globalThis.Headers,
-  Request: globalThis.Request,
-  Response: globalThis.Response
-};
-var base64url = {
-  parse(string, opts) {
-    return parse2(string, base64UrlEncoding, opts);
-  },
-  stringify(data, opts) {
-    return stringify(data, base64UrlEncoding, opts);
-  }
-};
-var base64UrlEncoding = {
-  chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
-  bits: 6
-};
-function parse2(string, encoding, opts = {}) {
-  if (!encoding.codes) {
-    encoding.codes = {};
-    for (let i = 0;i < encoding.chars.length; ++i) {
-      encoding.codes[encoding.chars[i]] = i;
-    }
-  }
-  if (!opts.loose && string.length * encoding.bits & 7) {
-    throw new SyntaxError("Invalid padding");
-  }
-  let end = string.length;
-  while (string[end - 1] === "=") {
-    --end;
-    if (!opts.loose && !((string.length - end) * encoding.bits & 7)) {
-      throw new SyntaxError("Invalid padding");
-    }
-  }
-  const out = new (opts.out ?? Uint8Array)(end * encoding.bits / 8 | 0);
-  let bits = 0;
-  let buffer = 0;
-  let written = 0;
-  for (let i = 0;i < end; ++i) {
-    const value = encoding.codes[string[i]];
-    if (value === undefined) {
-      throw new SyntaxError("Invalid character " + string[i]);
-    }
-    buffer = buffer << encoding.bits | value;
-    bits += encoding.bits;
-    if (bits >= 8) {
-      bits -= 8;
-      out[written++] = 255 & buffer >> bits;
-    }
-  }
-  if (bits >= encoding.bits || 255 & buffer << 8 - bits) {
-    throw new SyntaxError("Unexpected end of data");
-  }
-  return out;
-}
-function stringify(data, encoding, opts = {}) {
-  const { pad = true } = opts;
-  const mask = (1 << encoding.bits) - 1;
-  let out = "";
-  let bits = 0;
-  let buffer = 0;
-  for (let i = 0;i < data.length; ++i) {
-    buffer = buffer << 8 | 255 & data[i];
-    bits += 8;
-    while (bits > encoding.bits) {
-      bits -= encoding.bits;
-      out += encoding.chars[mask & buffer >> bits];
-    }
-  }
-  if (bits) {
-    out += encoding.chars[mask & buffer << encoding.bits - bits];
-  }
-  if (pad) {
-    while (out.length * encoding.bits & 7) {
-      out += "=";
-    }
-  }
-  return out;
-}
-var algToHash = {
-  RS256: "SHA-256",
-  RS384: "SHA-384",
-  RS512: "SHA-512"
-};
-var RSA_ALGORITHM_NAME = "RSASSA-PKCS1-v1_5";
-var jwksAlgToCryptoAlg = {
-  RS256: RSA_ALGORITHM_NAME,
-  RS384: RSA_ALGORITHM_NAME,
-  RS512: RSA_ALGORITHM_NAME
-};
-var algs = Object.keys(algToHash);
-function getCryptoAlgorithm(algorithmName) {
-  const hash = algToHash[algorithmName];
-  const name = jwksAlgToCryptoAlg[algorithmName];
-  if (!hash || !name) {
-    throw new Error(`Unsupported algorithm ${algorithmName}, expected one of ${algs.join(",")}.`);
-  }
-  return {
-    hash: { name: algToHash[algorithmName] },
-    name: jwksAlgToCryptoAlg[algorithmName]
-  };
-}
-var isArrayString = (s2) => {
-  return Array.isArray(s2) && s2.length > 0 && s2.every((a3) => typeof a3 === "string");
-};
-var assertAudienceClaim = (aud, audience) => {
-  const audienceList = [audience].flat().filter((a3) => !!a3);
-  const audList = [aud].flat().filter((a3) => !!a3);
-  const shouldVerifyAudience = audienceList.length > 0 && audList.length > 0;
-  if (!shouldVerifyAudience) {
-    return;
-  }
-  if (typeof aud === "string") {
-    if (!audienceList.includes(aud)) {
-      throw new TokenVerificationError({
-        action: TokenVerificationErrorAction.EnsureClerkJWT,
-        reason: TokenVerificationErrorReason.TokenVerificationFailed,
-        message: `Invalid JWT audience claim (aud) ${JSON.stringify(aud)}. Is not included in "${JSON.stringify(audienceList)}".`
-      });
-    }
-  } else if (isArrayString(aud)) {
-    if (!aud.some((a3) => audienceList.includes(a3))) {
-      throw new TokenVerificationError({
-        action: TokenVerificationErrorAction.EnsureClerkJWT,
-        reason: TokenVerificationErrorReason.TokenVerificationFailed,
-        message: `Invalid JWT audience claim array (aud) ${JSON.stringify(aud)}. Is not included in "${JSON.stringify(audienceList)}".`
-      });
-    }
-  }
-};
-var assertHeaderType = (typ) => {
-  if (typeof typ === "undefined") {
-    return;
-  }
-  if (typ !== "JWT") {
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.EnsureClerkJWT,
-      reason: TokenVerificationErrorReason.TokenInvalid,
-      message: `Invalid JWT type ${JSON.stringify(typ)}. Expected "JWT".`
-    });
-  }
-};
-var assertHeaderAlgorithm = (alg) => {
-  if (!algs.includes(alg)) {
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.EnsureClerkJWT,
-      reason: TokenVerificationErrorReason.TokenInvalidAlgorithm,
-      message: `Invalid JWT algorithm ${JSON.stringify(alg)}. Supported: ${algs}.`
-    });
-  }
-};
-var assertSubClaim = (sub) => {
-  if (typeof sub !== "string") {
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.EnsureClerkJWT,
-      reason: TokenVerificationErrorReason.TokenVerificationFailed,
-      message: `Subject claim (sub) is required and must be a string. Received ${JSON.stringify(sub)}.`
-    });
-  }
-};
-var assertAuthorizedPartiesClaim = (azp, authorizedParties) => {
-  if (!azp || !authorizedParties || authorizedParties.length === 0) {
-    return;
-  }
-  if (!authorizedParties.includes(azp)) {
-    throw new TokenVerificationError({
-      reason: TokenVerificationErrorReason.TokenInvalidAuthorizedParties,
-      message: `Invalid JWT Authorized party claim (azp) ${JSON.stringify(azp)}. Expected "${authorizedParties}".`
-    });
-  }
-};
-var assertExpirationClaim = (exp, clockSkewInMs) => {
-  if (typeof exp !== "number") {
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.EnsureClerkJWT,
-      reason: TokenVerificationErrorReason.TokenVerificationFailed,
-      message: `Invalid JWT expiry date claim (exp) ${JSON.stringify(exp)}. Expected number.`
-    });
-  }
-  const currentDate = new Date(Date.now());
-  const expiryDate = /* @__PURE__ */ new Date(0);
-  expiryDate.setUTCSeconds(exp);
-  const expired = expiryDate.getTime() <= currentDate.getTime() - clockSkewInMs;
-  if (expired) {
-    throw new TokenVerificationError({
-      reason: TokenVerificationErrorReason.TokenExpired,
-      message: `JWT is expired. Expiry date: ${expiryDate.toUTCString()}, Current date: ${currentDate.toUTCString()}.`
-    });
-  }
-};
-var assertActivationClaim = (nbf, clockSkewInMs) => {
-  if (typeof nbf === "undefined") {
-    return;
-  }
-  if (typeof nbf !== "number") {
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.EnsureClerkJWT,
-      reason: TokenVerificationErrorReason.TokenVerificationFailed,
-      message: `Invalid JWT not before date claim (nbf) ${JSON.stringify(nbf)}. Expected number.`
-    });
-  }
-  const currentDate = new Date(Date.now());
-  const notBeforeDate = /* @__PURE__ */ new Date(0);
-  notBeforeDate.setUTCSeconds(nbf);
-  const early = notBeforeDate.getTime() > currentDate.getTime() + clockSkewInMs;
-  if (early) {
-    throw new TokenVerificationError({
-      reason: TokenVerificationErrorReason.TokenNotActiveYet,
-      message: `JWT cannot be used prior to not before date claim (nbf). Not before date: ${notBeforeDate.toUTCString()}; Current date: ${currentDate.toUTCString()};`
-    });
-  }
-};
-var assertIssuedAtClaim = (iat, clockSkewInMs) => {
-  if (typeof iat === "undefined") {
-    return;
-  }
-  if (typeof iat !== "number") {
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.EnsureClerkJWT,
-      reason: TokenVerificationErrorReason.TokenVerificationFailed,
-      message: `Invalid JWT issued at date claim (iat) ${JSON.stringify(iat)}. Expected number.`
-    });
-  }
-  const currentDate = new Date(Date.now());
-  const issuedAtDate = /* @__PURE__ */ new Date(0);
-  issuedAtDate.setUTCSeconds(iat);
-  const postIssued = issuedAtDate.getTime() > currentDate.getTime() + clockSkewInMs;
-  if (postIssued) {
-    throw new TokenVerificationError({
-      reason: TokenVerificationErrorReason.TokenIatInTheFuture,
-      message: `JWT issued at date claim (iat) is in the future. Issued at date: ${issuedAtDate.toUTCString()}; Current date: ${currentDate.toUTCString()};`
-    });
-  }
-};
-function pemToBuffer(secret) {
-  const trimmed = secret.replace(/-----BEGIN.*?-----/g, "").replace(/-----END.*?-----/g, "").replace(/\s/g, "");
-  const decoded = isomorphicAtob(trimmed);
-  const buffer = new ArrayBuffer(decoded.length);
-  const bufView = new Uint8Array(buffer);
-  for (let i = 0, strLen = decoded.length;i < strLen; i++) {
-    bufView[i] = decoded.charCodeAt(i);
-  }
-  return bufView;
-}
-function importKey(key, algorithm, keyUsage) {
-  if (typeof key === "object") {
-    return runtime.crypto.subtle.importKey("jwk", key, algorithm, false, [keyUsage]);
-  }
-  const keyData = pemToBuffer(key);
-  const format = keyUsage === "sign" ? "pkcs8" : "spki";
-  return runtime.crypto.subtle.importKey(format, keyData, algorithm, false, [keyUsage]);
-}
-var DEFAULT_CLOCK_SKEW_IN_SECONDS = 5 * 1000;
-async function hasValidSignature(jwt, key) {
-  const { header, signature, raw: raw2 } = jwt;
-  const encoder = new TextEncoder;
-  const data = encoder.encode([raw2.header, raw2.payload].join("."));
-  const algorithm = getCryptoAlgorithm(header.alg);
-  try {
-    const cryptoKey = await importKey(key, algorithm, "verify");
-    const verified = await runtime.crypto.subtle.verify(algorithm.name, cryptoKey, signature, data);
-    return { data: verified };
-  } catch (error) {
-    return {
-      errors: [
-        new TokenVerificationError({
-          reason: TokenVerificationErrorReason.TokenInvalidSignature,
-          message: error?.message
-        })
-      ]
-    };
-  }
-}
-function decodeJwt(token) {
-  const tokenParts = (token || "").toString().split(".");
-  if (tokenParts.length !== 3) {
-    return {
-      errors: [
-        new TokenVerificationError({
-          reason: TokenVerificationErrorReason.TokenInvalid,
-          message: `Invalid JWT form. A JWT consists of three parts separated by dots.`
-        })
-      ]
-    };
-  }
-  const [rawHeader, rawPayload, rawSignature] = tokenParts;
-  const decoder = new TextDecoder;
-  const header = JSON.parse(decoder.decode(base64url.parse(rawHeader, { loose: true })));
-  const payload = JSON.parse(decoder.decode(base64url.parse(rawPayload, { loose: true })));
-  const signature = base64url.parse(rawSignature, { loose: true });
-  const data = {
-    header,
-    payload,
-    signature,
-    raw: {
-      header: rawHeader,
-      payload: rawPayload,
-      signature: rawSignature,
-      text: token
-    }
-  };
-  return { data };
-}
-async function verifyJwt(token, options) {
-  const { audience, authorizedParties, clockSkewInMs, key } = options;
-  const clockSkew = clockSkewInMs || DEFAULT_CLOCK_SKEW_IN_SECONDS;
-  const { data: decoded, errors: errors2 } = decodeJwt(token);
-  if (errors2) {
-    return { errors: errors2 };
-  }
-  const { header, payload } = decoded;
-  try {
-    const { typ, alg } = header;
-    assertHeaderType(typ);
-    assertHeaderAlgorithm(alg);
-    const { azp, sub, aud, iat, exp, nbf } = payload;
-    assertSubClaim(sub);
-    assertAudienceClaim([aud], [audience]);
-    assertAuthorizedPartiesClaim(azp, authorizedParties);
-    assertExpirationClaim(exp, clockSkew);
-    assertActivationClaim(nbf, clockSkew);
-    assertIssuedAtClaim(iat, clockSkew);
-  } catch (err) {
-    return { errors: [err] };
-  }
-  const { data: signatureValid, errors: signatureErrors } = await hasValidSignature(decoded, key);
-  if (signatureErrors) {
-    return {
-      errors: [
-        new TokenVerificationError({
-          action: TokenVerificationErrorAction.EnsureClerkJWT,
-          reason: TokenVerificationErrorReason.TokenVerificationFailed,
-          message: `Error verifying JWT signature. ${signatureErrors[0]}`
-        })
-      ]
-    };
-  }
-  if (!signatureValid) {
-    return {
-      errors: [
-        new TokenVerificationError({
-          reason: TokenVerificationErrorReason.TokenInvalidSignature,
-          message: "JWT signature is invalid."
-        })
-      ]
-    };
-  }
-  return { data: payload };
-}
-
-// node_modules/@clerk/backend/dist/chunk-DR4A5GLJ.mjs
-var import_snakecase_keys = __toESM(require_snakecase_keys(), 1);
-
-// node_modules/@clerk/shared/dist/chunk-E3NYSYOB.mjs
-var TYPES_TO_OBJECTS = {
-  strict_mfa: {
-    afterMinutes: 10,
-    level: "multi_factor"
-  },
-  strict: {
-    afterMinutes: 10,
-    level: "second_factor"
-  },
-  moderate: {
-    afterMinutes: 60,
-    level: "second_factor"
-  },
-  lax: {
-    afterMinutes: 1440,
-    level: "second_factor"
-  }
-};
-var ALLOWED_LEVELS = /* @__PURE__ */ new Set(["first_factor", "second_factor", "multi_factor"]);
-var ALLOWED_TYPES = /* @__PURE__ */ new Set(["strict_mfa", "strict", "moderate", "lax"]);
-var isValidMaxAge = (maxAge) => typeof maxAge === "number" && maxAge > 0;
-var isValidLevel = (level) => ALLOWED_LEVELS.has(level);
-var isValidVerificationType = (type) => ALLOWED_TYPES.has(type);
-var checkOrgAuthorization = (params, options) => {
-  const { orgId, orgRole, orgPermissions } = options;
-  if (!params.role && !params.permission) {
-    return null;
-  }
-  if (!orgId || !orgRole || !orgPermissions) {
-    return null;
-  }
-  if (params.permission) {
-    return orgPermissions.includes(params.permission);
-  }
-  if (params.role) {
-    return orgRole === params.role;
-  }
-  return null;
-};
-var validateReverificationConfig = (config2) => {
-  if (!config2) {
-    return false;
-  }
-  const convertConfigToObject = (config22) => {
-    if (typeof config22 === "string") {
-      return TYPES_TO_OBJECTS[config22];
-    }
-    return config22;
-  };
-  const isValidStringValue = typeof config2 === "string" && isValidVerificationType(config2);
-  const isValidObjectValue = typeof config2 === "object" && isValidLevel(config2.level) && isValidMaxAge(config2.afterMinutes);
-  if (isValidStringValue || isValidObjectValue) {
-    return convertConfigToObject.bind(null, config2);
-  }
-  return false;
-};
-var checkReverificationAuthorization = (params, { factorVerificationAge }) => {
-  if (!params.reverification || !factorVerificationAge) {
-    return null;
-  }
-  const isValidReverification = validateReverificationConfig(params.reverification);
-  if (!isValidReverification) {
-    return null;
-  }
-  const { level, afterMinutes } = isValidReverification();
-  const [factor1Age, factor2Age] = factorVerificationAge;
-  const isValidFactor1 = factor1Age !== -1 ? afterMinutes > factor1Age : null;
-  const isValidFactor2 = factor2Age !== -1 ? afterMinutes > factor2Age : null;
-  switch (level) {
-    case "first_factor":
-      return isValidFactor1;
-    case "second_factor":
-      return factor2Age !== -1 ? isValidFactor2 : isValidFactor1;
-    case "multi_factor":
-      return factor2Age === -1 ? isValidFactor1 : isValidFactor1 && isValidFactor2;
-  }
-};
-var createCheckAuthorization = (options) => {
-  return (params) => {
-    if (!options.userId) {
-      return false;
-    }
-    const orgAuthorization = checkOrgAuthorization(params, options);
-    const reverificationAuthorization = checkReverificationAuthorization(params, options);
-    if ([orgAuthorization, reverificationAuthorization].some((a3) => a3 === null)) {
-      return [orgAuthorization, reverificationAuthorization].some((a3) => a3 === true);
-    }
-    return [orgAuthorization, reverificationAuthorization].every((a3) => a3 === true);
-  };
-};
-
-// node_modules/@clerk/backend/dist/chunk-DR4A5GLJ.mjs
-var import_cookie3 = __toESM(require_dist5(), 1);
-
-// node_modules/@clerk/shared/dist/chunk-JJHTUJGL.mjs
-function _3(r) {
-  for (var n = [], e = 0;e < r.length; ) {
-    var a3 = r[e];
-    if (a3 === "*" || a3 === "+" || a3 === "?") {
-      n.push({
-        type: "MODIFIER",
-        index: e,
-        value: r[e++]
-      });
-      continue;
-    }
-    if (a3 === "\\") {
-      n.push({
-        type: "ESCAPED_CHAR",
-        index: e++,
-        value: r[e++]
-      });
-      continue;
-    }
-    if (a3 === "{") {
-      n.push({
-        type: "OPEN",
-        index: e,
-        value: r[e++]
-      });
-      continue;
-    }
-    if (a3 === "}") {
-      n.push({
-        type: "CLOSE",
-        index: e,
-        value: r[e++]
-      });
-      continue;
-    }
-    if (a3 === ":") {
-      for (var u3 = "", t = e + 1;t < r.length; ) {
-        var c3 = r.charCodeAt(t);
-        if (c3 >= 48 && c3 <= 57 || c3 >= 65 && c3 <= 90 || c3 >= 97 && c3 <= 122 || c3 === 95) {
-          u3 += r[t++];
-          continue;
-        }
-        break;
-      }
-      if (!u3)
-        throw new TypeError("Missing parameter name at ".concat(e));
-      n.push({
-        type: "NAME",
-        index: e,
-        value: u3
-      }), e = t;
-      continue;
-    }
-    if (a3 === "(") {
-      var o = 1, m3 = "", t = e + 1;
-      if (r[t] === "?")
-        throw new TypeError('Pattern cannot start with "?" at '.concat(t));
-      for (;t < r.length; ) {
-        if (r[t] === "\\") {
-          m3 += r[t++] + r[t++];
-          continue;
-        }
-        if (r[t] === ")") {
-          if (o--, o === 0) {
-            t++;
-            break;
-          }
-        } else if (r[t] === "(" && (o++, r[t + 1] !== "?"))
-          throw new TypeError("Capturing groups are not allowed at ".concat(t));
-        m3 += r[t++];
-      }
-      if (o)
-        throw new TypeError("Unbalanced pattern at ".concat(e));
-      if (!m3)
-        throw new TypeError("Missing pattern at ".concat(e));
-      n.push({
-        type: "PATTERN",
-        index: e,
-        value: m3
-      }), e = t;
-      continue;
-    }
-    n.push({
-      type: "CHAR",
-      index: e,
-      value: r[e++]
-    });
-  }
-  return n.push({
-    type: "END",
-    index: e,
-    value: ""
-  }), n;
-}
-function F(r, n) {
-  n === undefined && (n = {});
-  for (var e = _3(r), a3 = n.prefixes, u3 = a3 === undefined ? "./" : a3, t = n.delimiter, c3 = t === undefined ? "/#?" : t, o = [], m3 = 0, h4 = 0, p4 = "", f3 = function(l2) {
-    if (h4 < e.length && e[h4].type === l2)
-      return e[h4++].value;
-  }, w = function(l2) {
-    var v2 = f3(l2);
-    if (v2 !== undefined)
-      return v2;
-    var E4 = e[h4], N3 = E4.type, S3 = E4.index;
-    throw new TypeError("Unexpected ".concat(N3, " at ").concat(S3, ", expected ").concat(l2));
-  }, d4 = function() {
-    for (var l2 = "", v2;v2 = f3("CHAR") || f3("ESCAPED_CHAR"); )
-      l2 += v2;
-    return l2;
-  }, M2 = function(l2) {
-    for (var v2 = 0, E4 = c3;v2 < E4.length; v2++) {
-      var N3 = E4[v2];
-      if (l2.indexOf(N3) > -1)
-        return true;
-    }
-    return false;
-  }, A2 = function(l2) {
-    var v2 = o[o.length - 1], E4 = l2 || (v2 && typeof v2 == "string" ? v2 : "");
-    if (v2 && !E4)
-      throw new TypeError('Must have text between two parameters, missing text after "'.concat(v2.name, '"'));
-    return !E4 || M2(E4) ? "[^".concat(s2(c3), "]+?") : "(?:(?!".concat(s2(E4), ")[^").concat(s2(c3), "])+?");
-  };h4 < e.length; ) {
-    var T4 = f3("CHAR"), x4 = f3("NAME"), C = f3("PATTERN");
-    if (x4 || C) {
-      var g3 = T4 || "";
-      u3.indexOf(g3) === -1 && (p4 += g3, g3 = ""), p4 && (o.push(p4), p4 = ""), o.push({
-        name: x4 || m3++,
-        prefix: g3,
-        suffix: "",
-        pattern: C || A2(g3),
-        modifier: f3("MODIFIER") || ""
-      });
-      continue;
-    }
-    var i = T4 || f3("ESCAPED_CHAR");
-    if (i) {
-      p4 += i;
-      continue;
-    }
-    p4 && (o.push(p4), p4 = "");
-    var R2 = f3("OPEN");
-    if (R2) {
-      var g3 = d4(), y4 = f3("NAME") || "", O4 = f3("PATTERN") || "", b3 = d4();
-      w("CLOSE"), o.push({
-        name: y4 || (O4 ? m3++ : ""),
-        pattern: y4 && !O4 ? A2(g3) : O4,
-        prefix: g3,
-        suffix: b3,
-        modifier: f3("MODIFIER") || ""
-      });
-      continue;
-    }
-    w("END");
-  }
-  return o;
-}
-function H2(r, n) {
-  var e = [], a3 = P3(r, e, n);
-  return I3(a3, e, n);
-}
-function I3(r, n, e) {
-  e === undefined && (e = {});
-  var a3 = e.decode, u3 = a3 === undefined ? function(t) {
-    return t;
-  } : a3;
-  return function(t) {
-    var c3 = r.exec(t);
-    if (!c3)
-      return false;
-    for (var o = c3[0], m3 = c3.index, h4 = /* @__PURE__ */ Object.create(null), p4 = function(w) {
-      if (c3[w] === undefined)
-        return "continue";
-      var d4 = n[w - 1];
-      d4.modifier === "*" || d4.modifier === "+" ? h4[d4.name] = c3[w].split(d4.prefix + d4.suffix).map(function(M2) {
-        return u3(M2, d4);
-      }) : h4[d4.name] = u3(c3[w], d4);
-    }, f3 = 1;f3 < c3.length; f3++)
-      p4(f3);
-    return {
-      path: o,
-      index: m3,
-      params: h4
-    };
-  };
-}
-function s2(r) {
-  return r.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
-}
-function D2(r) {
-  return r && r.sensitive ? "" : "i";
-}
-function $2(r, n) {
-  if (!n)
-    return r;
-  for (var e = /\((?:\?<(.*?)>)?(?!\?)/g, a3 = 0, u3 = e.exec(r.source);u3; )
-    n.push({
-      name: u3[1] || a3++,
-      prefix: "",
-      suffix: "",
-      modifier: "",
-      pattern: ""
-    }), u3 = e.exec(r.source);
-  return r;
-}
-function W(r, n, e) {
-  var a3 = r.map(function(u3) {
-    return P3(u3, n, e).source;
-  });
-  return new RegExp("(?:".concat(a3.join("|"), ")"), D2(e));
-}
-function L4(r, n, e) {
-  return U4(F(r, e), n, e);
-}
-function U4(r, n, e) {
-  e === undefined && (e = {});
-  for (var a3 = e.strict, u3 = a3 === undefined ? false : a3, t = e.start, c3 = t === undefined ? true : t, o = e.end, m3 = o === undefined ? true : o, h4 = e.encode, p4 = h4 === undefined ? function(v2) {
-    return v2;
-  } : h4, f3 = e.delimiter, w = f3 === undefined ? "/#?" : f3, d4 = e.endsWith, M2 = d4 === undefined ? "" : d4, A2 = "[".concat(s2(M2), "]|$"), T4 = "[".concat(s2(w), "]"), x4 = c3 ? "^" : "", C = 0, g3 = r;C < g3.length; C++) {
-    var i = g3[C];
-    if (typeof i == "string")
-      x4 += s2(p4(i));
-    else {
-      var R2 = s2(p4(i.prefix)), y4 = s2(p4(i.suffix));
-      if (i.pattern)
-        if (n && n.push(i), R2 || y4)
-          if (i.modifier === "+" || i.modifier === "*") {
-            var O4 = i.modifier === "*" ? "?" : "";
-            x4 += "(?:".concat(R2, "((?:").concat(i.pattern, ")(?:").concat(y4).concat(R2, "(?:").concat(i.pattern, "))*)").concat(y4, ")").concat(O4);
-          } else
-            x4 += "(?:".concat(R2, "(").concat(i.pattern, ")").concat(y4, ")").concat(i.modifier);
-        else {
-          if (i.modifier === "+" || i.modifier === "*")
-            throw new TypeError('Can not repeat "'.concat(i.name, '" without a prefix and suffix'));
-          x4 += "(".concat(i.pattern, ")").concat(i.modifier);
-        }
-      else
-        x4 += "(?:".concat(R2).concat(y4, ")").concat(i.modifier);
-    }
-  }
-  if (m3)
-    u3 || (x4 += "".concat(T4, "?")), x4 += e.endsWith ? "(?=".concat(A2, ")") : "$";
-  else {
-    var b3 = r[r.length - 1], l2 = typeof b3 == "string" ? T4.indexOf(b3[b3.length - 1]) > -1 : b3 === undefined;
-    u3 || (x4 += "(?:".concat(T4, "(?=").concat(A2, "))?")), l2 || (x4 += "(?=".concat(T4, "|").concat(A2, ")"));
-  }
-  return new RegExp(x4, D2(e));
-}
-function P3(r, n, e) {
-  return r instanceof RegExp ? $2(r, n) : Array.isArray(r) ? W(r, n, e) : L4(r, n, e);
-}
-function match(str, options) {
-  try {
-    return H2(str, options);
-  } catch (e) {
-    throw new Error(`Invalid path and options: Consult the documentation of path-to-regexp here: https://github.com/pillarjs/path-to-regexp/tree/6.x
-${e.message}`);
-  }
-}
-
-// node_modules/@clerk/backend/dist/chunk-DR4A5GLJ.mjs
-var API_URL = "https://api.clerk.com";
-var API_VERSION = "v1";
-var USER_AGENT = `${"@clerk/backend"}@${"1.26.0"}`;
-var MAX_CACHE_LAST_UPDATED_AT_SECONDS = 5 * 60;
-var SUPPORTED_BAPI_VERSION = "2024-10-01";
-var Attributes = {
-  AuthToken: "__clerkAuthToken",
-  AuthSignature: "__clerkAuthSignature",
-  AuthStatus: "__clerkAuthStatus",
-  AuthReason: "__clerkAuthReason",
-  AuthMessage: "__clerkAuthMessage",
-  ClerkUrl: "__clerkUrl"
-};
-var Cookies = {
-  Session: "__session",
-  Refresh: "__refresh",
-  ClientUat: "__client_uat",
-  Handshake: "__clerk_handshake",
-  DevBrowser: "__clerk_db_jwt",
-  RedirectCount: "__clerk_redirect_count"
-};
-var QueryParameters = {
-  ClerkSynced: "__clerk_synced",
-  SuffixedCookies: "suffixed_cookies",
-  ClerkRedirectUrl: "__clerk_redirect_url",
-  DevBrowser: Cookies.DevBrowser,
-  Handshake: Cookies.Handshake,
-  HandshakeHelp: "__clerk_help",
-  LegacyDevBrowser: "__dev_session",
-  HandshakeReason: "__clerk_hs_reason"
-};
-var Headers2 = {
-  AuthToken: "x-clerk-auth-token",
-  AuthSignature: "x-clerk-auth-signature",
-  AuthStatus: "x-clerk-auth-status",
-  AuthReason: "x-clerk-auth-reason",
-  AuthMessage: "x-clerk-auth-message",
-  ClerkUrl: "x-clerk-clerk-url",
-  EnableDebug: "x-clerk-debug",
-  ClerkRequestData: "x-clerk-request-data",
-  ClerkRedirectTo: "x-clerk-redirect-to",
-  CloudFrontForwardedProto: "cloudfront-forwarded-proto",
-  Authorization: "authorization",
-  ForwardedPort: "x-forwarded-port",
-  ForwardedProto: "x-forwarded-proto",
-  ForwardedHost: "x-forwarded-host",
-  Accept: "accept",
-  Referrer: "referer",
-  UserAgent: "user-agent",
-  Origin: "origin",
-  Host: "host",
-  ContentType: "content-type",
-  SecFetchDest: "sec-fetch-dest",
-  Location: "location",
-  CacheControl: "cache-control"
-};
-var ContentTypes = {
-  Json: "application/json"
-};
-var constants = {
-  Attributes,
-  Cookies,
-  Headers: Headers2,
-  ContentTypes,
-  QueryParameters
-};
-var SEPARATOR = "/";
-var MULTIPLE_SEPARATOR_REGEX = new RegExp("(?<!:)" + SEPARATOR + "{1,}", "g");
-function joinPaths(...args) {
-  return args.filter((p4) => p4).join(SEPARATOR).replace(MULTIPLE_SEPARATOR_REGEX, SEPARATOR);
-}
-var AbstractAPI = class {
-  constructor(request) {
-    this.request = request;
-  }
-  requireId(id2) {
-    if (!id2) {
-      throw new Error("A valid resource ID is required.");
-    }
-  }
-};
-var basePath = "/accountless_applications";
-var AccountlessApplicationAPI = class extends AbstractAPI {
-  async createAccountlessApplication() {
-    return this.request({
-      method: "POST",
-      path: basePath
-    });
-  }
-  async completeAccountlessApplicationOnboarding() {
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath, "complete")
-    });
-  }
-};
-var basePath2 = "/allowlist_identifiers";
-var AllowlistIdentifierAPI = class extends AbstractAPI {
-  async getAllowlistIdentifierList() {
-    return this.request({
-      method: "GET",
-      path: basePath2,
-      queryParams: { paginated: true }
-    });
-  }
-  async createAllowlistIdentifier(params) {
-    return this.request({
-      method: "POST",
-      path: basePath2,
-      bodyParams: params
-    });
-  }
-  async deleteAllowlistIdentifier(allowlistIdentifierId) {
-    this.requireId(allowlistIdentifierId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath2, allowlistIdentifierId)
-    });
-  }
-};
-var basePath3 = "/clients";
-var ClientAPI = class extends AbstractAPI {
-  async getClientList(params = {}) {
-    return this.request({
-      method: "GET",
-      path: basePath3,
-      queryParams: { ...params, paginated: true }
-    });
-  }
-  async getClient(clientId) {
-    this.requireId(clientId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath3, clientId)
-    });
-  }
-  verifyClient(token) {
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath3, "verify"),
-      bodyParams: { token }
-    });
-  }
-};
-var basePath4 = "/domains";
-var DomainAPI = class extends AbstractAPI {
-  async deleteDomain(id2) {
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath4, id2)
-    });
-  }
-};
-var basePath5 = "/email_addresses";
-var EmailAddressAPI = class extends AbstractAPI {
-  async getEmailAddress(emailAddressId) {
-    this.requireId(emailAddressId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath5, emailAddressId)
-    });
-  }
-  async createEmailAddress(params) {
-    return this.request({
-      method: "POST",
-      path: basePath5,
-      bodyParams: params
-    });
-  }
-  async updateEmailAddress(emailAddressId, params = {}) {
-    this.requireId(emailAddressId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath5, emailAddressId),
-      bodyParams: params
-    });
-  }
-  async deleteEmailAddress(emailAddressId) {
-    this.requireId(emailAddressId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath5, emailAddressId)
-    });
-  }
-};
-var basePath6 = "/invitations";
-var InvitationAPI = class extends AbstractAPI {
-  async getInvitationList(params = {}) {
-    return this.request({
-      method: "GET",
-      path: basePath6,
-      queryParams: { ...params, paginated: true }
-    });
-  }
-  async createInvitation(params) {
-    return this.request({
-      method: "POST",
-      path: basePath6,
-      bodyParams: params
-    });
-  }
-  async revokeInvitation(invitationId) {
-    this.requireId(invitationId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath6, invitationId, "revoke")
-    });
-  }
-};
-var basePath7 = "/organizations";
-var OrganizationAPI = class extends AbstractAPI {
-  async getOrganizationList(params) {
-    return this.request({
-      method: "GET",
-      path: basePath7,
-      queryParams: params
-    });
-  }
-  async createOrganization(params) {
-    return this.request({
-      method: "POST",
-      path: basePath7,
-      bodyParams: params
-    });
-  }
-  async getOrganization(params) {
-    const { includeMembersCount } = params;
-    const organizationIdOrSlug = "organizationId" in params ? params.organizationId : params.slug;
-    this.requireId(organizationIdOrSlug);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath7, organizationIdOrSlug),
-      queryParams: {
-        includeMembersCount
-      }
-    });
-  }
-  async updateOrganization(organizationId, params) {
-    this.requireId(organizationId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath7, organizationId),
-      bodyParams: params
-    });
-  }
-  async updateOrganizationLogo(organizationId, params) {
-    this.requireId(organizationId);
-    const formData = new runtime.FormData;
-    formData.append("file", params?.file);
-    if (params?.uploaderUserId) {
-      formData.append("uploader_user_id", params?.uploaderUserId);
-    }
-    return this.request({
-      method: "PUT",
-      path: joinPaths(basePath7, organizationId, "logo"),
-      formData
-    });
-  }
-  async deleteOrganizationLogo(organizationId) {
-    this.requireId(organizationId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath7, organizationId, "logo")
-    });
-  }
-  async updateOrganizationMetadata(organizationId, params) {
-    this.requireId(organizationId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath7, organizationId, "metadata"),
-      bodyParams: params
-    });
-  }
-  async deleteOrganization(organizationId) {
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath7, organizationId)
-    });
-  }
-  async getOrganizationMembershipList(params) {
-    const { organizationId, ...queryParams } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath7, organizationId, "memberships"),
-      queryParams
-    });
-  }
-  async createOrganizationMembership(params) {
-    const { organizationId, ...bodyParams } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath7, organizationId, "memberships"),
-      bodyParams
-    });
-  }
-  async updateOrganizationMembership(params) {
-    const { organizationId, userId, ...bodyParams } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath7, organizationId, "memberships", userId),
-      bodyParams
-    });
-  }
-  async updateOrganizationMembershipMetadata(params) {
-    const { organizationId, userId, ...bodyParams } = params;
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath7, organizationId, "memberships", userId, "metadata"),
-      bodyParams
-    });
-  }
-  async deleteOrganizationMembership(params) {
-    const { organizationId, userId } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath7, organizationId, "memberships", userId)
-    });
-  }
-  async getOrganizationInvitationList(params) {
-    const { organizationId, ...queryParams } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath7, organizationId, "invitations"),
-      queryParams
-    });
-  }
-  async createOrganizationInvitation(params) {
-    const { organizationId, ...bodyParams } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath7, organizationId, "invitations"),
-      bodyParams
-    });
-  }
-  async getOrganizationInvitation(params) {
-    const { organizationId, invitationId } = params;
-    this.requireId(organizationId);
-    this.requireId(invitationId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath7, organizationId, "invitations", invitationId)
-    });
-  }
-  async revokeOrganizationInvitation(params) {
-    const { organizationId, invitationId, ...bodyParams } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath7, organizationId, "invitations", invitationId, "revoke"),
-      bodyParams
-    });
-  }
-  async getOrganizationDomainList(params) {
-    const { organizationId, ...queryParams } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath7, organizationId, "domains"),
-      queryParams
-    });
-  }
-  async createOrganizationDomain(params) {
-    const { organizationId, ...bodyParams } = params;
-    this.requireId(organizationId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath7, organizationId, "domains"),
-      bodyParams: {
-        ...bodyParams,
-        verified: bodyParams.verified ?? true
-      }
-    });
-  }
-  async updateOrganizationDomain(params) {
-    const { organizationId, domainId, ...bodyParams } = params;
-    this.requireId(organizationId);
-    this.requireId(domainId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath7, organizationId, "domains", domainId),
-      bodyParams
-    });
-  }
-  async deleteOrganizationDomain(params) {
-    const { organizationId, domainId } = params;
-    this.requireId(organizationId);
-    this.requireId(domainId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath7, organizationId, "domains", domainId)
-    });
-  }
-};
-var basePath8 = "/phone_numbers";
-var PhoneNumberAPI = class extends AbstractAPI {
-  async getPhoneNumber(phoneNumberId) {
-    this.requireId(phoneNumberId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath8, phoneNumberId)
-    });
-  }
-  async createPhoneNumber(params) {
-    return this.request({
-      method: "POST",
-      path: basePath8,
-      bodyParams: params
-    });
-  }
-  async updatePhoneNumber(phoneNumberId, params = {}) {
-    this.requireId(phoneNumberId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath8, phoneNumberId),
-      bodyParams: params
-    });
-  }
-  async deletePhoneNumber(phoneNumberId) {
-    this.requireId(phoneNumberId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath8, phoneNumberId)
-    });
-  }
-};
-var basePath9 = "/redirect_urls";
-var RedirectUrlAPI = class extends AbstractAPI {
-  async getRedirectUrlList() {
-    return this.request({
-      method: "GET",
-      path: basePath9,
-      queryParams: { paginated: true }
-    });
-  }
-  async getRedirectUrl(redirectUrlId) {
-    this.requireId(redirectUrlId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath9, redirectUrlId)
-    });
-  }
-  async createRedirectUrl(params) {
-    return this.request({
-      method: "POST",
-      path: basePath9,
-      bodyParams: params
-    });
-  }
-  async deleteRedirectUrl(redirectUrlId) {
-    this.requireId(redirectUrlId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath9, redirectUrlId)
-    });
-  }
-};
-var basePath10 = "/sessions";
-var SessionAPI = class extends AbstractAPI {
-  async getSessionList(params = {}) {
-    return this.request({
-      method: "GET",
-      path: basePath10,
-      queryParams: { ...params, paginated: true }
-    });
-  }
-  async getSession(sessionId) {
-    this.requireId(sessionId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath10, sessionId)
-    });
-  }
-  async revokeSession(sessionId) {
-    this.requireId(sessionId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath10, sessionId, "revoke")
-    });
-  }
-  async verifySession(sessionId, token) {
-    this.requireId(sessionId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath10, sessionId, "verify"),
-      bodyParams: { token }
-    });
-  }
-  async getToken(sessionId, template) {
-    this.requireId(sessionId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath10, sessionId, "tokens", template || "")
-    });
-  }
-  async refreshSession(sessionId, params) {
-    this.requireId(sessionId);
-    const { suffixed_cookies, ...restParams } = params;
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath10, sessionId, "refresh"),
-      bodyParams: restParams,
-      queryParams: { suffixed_cookies }
-    });
-  }
-};
-var basePath11 = "/sign_in_tokens";
-var SignInTokenAPI = class extends AbstractAPI {
-  async createSignInToken(params) {
-    return this.request({
-      method: "POST",
-      path: basePath11,
-      bodyParams: params
-    });
-  }
-  async revokeSignInToken(signInTokenId) {
-    this.requireId(signInTokenId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath11, signInTokenId, "revoke")
-    });
-  }
-};
-var basePath12 = "/users";
-var UserAPI = class extends AbstractAPI {
-  async getUserList(params = {}) {
-    const { limit, offset, orderBy, ...userCountParams } = params;
-    const [data, totalCount] = await Promise.all([
-      this.request({
-        method: "GET",
-        path: basePath12,
-        queryParams: params
-      }),
-      this.getCount(userCountParams)
-    ]);
-    return { data, totalCount };
-  }
-  async getUser(userId) {
-    this.requireId(userId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath12, userId)
-    });
-  }
-  async createUser(params) {
-    return this.request({
-      method: "POST",
-      path: basePath12,
-      bodyParams: params
-    });
-  }
-  async updateUser(userId, params = {}) {
-    this.requireId(userId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath12, userId),
-      bodyParams: params
-    });
-  }
-  async updateUserProfileImage(userId, params) {
-    this.requireId(userId);
-    const formData = new runtime.FormData;
-    formData.append("file", params?.file);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath12, userId, "profile_image"),
-      formData
-    });
-  }
-  async updateUserMetadata(userId, params) {
-    this.requireId(userId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath12, userId, "metadata"),
-      bodyParams: params
-    });
-  }
-  async deleteUser(userId) {
-    this.requireId(userId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath12, userId)
-    });
-  }
-  async getCount(params = {}) {
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath12, "count"),
-      queryParams: params
-    });
-  }
-  async getUserOauthAccessToken(userId, provider) {
-    this.requireId(userId);
-    const hasPrefix = provider.startsWith("oauth_");
-    const _provider = hasPrefix ? provider : `oauth_${provider}`;
-    if (hasPrefix) {
-      deprecated("getUserOauthAccessToken(userId, provider)", "Remove the `oauth_` prefix from the `provider` argument.");
-    }
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath12, userId, "oauth_access_tokens", _provider),
-      queryParams: { paginated: true }
-    });
-  }
-  async disableUserMFA(userId) {
-    this.requireId(userId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath12, userId, "mfa")
-    });
-  }
-  async getOrganizationMembershipList(params) {
-    const { userId, limit, offset } = params;
-    this.requireId(userId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath12, userId, "organization_memberships"),
-      queryParams: { limit, offset }
-    });
-  }
-  async verifyPassword(params) {
-    const { userId, password } = params;
-    this.requireId(userId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath12, userId, "verify_password"),
-      bodyParams: { password }
-    });
-  }
-  async verifyTOTP(params) {
-    const { userId, code } = params;
-    this.requireId(userId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath12, userId, "verify_totp"),
-      bodyParams: { code }
-    });
-  }
-  async banUser(userId) {
-    this.requireId(userId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath12, userId, "ban")
-    });
-  }
-  async unbanUser(userId) {
-    this.requireId(userId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath12, userId, "unban")
-    });
-  }
-  async lockUser(userId) {
-    this.requireId(userId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath12, userId, "lock")
-    });
-  }
-  async unlockUser(userId) {
-    this.requireId(userId);
-    return this.request({
-      method: "POST",
-      path: joinPaths(basePath12, userId, "unlock")
-    });
-  }
-  async deleteUserProfileImage(userId) {
-    this.requireId(userId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath12, userId, "profile_image")
-    });
-  }
-};
-var basePath13 = "/saml_connections";
-var SamlConnectionAPI = class extends AbstractAPI {
-  async getSamlConnectionList(params = {}) {
-    return this.request({
-      method: "GET",
-      path: basePath13,
-      queryParams: params
-    });
-  }
-  async createSamlConnection(params) {
-    return this.request({
-      method: "POST",
-      path: basePath13,
-      bodyParams: params
-    });
-  }
-  async getSamlConnection(samlConnectionId) {
-    this.requireId(samlConnectionId);
-    return this.request({
-      method: "GET",
-      path: joinPaths(basePath13, samlConnectionId)
-    });
-  }
-  async updateSamlConnection(samlConnectionId, params = {}) {
-    this.requireId(samlConnectionId);
-    return this.request({
-      method: "PATCH",
-      path: joinPaths(basePath13, samlConnectionId),
-      bodyParams: params
-    });
-  }
-  async deleteSamlConnection(samlConnectionId) {
-    this.requireId(samlConnectionId);
-    return this.request({
-      method: "DELETE",
-      path: joinPaths(basePath13, samlConnectionId)
-    });
-  }
-};
-var basePath14 = "/testing_tokens";
-var TestingTokenAPI = class extends AbstractAPI {
-  async createTestingToken() {
-    return this.request({
-      method: "POST",
-      path: basePath14
-    });
-  }
-};
-function assertValidSecretKey(val) {
-  if (!val || typeof val !== "string") {
-    throw Error("Missing Clerk Secret Key. Go to https://dashboard.clerk.com and get your key for your instance.");
-  }
-}
-function assertValidPublishableKey(val) {
-  parsePublishableKey(val, { fatal: true });
-}
-var AccountlessApplication = class _AccountlessApplication {
-  constructor(publishableKey, secretKey, claimUrl, apiKeysUrl) {
-    this.publishableKey = publishableKey;
-    this.secretKey = secretKey;
-    this.claimUrl = claimUrl;
-    this.apiKeysUrl = apiKeysUrl;
-  }
-  static fromJSON(data) {
-    return new _AccountlessApplication(data.publishable_key, data.secret_key, data.claim_url, data.api_keys_url);
-  }
-};
-var AllowlistIdentifier = class _AllowlistIdentifier {
-  constructor(id2, identifier, createdAt, updatedAt, invitationId) {
-    this.id = id2;
-    this.identifier = identifier;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.invitationId = invitationId;
-  }
-  static fromJSON(data) {
-    return new _AllowlistIdentifier(data.id, data.identifier, data.created_at, data.updated_at, data.invitation_id);
-  }
-};
-var SessionActivity = class _SessionActivity {
-  constructor(id2, isMobile, ipAddress, city, country, browserVersion, browserName, deviceType) {
-    this.id = id2;
-    this.isMobile = isMobile;
-    this.ipAddress = ipAddress;
-    this.city = city;
-    this.country = country;
-    this.browserVersion = browserVersion;
-    this.browserName = browserName;
-    this.deviceType = deviceType;
-  }
-  static fromJSON(data) {
-    return new _SessionActivity(data.id, data.is_mobile, data.ip_address, data.city, data.country, data.browser_version, data.browser_name, data.device_type);
-  }
-};
-var Session = class _Session {
-  constructor(id2, clientId, userId, status, lastActiveAt, expireAt, abandonAt, createdAt, updatedAt, lastActiveOrganizationId, latestActivity, actor = null) {
-    this.id = id2;
-    this.clientId = clientId;
-    this.userId = userId;
-    this.status = status;
-    this.lastActiveAt = lastActiveAt;
-    this.expireAt = expireAt;
-    this.abandonAt = abandonAt;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.lastActiveOrganizationId = lastActiveOrganizationId;
-    this.latestActivity = latestActivity;
-    this.actor = actor;
-  }
-  static fromJSON(data) {
-    return new _Session(data.id, data.client_id, data.user_id, data.status, data.last_active_at, data.expire_at, data.abandon_at, data.created_at, data.updated_at, data.last_active_organization_id, data.latest_activity && SessionActivity.fromJSON(data.latest_activity), data.actor);
-  }
-};
-var Client = class _Client {
-  constructor(id2, sessionIds, sessions, signInId, signUpId, lastActiveSessionId, createdAt, updatedAt) {
-    this.id = id2;
-    this.sessionIds = sessionIds;
-    this.sessions = sessions;
-    this.signInId = signInId;
-    this.signUpId = signUpId;
-    this.lastActiveSessionId = lastActiveSessionId;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-  static fromJSON(data) {
-    return new _Client(data.id, data.session_ids, data.sessions.map((x4) => Session.fromJSON(x4)), data.sign_in_id, data.sign_up_id, data.last_active_session_id, data.created_at, data.updated_at);
-  }
-};
-var Cookies2 = class _Cookies {
-  constructor(cookies) {
-    this.cookies = cookies;
-  }
-  static fromJSON(data) {
-    return new _Cookies(data.cookies);
-  }
-};
-var DeletedObject = class _DeletedObject {
-  constructor(object, id2, slug, deleted) {
-    this.object = object;
-    this.id = id2;
-    this.slug = slug;
-    this.deleted = deleted;
-  }
-  static fromJSON(data) {
-    return new _DeletedObject(data.object, data.id || null, data.slug || null, data.deleted);
-  }
-};
-var Email = class _Email {
-  constructor(id2, fromEmailName, emailAddressId, toEmailAddress, subject, body, bodyPlain, status, slug, data, deliveredByClerk) {
-    this.id = id2;
-    this.fromEmailName = fromEmailName;
-    this.emailAddressId = emailAddressId;
-    this.toEmailAddress = toEmailAddress;
-    this.subject = subject;
-    this.body = body;
-    this.bodyPlain = bodyPlain;
-    this.status = status;
-    this.slug = slug;
-    this.data = data;
-    this.deliveredByClerk = deliveredByClerk;
-  }
-  static fromJSON(data) {
-    return new _Email(data.id, data.from_email_name, data.email_address_id, data.to_email_address, data.subject, data.body, data.body_plain, data.status, data.slug, data.data, data.delivered_by_clerk);
-  }
-};
-var IdentificationLink = class _IdentificationLink {
-  constructor(id2, type) {
-    this.id = id2;
-    this.type = type;
-  }
-  static fromJSON(data) {
-    return new _IdentificationLink(data.id, data.type);
-  }
-};
-var Verification = class _Verification {
-  constructor(status, strategy, externalVerificationRedirectURL = null, attempts = null, expireAt = null, nonce = null, message = null) {
-    this.status = status;
-    this.strategy = strategy;
-    this.externalVerificationRedirectURL = externalVerificationRedirectURL;
-    this.attempts = attempts;
-    this.expireAt = expireAt;
-    this.nonce = nonce;
-    this.message = message;
-  }
-  static fromJSON(data) {
-    return new _Verification(data.status, data.strategy, data.external_verification_redirect_url ? new URL(data.external_verification_redirect_url) : null, data.attempts, data.expire_at, data.nonce);
-  }
-};
-var EmailAddress = class _EmailAddress {
-  constructor(id2, emailAddress, verification, linkedTo) {
-    this.id = id2;
-    this.emailAddress = emailAddress;
-    this.verification = verification;
-    this.linkedTo = linkedTo;
-  }
-  static fromJSON(data) {
-    return new _EmailAddress(data.id, data.email_address, data.verification && Verification.fromJSON(data.verification), data.linked_to.map((link) => IdentificationLink.fromJSON(link)));
-  }
-};
-var ExternalAccount = class _ExternalAccount {
-  constructor(id2, provider, identificationId, externalId, approvedScopes, emailAddress, firstName, lastName, imageUrl, username, publicMetadata = {}, label, verification) {
-    this.id = id2;
-    this.provider = provider;
-    this.identificationId = identificationId;
-    this.externalId = externalId;
-    this.approvedScopes = approvedScopes;
-    this.emailAddress = emailAddress;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.imageUrl = imageUrl;
-    this.username = username;
-    this.publicMetadata = publicMetadata;
-    this.label = label;
-    this.verification = verification;
-  }
-  static fromJSON(data) {
-    return new _ExternalAccount(data.id, data.provider, data.identification_id, data.provider_user_id, data.approved_scopes, data.email_address, data.first_name, data.last_name, data.image_url || "", data.username, data.public_metadata, data.label, data.verification && Verification.fromJSON(data.verification));
-  }
-};
-var Invitation = class _Invitation {
-  constructor(id2, emailAddress, publicMetadata, createdAt, updatedAt, status, url, revoked) {
-    this.id = id2;
-    this.emailAddress = emailAddress;
-    this.publicMetadata = publicMetadata;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.status = status;
-    this.url = url;
-    this.revoked = revoked;
-    this._raw = null;
-  }
-  get raw() {
-    return this._raw;
-  }
-  static fromJSON(data) {
-    const res = new _Invitation(data.id, data.email_address, data.public_metadata, data.created_at, data.updated_at, data.status, data.url, data.revoked);
-    res._raw = data;
-    return res;
-  }
-};
-var ObjectType = {
-  AccountlessApplication: "accountless_application",
-  AllowlistIdentifier: "allowlist_identifier",
-  Client: "client",
-  Cookies: "cookies",
-  Email: "email",
-  EmailAddress: "email_address",
-  ExternalAccount: "external_account",
-  FacebookAccount: "facebook_account",
-  GoogleAccount: "google_account",
-  Invitation: "invitation",
-  OauthAccessToken: "oauth_access_token",
-  Organization: "organization",
-  OrganizationDomain: "organization_domain",
-  OrganizationInvitation: "organization_invitation",
-  OrganizationMembership: "organization_membership",
-  PhoneNumber: "phone_number",
-  RedirectUrl: "redirect_url",
-  SamlAccount: "saml_account",
-  Session: "session",
-  SignInAttempt: "sign_in_attempt",
-  SignInToken: "sign_in_token",
-  SignUpAttempt: "sign_up_attempt",
-  SmsMessage: "sms_message",
-  User: "user",
-  WaitlistEntry: "waitlist_entry",
-  Web3Wallet: "web3_wallet",
-  Token: "token",
-  TotalCount: "total_count",
-  TestingToken: "testing_token",
-  Role: "role",
-  Permission: "permission"
-};
-var OauthAccessToken = class _OauthAccessToken {
-  constructor(externalAccountId, provider, token, publicMetadata = {}, label, scopes, tokenSecret) {
-    this.externalAccountId = externalAccountId;
-    this.provider = provider;
-    this.token = token;
-    this.publicMetadata = publicMetadata;
-    this.label = label;
-    this.scopes = scopes;
-    this.tokenSecret = tokenSecret;
-  }
-  static fromJSON(data) {
-    return new _OauthAccessToken(data.external_account_id, data.provider, data.token, data.public_metadata, data.label || "", data.scopes, data.token_secret);
-  }
-};
-var Organization = class _Organization {
-  constructor(id2, name, slug, imageUrl, hasImage, createdAt, updatedAt, publicMetadata = {}, privateMetadata = {}, maxAllowedMemberships, adminDeleteEnabled, membersCount, createdBy) {
-    this.id = id2;
-    this.name = name;
-    this.slug = slug;
-    this.imageUrl = imageUrl;
-    this.hasImage = hasImage;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.publicMetadata = publicMetadata;
-    this.privateMetadata = privateMetadata;
-    this.maxAllowedMemberships = maxAllowedMemberships;
-    this.adminDeleteEnabled = adminDeleteEnabled;
-    this.membersCount = membersCount;
-    this.createdBy = createdBy;
-    this._raw = null;
-  }
-  get raw() {
-    return this._raw;
-  }
-  static fromJSON(data) {
-    const res = new _Organization(data.id, data.name, data.slug, data.image_url || "", data.has_image, data.created_at, data.updated_at, data.public_metadata, data.private_metadata, data.max_allowed_memberships, data.admin_delete_enabled, data.members_count, data.created_by);
-    res._raw = data;
-    return res;
-  }
-};
-var OrganizationInvitation = class _OrganizationInvitation {
-  constructor(id2, emailAddress, role, organizationId, createdAt, updatedAt, status, publicMetadata = {}, privateMetadata = {}) {
-    this.id = id2;
-    this.emailAddress = emailAddress;
-    this.role = role;
-    this.organizationId = organizationId;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.status = status;
-    this.publicMetadata = publicMetadata;
-    this.privateMetadata = privateMetadata;
-    this._raw = null;
-  }
-  get raw() {
-    return this._raw;
-  }
-  static fromJSON(data) {
-    const res = new _OrganizationInvitation(data.id, data.email_address, data.role, data.organization_id, data.created_at, data.updated_at, data.status, data.public_metadata, data.private_metadata);
-    res._raw = data;
-    return res;
-  }
-};
-var OrganizationMembership = class _OrganizationMembership {
-  constructor(id2, role, permissions, publicMetadata = {}, privateMetadata = {}, createdAt, updatedAt, organization, publicUserData) {
-    this.id = id2;
-    this.role = role;
-    this.permissions = permissions;
-    this.publicMetadata = publicMetadata;
-    this.privateMetadata = privateMetadata;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.organization = organization;
-    this.publicUserData = publicUserData;
-    this._raw = null;
-  }
-  get raw() {
-    return this._raw;
-  }
-  static fromJSON(data) {
-    const res = new _OrganizationMembership(data.id, data.role, data.permissions, data.public_metadata, data.private_metadata, data.created_at, data.updated_at, Organization.fromJSON(data.organization), OrganizationMembershipPublicUserData.fromJSON(data.public_user_data));
-    res._raw = data;
-    return res;
-  }
-};
-var OrganizationMembershipPublicUserData = class _OrganizationMembershipPublicUserData {
-  constructor(identifier, firstName, lastName, imageUrl, hasImage, userId) {
-    this.identifier = identifier;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.imageUrl = imageUrl;
-    this.hasImage = hasImage;
-    this.userId = userId;
-  }
-  static fromJSON(data) {
-    return new _OrganizationMembershipPublicUserData(data.identifier, data.first_name, data.last_name, data.image_url, data.has_image, data.user_id);
-  }
-};
-var PhoneNumber = class _PhoneNumber {
-  constructor(id2, phoneNumber, reservedForSecondFactor, defaultSecondFactor, verification, linkedTo) {
-    this.id = id2;
-    this.phoneNumber = phoneNumber;
-    this.reservedForSecondFactor = reservedForSecondFactor;
-    this.defaultSecondFactor = defaultSecondFactor;
-    this.verification = verification;
-    this.linkedTo = linkedTo;
-  }
-  static fromJSON(data) {
-    return new _PhoneNumber(data.id, data.phone_number, data.reserved_for_second_factor, data.default_second_factor, data.verification && Verification.fromJSON(data.verification), data.linked_to.map((link) => IdentificationLink.fromJSON(link)));
-  }
-};
-var RedirectUrl = class _RedirectUrl {
-  constructor(id2, url, createdAt, updatedAt) {
-    this.id = id2;
-    this.url = url;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-  static fromJSON(data) {
-    return new _RedirectUrl(data.id, data.url, data.created_at, data.updated_at);
-  }
-};
-var SignInToken = class _SignInToken {
-  constructor(id2, userId, token, status, url, createdAt, updatedAt) {
-    this.id = id2;
-    this.userId = userId;
-    this.token = token;
-    this.status = status;
-    this.url = url;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-  static fromJSON(data) {
-    return new _SignInToken(data.id, data.user_id, data.token, data.status, data.url, data.created_at, data.updated_at);
-  }
-};
-var SMSMessage = class _SMSMessage {
-  constructor(id2, fromPhoneNumber, toPhoneNumber, message, status, phoneNumberId, data) {
-    this.id = id2;
-    this.fromPhoneNumber = fromPhoneNumber;
-    this.toPhoneNumber = toPhoneNumber;
-    this.message = message;
-    this.status = status;
-    this.phoneNumberId = phoneNumberId;
-    this.data = data;
-  }
-  static fromJSON(data) {
-    return new _SMSMessage(data.id, data.from_phone_number, data.to_phone_number, data.message, data.status, data.phone_number_id, data.data);
-  }
-};
-var Token = class _Token {
-  constructor(jwt) {
-    this.jwt = jwt;
-  }
-  static fromJSON(data) {
-    return new _Token(data.jwt);
-  }
-};
-var SamlAccountConnection = class _SamlAccountConnection {
-  constructor(id2, name, domain, active, provider, syncUserAttributes, allowSubdomains, allowIdpInitiated, createdAt, updatedAt) {
-    this.id = id2;
-    this.name = name;
-    this.domain = domain;
-    this.active = active;
-    this.provider = provider;
-    this.syncUserAttributes = syncUserAttributes;
-    this.allowSubdomains = allowSubdomains;
-    this.allowIdpInitiated = allowIdpInitiated;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-  static fromJSON(data) {
-    return new _SamlAccountConnection(data.id, data.name, data.domain, data.active, data.provider, data.sync_user_attributes, data.allow_subdomains, data.allow_idp_initiated, data.created_at, data.updated_at);
-  }
-};
-var SamlAccount = class _SamlAccount {
-  constructor(id2, provider, providerUserId, active, emailAddress, firstName, lastName, verification, samlConnection) {
-    this.id = id2;
-    this.provider = provider;
-    this.providerUserId = providerUserId;
-    this.active = active;
-    this.emailAddress = emailAddress;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.verification = verification;
-    this.samlConnection = samlConnection;
-  }
-  static fromJSON(data) {
-    return new _SamlAccount(data.id, data.provider, data.provider_user_id, data.active, data.email_address, data.first_name, data.last_name, data.verification && Verification.fromJSON(data.verification), data.saml_connection && SamlAccountConnection.fromJSON(data.saml_connection));
-  }
-};
-var Web3Wallet = class _Web3Wallet {
-  constructor(id2, web3Wallet, verification) {
-    this.id = id2;
-    this.web3Wallet = web3Wallet;
-    this.verification = verification;
-  }
-  static fromJSON(data) {
-    return new _Web3Wallet(data.id, data.web3_wallet, data.verification && Verification.fromJSON(data.verification));
-  }
-};
-var User = class _User {
-  constructor(id2, passwordEnabled, totpEnabled, backupCodeEnabled, twoFactorEnabled, banned, locked, createdAt, updatedAt, imageUrl, hasImage, primaryEmailAddressId, primaryPhoneNumberId, primaryWeb3WalletId, lastSignInAt, externalId, username, firstName, lastName, publicMetadata = {}, privateMetadata = {}, unsafeMetadata = {}, emailAddresses = [], phoneNumbers = [], web3Wallets = [], externalAccounts = [], samlAccounts = [], lastActiveAt, createOrganizationEnabled, createOrganizationsLimit = null, deleteSelfEnabled, legalAcceptedAt) {
-    this.id = id2;
-    this.passwordEnabled = passwordEnabled;
-    this.totpEnabled = totpEnabled;
-    this.backupCodeEnabled = backupCodeEnabled;
-    this.twoFactorEnabled = twoFactorEnabled;
-    this.banned = banned;
-    this.locked = locked;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.imageUrl = imageUrl;
-    this.hasImage = hasImage;
-    this.primaryEmailAddressId = primaryEmailAddressId;
-    this.primaryPhoneNumberId = primaryPhoneNumberId;
-    this.primaryWeb3WalletId = primaryWeb3WalletId;
-    this.lastSignInAt = lastSignInAt;
-    this.externalId = externalId;
-    this.username = username;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.publicMetadata = publicMetadata;
-    this.privateMetadata = privateMetadata;
-    this.unsafeMetadata = unsafeMetadata;
-    this.emailAddresses = emailAddresses;
-    this.phoneNumbers = phoneNumbers;
-    this.web3Wallets = web3Wallets;
-    this.externalAccounts = externalAccounts;
-    this.samlAccounts = samlAccounts;
-    this.lastActiveAt = lastActiveAt;
-    this.createOrganizationEnabled = createOrganizationEnabled;
-    this.createOrganizationsLimit = createOrganizationsLimit;
-    this.deleteSelfEnabled = deleteSelfEnabled;
-    this.legalAcceptedAt = legalAcceptedAt;
-    this._raw = null;
-  }
-  get raw() {
-    return this._raw;
-  }
-  static fromJSON(data) {
-    const res = new _User(data.id, data.password_enabled, data.totp_enabled, data.backup_code_enabled, data.two_factor_enabled, data.banned, data.locked, data.created_at, data.updated_at, data.image_url, data.has_image, data.primary_email_address_id, data.primary_phone_number_id, data.primary_web3_wallet_id, data.last_sign_in_at, data.external_id, data.username, data.first_name, data.last_name, data.public_metadata, data.private_metadata, data.unsafe_metadata, (data.email_addresses || []).map((x4) => EmailAddress.fromJSON(x4)), (data.phone_numbers || []).map((x4) => PhoneNumber.fromJSON(x4)), (data.web3_wallets || []).map((x4) => Web3Wallet.fromJSON(x4)), (data.external_accounts || []).map((x4) => ExternalAccount.fromJSON(x4)), (data.saml_accounts || []).map((x4) => SamlAccount.fromJSON(x4)), data.last_active_at, data.create_organization_enabled, data.create_organizations_limit, data.delete_self_enabled, data.legal_accepted_at);
-    res._raw = data;
-    return res;
-  }
-  get primaryEmailAddress() {
-    return this.emailAddresses.find(({ id: id2 }) => id2 === this.primaryEmailAddressId) ?? null;
-  }
-  get primaryPhoneNumber() {
-    return this.phoneNumbers.find(({ id: id2 }) => id2 === this.primaryPhoneNumberId) ?? null;
-  }
-  get primaryWeb3Wallet() {
-    return this.web3Wallets.find(({ id: id2 }) => id2 === this.primaryWeb3WalletId) ?? null;
-  }
-  get fullName() {
-    return [this.firstName, this.lastName].join(" ").trim() || null;
-  }
-};
-function deserialize(payload) {
-  let data, totalCount;
-  if (Array.isArray(payload)) {
-    const data2 = payload.map((item) => jsonToObject(item));
-    return { data: data2 };
-  } else if (isPaginated(payload)) {
-    data = payload.data.map((item) => jsonToObject(item));
-    totalCount = payload.total_count;
-    return { data, totalCount };
-  } else {
-    return { data: jsonToObject(payload) };
-  }
-}
-function isPaginated(payload) {
-  if (!payload || typeof payload !== "object" || !("data" in payload)) {
-    return false;
-  }
-  return Array.isArray(payload.data) && payload.data !== undefined;
-}
-function getCount(item) {
-  return item.total_count;
-}
-function jsonToObject(item) {
-  if (typeof item !== "string" && "object" in item && "deleted" in item) {
-    return DeletedObject.fromJSON(item);
-  }
-  switch (item.object) {
-    case ObjectType.AccountlessApplication:
-      return AccountlessApplication.fromJSON(item);
-    case ObjectType.AllowlistIdentifier:
-      return AllowlistIdentifier.fromJSON(item);
-    case ObjectType.Client:
-      return Client.fromJSON(item);
-    case ObjectType.Cookies:
-      return Cookies2.fromJSON(item);
-    case ObjectType.EmailAddress:
-      return EmailAddress.fromJSON(item);
-    case ObjectType.Email:
-      return Email.fromJSON(item);
-    case ObjectType.Invitation:
-      return Invitation.fromJSON(item);
-    case ObjectType.OauthAccessToken:
-      return OauthAccessToken.fromJSON(item);
-    case ObjectType.Organization:
-      return Organization.fromJSON(item);
-    case ObjectType.OrganizationInvitation:
-      return OrganizationInvitation.fromJSON(item);
-    case ObjectType.OrganizationMembership:
-      return OrganizationMembership.fromJSON(item);
-    case ObjectType.PhoneNumber:
-      return PhoneNumber.fromJSON(item);
-    case ObjectType.RedirectUrl:
-      return RedirectUrl.fromJSON(item);
-    case ObjectType.SignInToken:
-      return SignInToken.fromJSON(item);
-    case ObjectType.Session:
-      return Session.fromJSON(item);
-    case ObjectType.SmsMessage:
-      return SMSMessage.fromJSON(item);
-    case ObjectType.Token:
-      return Token.fromJSON(item);
-    case ObjectType.TotalCount:
-      return getCount(item);
-    case ObjectType.User:
-      return User.fromJSON(item);
-    default:
-      return item;
-  }
-}
-function buildRequest(options) {
-  const requestFn = async (requestOptions) => {
-    const {
-      secretKey,
-      requireSecretKey = true,
-      apiUrl = API_URL,
-      apiVersion = API_VERSION,
-      userAgent = USER_AGENT
-    } = options;
-    const { path, method, queryParams, headerParams, bodyParams, formData } = requestOptions;
-    if (requireSecretKey) {
-      assertValidSecretKey(secretKey);
-    }
-    const url = joinPaths(apiUrl, apiVersion, path);
-    const finalUrl = new URL(url);
-    if (queryParams) {
-      const snakecasedQueryParams = import_snakecase_keys.default({ ...queryParams });
-      for (const [key, val] of Object.entries(snakecasedQueryParams)) {
-        if (val) {
-          [val].flat().forEach((v2) => finalUrl.searchParams.append(key, v2));
-        }
-      }
-    }
-    const headers = {
-      "Clerk-API-Version": SUPPORTED_BAPI_VERSION,
-      "User-Agent": userAgent,
-      ...headerParams
-    };
-    if (secretKey) {
-      headers.Authorization = `Bearer ${secretKey}`;
-    }
-    let res;
-    try {
-      if (formData) {
-        res = await runtime.fetch(finalUrl.href, {
-          method,
-          headers,
-          body: formData
-        });
-      } else {
-        headers["Content-Type"] = "application/json";
-        const hasBody = method !== "GET" && bodyParams && Object.keys(bodyParams).length > 0;
-        const body = hasBody ? { body: JSON.stringify(import_snakecase_keys.default(bodyParams, { deep: false })) } : null;
-        res = await runtime.fetch(finalUrl.href, {
-          method,
-          headers,
-          ...body
-        });
-      }
-      const isJSONResponse = res?.headers && res.headers?.get(constants.Headers.ContentType) === constants.ContentTypes.Json;
-      const responseBody = await (isJSONResponse ? res.json() : res.text());
-      if (!res.ok) {
-        return {
-          data: null,
-          errors: parseErrors2(responseBody),
-          status: res?.status,
-          statusText: res?.statusText,
-          clerkTraceId: getTraceId(responseBody, res?.headers),
-          retryAfter: getRetryAfter(res?.headers)
-        };
-      }
-      return {
-        ...deserialize(responseBody),
-        errors: null
-      };
-    } catch (err) {
-      if (err instanceof Error) {
-        return {
-          data: null,
-          errors: [
-            {
-              code: "unexpected_error",
-              message: err.message || "Unexpected error"
-            }
-          ],
-          clerkTraceId: getTraceId(err, res?.headers)
-        };
-      }
-      return {
-        data: null,
-        errors: parseErrors2(err),
-        status: res?.status,
-        statusText: res?.statusText,
-        clerkTraceId: getTraceId(err, res?.headers),
-        retryAfter: getRetryAfter(res?.headers)
-      };
-    }
-  };
-  return withLegacyRequestReturn(requestFn);
-}
-function getTraceId(data, headers) {
-  if (data && typeof data === "object" && "clerk_trace_id" in data && typeof data.clerk_trace_id === "string") {
-    return data.clerk_trace_id;
-  }
-  const cfRay = headers?.get("cf-ray");
-  return cfRay || "";
-}
-function getRetryAfter(headers) {
-  const retryAfter = headers?.get("Retry-After");
-  if (!retryAfter)
-    return;
-  const value = parseInt(retryAfter, 10);
-  if (isNaN(value))
-    return;
-  return value;
-}
-function parseErrors2(data) {
-  if (!!data && typeof data === "object" && "errors" in data) {
-    const errors2 = data.errors;
-    return errors2.length > 0 ? errors2.map(parseError) : [];
-  }
-  return [];
-}
-function withLegacyRequestReturn(cb) {
-  return async (...args) => {
-    const { data, errors: errors2, totalCount, status, statusText, clerkTraceId, retryAfter } = await cb(...args);
-    if (errors2) {
-      const error = new ClerkAPIResponseError(statusText || "", {
-        data: [],
-        status,
-        clerkTraceId,
-        retryAfter
-      });
-      error.errors = errors2;
-      throw error;
-    }
-    if (typeof totalCount !== "undefined") {
-      return { data, totalCount };
-    }
-    return data;
-  };
-}
-function createBackendApiClient(options) {
-  const request = buildRequest(options);
-  return {
-    __experimental_accountlessApplications: new AccountlessApplicationAPI(buildRequest({ ...options, requireSecretKey: false })),
-    allowlistIdentifiers: new AllowlistIdentifierAPI(request),
-    clients: new ClientAPI(request),
-    emailAddresses: new EmailAddressAPI(request),
-    invitations: new InvitationAPI(request),
-    organizations: new OrganizationAPI(request),
-    phoneNumbers: new PhoneNumberAPI(request),
-    redirectUrls: new RedirectUrlAPI(request),
-    sessions: new SessionAPI(request),
-    signInTokens: new SignInTokenAPI(request),
-    users: new UserAPI(request),
-    domains: new DomainAPI(request),
-    samlConnections: new SamlConnectionAPI(request),
-    testingTokens: new TestingTokenAPI(request)
-  };
-}
-var createDebug = (data) => {
-  return () => {
-    const res = { ...data };
-    res.secretKey = (res.secretKey || "").substring(0, 7);
-    res.jwtKey = (res.jwtKey || "").substring(0, 7);
-    return { ...res };
-  };
-};
-function signedInAuthObject(authenticateContext, sessionToken, sessionClaims) {
-  const {
-    act: actor,
-    sid: sessionId,
-    org_id: orgId,
-    org_role: orgRole,
-    org_slug: orgSlug,
-    org_permissions: orgPermissions,
-    sub: userId,
-    fva,
-    sts
-  } = sessionClaims;
-  const apiClient = createBackendApiClient(authenticateContext);
-  const getToken = createGetToken({
-    sessionId,
-    sessionToken,
-    fetcher: async (...args) => (await apiClient.sessions.getToken(...args)).jwt
-  });
-  const factorVerificationAge = fva ?? null;
-  const sessionStatus = sts ?? null;
-  return {
-    actor,
-    sessionClaims,
-    sessionId,
-    sessionStatus,
-    userId,
-    orgId,
-    orgRole,
-    orgSlug,
-    orgPermissions,
-    factorVerificationAge,
-    getToken,
-    has: createCheckAuthorization({ orgId, orgRole, orgPermissions, userId, factorVerificationAge }),
-    debug: createDebug({ ...authenticateContext, sessionToken })
-  };
-}
-function signedOutAuthObject(debugData) {
-  return {
-    sessionClaims: null,
-    sessionId: null,
-    sessionStatus: null,
-    userId: null,
-    actor: null,
-    orgId: null,
-    orgRole: null,
-    orgSlug: null,
-    orgPermissions: null,
-    factorVerificationAge: null,
-    getToken: () => Promise.resolve(null),
-    has: () => false,
-    debug: createDebug(debugData)
-  };
-}
-var createGetToken = (params) => {
-  const { fetcher, sessionToken, sessionId } = params || {};
-  return async (options = {}) => {
-    if (!sessionId) {
-      return null;
-    }
-    if (options.template) {
-      return fetcher(sessionId, options.template);
-    }
-    return sessionToken;
-  };
-};
-var AuthStatus = {
-  SignedIn: "signed-in",
-  SignedOut: "signed-out",
-  Handshake: "handshake"
-};
-var AuthErrorReason = {
-  ClientUATWithoutSessionToken: "client-uat-but-no-session-token",
-  DevBrowserMissing: "dev-browser-missing",
-  DevBrowserSync: "dev-browser-sync",
-  PrimaryRespondsToSyncing: "primary-responds-to-syncing",
-  SatelliteCookieNeedsSyncing: "satellite-needs-syncing",
-  SessionTokenAndUATMissing: "session-token-and-uat-missing",
-  SessionTokenMissing: "session-token-missing",
-  SessionTokenExpired: "session-token-expired",
-  SessionTokenIATBeforeClientUAT: "session-token-iat-before-client-uat",
-  SessionTokenNBF: "session-token-nbf",
-  SessionTokenIatInTheFuture: "session-token-iat-in-the-future",
-  SessionTokenWithoutClientUAT: "session-token-but-no-client-uat",
-  ActiveOrganizationMismatch: "active-organization-mismatch",
-  UnexpectedError: "unexpected-error"
-};
-function signedIn(authenticateContext, sessionClaims, headers = new Headers, token) {
-  const authObject = signedInAuthObject(authenticateContext, token, sessionClaims);
-  return {
-    status: AuthStatus.SignedIn,
-    reason: null,
-    message: null,
-    proxyUrl: authenticateContext.proxyUrl || "",
-    publishableKey: authenticateContext.publishableKey || "",
-    isSatellite: authenticateContext.isSatellite || false,
-    domain: authenticateContext.domain || "",
-    signInUrl: authenticateContext.signInUrl || "",
-    signUpUrl: authenticateContext.signUpUrl || "",
-    afterSignInUrl: authenticateContext.afterSignInUrl || "",
-    afterSignUpUrl: authenticateContext.afterSignUpUrl || "",
-    isSignedIn: true,
-    toAuth: () => authObject,
-    headers,
-    token
-  };
-}
-function signedOut(authenticateContext, reason, message = "", headers = new Headers) {
-  return withDebugHeaders({
-    status: AuthStatus.SignedOut,
-    reason,
-    message,
-    proxyUrl: authenticateContext.proxyUrl || "",
-    publishableKey: authenticateContext.publishableKey || "",
-    isSatellite: authenticateContext.isSatellite || false,
-    domain: authenticateContext.domain || "",
-    signInUrl: authenticateContext.signInUrl || "",
-    signUpUrl: authenticateContext.signUpUrl || "",
-    afterSignInUrl: authenticateContext.afterSignInUrl || "",
-    afterSignUpUrl: authenticateContext.afterSignUpUrl || "",
-    isSignedIn: false,
-    headers,
-    toAuth: () => signedOutAuthObject({ ...authenticateContext, status: AuthStatus.SignedOut, reason, message }),
-    token: null
-  });
-}
-function handshake(authenticateContext, reason, message = "", headers) {
-  return withDebugHeaders({
-    status: AuthStatus.Handshake,
-    reason,
-    message,
-    publishableKey: authenticateContext.publishableKey || "",
-    isSatellite: authenticateContext.isSatellite || false,
-    domain: authenticateContext.domain || "",
-    proxyUrl: authenticateContext.proxyUrl || "",
-    signInUrl: authenticateContext.signInUrl || "",
-    signUpUrl: authenticateContext.signUpUrl || "",
-    afterSignInUrl: authenticateContext.afterSignInUrl || "",
-    afterSignUpUrl: authenticateContext.afterSignUpUrl || "",
-    isSignedIn: false,
-    headers,
-    toAuth: () => null,
-    token: null
-  });
-}
-var withDebugHeaders = (requestState) => {
-  const headers = new Headers(requestState.headers || {});
-  if (requestState.message) {
-    try {
-      headers.set(constants.Headers.AuthMessage, requestState.message);
-    } catch {}
-  }
-  if (requestState.reason) {
-    try {
-      headers.set(constants.Headers.AuthReason, requestState.reason);
-    } catch {}
-  }
-  if (requestState.status) {
-    try {
-      headers.set(constants.Headers.AuthStatus, requestState.status);
-    } catch {}
-  }
-  requestState.headers = headers;
-  return requestState;
-};
-var ClerkUrl = class extends URL {
-  isCrossOrigin(other) {
-    return this.origin !== new URL(other.toString()).origin;
-  }
-};
-var createClerkUrl = (...args) => {
-  return new ClerkUrl(...args);
-};
-var ClerkRequest = class extends Request {
-  constructor(input, init) {
-    const url = typeof input !== "string" && "url" in input ? input.url : String(input);
-    super(url, init || typeof input === "string" ? undefined : input);
-    this.clerkUrl = this.deriveUrlFromHeaders(this);
-    this.cookies = this.parseCookies(this);
-  }
-  toJSON() {
-    return {
-      url: this.clerkUrl.href,
-      method: this.method,
-      headers: JSON.stringify(Object.fromEntries(this.headers)),
-      clerkUrl: this.clerkUrl.toString(),
-      cookies: JSON.stringify(Object.fromEntries(this.cookies))
-    };
-  }
-  deriveUrlFromHeaders(req) {
-    const initialUrl = new URL(req.url);
-    const forwardedProto = req.headers.get(constants.Headers.ForwardedProto);
-    const forwardedHost = req.headers.get(constants.Headers.ForwardedHost);
-    const host = req.headers.get(constants.Headers.Host);
-    const protocol = initialUrl.protocol;
-    const resolvedHost = this.getFirstValueFromHeader(forwardedHost) ?? host;
-    const resolvedProtocol = this.getFirstValueFromHeader(forwardedProto) ?? protocol?.replace(/[:/]/, "");
-    const origin = resolvedHost && resolvedProtocol ? `${resolvedProtocol}://${resolvedHost}` : initialUrl.origin;
-    if (origin === initialUrl.origin) {
-      return createClerkUrl(initialUrl);
-    }
-    return createClerkUrl(initialUrl.pathname + initialUrl.search, origin);
-  }
-  getFirstValueFromHeader(value) {
-    return value?.split(",")[0];
-  }
-  parseCookies(req) {
-    const cookiesRecord = import_cookie3.parse(this.decodeCookieValue(req.headers.get("cookie") || ""));
-    return new Map(Object.entries(cookiesRecord));
-  }
-  decodeCookieValue(str) {
-    return str ? str.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent) : str;
-  }
-};
-var createClerkRequest = (...args) => {
-  return args[0] instanceof ClerkRequest ? args[0] : new ClerkRequest(...args);
-};
-var cache = {};
-var lastUpdatedAt = 0;
-function getFromCache(kid) {
-  return cache[kid];
-}
-function getCacheValues() {
-  return Object.values(cache);
-}
-function setInCache(jwk, shouldExpire = true) {
-  cache[jwk.kid] = jwk;
-  lastUpdatedAt = shouldExpire ? Date.now() : -1;
-}
-var LocalJwkKid = "local";
-var PEM_HEADER = "-----BEGIN PUBLIC KEY-----";
-var PEM_TRAILER = "-----END PUBLIC KEY-----";
-var RSA_PREFIX = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA";
-var RSA_SUFFIX = "IDAQAB";
-function loadClerkJWKFromLocal(localKey) {
-  if (!getFromCache(LocalJwkKid)) {
-    if (!localKey) {
-      throw new TokenVerificationError({
-        action: TokenVerificationErrorAction.SetClerkJWTKey,
-        message: "Missing local JWK.",
-        reason: TokenVerificationErrorReason.LocalJWKMissing
-      });
-    }
-    const modulus = localKey.replace(/\r\n|\n|\r/g, "").replace(PEM_HEADER, "").replace(PEM_TRAILER, "").replace(RSA_PREFIX, "").replace(RSA_SUFFIX, "").replace(/\+/g, "-").replace(/\//g, "_");
-    setInCache({
-      kid: "local",
-      kty: "RSA",
-      alg: "RS256",
-      n: modulus,
-      e: "AQAB"
-    }, false);
-  }
-  return getFromCache(LocalJwkKid);
-}
-async function loadClerkJWKFromRemote({
-  secretKey,
-  apiUrl = API_URL,
-  apiVersion = API_VERSION,
-  kid,
-  skipJwksCache
-}) {
-  if (skipJwksCache || cacheHasExpired() || !getFromCache(kid)) {
-    if (!secretKey) {
-      throw new TokenVerificationError({
-        action: TokenVerificationErrorAction.ContactSupport,
-        message: "Failed to load JWKS from Clerk Backend or Frontend API.",
-        reason: TokenVerificationErrorReason.RemoteJWKFailedToLoad
-      });
-    }
-    const fetcher = () => fetchJWKSFromBAPI(apiUrl, secretKey, apiVersion);
-    const { keys } = await retry(fetcher);
-    if (!keys || !keys.length) {
-      throw new TokenVerificationError({
-        action: TokenVerificationErrorAction.ContactSupport,
-        message: "The JWKS endpoint did not contain any signing keys. Contact support@clerk.com.",
-        reason: TokenVerificationErrorReason.RemoteJWKFailedToLoad
-      });
-    }
-    keys.forEach((key) => setInCache(key));
-  }
-  const jwk = getFromCache(kid);
-  if (!jwk) {
-    const cacheValues = getCacheValues();
-    const jwkKeys = cacheValues.map((jwk2) => jwk2.kid).sort().join(", ");
-    throw new TokenVerificationError({
-      action: `Go to your Dashboard and validate your secret and public keys are correct. ${TokenVerificationErrorAction.ContactSupport} if the issue persists.`,
-      message: `Unable to find a signing key in JWKS that matches the kid='${kid}' of the provided session token. Please make sure that the __session cookie or the HTTP authorization header contain a Clerk-generated session JWT. The following kid is available: ${jwkKeys}`,
-      reason: TokenVerificationErrorReason.JWKKidMismatch
-    });
-  }
-  return jwk;
-}
-async function fetchJWKSFromBAPI(apiUrl, key, apiVersion) {
-  if (!key) {
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.SetClerkSecretKey,
-      message: "Missing Clerk Secret Key or API Key. Go to https://dashboard.clerk.com and get your key for your instance.",
-      reason: TokenVerificationErrorReason.RemoteJWKFailedToLoad
-    });
-  }
-  const url = new URL(apiUrl);
-  url.pathname = joinPaths(url.pathname, apiVersion, "/jwks");
-  const response = await runtime.fetch(url.href, {
-    headers: {
-      Authorization: `Bearer ${key}`,
-      "Clerk-API-Version": SUPPORTED_BAPI_VERSION,
-      "Content-Type": "application/json",
-      "User-Agent": USER_AGENT
-    }
-  });
-  if (!response.ok) {
-    const json2 = await response.json();
-    const invalidSecretKeyError = getErrorObjectByCode(json2?.errors, TokenVerificationErrorCode.InvalidSecretKey);
-    if (invalidSecretKeyError) {
-      const reason = TokenVerificationErrorReason.InvalidSecretKey;
-      throw new TokenVerificationError({
-        action: TokenVerificationErrorAction.ContactSupport,
-        message: invalidSecretKeyError.message,
-        reason
-      });
-    }
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.ContactSupport,
-      message: `Error loading Clerk JWKS from ${url.href} with code=${response.status}`,
-      reason: TokenVerificationErrorReason.RemoteJWKFailedToLoad
-    });
-  }
-  return response.json();
-}
-function cacheHasExpired() {
-  if (lastUpdatedAt === -1) {
-    return false;
-  }
-  const isExpired = Date.now() - lastUpdatedAt >= MAX_CACHE_LAST_UPDATED_AT_SECONDS * 1000;
-  if (isExpired) {
-    cache = {};
-  }
-  return isExpired;
-}
-var getErrorObjectByCode = (errors2, code) => {
-  if (!errors2) {
-    return null;
-  }
-  return errors2.find((err) => err.code === code);
-};
-async function verifyToken(token, options) {
-  const { data: decodedResult, errors: errors2 } = decodeJwt(token);
-  if (errors2) {
-    return { errors: errors2 };
-  }
-  const { header } = decodedResult;
-  const { kid } = header;
-  try {
-    let key;
-    if (options.jwtKey) {
-      key = loadClerkJWKFromLocal(options.jwtKey);
-    } else if (options.secretKey) {
-      key = await loadClerkJWKFromRemote({ ...options, kid });
-    } else {
-      return {
-        errors: [
-          new TokenVerificationError({
-            action: TokenVerificationErrorAction.SetClerkJWTKey,
-            message: "Failed to resolve JWK during verification.",
-            reason: TokenVerificationErrorReason.JWKFailedToResolve
-          })
-        ]
-      };
-    }
-    return await verifyJwt(token, { ...options, key });
-  } catch (error) {
-    return { errors: [error] };
-  }
-}
-var AuthenticateContext = class {
-  constructor(cookieSuffix, clerkRequest, options) {
-    this.cookieSuffix = cookieSuffix;
-    this.clerkRequest = clerkRequest;
-    this.initPublishableKeyValues(options);
-    this.initHeaderValues();
-    this.initCookieValues();
-    this.initHandshakeValues();
-    Object.assign(this, options);
-    this.clerkUrl = this.clerkRequest.clerkUrl;
-  }
-  get sessionToken() {
-    return this.sessionTokenInCookie || this.sessionTokenInHeader;
-  }
-  usesSuffixedCookies() {
-    const suffixedClientUat = this.getSuffixedCookie(constants.Cookies.ClientUat);
-    const clientUat = this.getCookie(constants.Cookies.ClientUat);
-    const suffixedSession = this.getSuffixedCookie(constants.Cookies.Session) || "";
-    const session = this.getCookie(constants.Cookies.Session) || "";
-    if (session && !this.tokenHasIssuer(session)) {
-      return false;
-    }
-    if (session && !this.tokenBelongsToInstance(session)) {
-      return true;
-    }
-    if (!suffixedClientUat && !suffixedSession) {
-      return false;
-    }
-    const { data: sessionData } = decodeJwt(session);
-    const sessionIat = sessionData?.payload.iat || 0;
-    const { data: suffixedSessionData } = decodeJwt(suffixedSession);
-    const suffixedSessionIat = suffixedSessionData?.payload.iat || 0;
-    if (suffixedClientUat !== "0" && clientUat !== "0" && sessionIat > suffixedSessionIat) {
-      return false;
-    }
-    if (suffixedClientUat === "0" && clientUat !== "0") {
-      return false;
-    }
-    if (this.instanceType !== "production") {
-      const isSuffixedSessionExpired = this.sessionExpired(suffixedSessionData);
-      if (suffixedClientUat !== "0" && clientUat === "0" && isSuffixedSessionExpired) {
-        return false;
-      }
-    }
-    if (!suffixedClientUat && suffixedSession) {
-      return false;
-    }
-    return true;
-  }
-  initPublishableKeyValues(options) {
-    assertValidPublishableKey(options.publishableKey);
-    this.publishableKey = options.publishableKey;
-    const pk = parsePublishableKey(this.publishableKey, {
-      fatal: true,
-      proxyUrl: options.proxyUrl,
-      domain: options.domain
-    });
-    this.instanceType = pk.instanceType;
-    this.frontendApi = pk.frontendApi;
-  }
-  initHeaderValues() {
-    this.sessionTokenInHeader = this.parseAuthorizationHeader(this.getHeader(constants.Headers.Authorization));
-    this.origin = this.getHeader(constants.Headers.Origin);
-    this.host = this.getHeader(constants.Headers.Host);
-    this.forwardedHost = this.getHeader(constants.Headers.ForwardedHost);
-    this.forwardedProto = this.getHeader(constants.Headers.CloudFrontForwardedProto) || this.getHeader(constants.Headers.ForwardedProto);
-    this.referrer = this.getHeader(constants.Headers.Referrer);
-    this.userAgent = this.getHeader(constants.Headers.UserAgent);
-    this.secFetchDest = this.getHeader(constants.Headers.SecFetchDest);
-    this.accept = this.getHeader(constants.Headers.Accept);
-  }
-  initCookieValues() {
-    this.sessionTokenInCookie = this.getSuffixedOrUnSuffixedCookie(constants.Cookies.Session);
-    this.refreshTokenInCookie = this.getSuffixedCookie(constants.Cookies.Refresh);
-    this.clientUat = Number.parseInt(this.getSuffixedOrUnSuffixedCookie(constants.Cookies.ClientUat) || "") || 0;
-  }
-  initHandshakeValues() {
-    this.devBrowserToken = this.getQueryParam(constants.QueryParameters.DevBrowser) || this.getSuffixedOrUnSuffixedCookie(constants.Cookies.DevBrowser);
-    this.handshakeToken = this.getQueryParam(constants.QueryParameters.Handshake) || this.getCookie(constants.Cookies.Handshake);
-    this.handshakeRedirectLoopCounter = Number(this.getCookie(constants.Cookies.RedirectCount)) || 0;
-  }
-  getQueryParam(name) {
-    return this.clerkRequest.clerkUrl.searchParams.get(name);
-  }
-  getHeader(name) {
-    return this.clerkRequest.headers.get(name) || undefined;
-  }
-  getCookie(name) {
-    return this.clerkRequest.cookies.get(name) || undefined;
-  }
-  getSuffixedCookie(name) {
-    return this.getCookie(getSuffixedCookieName(name, this.cookieSuffix)) || undefined;
-  }
-  getSuffixedOrUnSuffixedCookie(cookieName) {
-    if (this.usesSuffixedCookies()) {
-      return this.getSuffixedCookie(cookieName);
-    }
-    return this.getCookie(cookieName);
-  }
-  parseAuthorizationHeader(authorizationHeader) {
-    if (!authorizationHeader) {
-      return;
-    }
-    const [scheme, token] = authorizationHeader.split(" ", 2);
-    if (!token) {
-      return scheme;
-    }
-    if (scheme === "Bearer") {
-      return token;
-    }
-    return;
-  }
-  tokenHasIssuer(token) {
-    const { data, errors: errors2 } = decodeJwt(token);
-    if (errors2) {
-      return false;
-    }
-    return !!data.payload.iss;
-  }
-  tokenBelongsToInstance(token) {
-    if (!token) {
-      return false;
-    }
-    const { data, errors: errors2 } = decodeJwt(token);
-    if (errors2) {
-      return false;
-    }
-    const tokenIssuer = data.payload.iss.replace(/https?:\/\//gi, "");
-    return this.frontendApi === tokenIssuer;
-  }
-  sessionExpired(jwt) {
-    return !!jwt && jwt?.payload.exp <= Date.now() / 1000 >> 0;
-  }
-};
-var createAuthenticateContext = async (clerkRequest, options) => {
-  const cookieSuffix = options.publishableKey ? await getCookieSuffix(options.publishableKey, runtime.crypto.subtle) : "";
-  return new AuthenticateContext(cookieSuffix, clerkRequest, options);
-};
-var getCookieName = (cookieDirective) => {
-  return cookieDirective.split(";")[0]?.split("=")[0];
-};
-var getCookieValue = (cookieDirective) => {
-  return cookieDirective.split(";")[0]?.split("=")[1];
-};
-async function verifyHandshakeJwt(token, { key }) {
-  const { data: decoded, errors: errors2 } = decodeJwt(token);
-  if (errors2) {
-    throw errors2[0];
-  }
-  const { header, payload } = decoded;
-  const { typ, alg } = header;
-  assertHeaderType(typ);
-  assertHeaderAlgorithm(alg);
-  const { data: signatureValid, errors: signatureErrors } = await hasValidSignature(decoded, key);
-  if (signatureErrors) {
-    throw new TokenVerificationError({
-      reason: TokenVerificationErrorReason.TokenVerificationFailed,
-      message: `Error verifying handshake token. ${signatureErrors[0]}`
-    });
-  }
-  if (!signatureValid) {
-    throw new TokenVerificationError({
-      reason: TokenVerificationErrorReason.TokenInvalidSignature,
-      message: "Handshake signature is invalid."
-    });
-  }
-  return payload;
-}
-async function verifyHandshakeToken(token, options) {
-  const { secretKey, apiUrl, apiVersion, jwksCacheTtlInMs, jwtKey, skipJwksCache } = options;
-  const { data, errors: errors2 } = decodeJwt(token);
-  if (errors2) {
-    throw errors2[0];
-  }
-  const { kid } = data.header;
-  let key;
-  if (jwtKey) {
-    key = loadClerkJWKFromLocal(jwtKey);
-  } else if (secretKey) {
-    key = await loadClerkJWKFromRemote({ secretKey, apiUrl, apiVersion, kid, jwksCacheTtlInMs, skipJwksCache });
-  } else {
-    throw new TokenVerificationError({
-      action: TokenVerificationErrorAction.SetClerkJWTKey,
-      message: "Failed to resolve JWK during handshake verification.",
-      reason: TokenVerificationErrorReason.JWKFailedToResolve
-    });
-  }
-  return await verifyHandshakeJwt(token, {
-    key
-  });
-}
-var RefreshTokenErrorReason = {
-  NonEligibleNoCookie: "non-eligible-no-refresh-cookie",
-  NonEligibleNonGet: "non-eligible-non-get",
-  InvalidSessionToken: "invalid-session-token",
-  MissingApiClient: "missing-api-client",
-  MissingSessionToken: "missing-session-token",
-  MissingRefreshToken: "missing-refresh-token",
-  ExpiredSessionTokenDecodeFailed: "expired-session-token-decode-failed",
-  ExpiredSessionTokenMissingSidClaim: "expired-session-token-missing-sid-claim",
-  FetchError: "fetch-error",
-  UnexpectedSDKError: "unexpected-sdk-error",
-  UnexpectedBAPIError: "unexpected-bapi-error"
-};
-function assertSignInUrlExists(signInUrl, key) {
-  if (!signInUrl && isDevelopmentFromSecretKey(key)) {
-    throw new Error(`Missing signInUrl. Pass a signInUrl for dev instances if an app is satellite`);
-  }
-}
-function assertProxyUrlOrDomain(proxyUrlOrDomain) {
-  if (!proxyUrlOrDomain) {
-    throw new Error(`Missing domain and proxyUrl. A satellite application needs to specify a domain or a proxyUrl`);
-  }
-}
-function assertSignInUrlFormatAndOrigin(_signInUrl, origin) {
-  let signInUrl;
-  try {
-    signInUrl = new URL(_signInUrl);
-  } catch {
-    throw new Error(`The signInUrl needs to have a absolute url format.`);
-  }
-  if (signInUrl.origin === origin) {
-    throw new Error(`The signInUrl needs to be on a different origin than your satellite application.`);
-  }
-}
-function isRequestEligibleForHandshake(authenticateContext) {
-  const { accept, secFetchDest } = authenticateContext;
-  if (secFetchDest === "document" || secFetchDest === "iframe") {
-    return true;
-  }
-  if (!secFetchDest && accept?.startsWith("text/html")) {
-    return true;
-  }
-  return false;
-}
-function isRequestEligibleForRefresh(err, authenticateContext, request) {
-  return err.reason === TokenVerificationErrorReason.TokenExpired && !!authenticateContext.refreshTokenInCookie && request.method === "GET";
-}
-async function authenticateRequest(request, options) {
-  const authenticateContext = await createAuthenticateContext(createClerkRequest(request), options);
-  assertValidSecretKey(authenticateContext.secretKey);
-  if (authenticateContext.isSatellite) {
-    assertSignInUrlExists(authenticateContext.signInUrl, authenticateContext.secretKey);
-    if (authenticateContext.signInUrl && authenticateContext.origin) {
-      assertSignInUrlFormatAndOrigin(authenticateContext.signInUrl, authenticateContext.origin);
-    }
-    assertProxyUrlOrDomain(authenticateContext.proxyUrl || authenticateContext.domain);
-  }
-  const organizationSyncTargetMatchers = computeOrganizationSyncTargetMatchers(options.organizationSyncOptions);
-  function removeDevBrowserFromURL(url) {
-    const updatedURL = new URL(url);
-    updatedURL.searchParams.delete(constants.QueryParameters.DevBrowser);
-    updatedURL.searchParams.delete(constants.QueryParameters.LegacyDevBrowser);
-    return updatedURL;
-  }
-  function buildRedirectToHandshake({ handshakeReason }) {
-    const redirectUrl = removeDevBrowserFromURL(authenticateContext.clerkUrl);
-    const frontendApiNoProtocol = authenticateContext.frontendApi.replace(/http(s)?:\/\//, "");
-    const url = new URL(`https://${frontendApiNoProtocol}/v1/client/handshake`);
-    url.searchParams.append("redirect_url", redirectUrl?.href || "");
-    url.searchParams.append(constants.QueryParameters.SuffixedCookies, authenticateContext.usesSuffixedCookies().toString());
-    url.searchParams.append(constants.QueryParameters.HandshakeReason, handshakeReason);
-    if (authenticateContext.instanceType === "development" && authenticateContext.devBrowserToken) {
-      url.searchParams.append(constants.QueryParameters.DevBrowser, authenticateContext.devBrowserToken);
-    }
-    const toActivate = getOrganizationSyncTarget(authenticateContext.clerkUrl, options.organizationSyncOptions, organizationSyncTargetMatchers);
-    if (toActivate) {
-      const params = getOrganizationSyncQueryParams(toActivate);
-      params.forEach((value, key) => {
-        url.searchParams.append(key, value);
-      });
-    }
-    return new Headers({ [constants.Headers.Location]: url.href });
-  }
-  async function resolveHandshake() {
-    const headers = new Headers({
-      "Access-Control-Allow-Origin": "null",
-      "Access-Control-Allow-Credentials": "true"
-    });
-    const handshakePayload = await verifyHandshakeToken(authenticateContext.handshakeToken, authenticateContext);
-    const cookiesToSet = handshakePayload.handshake;
-    let sessionToken = "";
-    cookiesToSet.forEach((x4) => {
-      headers.append("Set-Cookie", x4);
-      if (getCookieName(x4).startsWith(constants.Cookies.Session)) {
-        sessionToken = getCookieValue(x4);
-      }
-    });
-    if (authenticateContext.instanceType === "development") {
-      const newUrl = new URL(authenticateContext.clerkUrl);
-      newUrl.searchParams.delete(constants.QueryParameters.Handshake);
-      newUrl.searchParams.delete(constants.QueryParameters.HandshakeHelp);
-      headers.append(constants.Headers.Location, newUrl.toString());
-      headers.set(constants.Headers.CacheControl, "no-store");
-    }
-    if (sessionToken === "") {
-      return signedOut(authenticateContext, AuthErrorReason.SessionTokenMissing, "", headers);
-    }
-    const { data, errors: [error] = [] } = await verifyToken(sessionToken, authenticateContext);
-    if (data) {
-      return signedIn(authenticateContext, data, headers, sessionToken);
-    }
-    if (authenticateContext.instanceType === "development" && (error?.reason === TokenVerificationErrorReason.TokenExpired || error?.reason === TokenVerificationErrorReason.TokenNotActiveYet || error?.reason === TokenVerificationErrorReason.TokenIatInTheFuture)) {
-      error.tokenCarrier = "cookie";
-      console.error(`Clerk: Clock skew detected. This usually means that your system clock is inaccurate. Clerk will attempt to account for the clock skew in development.
-
-To resolve this issue, make sure your system's clock is set to the correct time (e.g. turn off and on automatic time synchronization).
-
----
-
-${error.getFullMessage()}`);
-      const { data: retryResult, errors: [retryError] = [] } = await verifyToken(sessionToken, {
-        ...authenticateContext,
-        clockSkewInMs: 86400000
-      });
-      if (retryResult) {
-        return signedIn(authenticateContext, retryResult, headers, sessionToken);
-      }
-      throw new Error(retryError?.message || "Clerk: Handshake retry failed.");
-    }
-    throw new Error(error?.message || "Clerk: Handshake failed.");
-  }
-  async function refreshToken(authenticateContext2) {
-    if (!options.apiClient) {
-      return {
-        data: null,
-        error: {
-          message: "An apiClient is needed to perform token refresh.",
-          cause: { reason: RefreshTokenErrorReason.MissingApiClient }
-        }
-      };
-    }
-    const { sessionToken: expiredSessionToken, refreshTokenInCookie: refreshToken2 } = authenticateContext2;
-    if (!expiredSessionToken) {
-      return {
-        data: null,
-        error: {
-          message: "Session token must be provided.",
-          cause: { reason: RefreshTokenErrorReason.MissingSessionToken }
-        }
-      };
-    }
-    if (!refreshToken2) {
-      return {
-        data: null,
-        error: {
-          message: "Refresh token must be provided.",
-          cause: { reason: RefreshTokenErrorReason.MissingRefreshToken }
-        }
-      };
-    }
-    const { data: decodeResult, errors: decodedErrors } = decodeJwt(expiredSessionToken);
-    if (!decodeResult || decodedErrors) {
-      return {
-        data: null,
-        error: {
-          message: "Unable to decode the expired session token.",
-          cause: { reason: RefreshTokenErrorReason.ExpiredSessionTokenDecodeFailed, errors: decodedErrors }
-        }
-      };
-    }
-    if (!decodeResult?.payload?.sid) {
-      return {
-        data: null,
-        error: {
-          message: "Expired session token is missing the `sid` claim.",
-          cause: { reason: RefreshTokenErrorReason.ExpiredSessionTokenMissingSidClaim }
-        }
-      };
-    }
-    try {
-      const response = await options.apiClient.sessions.refreshSession(decodeResult.payload.sid, {
-        format: "cookie",
-        suffixed_cookies: authenticateContext2.usesSuffixedCookies(),
-        expired_token: expiredSessionToken || "",
-        refresh_token: refreshToken2 || "",
-        request_origin: authenticateContext2.clerkUrl.origin,
-        request_headers: Object.fromEntries(Array.from(request.headers.entries()).map(([k3, v2]) => [k3, [v2]]))
-      });
-      return { data: response.cookies, error: null };
-    } catch (err) {
-      if (err?.errors?.length) {
-        if (err.errors[0].code === "unexpected_error") {
-          return {
-            data: null,
-            error: {
-              message: `Fetch unexpected error`,
-              cause: { reason: RefreshTokenErrorReason.FetchError, errors: err.errors }
-            }
-          };
-        }
-        return {
-          data: null,
-          error: {
-            message: err.errors[0].code,
-            cause: { reason: err.errors[0].code, errors: err.errors }
-          }
-        };
-      } else {
-        return {
-          data: null,
-          error: {
-            message: `Unexpected Server/BAPI error`,
-            cause: { reason: RefreshTokenErrorReason.UnexpectedBAPIError, errors: [err] }
-          }
-        };
-      }
-    }
-  }
-  async function attemptRefresh(authenticateContext2) {
-    const { data: cookiesToSet, error } = await refreshToken(authenticateContext2);
-    if (!cookiesToSet || cookiesToSet.length === 0) {
-      return { data: null, error };
-    }
-    const headers = new Headers;
-    let sessionToken = "";
-    cookiesToSet.forEach((x4) => {
-      headers.append("Set-Cookie", x4);
-      if (getCookieName(x4).startsWith(constants.Cookies.Session)) {
-        sessionToken = getCookieValue(x4);
-      }
-    });
-    const { data: jwtPayload, errors: errors2 } = await verifyToken(sessionToken, authenticateContext2);
-    if (errors2) {
-      return {
-        data: null,
-        error: {
-          message: `Clerk: unable to verify refreshed session token.`,
-          cause: { reason: RefreshTokenErrorReason.InvalidSessionToken, errors: errors2 }
-        }
-      };
-    }
-    return { data: { jwtPayload, sessionToken, headers }, error: null };
-  }
-  function handleMaybeHandshakeStatus(authenticateContext2, reason, message, headers) {
-    if (isRequestEligibleForHandshake(authenticateContext2)) {
-      const handshakeHeaders = headers ?? buildRedirectToHandshake({ handshakeReason: reason });
-      if (handshakeHeaders.get(constants.Headers.Location)) {
-        handshakeHeaders.set(constants.Headers.CacheControl, "no-store");
-      }
-      const isRedirectLoop = setHandshakeInfiniteRedirectionLoopHeaders(handshakeHeaders);
-      if (isRedirectLoop) {
-        const msg = `Clerk: Refreshing the session token resulted in an infinite redirect loop. This usually means that your Clerk instance keys do not match - make sure to copy the correct publishable and secret keys from the Clerk dashboard.`;
-        console.log(msg);
-        return signedOut(authenticateContext2, reason, message);
-      }
-      return handshake(authenticateContext2, reason, message, handshakeHeaders);
-    }
-    return signedOut(authenticateContext2, reason, message);
-  }
-  function handleMaybeOrganizationSyncHandshake(authenticateContext2, auth) {
-    const organizationSyncTarget = getOrganizationSyncTarget(authenticateContext2.clerkUrl, options.organizationSyncOptions, organizationSyncTargetMatchers);
-    if (!organizationSyncTarget) {
-      return null;
-    }
-    let mustActivate = false;
-    if (organizationSyncTarget.type === "organization") {
-      if (organizationSyncTarget.organizationSlug && organizationSyncTarget.organizationSlug !== auth.orgSlug) {
-        mustActivate = true;
-      }
-      if (organizationSyncTarget.organizationId && organizationSyncTarget.organizationId !== auth.orgId) {
-        mustActivate = true;
-      }
-    }
-    if (organizationSyncTarget.type === "personalAccount" && auth.orgId) {
-      mustActivate = true;
-    }
-    if (!mustActivate) {
-      return null;
-    }
-    if (authenticateContext2.handshakeRedirectLoopCounter > 0) {
-      console.warn("Clerk: Organization activation handshake loop detected. This is likely due to an invalid organization ID or slug. Skipping organization activation.");
-      return null;
-    }
-    const handshakeState = handleMaybeHandshakeStatus(authenticateContext2, AuthErrorReason.ActiveOrganizationMismatch, "");
-    if (handshakeState.status !== "handshake") {
-      return null;
-    }
-    return handshakeState;
-  }
-  async function authenticateRequestWithTokenInHeader() {
-    const { sessionTokenInHeader } = authenticateContext;
-    try {
-      const { data, errors: errors2 } = await verifyToken(sessionTokenInHeader, authenticateContext);
-      if (errors2) {
-        throw errors2[0];
-      }
-      return signedIn(authenticateContext, data, undefined, sessionTokenInHeader);
-    } catch (err) {
-      return handleError(err, "header");
-    }
-  }
-  function setHandshakeInfiniteRedirectionLoopHeaders(headers) {
-    if (authenticateContext.handshakeRedirectLoopCounter === 3) {
-      return true;
-    }
-    const newCounterValue = authenticateContext.handshakeRedirectLoopCounter + 1;
-    const cookieName = constants.Cookies.RedirectCount;
-    headers.append("Set-Cookie", `${cookieName}=${newCounterValue}; SameSite=Lax; HttpOnly; Max-Age=3`);
-    return false;
-  }
-  function handleHandshakeTokenVerificationErrorInDevelopment(error) {
-    if (error.reason === TokenVerificationErrorReason.TokenInvalidSignature) {
-      const msg = `Clerk: Handshake token verification failed due to an invalid signature. If you have switched Clerk keys locally, clear your cookies and try again.`;
-      throw new Error(msg);
-    }
-    throw new Error(`Clerk: Handshake token verification failed: ${error.getFullMessage()}.`);
-  }
-  async function authenticateRequestWithTokenInCookie() {
-    const hasActiveClient = authenticateContext.clientUat;
-    const hasSessionToken = !!authenticateContext.sessionTokenInCookie;
-    const hasDevBrowserToken = !!authenticateContext.devBrowserToken;
-    if (authenticateContext.handshakeToken) {
-      try {
-        return await resolveHandshake();
-      } catch (error) {
-        if (error instanceof TokenVerificationError && authenticateContext.instanceType === "development") {
-          handleHandshakeTokenVerificationErrorInDevelopment(error);
-        } else {
-          console.error("Clerk: unable to resolve handshake:", error);
-        }
-      }
-    }
-    if (authenticateContext.instanceType === "development" && authenticateContext.clerkUrl.searchParams.has(constants.QueryParameters.DevBrowser)) {
-      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.DevBrowserSync, "");
-    }
-    const isRequestEligibleForMultiDomainSync = authenticateContext.isSatellite && authenticateContext.secFetchDest === "document";
-    if (authenticateContext.instanceType === "production" && isRequestEligibleForMultiDomainSync) {
-      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.SatelliteCookieNeedsSyncing, "");
-    }
-    if (authenticateContext.instanceType === "development" && isRequestEligibleForMultiDomainSync && !authenticateContext.clerkUrl.searchParams.has(constants.QueryParameters.ClerkSynced)) {
-      const redirectURL = new URL(authenticateContext.signInUrl);
-      redirectURL.searchParams.append(constants.QueryParameters.ClerkRedirectUrl, authenticateContext.clerkUrl.toString());
-      const headers = new Headers({ [constants.Headers.Location]: redirectURL.toString() });
-      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.SatelliteCookieNeedsSyncing, "", headers);
-    }
-    const redirectUrl = new URL(authenticateContext.clerkUrl).searchParams.get(constants.QueryParameters.ClerkRedirectUrl);
-    if (authenticateContext.instanceType === "development" && !authenticateContext.isSatellite && redirectUrl) {
-      const redirectBackToSatelliteUrl = new URL(redirectUrl);
-      if (authenticateContext.devBrowserToken) {
-        redirectBackToSatelliteUrl.searchParams.append(constants.QueryParameters.DevBrowser, authenticateContext.devBrowserToken);
-      }
-      redirectBackToSatelliteUrl.searchParams.append(constants.QueryParameters.ClerkSynced, "true");
-      const headers = new Headers({ [constants.Headers.Location]: redirectBackToSatelliteUrl.toString() });
-      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.PrimaryRespondsToSyncing, "", headers);
-    }
-    if (authenticateContext.instanceType === "development" && !hasDevBrowserToken) {
-      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.DevBrowserMissing, "");
-    }
-    if (!hasActiveClient && !hasSessionToken) {
-      return signedOut(authenticateContext, AuthErrorReason.SessionTokenAndUATMissing, "");
-    }
-    if (!hasActiveClient && hasSessionToken) {
-      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.SessionTokenWithoutClientUAT, "");
-    }
-    if (hasActiveClient && !hasSessionToken) {
-      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.ClientUATWithoutSessionToken, "");
-    }
-    const { data: decodeResult, errors: decodedErrors } = decodeJwt(authenticateContext.sessionTokenInCookie);
-    if (decodedErrors) {
-      return handleError(decodedErrors[0], "cookie");
-    }
-    if (decodeResult.payload.iat < authenticateContext.clientUat) {
-      return handleMaybeHandshakeStatus(authenticateContext, AuthErrorReason.SessionTokenIATBeforeClientUAT, "");
-    }
-    try {
-      const { data, errors: errors2 } = await verifyToken(authenticateContext.sessionTokenInCookie, authenticateContext);
-      if (errors2) {
-        throw errors2[0];
-      }
-      const signedInRequestState = signedIn(authenticateContext, data, undefined, authenticateContext.sessionTokenInCookie);
-      const handshakeRequestState = handleMaybeOrganizationSyncHandshake(authenticateContext, signedInRequestState.toAuth());
-      if (handshakeRequestState) {
-        return handshakeRequestState;
-      }
-      return signedInRequestState;
-    } catch (err) {
-      return handleError(err, "cookie");
-    }
-    return signedOut(authenticateContext, AuthErrorReason.UnexpectedError);
-  }
-  async function handleError(err, tokenCarrier) {
-    if (!(err instanceof TokenVerificationError)) {
-      return signedOut(authenticateContext, AuthErrorReason.UnexpectedError);
-    }
-    let refreshError;
-    if (isRequestEligibleForRefresh(err, authenticateContext, request)) {
-      const { data, error } = await attemptRefresh(authenticateContext);
-      if (data) {
-        return signedIn(authenticateContext, data.jwtPayload, data.headers, data.sessionToken);
-      }
-      if (error?.cause?.reason) {
-        refreshError = error.cause.reason;
-      } else {
-        refreshError = RefreshTokenErrorReason.UnexpectedSDKError;
-      }
-    } else {
-      if (request.method !== "GET") {
-        refreshError = RefreshTokenErrorReason.NonEligibleNonGet;
-      } else if (!authenticateContext.refreshTokenInCookie) {
-        refreshError = RefreshTokenErrorReason.NonEligibleNoCookie;
-      } else {
-        refreshError = null;
-      }
-    }
-    err.tokenCarrier = tokenCarrier;
-    const reasonToHandshake = [
-      TokenVerificationErrorReason.TokenExpired,
-      TokenVerificationErrorReason.TokenNotActiveYet,
-      TokenVerificationErrorReason.TokenIatInTheFuture
-    ].includes(err.reason);
-    if (reasonToHandshake) {
-      return handleMaybeHandshakeStatus(authenticateContext, convertTokenVerificationErrorReasonToAuthErrorReason({ tokenError: err.reason, refreshError }), err.getFullMessage());
-    }
-    return signedOut(authenticateContext, err.reason, err.getFullMessage());
-  }
-  if (authenticateContext.sessionTokenInHeader) {
-    return authenticateRequestWithTokenInHeader();
-  }
-  return authenticateRequestWithTokenInCookie();
-}
-var debugRequestState = (params) => {
-  const { isSignedIn, proxyUrl, reason, message, publishableKey, isSatellite, domain } = params;
-  return { isSignedIn, proxyUrl, reason, message, publishableKey, isSatellite, domain };
-};
-function computeOrganizationSyncTargetMatchers(options) {
-  let personalAccountMatcher = null;
-  if (options?.personalAccountPatterns) {
-    try {
-      personalAccountMatcher = match(options.personalAccountPatterns);
-    } catch (e) {
-      throw new Error(`Invalid personal account pattern "${options.personalAccountPatterns}": "${e}"`);
-    }
-  }
-  let organizationMatcher = null;
-  if (options?.organizationPatterns) {
-    try {
-      organizationMatcher = match(options.organizationPatterns);
-    } catch (e) {
-      throw new Error(`Clerk: Invalid organization pattern "${options.organizationPatterns}": "${e}"`);
-    }
-  }
-  return {
-    OrganizationMatcher: organizationMatcher,
-    PersonalAccountMatcher: personalAccountMatcher
-  };
-}
-function getOrganizationSyncTarget(url, options, matchers) {
-  if (!options) {
-    return null;
-  }
-  if (matchers.OrganizationMatcher) {
-    let orgResult;
-    try {
-      orgResult = matchers.OrganizationMatcher(url.pathname);
-    } catch (e) {
-      console.error(`Clerk: Failed to apply organization pattern "${options.organizationPatterns}" to a path`, e);
-      return null;
-    }
-    if (orgResult && "params" in orgResult) {
-      const params = orgResult.params;
-      if ("id" in params && typeof params.id === "string") {
-        return { type: "organization", organizationId: params.id };
-      }
-      if ("slug" in params && typeof params.slug === "string") {
-        return { type: "organization", organizationSlug: params.slug };
-      }
-      console.warn("Clerk: Detected an organization pattern match, but no organization ID or slug was found in the URL. Does the pattern include `:id` or `:slug`?");
-    }
-  }
-  if (matchers.PersonalAccountMatcher) {
-    let personalResult;
-    try {
-      personalResult = matchers.PersonalAccountMatcher(url.pathname);
-    } catch (e) {
-      console.error(`Failed to apply personal account pattern "${options.personalAccountPatterns}" to a path`, e);
-      return null;
-    }
-    if (personalResult) {
-      return { type: "personalAccount" };
-    }
-  }
-  return null;
-}
-function getOrganizationSyncQueryParams(toActivate) {
-  const ret = /* @__PURE__ */ new Map;
-  if (toActivate.type === "personalAccount") {
-    ret.set("organization_id", "");
-  }
-  if (toActivate.type === "organization") {
-    if (toActivate.organizationId) {
-      ret.set("organization_id", toActivate.organizationId);
-    }
-    if (toActivate.organizationSlug) {
-      ret.set("organization_id", toActivate.organizationSlug);
-    }
-  }
-  return ret;
-}
-var convertTokenVerificationErrorReasonToAuthErrorReason = ({
-  tokenError,
-  refreshError
-}) => {
-  switch (tokenError) {
-    case TokenVerificationErrorReason.TokenExpired:
-      return `${AuthErrorReason.SessionTokenExpired}-refresh-${refreshError}`;
-    case TokenVerificationErrorReason.TokenNotActiveYet:
-      return AuthErrorReason.SessionTokenNBF;
-    case TokenVerificationErrorReason.TokenIatInTheFuture:
-      return AuthErrorReason.SessionTokenIatInTheFuture;
-    default:
-      return AuthErrorReason.UnexpectedError;
-  }
-};
-function mergePreDefinedOptions(preDefinedOptions, options) {
-  return Object.keys(preDefinedOptions).reduce((obj, key) => {
-    return { ...obj, [key]: options[key] || obj[key] };
-  }, { ...preDefinedOptions });
-}
-var defaultOptions2 = {
-  secretKey: "",
-  jwtKey: "",
-  apiUrl: undefined,
-  apiVersion: undefined,
-  proxyUrl: "",
-  publishableKey: "",
-  isSatellite: false,
-  domain: "",
-  audience: ""
-};
-function createAuthenticateRequest(params) {
-  const buildTimeOptions = mergePreDefinedOptions(defaultOptions2, params.options);
-  const apiClient = params.apiClient;
-  const authenticateRequest2 = (request, options = {}) => {
-    const { apiUrl, apiVersion } = buildTimeOptions;
-    const runTimeOptions = mergePreDefinedOptions(buildTimeOptions, options);
-    return authenticateRequest(request, {
-      ...options,
-      ...runTimeOptions,
-      apiUrl,
-      apiVersion,
-      apiClient
-    });
-  };
-  return {
-    authenticateRequest: authenticateRequest2,
-    debugRequestState
-  };
-}
-
-// node_modules/@clerk/backend/dist/chunk-P263NW7Z.mjs
-function withLegacyReturn(cb) {
-  return async (...args) => {
-    const { data, errors: errors2 } = await cb(...args);
-    if (errors2) {
-      throw errors2[0];
-    }
-    return data;
-  };
-}
-
-// node_modules/@clerk/shared/dist/chunk-RWYTRAIK.mjs
-function snakeToCamel(str) {
-  return str ? str.replace(/([-_][a-z])/g, (match2) => match2.toUpperCase().replace(/-|_/, "")) : "";
-}
-function camelToSnake(str) {
-  return str ? str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`) : "";
-}
-var createDeepObjectTransformer = (transform) => {
-  const deepTransform = (obj) => {
-    if (!obj) {
-      return obj;
-    }
-    if (Array.isArray(obj)) {
-      return obj.map((el2) => {
-        if (typeof el2 === "object" || Array.isArray(el2)) {
-          return deepTransform(el2);
-        }
-        return el2;
-      });
-    }
-    const copy = { ...obj };
-    const keys = Object.keys(copy);
-    for (const oldName of keys) {
-      const newName = transform(oldName.toString());
-      if (newName !== oldName) {
-        copy[newName] = copy[oldName];
-        delete copy[oldName];
-      }
-      if (typeof copy[newName] === "object") {
-        copy[newName] = deepTransform(copy[newName]);
-      }
-    }
-    return copy;
-  };
-  return deepTransform;
-};
-var deepCamelToSnake = createDeepObjectTransformer(camelToSnake);
-var deepSnakeToCamel = createDeepObjectTransformer(snakeToCamel);
-function isTruthy(value) {
-  if (typeof value === `boolean`) {
-    return value;
-  }
-  if (value === undefined || value === null) {
-    return false;
-  }
-  if (typeof value === `string`) {
-    if (value.toLowerCase() === `true`) {
-      return true;
-    }
-    if (value.toLowerCase() === `false`) {
-      return false;
-    }
-  }
-  const number = parseInt(value, 10);
-  if (isNaN(number)) {
-    return false;
-  }
-  if (number > 0) {
-    return true;
-  }
-  return false;
-}
-
-// node_modules/@clerk/shared/dist/chunk-L6WULBPV.mjs
-var DEFAULT_CACHE_TTL_MS = 86400000;
-var _storageKey;
-var _cacheTtl;
-var _TelemetryEventThrottler_instances;
-var generateKey_fn;
-var cache_get;
-var isValidBrowser_get;
-var TelemetryEventThrottler = class {
-  constructor() {
-    __privateAdd(this, _TelemetryEventThrottler_instances);
-    __privateAdd(this, _storageKey, "clerk_telemetry_throttler");
-    __privateAdd(this, _cacheTtl, DEFAULT_CACHE_TTL_MS);
-  }
-  isEventThrottled(payload) {
-    if (!__privateGet(this, _TelemetryEventThrottler_instances, isValidBrowser_get)) {
-      return false;
-    }
-    const now = Date.now();
-    const key = __privateMethod(this, _TelemetryEventThrottler_instances, generateKey_fn).call(this, payload);
-    const entry = __privateGet(this, _TelemetryEventThrottler_instances, cache_get)?.[key];
-    if (!entry) {
-      const updatedCache = {
-        ...__privateGet(this, _TelemetryEventThrottler_instances, cache_get),
-        [key]: now
-      };
-      localStorage.setItem(__privateGet(this, _storageKey), JSON.stringify(updatedCache));
-    }
-    const shouldInvalidate = entry && now - entry > __privateGet(this, _cacheTtl);
-    if (shouldInvalidate) {
-      const updatedCache = __privateGet(this, _TelemetryEventThrottler_instances, cache_get);
-      delete updatedCache[key];
-      localStorage.setItem(__privateGet(this, _storageKey), JSON.stringify(updatedCache));
-    }
-    return !!entry;
-  }
-};
-_storageKey = new WeakMap;
-_cacheTtl = new WeakMap;
-_TelemetryEventThrottler_instances = new WeakSet;
-generateKey_fn = function(event) {
-  const { sk: _sk, pk: _pk, payload, ...rest } = event;
-  const sanitizedEvent = {
-    ...payload,
-    ...rest
-  };
-  return JSON.stringify(Object.keys({
-    ...payload,
-    ...rest
-  }).sort().map((key) => sanitizedEvent[key]));
-};
-cache_get = function() {
-  const cacheString = localStorage.getItem(__privateGet(this, _storageKey));
-  if (!cacheString) {
-    return {};
-  }
-  return JSON.parse(cacheString);
-};
-isValidBrowser_get = function() {
-  if (typeof window === "undefined") {
-    return false;
-  }
-  const storage = window.localStorage;
-  if (!storage) {
-    return false;
-  }
-  try {
-    const testKey = "test";
-    storage.setItem(testKey, testKey);
-    storage.removeItem(testKey);
-    return true;
-  } catch (err) {
-    const isQuotaExceededError = err instanceof DOMException && (err.name === "QuotaExceededError" || err.name === "NS_ERROR_DOM_QUOTA_REACHED");
-    if (isQuotaExceededError && storage.length > 0) {
-      storage.removeItem(__privateGet(this, _storageKey));
-    }
-    return false;
-  }
-};
-var DEFAULT_CONFIG = {
-  samplingRate: 1,
-  maxBufferSize: 5,
-  endpoint: "https://clerk-telemetry.com"
-};
-var _config;
-var _eventThrottler;
-var _metadata;
-var _buffer;
-var _pendingFlush;
-var _TelemetryCollector_instances;
-var shouldRecord_fn;
-var shouldBeSampled_fn;
-var scheduleFlush_fn;
-var flush_fn;
-var logEvent_fn;
-var getSDKMetadata_fn;
-var preparePayload_fn;
-var TelemetryCollector = class {
-  constructor(options) {
-    __privateAdd(this, _TelemetryCollector_instances);
-    __privateAdd(this, _config);
-    __privateAdd(this, _eventThrottler);
-    __privateAdd(this, _metadata, {});
-    __privateAdd(this, _buffer, []);
-    __privateAdd(this, _pendingFlush);
-    __privateSet(this, _config, {
-      maxBufferSize: options.maxBufferSize ?? DEFAULT_CONFIG.maxBufferSize,
-      samplingRate: options.samplingRate ?? DEFAULT_CONFIG.samplingRate,
-      disabled: options.disabled ?? false,
-      debug: options.debug ?? false,
-      endpoint: DEFAULT_CONFIG.endpoint
-    });
-    if (!options.clerkVersion && typeof window === "undefined") {
-      __privateGet(this, _metadata).clerkVersion = "";
-    } else {
-      __privateGet(this, _metadata).clerkVersion = options.clerkVersion ?? "";
-    }
-    __privateGet(this, _metadata).sdk = options.sdk;
-    __privateGet(this, _metadata).sdkVersion = options.sdkVersion;
-    __privateGet(this, _metadata).publishableKey = options.publishableKey ?? "";
-    const parsedKey = parsePublishableKey(options.publishableKey);
-    if (parsedKey) {
-      __privateGet(this, _metadata).instanceType = parsedKey.instanceType;
-    }
-    if (options.secretKey) {
-      __privateGet(this, _metadata).secretKey = options.secretKey.substring(0, 16);
-    }
-    __privateSet(this, _eventThrottler, new TelemetryEventThrottler);
-  }
-  get isEnabled() {
-    if (__privateGet(this, _metadata).instanceType !== "development") {
-      return false;
-    }
-    if (__privateGet(this, _config).disabled || typeof process !== "undefined" && isTruthy(process.env.CLERK_TELEMETRY_DISABLED)) {
-      return false;
-    }
-    if (typeof window !== "undefined" && !!window?.navigator?.webdriver) {
-      return false;
-    }
-    return true;
-  }
-  get isDebug() {
-    return __privateGet(this, _config).debug || typeof process !== "undefined" && isTruthy(process.env.CLERK_TELEMETRY_DEBUG);
-  }
-  record(event) {
-    const preparedPayload = __privateMethod(this, _TelemetryCollector_instances, preparePayload_fn).call(this, event.event, event.payload);
-    __privateMethod(this, _TelemetryCollector_instances, logEvent_fn).call(this, preparedPayload.event, preparedPayload);
-    if (!__privateMethod(this, _TelemetryCollector_instances, shouldRecord_fn).call(this, preparedPayload, event.eventSamplingRate)) {
-      return;
-    }
-    __privateGet(this, _buffer).push(preparedPayload);
-    __privateMethod(this, _TelemetryCollector_instances, scheduleFlush_fn).call(this);
-  }
-};
-_config = new WeakMap;
-_eventThrottler = new WeakMap;
-_metadata = new WeakMap;
-_buffer = new WeakMap;
-_pendingFlush = new WeakMap;
-_TelemetryCollector_instances = new WeakSet;
-shouldRecord_fn = function(preparedPayload, eventSamplingRate) {
-  return this.isEnabled && !this.isDebug && __privateMethod(this, _TelemetryCollector_instances, shouldBeSampled_fn).call(this, preparedPayload, eventSamplingRate);
-};
-shouldBeSampled_fn = function(preparedPayload, eventSamplingRate) {
-  const randomSeed = Math.random();
-  const toBeSampled = randomSeed <= __privateGet(this, _config).samplingRate && (typeof eventSamplingRate === "undefined" || randomSeed <= eventSamplingRate);
-  if (!toBeSampled) {
-    return false;
-  }
-  return !__privateGet(this, _eventThrottler).isEventThrottled(preparedPayload);
-};
-scheduleFlush_fn = function() {
-  if (typeof window === "undefined") {
-    __privateMethod(this, _TelemetryCollector_instances, flush_fn).call(this);
-    return;
-  }
-  const isBufferFull = __privateGet(this, _buffer).length >= __privateGet(this, _config).maxBufferSize;
-  if (isBufferFull) {
-    if (__privateGet(this, _pendingFlush)) {
-      const cancel = typeof cancelIdleCallback !== "undefined" ? cancelIdleCallback : clearTimeout;
-      cancel(__privateGet(this, _pendingFlush));
-    }
-    __privateMethod(this, _TelemetryCollector_instances, flush_fn).call(this);
-    return;
-  }
-  if (__privateGet(this, _pendingFlush)) {
-    return;
-  }
-  if ("requestIdleCallback" in window) {
-    __privateSet(this, _pendingFlush, requestIdleCallback(() => {
-      __privateMethod(this, _TelemetryCollector_instances, flush_fn).call(this);
-    }));
-  } else {
-    __privateSet(this, _pendingFlush, setTimeout(() => {
-      __privateMethod(this, _TelemetryCollector_instances, flush_fn).call(this);
-    }, 0));
-  }
-};
-flush_fn = function() {
-  fetch(new URL("/v1/event", __privateGet(this, _config).endpoint), {
-    method: "POST",
-    body: JSON.stringify({
-      events: __privateGet(this, _buffer)
-    }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).catch(() => {
-    return;
-  }).then(() => {
-    __privateSet(this, _buffer, []);
-  }).catch(() => {
-    return;
-  });
-};
-logEvent_fn = function(event, payload) {
-  if (!this.isDebug) {
-    return;
-  }
-  if (typeof console.groupCollapsed !== "undefined") {
-    console.groupCollapsed("[clerk/telemetry]", event);
-    console.log(payload);
-    console.groupEnd();
-  } else {
-    console.log("[clerk/telemetry]", event, payload);
-  }
-};
-getSDKMetadata_fn = function() {
-  let sdkMetadata = {
-    name: __privateGet(this, _metadata).sdk,
-    version: __privateGet(this, _metadata).sdkVersion
-  };
-  if (typeof window !== "undefined" && window.Clerk) {
-    sdkMetadata = { ...sdkMetadata, ...window.Clerk.constructor.sdkMetadata };
-  }
-  return sdkMetadata;
-};
-preparePayload_fn = function(event, payload) {
-  const sdkMetadata = __privateMethod(this, _TelemetryCollector_instances, getSDKMetadata_fn).call(this);
-  return {
-    event,
-    cv: __privateGet(this, _metadata).clerkVersion ?? "",
-    it: __privateGet(this, _metadata).instanceType ?? "",
-    sdk: sdkMetadata.name,
-    sdkv: sdkMetadata.version,
-    ...__privateGet(this, _metadata).publishableKey ? { pk: __privateGet(this, _metadata).publishableKey } : {},
-    ...__privateGet(this, _metadata).secretKey ? { sk: __privateGet(this, _metadata).secretKey } : {},
-    payload
-  };
-};
-
-// node_modules/@clerk/backend/dist/index.mjs
-var verifyToken2 = withLegacyReturn(verifyToken);
-function createClerkClient(options) {
-  const opts = { ...options };
-  const apiClient = createBackendApiClient(opts);
-  const requestState = createAuthenticateRequest({ options: opts, apiClient });
-  const telemetry = new TelemetryCollector({
-    ...options.telemetry,
-    publishableKey: opts.publishableKey,
-    secretKey: opts.secretKey,
-    samplingRate: 0.1,
-    ...opts.sdkMetadata ? { sdk: opts.sdkMetadata.name, sdkVersion: opts.sdkMetadata.version } : {}
-  });
-  return {
-    ...apiClient,
-    ...requestState,
-    telemetry
-  };
-}
-
-// node_modules/hono/dist/helper/adapter/index.js
-var env = (c3, runtime2) => {
-  const global2 = globalThis;
-  const globalEnv = global2?.process?.env;
-  runtime2 ??= getRuntimeKey();
-  const runtimeEnvHandlers = {
-    bun: () => globalEnv,
-    node: () => globalEnv,
-    "edge-light": () => globalEnv,
-    deno: () => {
-      return Deno.env.toObject();
-    },
-    workerd: () => c3.env,
-    fastly: () => ({}),
-    other: () => ({})
-  };
-  return runtimeEnvHandlers[runtime2]();
-};
-var knownUserAgents = {
-  deno: "Deno",
-  bun: "Bun",
-  workerd: "Cloudflare-Workers",
-  node: "Node.js"
-};
-var getRuntimeKey = () => {
-  const global2 = globalThis;
-  const userAgentSupported = typeof navigator !== "undefined" && typeof navigator.userAgent === "string";
-  if (userAgentSupported) {
-    for (const [runtimeKey, userAgent] of Object.entries(knownUserAgents)) {
-      if (checkUserAgentEquals(userAgent)) {
-        return runtimeKey;
-      }
-    }
-  }
-  if (typeof global2?.EdgeRuntime === "string") {
-    return "edge-light";
-  }
-  if (global2?.fastly !== undefined) {
-    return "fastly";
-  }
-  if (global2?.process?.release?.name === "node") {
-    return "node";
-  }
-  return "other";
-};
-var checkUserAgentEquals = (platform) => {
-  const userAgent = navigator.userAgent;
-  return userAgent.startsWith(platform);
-};
-
-// node_modules/@hono/clerk-auth/dist/index.js
-var getAuth = (c3) => {
-  return c3.get("clerkAuth");
-};
-var clerkMiddleware = (options) => {
-  return async (c3, next) => {
-    const clerkEnv = env(c3);
-    const { secretKey, publishableKey, apiUrl, apiVersion, ...rest } = options || {
-      secretKey: clerkEnv.CLERK_SECRET_KEY || "",
-      publishableKey: clerkEnv.CLERK_PUBLISHABLE_KEY || "",
-      apiUrl: clerkEnv.CLERK_API_URL,
-      apiVersion: clerkEnv.CLERK_API_VERSION
-    };
-    if (!secretKey) {
-      throw new Error("Missing Clerk Secret key");
-    }
-    if (!publishableKey) {
-      throw new Error("Missing Clerk Publishable key");
-    }
-    const clerkClient = createClerkClient({
-      ...rest,
-      apiUrl,
-      apiVersion,
-      secretKey,
-      publishableKey
-    });
-    const requestState = await clerkClient.authenticateRequest(c3.req.raw, {
-      ...rest,
-      secretKey,
-      publishableKey
-    });
-    if (requestState.headers) {
-      requestState.headers.forEach((value, key) => c3.res.headers.append(key, value));
-      const locationHeader = requestState.headers.get("location");
-      if (locationHeader) {
-        return c3.redirect(locationHeader, 307);
-      } else if (requestState.status === "handshake") {
-        throw new Error("Clerk: unexpected handshake without redirect");
-      }
-    }
-    c3.set("clerkAuth", requestState.toAuth());
-    c3.set("clerk", clerkClient);
-    await next();
-  };
-};
-
-// src/routes/weight/index.js
-var weightRoutes = new Hono2;
-weightRoutes.get("/", async (c3) => {
-  const auth = getAuth(c3);
-  if (!auth?.userId) {
-    return c3.json("Not found");
-  }
-  const user = await db.query.usersTable.findFirst({
-    where: eq(usersTable.user_id, auth.userId)
-  });
-  const page = Number(c3.req.query("page"));
-  const weight = await db.select().from(weightTable).orderBy(weightTable.id).limit(10).offset((page - 1) * 10).where(eq(weightTable.user_id, user.id));
-  return c3.json(weight);
-});
-weightRoutes.post("/remove", async (c3) => {
-  const body = await c3.req.json();
-  const result = removeWeightSchema.safeParse(body);
-  if (!result) {
-    return c3.json({ error: "Validation error" });
-  }
-  const weight = await db.delete(weightTable).where(eq(weightTable.id, body.id));
-  return c3.json("Weight has been deleted Successfully");
-});
-weightRoutes.post("/store", async (c3) => {
-  const body = await c3.req.json();
-  const user = getAuth(c3);
-  if (!user?.userId) {
-    return c3.json("not found");
-  }
-  return c3.json(user);
-  const userFind = await db.query.usersTable.findFirst({
-    where: eq(usersTable.user_id, user?.userId)
-  });
-  const result = weightSchema.safeParse({
-    user_id: userFind?.id,
-    scaleWeight: body.scaleWeight,
-    created_at: body.created_at
-  });
-  if (!result.success) {
-    return c3.json({ error: "Validation failed could not create a Weight", message: result.error.format() });
-  } else {
-    try {
-      const currentDate = new Date(body.created_at);
-      const weightFind = await db.select().from(weightTable).where(eq(weightTable.created_at, currentDate));
-      if (!weightFind) {
-        return c3.json("no");
-      } else {
-        const weightCheck = await db.select({ value: sum(weightTable.scaleWeight), count: count() }).from(weightTable).where(eq(weightTable.user_id, userFind?.id)).orderBy(desc(weightTable.id)).limit(6);
-        const numberValue = Number(weightCheck[0].value);
-        const totalWeight = numberValue + body.scaleWeight;
-        const avgWeight = totalWeight / (weightCheck[0].count + 1);
-        const newWeight = await db.insert(weightTable).values({ created_at: currentDate, scaleWeight: body.scaleWeight, trendWeight: avgWeight, user_id: userFind?.id }).returning();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    if (userFind?.parent_id != null) {
-      const latestWeight = await db.insert(latestActivitiesTable).values({
-        sender_id: userFind.id,
-        reciever_id: userFind.parent_id,
-        message: `A new weight ${body.scaleWeight} has been recorded `
-      });
-      return c3.json(latestWeight);
-    }
-    const latestActivities = await db.insert(latestActivitiesTable).values({
-      sender_id: userFind?.id
-    });
-    return c3.json(latestActivities);
-  }
-});
-var weight_default = weightRoutes;
-
-// src/zod/nutirtionSchema.js
-var nutritionSchema = exports_external.object({
-  user_id: exports_external.number().openapi({
-    example: 1
-  }),
-  created_at: exports_external.string().date(),
-  calories: exports_external.number().openapi({
-    example: 300
-  }),
-  protein: exports_external.number().openapi({
-    example: 140.2
-  }),
-  carbs: exports_external.number().openapi({
-    example: 150.3
-  }),
-  fat: exports_external.number().openapi({
-    example: 120
-  })
-});
-var removeNutritionSchema = exports_external.object({
-  id: exports_external.number().openapi({
-    example: 11212
-  }),
-  user_id: exports_external.number().openapi({
-    example: 1212
-  })
-});
-
-// src/routes/nutrition/index.js
-var nutritionRoutes = new Hono2;
-nutritionRoutes.get("/", async (c3) => {
-  const page = Number(c3.req.query("page"));
-  console.log("from nutrition");
-  const nutrition = await db.select({ calories: sum(nutritionTable.calories), protein: sum(nutritionTable.protein), created_at: nutritionTable.created_at, carbs: sum(nutritionTable.carbs), fat: nutritionTable.fat }).from(nutritionTable).limit(5).offset((page - 1) * 5).groupBy(nutritionTable.created_at);
-  return c3.json(nutrition);
-});
-nutritionRoutes.get("/show", async (c3) => {
-  const query = new Date(c3.req.query("date"));
-  const data = await db.select().from(nutritionTable).where(eq(nutritionTable.created_at, query));
-  return c3.json(data);
-});
-nutritionRoutes.post("/remove", async (c3) => {
-  const body = await c3.req.json();
-  const result = removeNutritionSchema.safeParse(body);
-  if (!result.success) {
-    return c3.json({ message: "Validation has been failed", error: result.error });
-  } else {
-    await db.delete(nutritionTable).where(eq(nutritionTable.id, body.id));
-    return c3.json("deleted successfully");
-  }
-});
-nutritionRoutes.post("/store", async (c3) => {
-  const body = await c3.req.json();
-  body.item.forEach((value) => {
-    const result = nutritionSchema.safeParse(value);
-    if (!result.success) {
-      console.log("Failed");
-    }
-  });
-  for (let index = 0;index < body.item.length; index++) {
-    await db.insert(nutritionTable).values({
-      protein: body.item[index].protein,
-      carbs: body.item[index].carbs,
-      fat: body.item[index].fat,
-      calories: body.item[index].calories,
-      user_id: body.item[index].user_id,
-      created_at: new Date(body.item[index].created_at)
-    });
-  }
-  return c3.json("nutrient created");
-});
-var nutrition_default = nutritionRoutes;
-
-// src/routes/dashboard/dashboard.js
-var dashboardRoutes = new Hono2;
-dashboardRoutes.get("/", async (c3) => {
-  const auth = getAuth(c3);
-  if (!auth?.userId) {
-    return c3.json({ error: "Unauthorized" });
-  }
-  const data2 = await db.query.usersTable.findFirst();
-  const person = await db.query.usersTable.findMany({
-    where: eq(usersTable.user_id, auth.userId),
-    with: {
-      children: true,
-      workout: true,
-      weight: true
-    }
-  });
-  if (person.length == 0) {
-    return c3.json({ message: "No Clients" });
-  }
-  return c3.json(person);
-});
-var dashboard_default = dashboardRoutes;
-
-// src/zod/workoutSchema.js
-var exercise = exports_external.object({
-  set: exports_external.number(),
-  reps: exports_external.number(),
-  weight: exports_external.number()
-});
-var workoutExercise = exports_external.object({
-  id: exports_external.number(),
-  name: exports_external.string(),
-  exercise: exports_external.array(exercise)
-});
-var workoutSchema = exports_external.object({
-  name: exports_external.string(),
-  date: exports_external.string(),
-  workout: exports_external.array(workoutExercise)
-});
-var workoutDeletionSchema = exports_external.object({
-  id: exports_external.number().openapi({
-    example: 12
-  }),
-  user_id: exports_external.number().openapi({
-    example: 1231
-  })
-});
-
-// src/routes/workout/index.js
-var workoutRoutes = new Hono2;
-workoutRoutes.get("/", async (c3) => {
-  const auth = getAuth(c3);
-  if (!auth?.userId) {
-    return c3.json("error");
-  }
-  const findUser = await db.query.usersTable.findFirst({
-    where: eq(usersTable.user_id, auth.userId)
-  });
-  if (!findUser) {
-    return c3.json("not exist");
-  }
-  const data = await db.query.workoutTable.findMany({
-    where: eq(weightTable.user_id, findUser?.id),
-    with: {
-      programme: true
-    }
-  });
-  return c3.json(data);
-});
-workoutRoutes.post("/remove", async (c3) => {
-  const data = await c3.req.json();
-  const result = workoutDeletionSchema.safeParse(data.item);
-  if (!result.success) {
-    return c3.json({ message: "Validation has been failed", error: result.error });
-  }
-  try {
-    await db.delete(workoutDetailsTable).where(eq(workoutDetailsTable.workout_id, data.item.id));
-    await db.delete(workoutTable).where(eq(workoutTable.id, data.item.id)).returning();
-  } catch (error) {
-    return c3.json("Error");
-  }
-  return c3.json("no error");
-});
-workoutRoutes.get("/show", async (c3) => {
-  const value = c3.req.query("date");
-  const query = new Date(value);
-  const data = await db.query.workoutTable.findFirst({
-    where: eq(workoutTable.created_at, query),
-    with: {
-      workoutDetail: {
-        with: {
-          exercise: true
-        }
-      }
-    }
-  });
-  if (!data) {
-    return c3.json("No items");
-  } else
-    return c3.json(data);
-});
-workoutRoutes.get("/stats", async (c3) => {
-  const query = c3.req.query("id");
-  const data = await db.query.workoutDetailsTable.findMany({
-    where: eq(workoutDetailsTable.exercise_id, query),
-    with: {
-      workout: true,
-      exercise: true
-    }
-  });
-  if (!data) {
-    return c3.json("No items found");
-  }
-  return c3.json(data);
-});
-workoutRoutes.post("/update", async (c3) => {
-  const body = await c3.req.json();
-  body.item.forEach((value) => {
-    console.log(value);
-    const result = workoutSchema.safeParse({
-      name: value.name,
-      rir: value.rir,
-      workout_id: value.workout_id,
-      set: value.set,
-      reps: value.reps,
-      exercise_id: value.exercise_id
-    });
-    if (!result.success) {
-      return c3.json("Failed");
-    }
-  });
-  for (let index = 0;index < body.item.length; index++) {
-    console.log(body.item[index].id);
-    if (body.item && body.item[index].id != 0) {
-      console.log(true);
-      const data = await db.update(workoutDetailsTable).set({
-        exercise_id: body.item[index].exercise_id,
-        set: body.item[index].set,
-        weight: body.item[index].weight,
-        reps: body.item[index].reps,
-        rir: body.item[index].rir,
-        workout_id: body.item[index].workout_id
-      }).where(eq(workoutDetailsTable.id, body.item[index].id)).returning();
-    } else {
-      console.log("function execution");
-      const data1 = await db.insert(workoutDetailsTable).values({
-        exercise_id: body.item[index].exercise_id,
-        set: body.item[index].set,
-        weight: body.item[index].weight,
-        reps: body.item[index].reps,
-        rir: body.item[index].rir,
-        workout_id: 7
-      }).returning();
-    }
-  }
-  return c3.json("Updated");
-});
-workoutRoutes.post("/store", async (c3) => {
-  const body = await c3.req.json();
-  const auth = getAuth(c3);
-  if (!auth?.userId) {
-    return c3.json("not exist");
-  }
-  const user = await db.query.usersTable.findFirst({
-    where: eq(usersTable.user_id, auth.userId)
-  });
-  let workoutId = {};
-  if (body.programme === 0) {
-    workoutId = await db.insert(workoutTable).values({
-      user_id: user?.id,
-      created_at: body.created_at
-    }).returning();
-  } else {
-    workoutId = await db.insert(workoutTable).values({
-      user_id: user?.id,
-      created_at: new Date(body.created_at),
-      programme_id: body.programme
-    }).returning();
-  }
-  for (let i = 0;i < body.item.length; i++) {
-    console.log(body.item[i]);
-    const result2 = workoutSchema.safeParse({
-      exercise_id: body.item[i].exercise_id,
-      name: body.item[i].name,
-      set: body.item[i].set,
-      reps: body.item[i].reps,
-      rir: body.item[i].rir,
-      weight: body.item[i].weight,
-      workout_id: workoutId[0].id
-    });
-    if (!result2.success) {
-      console.log(result2.error);
-      return c3.json("failed");
-    }
-  }
-  return c3.json("passed");
-  const result = workoutSchema.safeParse(body.item);
-  if (!result.success) {
-    console.log(result.error);
-    return c3.json("failed");
-  }
-  return c3.json("passed");
-  for (let index = 0;index < body.item.length; index++) {
-    const data = await db.insert(workoutDetailsTable).values({
-      exercise_id: body.item[index].exercise_id,
-      set: body.item[index].set,
-      weight: body.item[index].weight,
-      reps: body.item[index].reps,
-      rir: body.item[index].rir,
-      workout_id: workoutId[0].id
-    });
-  }
-  return c3.json("Workout Added");
-});
-var workout_default = workoutRoutes;
-
-// src/zod/customFoodSchema.js
-var customFoodSchema = objectType({
-  user_id: exports_external.number().openapi({
-    example: 122323
-  }),
-  food_name: exports_external.string().openapi({
-    example: "hello"
-  }),
-  defaultCalories: exports_external.number().openapi({
-    example: 24.242
-  }),
-  defaultCarbs: exports_external.number().openapi({
-    example: 24.242
-  }),
-  defaultFat: exports_external.number().openapi({
-    example: 24.242
-  }),
-  defaultProtein: exports_external.number().openapi({
-    example: 24.242
-  })
-});
-
-// src/routes/customFood/food.js
-var customFoodRoute = new Hono2;
-customFoodRoute.get("/", async (c3) => {
-  const query = c3.req.query("foodName");
-  const data = await db.select().from(customFoodTable).where(like(customFoodTable.foodName, `${query}%`));
-  return c3.json(data);
-});
-customFoodRoute.post("/store", async (c3) => {
-  const body = await c3.req.json();
-  const result = customFoodSchema.safeParse(body);
-  if (!result) {
-    return c3.json("No");
-  } else {
-    const value = await db.insert(customFoodTable).values({
-      foodName: body.foodName,
-      defaultCalories: body.defaultCalories,
-      defaultCarbs: body.defaultCalories,
-      defaultFat: body.defaultCalories,
-      defaultProtein: body.defaultProtein,
-      user_id: 1,
-      defaultServing: body.defaultServing
-    });
-    return c3.json(value);
-  }
-});
-var food_default = customFoodRoute;
-
-// src/zod/customExerciseSchema.js
+// api/src/zod/customExerciseSchema.js
 var customExerciseSchema = exports_external.object({
   name: exports_external.string(),
   type: exports_external.string(),
@@ -40505,7 +39915,7 @@ var customExerciseSchema = exports_external.object({
   instructions: exports_external.string()
 });
 
-// src/routes/exercise/index.js
+// api/src/routes/exercise/index.js
 var exerciseRoutes = new Hono2;
 var myExerciseRoute = exerciseRoutes.get("/all", async (c3) => {
   const exerciseName = c3.req.query("exerciseName") || "";
@@ -40574,19 +39984,19 @@ exerciseRoutes.post("/store", async (c3) => {
 });
 var exercise_default = exerciseRoutes;
 
-// src/db/db.ts
+// api/src/db/db.ts
 var import_dotenv2 = __toESM(require_main(), 1);
 var import_config2 = __toESM(require_config(), 1);
 import_dotenv2.config({ path: ".env" });
 var sql3 = cs(process.env.DATABASE_URL);
 var db2 = drizzle(sql3, { schema: exports_schema });
 
-// src/zod/programmeSchema.ts
+// api/src/zod/programmeSchema.ts
 var programmeDeletionSchema = exports_external.object({
   id: exports_external.number()
 });
 
-// src/routes/programme/index.js
+// api/src/routes/programme/index.js
 var programmeRoutes = new Hono2;
 programmeRoutes.post("/delete", async (c3) => {
   const auth = getAuth(c3);
@@ -40609,6 +40019,9 @@ programmeRoutes.post("/store", async (c3) => {
   const userFind = await db2.query.usersTable.findFirst({
     where: eq(usersTable2.user_id, auth.userId)
   });
+  if (!userFind) {
+    return c3.json({ message: "User does not exist" });
+  }
   const body = await db2.insert(programmesTable2).values({
     user_id: userFind.id,
     name: "Untitled"
@@ -40622,9 +40035,15 @@ programmeRoutes.post("/update", async (c3) => {
 });
 var programmes = programmeRoutes.get("/", async (c3) => {
   const auth = getAuth(c3);
+  if (!auth?.userId) {
+    return c3.json({ message: "Unverified" });
+  }
   const user = await db2.query.usersTable.findFirst({
     where: eq(usersTable2.user_id, auth?.userId)
   });
+  if (!user) {
+    return c3.json({ message: "Unable to find user" });
+  }
   const data = await db2.query.programmesTable.findMany({
     where: or(eq(programmesTable2.user_id, user?.id), eq(programmesTable2.assigned_to, user?.id)),
     orderBy: [desc(programmesTable2.id)],
@@ -40640,39 +40059,10 @@ var programmes = programmeRoutes.get("/", async (c3) => {
       }
     }
   });
-  const programme = data.map((item) => ({
-    id: item.id,
-    name: item.name,
-    description: item.description,
-    workout: item.programmeWorkout?.map((value) => ({
-      id: value.id,
-      name: value.name,
-      details: value.programmeDetails.map((detail) => ({
-        id: detail.id,
-        repRange: detail.repRange,
-        sets: detail.sets,
-        exercise: {
-          id: detail.exercise.id,
-          name: detail.exercise.name,
-          equipment: detail.exercise.equipment
-        }
-      }))
-    }))
-  }));
-  return c3.json(programme);
-});
-programmeRoutes.get("/client", async (c3) => {
-  const query = c3.req.query("name");
-  const data = await db2.query.usersTable.findMany({
-    where: eq(usersTable2.name, query)
-  });
-  if (data.length == 0) {
-    return c3.json("0");
-  }
   return c3.json(data);
 });
 programmeRoutes.get("/details", async (c3) => {
-  const data = c3.req.query("id");
+  const data = Number(c3.req.query("id"));
   const body = await db2.query.programmesTable.findFirst({
     where: eq(programmesTable2.id, data),
     with: {
@@ -40683,46 +40073,101 @@ programmeRoutes.get("/details", async (c3) => {
 });
 var programme_default = programmeRoutes;
 
-// src/routes/userProgramme/index.js
-var userProgrammeRoute = new Hono2;
-userProgrammeRoute.get("/", async (c3) => {
-  const auth = getAuth(c3);
-  if (!auth?.userId) {
-    return c3.json("not validated");
-  }
-  const user = await db2.query.usersTable.findFirst({
-    where: eq(usersTable2.user_id, auth?.userId)
-  });
-  const response = await db2.query.userProgrammeTable.findFirst({
-    where: eq(userProgrammeTable2.user_id, user?.id),
-    with: {
-      programme: {
-        with: {
-          programmeWorkout: {
-            with: {
-              programmeDetails: {
-                with: {
-                  exercise: true
-                }
-              }
-            }
-          }
-        }
-      },
-      user: true
+// api/node_modules/@asteasolutions/zod-to-openapi/dist/index.mjs
+function __rest2(s3, e) {
+  var t = {};
+  for (var p4 in s3)
+    if (Object.prototype.hasOwnProperty.call(s3, p4) && e.indexOf(p4) < 0)
+      t[p4] = s3[p4];
+  if (s3 != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p4 = Object.getOwnPropertySymbols(s3);i < p4.length; i++) {
+      if (e.indexOf(p4[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s3, p4[i]))
+        t[p4[i]] = s3[p4[i]];
     }
-  });
-  return c3.json([response]);
-});
-var userProgramme_default = userProgrammeRoute;
+  return t;
+}
+function isZodType(schema, typeName) {
+  var _a;
+  return ((_a = schema === null || schema === undefined ? undefined : schema._def) === null || _a === undefined ? undefined : _a.typeName) === typeName;
+}
+function preserveMetadataFromModifier(zod, modifier) {
+  const zodModifier = zod.ZodType.prototype[modifier];
+  zod.ZodType.prototype[modifier] = function(...args) {
+    const result = zodModifier.apply(this, args);
+    result._def.openapi = this._def.openapi;
+    return result;
+  };
+}
+function extendZodWithOpenApi(zod) {
+  if (typeof zod.ZodType.prototype.openapi !== "undefined") {
+    return;
+  }
+  zod.ZodType.prototype.openapi = function(refOrOpenapi, metadata) {
+    var _a, _b2, _c, _d2, _e, _f;
+    const openapi = typeof refOrOpenapi === "string" ? metadata : refOrOpenapi;
+    const _g = openapi !== null && openapi !== undefined ? openapi : {}, { param } = _g, restOfOpenApi = __rest2(_g, ["param"]);
+    const _internal = Object.assign(Object.assign({}, (_a = this._def.openapi) === null || _a === undefined ? undefined : _a._internal), typeof refOrOpenapi === "string" ? { refId: refOrOpenapi } : undefined);
+    const resultMetadata = Object.assign(Object.assign(Object.assign({}, (_b2 = this._def.openapi) === null || _b2 === undefined ? undefined : _b2.metadata), restOfOpenApi), ((_d2 = (_c = this._def.openapi) === null || _c === undefined ? undefined : _c.metadata) === null || _d2 === undefined ? undefined : _d2.param) || param ? {
+      param: Object.assign(Object.assign({}, (_f = (_e = this._def.openapi) === null || _e === undefined ? undefined : _e.metadata) === null || _f === undefined ? undefined : _f.param), param)
+    } : undefined);
+    const result = new this.constructor(Object.assign(Object.assign({}, this._def), { openapi: Object.assign(Object.assign({}, Object.keys(_internal).length > 0 ? { _internal } : undefined), Object.keys(resultMetadata).length > 0 ? { metadata: resultMetadata } : undefined) }));
+    if (isZodType(this, "ZodObject")) {
+      const originalExtend = this.extend;
+      result.extend = function(...args) {
+        var _a2, _b3, _c2, _d3, _e2, _f2;
+        const extendedResult = originalExtend.apply(this, args);
+        extendedResult._def.openapi = {
+          _internal: {
+            extendedFrom: ((_b3 = (_a2 = this._def.openapi) === null || _a2 === undefined ? undefined : _a2._internal) === null || _b3 === undefined ? undefined : _b3.refId) ? { refId: (_d3 = (_c2 = this._def.openapi) === null || _c2 === undefined ? undefined : _c2._internal) === null || _d3 === undefined ? undefined : _d3.refId, schema: this } : (_e2 = this._def.openapi) === null || _e2 === undefined ? undefined : _e2._internal.extendedFrom
+          },
+          metadata: (_f2 = extendedResult._def.openapi) === null || _f2 === undefined ? undefined : _f2.metadata
+        };
+        return extendedResult;
+      };
+    }
+    return result;
+  };
+  preserveMetadataFromModifier(zod, "optional");
+  preserveMetadataFromModifier(zod, "nullable");
+  preserveMetadataFromModifier(zod, "default");
+  preserveMetadataFromModifier(zod, "transform");
+  preserveMetadataFromModifier(zod, "refine");
+  const zodDeepPartial = zod.ZodObject.prototype.deepPartial;
+  zod.ZodObject.prototype.deepPartial = function() {
+    const initialShape = this._def.shape();
+    const result = zodDeepPartial.apply(this);
+    const resultShape = result._def.shape();
+    Object.entries(resultShape).forEach(([key, value]) => {
+      var _a, _b2;
+      value._def.openapi = (_b2 = (_a = initialShape[key]) === null || _a === undefined ? undefined : _a._def) === null || _b2 === undefined ? undefined : _b2.openapi;
+    });
+    result._def.openapi = undefined;
+    return result;
+  };
+  const zodPick = zod.ZodObject.prototype.pick;
+  zod.ZodObject.prototype.pick = function(...args) {
+    const result = zodPick.apply(this, args);
+    result._def.openapi = undefined;
+    return result;
+  };
+  const zodOmit = zod.ZodObject.prototype.omit;
+  zod.ZodObject.prototype.omit = function(...args) {
+    const result = zodOmit.apply(this, args);
+    result._def.openapi = undefined;
+    return result;
+  };
+}
 
-// src/zod/idSchema.ts
+// api/node_modules/@hono/zod-openapi/dist/index.mjs
+extendZodWithOpenApi(exports_external);
+
+// api/src/zod/idSchema.ts
 var idSchema = exports_external.object({
   id: exports_external.number().positive()
 });
 
-// src/zod/weightSchema.ts
-var weightSchema2 = exports_external.object({
+// api/src/zod/weightSchema.ts
+var weightSchema = exports_external.object({
   user_id: exports_external.number().openapi({
     example: 1
   }),
@@ -40731,13 +40176,13 @@ var weightSchema2 = exports_external.object({
     example: 73.2
   })
 }).openapi("Weight");
-var removeWeightSchema2 = exports_external.object({
+var removeWeightSchema = exports_external.object({
   id: exports_external.number().openapi({
     example: 1232
   })
 });
 
-// src/zod/measurementsSchema.ts
+// api/src/zod/measurementsSchema.ts
 var measurementSchema = exports_external.object({
   created_at: exports_external.string(),
   measurement_id: exports_external.number(),
@@ -40753,9 +40198,7 @@ var measurementFieldSchema = exports_external.object({
   value: exports_external.number()
 });
 var insertMeasurementMultipleSchema = exports_external.object({
-  measurement: {
-    created_at: exports_external.string()
-  },
+  created_at: exports_external.string(),
   measurement: exports_external.array(measurementFieldSchema)
 });
 var deleteMeasurementSchema = exports_external.object({
@@ -40767,7 +40210,7 @@ var updateMeasurementSchema = exports_external.object({
   created_at: exports_external.string()
 });
 
-// src/zod/clientSchema.ts
+// api/src/zod/clientSchema.ts
 var clientUpdateSchema = exports_external.object({
   name: exports_external.string(),
   age: exports_external.number(),
@@ -40788,23 +40231,23 @@ var clientDeletionSchema = exports_external.object({
   id: exports_external.number()
 });
 
-// src/zod/workoutSchema.ts
-var exercise2 = exports_external.object({
+// api/src/zod/workoutSchema.ts
+var exercise = exports_external.object({
   set: exports_external.number(),
   reps: exports_external.number(),
   weight: exports_external.number()
 });
-var workoutExercise2 = exports_external.object({
+var workoutExercise = exports_external.object({
   id: exports_external.number(),
   name: exports_external.string(),
-  exercise: exports_external.array(exercise2)
+  exercise: exports_external.array(exercise)
 });
-var workoutSchema2 = exports_external.object({
+var workoutSchema = exports_external.object({
   name: exports_external.string(),
   date: exports_external.string(),
-  workout: exports_external.array(workoutExercise2)
+  workout: exports_external.array(workoutExercise)
 });
-var workoutDeletionSchema2 = exports_external.object({
+var workoutDeletionSchema = exports_external.object({
   id: exports_external.number().openapi({
     example: 12
   }),
@@ -40813,7 +40256,7 @@ var workoutDeletionSchema2 = exports_external.object({
   })
 });
 
-// src/zod/workoutHistorySchema.ts
+// api/src/zod/workoutHistorySchema.ts
 var ExerciseSchema = exports_external.object({
   id: exports_external.number(),
   name: exports_external.string(),
@@ -40838,7 +40281,7 @@ var workoutHistorySchema = exports_external.object({
   workoutDetail: exports_external.array(workoutDetailSchema)
 });
 
-// src/zod/clientProgrammeschema.ts
+// api/src/zod/clientProgrammeschema.ts
 var exerciseSchema = exports_external.object({
   id: exports_external.number(),
   name: exports_external.string(),
@@ -40875,17 +40318,8 @@ var updateClientProgrammeSchema = exports_external.object({
   id: exports_external.number()
 });
 
-// src/routes/clients/index.js
+// api/src/routes/clients/index.js
 var clientRoutes = new Hono2;
-function addDays(startDate, days) {
-  const dateArray = [];
-  for (let i = 0;i < days; i++) {
-    const dateString = new Date(startDate.getTime() + i * 1 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
-    dateArray.push(dateString);
-    console.log(dateString);
-  }
-  return dateArray;
-}
 clientRoutes.post("/delete", async (c3) => {
   const auth = getAuth(c3);
   if (!auth?.userId) {
@@ -40898,56 +40332,6 @@ clientRoutes.post("/delete", async (c3) => {
   }
   const data = await db2.delete(usersTable2).where(eq(usersTable2.id, body.id));
   return c3.json("Data deleted");
-});
-clientRoutes.get("/:id/workoutStats", async (c3) => {
-  let dateArray = [];
-  let startDate = new Date;
-  const query = String(c3.req.query("date"));
-  if (query != "") {
-    startDate = new Date(query);
-  }
-  dateArray = addDays(startDate, 7);
-  const id2 = Number(c3.req.param("id"));
-  const parse4 = idSchema.safeParse({ id: id2 });
-  if (!parse4.success) {
-    return c3.json({ error: '"Walidation Error"' });
-  }
-  const workout = await db2.select().from(workoutDetailsTable2).innerJoin(workoutTable2, eq(workoutDetailsTable2.workout_id, workoutTable2.id)).innerJoin(exerciseTable2, eq(workoutDetailsTable2.exercise_id, exerciseTable2.id)).where(and(eq(workoutTable2.user_id, id2), inArray(workoutTable2.created_at, dateArray)));
-  return c3.json(workout);
-  const myStats = new Map;
-  const type = ["Chest", "Biceps", "Legs", "Triceps", "Back", "Abs"];
-  for (let i = 0;i < type.length; i++) {
-    myStats.set(type[i], {
-      totalSets: 0,
-      totalVolume: 0
-    });
-  }
-  for (let i = 0;i < workout.length; i++) {
-    if (myStats.has(workout[i].exercise.type)) {
-      console.log("YES");
-      const currentStats = myStats.get(workout[i].exercise.type) || { totalSets: 0, totalVolume: 0 };
-      const newVolume = currentStats.totalVolume + Number(workout[i].workoutDetails.weight);
-      const newSets = currentStats.totalSets + 1;
-      myStats.set(String(workout[i].exercise.type), {
-        totalVolume: newVolume,
-        totalSets: newSets
-      });
-    }
-  }
-  let myArray = [];
-  for (let i = 0;i < type.length; i++) {
-    if (myStats.has(type[i])) {
-      const volume = myStats.get(type[i]);
-      myArray.push({
-        equipmentName: type[i],
-        stats: {
-          totalSets: volume?.totalSets ?? 0,
-          totalVolume: volume?.totalVolume ?? 0
-        }
-      });
-    }
-  }
-  return c3.json(myArray);
 });
 var mainClientRoute = clientRoutes.get("/", async (c3) => {
   const auth = getAuth(c3);
@@ -40989,7 +40373,7 @@ clientRoutes.get("/:id/programmes", async (c3) => {
   if (auth?.userId) {
     return c3.json({ Error: "Unable to verify user" });
   }
-  const id2 = c3.req.param("id");
+  const id2 = Number(c3.req.param("id"));
   const userProgramme = await db2.query.userProgrammeTable.findFirst({
     where: and(eq(userProgrammeTable2.user_id, id2), eq(userProgrammeTable2.status, "active")),
     with: {
@@ -41027,27 +40411,9 @@ clientRoutes.get("/:id/programmes", async (c3) => {
     return c3.json({ message: verfication.error.format() });
   }
   return c3.json(userProgramme);
-  const programme = {
-    status: userProgramme?.status ?? "",
-    id: Number(userProgramme?.programme?.id),
-    name: userProgramme.programme?.name ?? "",
-    description: userProgramme.programme?.description ?? "",
-    workout: userProgramme.programme?.programmeWorkout?.map((value) => ({
-      id: value.id,
-      name: value.name,
-      details: value.programmeDetails?.map((detail) => ({
-        id: detail.id,
-        repRange: detail.repRange,
-        set: detail.sets,
-        exercise: {
-          id: detail.exercise.id,
-          name: detail.exercise.name,
-          equipment: detail.exercise.equipment
-        }
-      }))
-    }))
-  };
-  return c3.json(programme);
+});
+clientRoutes.get("/hello", async (c3) => {
+  return c3.json({ message: "Hi" });
 });
 clientRoutes.post("/:id/updateProgramme", async (c3) => {
   const id2 = Number(c3.req.param("id"));
@@ -41071,13 +40437,13 @@ clientRoutes.post("/:id/updateProgramme", async (c3) => {
 });
 clientRoutes.get("/:id/measurements", async (c3) => {
   const auth = getAuth(c3);
-  if (auth?.userId) {
+  if (!auth?.userId) {
     return c3.json({ Error: "Unable to verify User" });
   }
   const id2 = Number(c3.req.param("id"));
   const result = idSchema.safeParse({ id: id2 });
   const query = Number(c3.req.query("id"));
-  const searchId = query ?? null;
+  const searchId = query ?? 0;
   if (!result.success) {
     return c3.json({ error: "validation Failed" });
   }
@@ -41104,7 +40470,7 @@ clientRoutes.post("/:id/measurement/delete", async (c3) => {
   return c3.json(data);
 });
 clientRoutes.post("/:id/measurement/storeMultiple", async (c3) => {
-  const id2 = c3.req.param("id");
+  const id2 = Number(c3.req.param("id"));
   const auth = getAuth(c3);
   if (!auth?.userId) {
     return c3.json({ message: "Unverified" });
@@ -41169,18 +40535,17 @@ var clientWorkoutHistory = clientRoutes.get("/:id/workoutHistory", async (c3) =>
       return c3.json({ message: verfication.error.flatten() });
     }
   }
-  const workoutToSend = workout;
-  return c3.json(workoutToSend);
+  return c3.json(workout);
 });
 clientRoutes.get("/:id", async (c3) => {
-  const id2 = c3.req.param("id");
+  const id2 = Number(c3.req.param("id"));
   const data = await db2.query.usersTable.findFirst({
     where: eq(usersTable2.id, id2)
   });
   return c3.json(data);
 });
 clientRoutes.post("/:id/weights/store", async (c3) => {
-  const id2 = c3.req.param("id");
+  const id2 = Number(c3.req.param("id"));
   const auth = getAuth(c3);
   if (!auth?.userId) {
     return c3.json({ message: "Unverified" });
@@ -41193,26 +40558,6 @@ clientRoutes.post("/:id/weights/store", async (c3) => {
   const newRecord = await db2.insert(measurementsDataTable2).values({ value: verfication.data.scaleWeight, created_at: verfication.data.created_at, user_id: id2, measurement_id: 4 }).returning();
   return c3.json(newRecord);
 });
-clientRoutes.post("/:id/measurements/store", async (c3) => {
-  const body = await c3.req.json();
-  return c3.json(body);
-  const id2 = Number(c3.req.param("id"));
-  const verification = idSchema.safeParse({ id: id2 });
-  if (!verification.success) {
-    return c3.json("Error has occured");
-  }
-  return c3.json("no error has occured");
-  let measurements = [
-    { created_at: "2025-01-01", value: 85, measurement_id: 5, user_id }
-  ];
-  for (let i = 0;i < measurements.length; i++) {
-    const verfication = measurementSchema.safeParse(measurements[i]);
-    if (!verfication.success) {
-      return c3.json("Error has been occured");
-    }
-  }
-  return c3.json("No Error");
-});
 clientRoutes.post("/:id/weights/store", async (c3) => {
   const id2 = Number(c3.req.param("id"));
   const verification = idSchema.safeParse({ id: id2 });
@@ -41224,7 +40569,7 @@ clientRoutes.post("/:id/weights/store", async (c3) => {
     created_at: new Date,
     user_id: id2
   };
-  const verificationOfWeight = weightSchema2.safeParse(body);
+  const verificationOfWeight = weightSchema.safeParse(body);
   if (!verification.success) {
     return c3.json("Validation has been failed");
   }
@@ -41236,32 +40581,25 @@ clientRoutes.post("/:id/weights/store", async (c3) => {
   console.log("Weight inserted");
   return c3.json("Weight Has been stored");
 });
-clientRoutes.get("/:id/weights", async (c3) => {
-  const id2 = c3.req.param("id");
-  const weight = await db2.query.weightTable.findFirst();
-  return c3.json(weight);
-});
 clientRoutes.get("/:id/stats", async (c3) => {
-  const exercise_id = c3.req.query("id");
-  const query = c3.req.param("id");
-  let stats = {
-    maximumWeight: 0,
-    exercise: {
-      name: "",
-      id: Number(query),
-      target: "",
-      equipment: ""
-    }
-  };
+  const exercise_id = Number(c3.req.query("exercise_id"));
+  if (!exercise_id) {
+    return c3.json({ message: "Exercise Id Is Required" });
+  }
+  if (isNaN(exercise_id)) {
+    return c3.json({ message: "Exercise_id must be a" });
+  }
+  const query = Number(c3.req.param("id"));
   const data = await db2.select().from(workoutDetailsTable2).innerJoin(exerciseTable2, eq(workoutDetailsTable2.exercise_id, exerciseTable2.id)).innerJoin(workoutTable2, eq(workoutDetailsTable2.workout_id, workoutTable2.id)).where(and(eq(workoutTable2.user_id, query), eq(exerciseTable2.id, exercise_id)));
   const statsWorkout = data.map((item) => ({
-    created_at: item.workout.created_at,
+    created_at: item.workout.created_at || "",
     exercise: {
-      name: item.exercise.name,
-      weight: item.workoutDetails.weight,
-      reps: item.workoutDetails.reps,
-      set: item.workoutDetails.set,
-      rir: item.workoutDetails.rir
+      id: item.exercise.id || 0,
+      name: item.exercise.name || "",
+      weight: item.workoutDetails.weight || 0,
+      reps: item.workoutDetails.reps || 0,
+      set: item.workoutDetails.set || 0,
+      rir: item.workoutDetails.rir || 0
     }
   }));
   return c3.json(statsWorkout);
@@ -41306,11 +40644,11 @@ clientRoutes.post("/:id/workout/store", async (c3) => {
     return c3.json("Error has been occured");
   }
   const body = await c3.req.json();
-  const workoutVerification = workoutSchema2.safeParse(body.workout);
+  const workoutVerification = workoutSchema.safeParse(body.workout);
   if (workoutVerification.error) {
     return c3.json({ message: "Failed To verify" });
   }
-  const insertRecord = await db2.insert(workoutTable2).values({ name: body.workout.name, date: body.workout.date, user_id: id2 }).returning();
+  const insertRecord = await db2.insert(workoutTable2).values({ name: body.workout.name, created_at: body.workout.date, user_id: id2 }).returning();
   for (let i = 0;i < body.workout.workout.length; i++) {
     const newRecord = await db2.insert(workoutDetailsTable2).values({ workout_id: insertRecord[0].id, set: body.workout.workout[i].exercise.set, reps: body.workout.workout[i].reps, weight: body.workout.workout[i].weight, exercise_id: body.workout.workout[i].id });
   }
@@ -41318,7 +40656,7 @@ clientRoutes.post("/:id/workout/store", async (c3) => {
 });
 var clients_default = clientRoutes;
 
-// src/routes/latestActivities/index.js
+// api/src/routes/latestActivities/index.js
 var latestActivitiesRoutes = new Hono2;
 latestActivitiesRoutes.get("/", async (c3) => {
   const auth = getAuth(c3);
@@ -41342,7 +40680,7 @@ latestActivitiesRoutes.get("/", async (c3) => {
 });
 var latestActivities_default = latestActivitiesRoutes;
 
-// node_modules/hono/dist/utils/stream.js
+// api/node_modules/hono/dist/utils/stream.js
 var StreamingApi = class {
   writer;
   encoder;
@@ -41408,7 +40746,7 @@ var StreamingApi = class {
   }
 };
 
-// node_modules/hono/dist/helper/streaming/utils.js
+// api/node_modules/hono/dist/helper/streaming/utils.js
 var isOldBunVersion = () => {
   const version2 = typeof Bun !== "undefined" ? Bun.version : undefined;
   if (version2 === undefined) {
@@ -41419,7 +40757,7 @@ var isOldBunVersion = () => {
   return result;
 };
 
-// node_modules/hono/dist/helper/streaming/stream.js
+// api/node_modules/hono/dist/helper/streaming/stream.js
 var contextStash = /* @__PURE__ */ new WeakMap;
 var stream = (c3, cb, onError) => {
   const { readable, writable } = new TransformStream;
@@ -41448,10 +40786,10 @@ var stream = (c3, cb, onError) => {
   return c3.newResponse(stream2.responseReadable);
 };
 
-// node_modules/hono/dist/adapter/bun/serve-static.js
+// api/node_modules/hono/dist/adapter/bun/serve-static.js
 var {stat} = (() => ({}));
 
-// node_modules/hono/dist/middleware/serve-static/index.js
+// api/node_modules/hono/dist/middleware/serve-static/index.js
 var ENCODINGS = {
   br: ".br",
   zstd: ".zst",
@@ -41459,7 +40797,7 @@ var ENCODINGS = {
 };
 var ENCODINGS_ORDERED_KEYS = Object.keys(ENCODINGS);
 
-// node_modules/hono/dist/helper/ssg/middleware.js
+// api/node_modules/hono/dist/helper/ssg/middleware.js
 var X_HONO_DISABLE_SSG_HEADER_KEY = "x-hono-disable-ssg";
 var SSG_DISABLED_RESPONSE = (() => {
   try {
@@ -41471,10 +40809,10 @@ var SSG_DISABLED_RESPONSE = (() => {
     return null;
   }
 })();
-// node_modules/hono/dist/adapter/bun/ssg.js
+// api/node_modules/hono/dist/adapter/bun/ssg.js
 var { write } = Bun;
 
-// node_modules/hono/dist/helper/websocket/index.js
+// api/node_modules/hono/dist/helper/websocket/index.js
 var WSContext = class {
   #init;
   constructor(init) {
@@ -41515,10 +40853,10 @@ var defineWebSocketHelper = (handler) => {
   };
 };
 
-// node_modules/hono/dist/adapter/bun/server.js
+// api/node_modules/hono/dist/adapter/bun/server.js
 var getBunServer = (c3) => ("server" in c3.env) ? c3.env.server : c3.env;
 
-// node_modules/hono/dist/adapter/bun/websocket.js
+// api/node_modules/hono/dist/adapter/bun/websocket.js
 var createWSContext = (ws) => {
   return new WSContext({
     send: (source, options) => {
@@ -41581,69 +40919,7 @@ var createBunWebSocket = () => {
   };
 };
 
-// src/routes/messages/index.js
-var messageRoute = new Hono2;
-messageRoute.get("/", async (c3) => {
-  const query = Number(c3.req.query("id"));
-  if (query == -1) {
-    return c3.json("");
-  }
-  const auth = getAuth(c3);
-  if (!auth?.userId) {
-    return c3.json("not exist");
-  }
-  const user = await db2.query.usersTable.findFirst({
-    where: eq(usersTable2.user_id, auth?.userId)
-  });
-  const data = await db2.query.messagesTable.findMany({
-    where: or(eq(messagesTable2.user_id, user?.id), eq(messagesTable2.user_id, query))
-  });
-  if (!data) {
-    return c3.json("not exist");
-  }
-  return c3.json(data);
-});
-var messages_default = messageRoute;
-
-// src/routes/roomMember/index.js
-var roomMembers = new Hono2;
-roomMembers.get("/", async (c3) => {
-  const auth = getAuth(c3);
-  const user = await db2.query.usersTable.findFirst({
-    where: eq(usersTable2.user_id, auth?.userId)
-  });
-  if (user?.parent_id == null) {
-    const rooms = await db2.query.roomsTable.findMany({
-      where: eq(roomsTable2.user_id, user.id)
-    });
-    let users = [];
-    for (let i = 0;i < rooms.length; i++) {
-      console.log(rooms[i].id);
-      users = await db2.query.roomMembersTable.findMany({
-        where: eq(roomMembersTable2.id, rooms[i].id),
-        with: {
-          user: true
-        }
-      });
-    }
-    return c3.json(users);
-  }
-  const roomMembers2 = await db2.query.roomMembersTable.findMany({
-    where: eq(roomMembersTable2.user_id, user?.id),
-    with: {
-      user: true,
-      room: {
-        with: {
-          user: true
-        }
-      }
-    }
-  });
-  return c3.json(roomMembers2);
-});
-var roomMember_default = roomMembers;
-
-// src/routes/measurements/index.js
+// api/src/routes/measurements/index.js
 var measurementRoute = new Hono2;
 var MeasurementRoute = measurementRoute.get("/", async (c3) => {
   const data = await db2.query.measurementsTable.findMany();
@@ -41651,11 +40927,11 @@ var MeasurementRoute = measurementRoute.get("/", async (c3) => {
 });
 var measurements_default = measurementRoute;
 
-// drizzle/schema.ts
+// api/drizzle/schema.ts
 var measurements = pgTable("measurements", {
   id: integer().primaryKey().generatedAlwaysAsIdentity({ name: "measurements_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 2147483647, cache: 1 })
 });
-var exercise3 = pgTable("exercise", {
+var exercise2 = pgTable("exercise", {
   id: integer().primaryKey().generatedAlwaysAsIdentity({ name: "exercise_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 2147483647, cache: 1 }),
   name: text().notNull(),
   type: text().notNull(),
@@ -41739,7 +41015,7 @@ var programme = pgTable("programme", {
   userId: integer("user_id"),
   assignedTo: integer("assigned_to")
 });
-var roomMembers2 = pgTable("roomMembers", {
+var roomMembers = pgTable("roomMembers", {
   id: serial().primaryKey().notNull(),
   userId: integer("user_id"),
   roomId: integer("room_id")
@@ -41783,7 +41059,7 @@ var workout = pgTable("workout", {
   createdAt: timestamp("created_at", { mode: "string" })
 });
 
-// src/zod/templateSchema.ts
+// api/src/zod/templateSchema.ts
 var TemplateSchema = exports_external.object({
   programme_id: exports_external.number(),
   name: exports_external.string()
@@ -41811,7 +41087,7 @@ var templateRecordUpdate = exports_external.object({
   template_id: exports_external.number()
 });
 
-// src/routes/template/index.js
+// api/src/routes/template/index.js
 var templateRoutes = new Hono2;
 templateRoutes.post("/updateRecord", async (c3) => {
   const auth = getAuth(c3);
@@ -41892,7 +41168,10 @@ templateRoutes.post("/store", async (c3) => {
   return c3.json(newData);
 });
 var myTemplate = templateRoutes.get("/", async (c3) => {
-  const id2 = c3.req.query("id");
+  const id2 = Number(c3.req.query("id"));
+  if (!id2) {
+    return c3.json({ message: "Please Provide template id" });
+  }
   const data = await db2.query.programmeWorkoutTable.findFirst({
     where: eq(programmeWorkout.id, id2),
     with: {
@@ -41921,12 +41200,12 @@ templateRoutes.post("/delete", async (c3) => {
 });
 var template_default = templateRoutes;
 
-// src/index.ts
+// api/src/index.js
 var app = new Hono2;
 var { upgradeWebSocket, websocket } = createBunWebSocket();
 var cacheStore = new Map;
 app.get("/", async (c3) => {
-  return c3.json("Hello Ebrahim");
+  return c3.json("Hello Mano");
 });
 app.use("/api/trpc/*");
 app.use("*", clerkMiddleware());
@@ -41939,42 +41218,6 @@ var myRoute = app.get("/api/funny", (c3) => {
 });
 var users2 = new Map;
 var messages2 = new Map;
-app.get("/ws", upgradeWebSocket((_4) => {
-  return {
-    onClose: (_5, ws) => {},
-    onOpen(_5, ws) {
-      console.log("web socket opened");
-    },
-    onMessage(event, ws) {
-      console.log("I am running");
-      let timer = 0;
-      const data = JSON.parse(event.data);
-      if (data.type === "left") {
-        console.log("The User has Been Deleted");
-        users2.delete(data.sender);
-      }
-      if (users2.size >= 2) {
-        const currentTime = new Date().toLocaleTimeString();
-        users2.forEach((item) => {
-          if (item.reciever === data.reciever) {
-            item.socket.send(event.data);
-          }
-        });
-        console.log(data);
-      }
-      users2.set(data.sender, {
-        socket: ws,
-        roomId: data.roomNumber,
-        reciever: data.sender
-      });
-      console.log("The users size is", users2.size);
-    },
-    onError: (event, ws) => {
-      console.log("error");
-      ws.send("error e");
-    }
-  };
-}));
 app.use("/api/*", cors());
 app.use("/api/*", clerkMiddleware());
 app.use("/api2/*", cors({
@@ -41983,24 +41226,7 @@ app.use("/api2/*", cors({
   credentials: true
 }));
 app.get("/hello", async (c3) => {
-  return c3.json({ message: "HLI" });
-});
-app.post("/api/email-check", async (c3) => {
-  const body = await c3.req.json();
-  const user = await db.query.usersTable.findFirst({
-    where: eq(usersTable.email, body.email)
-  });
-  if (!user) {
-    return c3.json("Not Exist");
-  }
-  return c3.json("User Exists");
-});
-app.get("/api/roles", async (c3) => {
-  const auth = getAuth(c3);
-  if (!auth) {
-    return c3.json("not found");
-  }
-  return c3.json(auth.sessionClaims?.metadata);
+  return c3.json({ message: "HII" });
 });
 app.post("/api/login", async (c3) => {
   const body = await c3.req.json();
@@ -42026,20 +41252,13 @@ app.get("/api/search", async (c3) => {
   };
   return c3.json(options);
 });
-var route = app.route("/api/programme", programme_default);
-app.route("/api/customFoods", food_default);
-app.route("/api/weight", weight_default);
-app.route("/api/workout", workout_default);
-app.route("/api/userProgramme", userProgramme_default);
+app.route("/api/programme", programme_default);
 app.route("/api/activity", latestActivities_default);
-app.route("/api/roomMembers", roomMember_default);
 app.route("/api/measurements", measurements_default);
 app.route("/api/exercise", exercise_default);
-app.route("/api/nutrition", nutrition_default);
 app.route("/api/dashboard", dashboard_default);
 app.route("/api/clients", clients_default);
 app.route("/api/template", template_default);
-app.route("/api/messages", messages_default);
 app.post("/api/client/store", async (c3) => {
   const auth = getAuth(c3);
   if (!auth?.userId) {
@@ -42065,10 +41284,10 @@ app.get("/api/stream", (c3) => {
     stream2.onAbort(() => {
       console.log("aborted");
     });
-    let count2 = 0;
+    let count = 0;
     const interval2 = setInterval(async () => {
-      console.log(count2);
-      await stream2.write(`data: ${JSON.stringify(count2++)} `);
+      console.log(count);
+      await stream2.write(`data: ${JSON.stringify(count++)} `);
     }, 1000);
     setTimeout(async () => {
       clearInterval(interval2);
@@ -42094,12 +41313,13 @@ app.get("/api/me", async (c3) => {
   });
   return c3.json(user);
 });
-var src_default = {
-  port: 3001,
-  fetch: app.fetch,
-  websocket
+
+// api/api/index.ts
+var config3 = {
+  runtime: "edge"
 };
-console.log("Bun running");
+var api_default = handle(app);
 export {
-  src_default as default
+  api_default as default,
+  config3 as config
 };
