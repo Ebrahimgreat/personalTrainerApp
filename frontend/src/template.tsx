@@ -16,8 +16,8 @@ import { Show } from "solid-js";
 import { Badge } from "./components/ui/ui/badge";
 import { useAuth } from "clerk-solidjs";
 import { getAuth } from "@hono/clerk-auth";
-const client=hc<myExerciseType>('http://localhost:3001/api/exercise')
-const templateClient=hc<myTemplate>('http://localhost:3001/api/template')
+const client=hc<myExerciseType>(`${import.meta.env.VITE_API_URL}/api/exercise`)
+const templateClient=hc<myTemplate>(`${import.meta.env.VITE_API_URL}/api/template`)
 const equipment:string[]=['Barbell','Dumbell','KettleBells','Body Weight','Cable','Machine']
 const bodyPart:string[]=['Chest','Quads','Hamstrings','Rear Delts','Tricpes']
 const[typeSelected,setTypeSelected]=createSignal('Type')
@@ -84,7 +84,7 @@ const timeout=setTimeout(()=>{
  
 try{
     const token=await getToken();
-    const data=await fetch('http://localhost:3001/api/template/updateRecord',{
+    const data=await fetch(`${import.meta.env.VITE_API_URL}/api/template/updateRecord`,{
 
         method:"POST",
         headers:{
@@ -131,7 +131,7 @@ const[myTemplateExercises,setMyTemplateExercises]=createStore<TemplateDetail>({
         try{
     
             const token=await getToken();
-            const data=await fetch('http://localhost:3001/api/template/updateMain',{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/template/updateMain`,{
                 method:"POST",
                 headers:{
                     'Authorization':`Bearer ${token}`
@@ -151,7 +151,7 @@ const[myTemplateExercises,setMyTemplateExercises]=createStore<TemplateDetail>({
 
     const updateTemplateExercises=async()=>{
         try{
-            const data=await fetch('http://localhost:3001/api/template/updateTemplateExercises',{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/template/updateTemplateExercises`,{
                 method:"POST",
                 body:JSON.stringify({
                     id:id,
@@ -200,7 +200,7 @@ const timeout=setTimeout(()=>{
 
        try{
         const token=await getToken();
-       const data=await fetch('http://localhost:3001/api/template/addExercise',{
+       const data=await fetch(`${import.meta.env.VITE_API_URL}/api/template/addExercise`,{
         method:"POST",
         headers:{
             'Authorization':`Bearer ${token}`
@@ -250,7 +250,7 @@ const timeout=setTimeout(()=>{
  
 try{
     const token=await getToken();
-    const data=await fetch('http://localhost:3001/api/template/deleteExercise',{
+    const data=await fetch(`${import.meta.env.VITE_API_URL}/api/template/deleteExercise`,{
         method:"POST",
         headers:{
             'Authorization':`Bearer ${token}`

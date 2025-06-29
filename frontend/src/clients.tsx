@@ -48,7 +48,7 @@ function Clients()
         try{
    
             const token=await getToken();
-            const data=await fetch('http://localhost:3001/api/clients/delete',{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/delete`,{
                 method:"POST",
                 headers:{
                     'Authorization':`Bearer ${token}`
@@ -73,7 +73,7 @@ function Clients()
 
 
         const token=await getToken();
-        const data=await fetch('http://localhost:3001/api/client/store',{
+        const data=await fetch(`${import.meta.env.VITE_API_URL}/api/client/store`,{
             method:"POST",
             headers:{
                 'Authorization':`Bearer ${token}`
@@ -118,7 +118,7 @@ function Clients()
     const[open,setOpen]=createSignal(false)
 
     const fetchProgrammes=async()=>{
-        const reponse=await fetch('http://localhost:3001/api/programme');
+        const reponse=await fetch(`${import.meta.env.VITE_API_URL}/api/programme`);
         return reponse.json();
     }
 

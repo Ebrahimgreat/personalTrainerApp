@@ -31,7 +31,7 @@ function ViewProgramme(){
     const location=useLocation()
     const[id,setId]=createSignal(location.search.slice(4))
     const getProgramme=async()=>{
-        const data=await fetch(`http://localhost:3001/api/programme/details?id=${id()}`,{
+        const data=await fetch(`${import.meta.env.VITE_API_URL}/api/programme/details?id=${id()}`,{
             method:'GET'
         })
         return data.json();
@@ -51,7 +51,7 @@ function ViewProgramme(){
     const deleteTemplate=async(item:number)=>{
         try{
             const token=await getToken();
-            const data=await fetch('http://localhost:3001/api/template/delete',{
+            const data=await fetch('${import.meta.env.VITE_API_URL}/api/template/delete',{
                 method:"POST",
                 body:JSON.stringify({
                     id:item
@@ -69,7 +69,7 @@ function ViewProgramme(){
         try{
             console.log("HI")
             const token=await getToken();
-            const data=await fetch('http://localhost:3001/api/template/store',{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/template/store`,{
                 method:"POST",
                 headers:{
                     'Authorization':`Bearer ${token}`
@@ -143,7 +143,7 @@ function ViewProgramme(){
 
  const updatingProgramme=async()=>{
 
-    const data=await fetch('http://localhost:3001/api/programme/update',{
+    const data=await fetch(`${import.meta.env.VITE_API_URL}/api/programme/update`,{
         method:'POST',
         body:JSON.stringify({
             id:id(),

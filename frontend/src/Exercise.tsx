@@ -9,7 +9,7 @@ import {
 } from '@tanstack/solid-query';
 import { hc } from "hono/client";
 import { myExerciseType } from "../../backend/src/routes/exercise";
-const client=hc<myExerciseType>('http://localhost:3001/api/exercise')
+const client=hc<myExerciseType>(`${import.meta.env.VITE_API_URL}/api/exercise`)
 
 
 
@@ -51,7 +51,7 @@ function Exercise()
         event.preventDefault();
         try{
             const token=await getToken();
-            const data=await fetch('http://localhost:3001/api/exercise/store',{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/exercise/store`,{
                 method:"POST",
                 headers:{
                     'Authorization':`Bearer ${token}`,

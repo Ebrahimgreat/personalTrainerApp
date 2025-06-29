@@ -34,7 +34,7 @@ function Programme()
 
         const token=await getToken();
         
-        const response=await fetch('http://localhost:3001/api/programme',{
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/programme`,{
             method:"GET",
             headers:{
                 'Authorization': `Bearer ${token}`
@@ -48,7 +48,7 @@ function Programme()
         
         const token=await getToken();
         try{
-        const response=await fetch('http://localhost:3001/api/programme/store',{
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/programme/store`,{
             method:"POST",
             headers:{
                 'Authorization':`Bearer ${token}`
@@ -70,7 +70,7 @@ function Programme()
 const deleteProgramme=async(item:number)=>{
  
     const token=await getToken();
-   const data=await fetch('http://localhost:3001/api/programme/delete',{
+   const data=await fetch(`${import.meta.env.VITE_API_URL}/api/programme/delete`,{
     method:'POST',
     headers:{
         'Authorization':`Bearer ${token}`

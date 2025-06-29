@@ -29,7 +29,7 @@ import { hc, InferResponseType } from "hono/client";
 import { getAuth } from "@hono/clerk-auth";
 import WorkoutHistory from "./components/clientPage/Manager/assignedProgramme/workoutHistory";
 import type { WorkoutHistoryType } from "./types/workoutHistory";
-const client=hc<MeasurementType>('http://localhost:3001/api/measurements')
+const client=hc<MeasurementType>('${import.meta.env.VITE_API_URL}/api/measurements')
 import { Suspense } from "solid-js";
 import { measurementsData, programmeWorkout, workout } from "../../backend/drizzle/schema";
 import { Badge } from "./components/ui/ui/badge";
@@ -356,7 +356,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     
     const fetchAllExercises=async()=>{
         try{
-            const data=await fetch(`http://localhost:3001/api/exercise/all?exerciseName=${searchString()}&type=${type()}&equipment=${equipment()}`,{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/exercise/all?exerciseName=${searchString()}&type=${type()}&equipment=${equipment()}`,{
                 method:"GET",
             })
             return data.json();
@@ -372,7 +372,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
         try{
 
            
-            const data=await fetch(`http://localhost:3001/api/clients/${id}/workoutHistory`,{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/workoutHistory`,{
                 method:'GET',
                 headers:{}
             })
@@ -388,7 +388,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     const measurementId=createMemo(()=>measurement.measurement_id)
     const fetchStats=async()=>{
         try{
-            const data=await fetch(`http://localhost:3001/api/clients/${id}/stats?id=${exerciseId()}`,{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/stats?id=${exerciseId()}`,{
                 method:"GET"
             })
             return data.json();
@@ -401,7 +401,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     const fetchAllProgrammes=async()=>{
         try{
             const token=await getToken();
-            const data=await fetch(`http://localhost:3001/api/programme`,{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/programme`,{
                 method:'GET',
                 headers:{
                     'Authorization':`Bearer ${token}`
@@ -416,7 +416,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     const fetchProgrammes=async()=>{
         try{
 
-            const data=await fetch(`http://localhost:3001/api/clients/${id}/programmes`)
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/programmes`)
             return data.json();
         }
         catch(error){
@@ -431,7 +431,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     const fetchMeasurements=async()=>{
         try{
             const token=await getToken();
-           const data=await fetch(`http://localhost:3001/api/measurements`,{
+           const data=await fetch(`${import.meta.env.VITE_API_URL}/api/measurements`,{
                 method:'GET',
                 headers:{
                  'Authorization':`Bearer ${token}`
@@ -446,7 +446,7 @@ const [measurement,setMeasurement]=createStore<Measurement>({
     }
     const fetchMeasurementsData=async()=>{
         try{
-            const data=await fetch(`http://localhost:3001/api/clients/${id}/measurements?id=${measurementId()}`)
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/measurements?id=${measurementId()}`)
             return data.json();
         }
         catch(error)
@@ -475,7 +475,7 @@ const submitMeasurement=async()=>{
     try{
     
         const token=await getToken();
-        const data=await fetch(`http://localhost:3001/api/clients/${id}/measurement/storeMultiple`,{
+        const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/measurement/storeMultiple`,{
             method:'POST',
             headers:{
                 'Authorization':`Bearer ${token}`
@@ -499,7 +499,7 @@ const submitWorkout=async()=>{
     console.log("HI")
    const token=await getToken();
    try{
-    const data=await fetch(`http://localhost:3001/api/clients/${id}/workout/store`,{
+    const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/workout/store`,{
         method:'POST',
         headers:{
             'Authorization':`Bearer ${token}`
@@ -533,7 +533,7 @@ const addWeight=async()=>
         console.log('hi');
 
         const token=await getToken();
-        const data=await fetch(`http://localhost:3001/api/clients/${id}/weights/store`,{
+        const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/weights/store`,{
             method:'POST',
             headers:{
                 'Authorization':`Bearer ${token}`
@@ -588,7 +588,7 @@ const[measurementDeletionIndicator,setMeasurementDeletionIndicator]=createSignal
 
     const updateProgramme=async(item:number)=>{
         try{
-         const data=await fetch(`http://localhost:3001/api/clients/${id}/updateProgramme`,{
+         const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/updateProgramme`,{
              method:'POST',
              body:JSON.stringify({
                 id:item
@@ -610,7 +610,7 @@ const[measurementDeletionIndicator,setMeasurementDeletionIndicator]=createSignal
       );
     const getClientDetails=async()=>{
         try{
-           const data= await fetch(`http://localhost:3001/api/clients/${id}`,{
+           const data= await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}`,{
 
                 method:'GET',
                 
@@ -696,7 +696,7 @@ const[initialExercisePut,setInitalExercisePut]=createSignal(-1)
 
  try{
     const token=await getToken();
-    const data=await fetch(`http://localhost:3001/api/clients/${id}/measurement/delete`,{
+    const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/measurement/delete`,{
         method:"POST",
         headers:{
             'Authorization':`Bearer ${token}`
@@ -741,7 +741,7 @@ const timeout=setTimeout(()=>{
 
 
 try{
-    const data=await fetch(`http://localhost:3001/api/clients/${id}/measurementUpdate`,{
+    const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/measurementUpdate`,{
         headers:{
             'Authorization':`Bearer ${token}`
         },
@@ -783,7 +783,7 @@ catch(error){
 
      const token=await getToken();
      try{
-        const data=await fetch(`http://localhost:3001/api/clients/${id}/updateInformation`,{
+        const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/updateInformation`,{
             method:'POST',
             headers:{
               'Authorization':`Bearer ${token}`
