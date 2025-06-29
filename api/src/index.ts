@@ -329,10 +329,5 @@ app.get('/api/me',async(c)=>{
 })
 
 
-export default handle(app)
-console.log('Bun running')
 
-export const config ={
-  runtime:'edge'
-}
 export type AppType=typeof myRoute;
