@@ -24,7 +24,7 @@ import ViewClient from './viewClient';
 import ViewProgramme from './viewProgramme';
 import layout from './layout';
 import Layout1 from './components/Layout';
-import { ToastProvider, Toaster } from "solid-notifications";
+
 
 import Button from "./components/ui/button";
 import Layout2 from './components/Layout2';

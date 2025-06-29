@@ -19,7 +19,7 @@ import latestActivitiesRoutes from './routes/latestActivities/index.js';
 import {stream,streamText,streamSSE} from 'hono/streaming';
 import type { ServerWebSocket } from 'bun';
 import {createBunWebSocket} from 'hono/bun';
-const app = new Hono()
+export const app = new Hono()
 const{upgradeWebSocket,websocket}=createBunWebSocket<ServerWebSocket>()
 const cacheStore=new Map();
 
