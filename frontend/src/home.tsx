@@ -75,7 +75,7 @@ const[nutrientPage,setNutrientPage]=createSignal<number>(1);
     const[message,setMessage]=createSignal('')
 
     const clients=async()=>{
-        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard` ,{
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/dashboard` ,{
             method:'GET',
         })
         return response.json();
@@ -94,7 +94,7 @@ const token=await getToken()
 
 
 
-    const response=await fetch(`${import.meta.env.VITE_API_URL}`,{
+    const response=await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard`,{
         method:'GET',
         headers:{
             'Authorization': `Bearer ${token}`
