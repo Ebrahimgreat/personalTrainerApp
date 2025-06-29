@@ -162,25 +162,15 @@ console.log("The users size is",users.size);
 
 
 
-
-app.use('/api/*',cors())
-app.use('/api/*',clerkMiddleware())
-app.use('/api2/*',
+app.use(
+  '/api/*',
   cors({
-    origin:['http://localhost:3000','http://localhost:8081'],
-    allowMethods:['POST','GET','PUT'],
-    credentials: true,
-
-  })
+    origin: 'https://personal-trainer-app-8itk.vercel.app',
+    allowMethods: ['GET', 'POST', 'PUT'],
+    credentials: true
+  }),
+  clerkMiddleware()
 )
-app.get('/hello',async(c)=>{
- return c.json({message:'HII'})
-  
-
-
-})
-
-
 
 
 
