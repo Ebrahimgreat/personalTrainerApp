@@ -11,7 +11,7 @@ import clientRoutes from './routes/clients/index.js';
 import latestActivitiesRoutes from './routes/latestActivities/index.js';
 import { stream } from 'hono/streaming';
 import { createBunWebSocket } from 'hono/bun';
-const app = new Hono();
+export const app = new Hono();
 const { upgradeWebSocket, websocket } = createBunWebSocket();
 const cacheStore = new Map();
 import measurementRoute from './routes/measurements/index.js';
@@ -220,9 +220,3 @@ app.get('/api/me', async (c) => {
     });
     return c.json(user);
 });
-export default {
-    port: 3001,
-    fetch: app.fetch,
-    websocket,
-};
-console.log('Bun running');
