@@ -75,7 +75,7 @@ const[nutrientPage,setNutrientPage]=createSignal<number>(1);
     const[message,setMessage]=createSignal('')
 
     const clients=async()=>{
-        const response=await fetch('http://localhost:3001/api/dashboard',{
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/dashboard` ,{
             method:'GET',
         })
         return response.json();
@@ -93,7 +93,8 @@ const fetchData=async()=>{
 const token=await getToken()
 
 
-    const response=await fetch(`http://localhost:3001/api/dashboard`,{
+
+    const response=await fetch(`${import.meta.env.VITE_API_URL}`,{
         method:'GET',
         headers:{
             'Authorization': `Bearer ${token}`

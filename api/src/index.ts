@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
+import { serve } from 'bun';
 import { usersTable } from './db/schema.js';
-import{handle} from  'hono/vercel'
 import { db } from './db/db.js';
 import {basicAuth} from "hono/basic-auth";
 import { sql,eq,and} from 'drizzle-orm';
@@ -19,7 +19,7 @@ import latestActivitiesRoutes from './routes/latestActivities/index.js';
 import {stream,streamText,streamSSE} from 'hono/streaming';
 import type { ServerWebSocket } from 'bun';
 import {createBunWebSocket} from 'hono/bun';
-export const app = new Hono()
+const app = new Hono()
 const{upgradeWebSocket,websocket}=createBunWebSocket<ServerWebSocket>()
 const cacheStore=new Map();
 
@@ -328,6 +328,9 @@ app.get('/api/me',async(c)=>{
 
 })
 
-
-
+serve({
+  fetch:app.fetch,
+  port:3000,
+  hostname:"0.0.0.0"
+})
 export type AppType=typeof myRoute;
