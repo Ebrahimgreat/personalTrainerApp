@@ -481,6 +481,12 @@ clientRoutes.get('/:id/stats',async(c)=>{
 
 
   const exercise_id=Number(c.req.query('exercise_id'));
+  if(!exercise_id){
+    return c.json({message:"Exercise Id Is Required"})
+  }
+  if(isNaN(exercise_id)){
+    return c.json({message:"Exercise_id must be a"})
+  }
  const query=Number(c.req.param('id'))
 
 

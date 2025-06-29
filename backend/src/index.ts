@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { usersTable } from './db/schema.js';
-
+import{handle} from  'hono/vercel'
 import { db } from './db/db.js';
 import {basicAuth} from "hono/basic-auth";
 import { sql,eq,and} from 'drizzle-orm';
@@ -31,8 +31,14 @@ import templateRoutes from './routes/template/index.js';
 import {zValidator} from '@hono/zod-validator';
 import {z} from '@hono/zod-openapi';
 
+import "bun:dotenv";
+const backendUrl = "https://personal-trainer-f1rr9gtg8-ebrahimgreats-projects.vercel.app";
+
+
 app.get('/',async(c)=>{
-  return c.json("Hello Ebrahim");
+
+  return c.json("Hello Mano");
+  
 })
 
 app.use('/api/trpc/*',)
@@ -323,12 +329,7 @@ app.get('/api/me',async(c)=>{
 })
 
 
-export default{
-  port:3001,
-  fetch:app.fetch,
-  websocket,
-  
-}
+export default handle(app)
 console.log('Bun running')
 
 export type AppType=typeof myRoute;

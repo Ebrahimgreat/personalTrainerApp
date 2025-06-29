@@ -16,8 +16,10 @@ const { upgradeWebSocket, websocket } = createBunWebSocket();
 const cacheStore = new Map();
 import measurementRoute from './routes/measurements/index.js';
 import templateRoutes from './routes/template/index.js';
+import "bun:dotenv";
+const backendUrl = "https://personal-trainer-f1rr9gtg8-ebrahimgreats-projects.vercel.app";
 app.get('/', async (c) => {
-    return c.json("Hello Ebrahim");
+    return c.json("Hello Mano");
 });
 app.use('/api/trpc/*');
 app.use('*', clerkMiddleware());

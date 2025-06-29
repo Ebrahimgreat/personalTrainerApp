@@ -298,6 +298,12 @@ clientRoutes.post('/:id/weights/store', async (c) => {
 });
 clientRoutes.get('/:id/stats', async (c) => {
     const exercise_id = Number(c.req.query('exercise_id'));
+    if (!exercise_id) {
+        return c.json({ message: "Exercise Id Is Required" });
+    }
+    if (isNaN(exercise_id)) {
+        return c.json({ message: "Exercise_id must be a" });
+    }
     const query = Number(c.req.param('id'));
     const data = await db.select().from(workoutDetailsTable).innerJoin(exerciseTable, eq(workoutDetailsTable.exercise_id, exerciseTable.id)).innerJoin(workoutTable, eq(workoutDetailsTable.workout_id, workoutTable.id)).where(and(eq(workoutTable.user_id, query), eq(exerciseTable.id, exercise_id)));
     const statsWorkout = data.map((item) => ({
