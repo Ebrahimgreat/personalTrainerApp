@@ -165,7 +165,7 @@ console.log("The users size is",users.size);
 app.use(
   '/api/*',
   cors({
-    origin: 'https://personal-trainer-app-8itk.vercel.app',
+    origin: 'http://localhost:3000',
     allowMethods: ['GET', 'POST', 'PUT'],
     credentials: true
   }),
@@ -320,7 +320,7 @@ app.get('/api/me',async(c)=>{
 
 serve({
   fetch:app.fetch,
-  port:3000,
+  port:3001,
   hostname:"0.0.0.0"
 })
 export type AppType=typeof myRoute;

@@ -133,6 +133,7 @@ createEffect(()=>{
 
     
     const[exercise,setExerciseSelected]=createSignal('')
+    const[open,SetOpen]=createSignal<boolean>(false)
 
 
    
@@ -167,7 +168,7 @@ createEffect(()=>{
             <p class="text-gray-600 text-sm">
                 Search For existing exercises,view them and create your custom exercises
             </p>
-       <Dialog>
+       <Dialog open={open()} onOpenChange={SetOpen}>
         <DialogTrigger>
 <Button>
     Create Exercise
@@ -239,7 +240,7 @@ createEffect(()=>{
     
         </TextFieldRoot>
         <DialogFooter>
-            <Button type="button">
+            <Button onClick={()=>SetOpen(false)} type="button">
                 Cancel
             </Button>
             <Button type="submit">

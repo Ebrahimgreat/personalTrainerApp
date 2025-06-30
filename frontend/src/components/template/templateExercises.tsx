@@ -41,13 +41,13 @@ function TemplateExercises(props:props)
         </CardTitle>
 
     </CardHeader>
-    <CardContent class="h-[400px] overflow-y-auto">
+    <CardContent class="h-[400px] overflow-x-auto overflow-y-auto">
         <Show when={props.detail.length>0}>
 
 
         <For each={props.detail}>
             {(item,key)=>(
-                <div class="text-black shadow-md p-8 grid grid-cols-3">
+                <div class="text-black shadow-md p-4 grid md:grid-cols-4 gap-4">
                  
         <AlertDialog>
             <AlertDialogTrigger>

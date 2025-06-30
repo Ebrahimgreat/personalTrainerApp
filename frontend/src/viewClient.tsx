@@ -912,7 +912,9 @@ createEffect(()=>{
     return(
         <div class="flex flex-col">
             
-       
+            <p class="block text-sm md:hidden text-red-500">
+                    To Create Workouts and measurements, switch to a desktop
+                 </p>
 
           <Show when={myClient.loading}>
 Loading
@@ -935,10 +937,15 @@ Loading
  </Show>
 
  
+
+                        <div class="hidden md:block">
+
+                 
                    <ManagerClientHeader measurementDate={measurementStore.created_at} updateMeasurementDate={(item)=>setMeasurementStore('created_at',item)} submitMeasurement={()=>submitMeasurement()}  updateProgrammeType={(item)=>setProgrammeType('id',item)}  programmeTypeSelected={programmeTypeSelected} programmeTypes={programmeTypes} showProgramme={showProgramme()} setShowProgramme={(item:string)=>updateShowProgramme(item)} programmeExercise={programmeExercise}  updateWorkout={(id,value,key,field)=>updateWorkout(id,value,key,field)}   submitWorkout={submitWorkout} updateMeasurement={(key,item)=>updateMeasurement(key,item)}
                      measurements={measurementStore.measurement}  weight={weight.scaleWeight} weightCreated={weight.created_at} updateScaleWeight={(item)=>setWeight('scaleWeight',item)} updateWeightDate={(item)=>setWeight('created_at',item)}  addWeight={addWeight}  removeItem={(number,value,key)=>removeItem(number,value,key)} setDate={(item)=>setMyWorkout('date',item)} setWorkoutName={(item)=>setMyWorkout('name',item)} myExercise={myWorkout.workout} workoutName={myWorkout.name}    searchString={searchString()} setSearchString={(item)=>setSearchString(item) } equipment={equipment()} setEquipment={(item)=>setEquipment(item)}  setType={(item)=>setType(item)}    type={type()} addExercise={(item)=>addExercise(item)} name={client.name} exercises={allExercises()}/ >
                  
-                 
+                 </div>
+               
                  
                  
             <Tabs   defaultValue="Overview" class="w-400px">
@@ -1064,7 +1071,7 @@ Loading
   Updating Programming...
 </Show>
           
-                <div class="grid grid-cols-2 gap-x-3">
+                <div class="grid grid-cols-1 md:grid-cols-2">
                     <AssignedProgramme updateProgramme={(item)=>updateProgramme(item)} programme_id={programmeId()} allProgramme={allProgrammes()} programme={programmes()}  >
 
                     </AssignedProgramme>

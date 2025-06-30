@@ -48,10 +48,10 @@ function ExerciseLibrary(props:props){
 <Show when={props.showProgramme==='No Programme'}>
 
 
-<div class="border-b px-6 py-3">
+<div class="border-b grid-cols-1  md:flex flex-row justify-between">
 
 
-        <div class="flex flex-row justify-around mr-10 ml-10">
+
 
         <select value={props.equipmentSelected} onchange={(e)=>props.setEquipment(e.currentTarget.value)} class="shadow-appearance-none border border-gray-300 rounded-xl focus:outline-none focus:ring-2 py-2 px-3 mb-2">
       
@@ -69,7 +69,7 @@ function ExerciseLibrary(props:props){
             No option
          </option>
         </select>
-        <select class="shadow-appearance-none border border-gray-300 rounded-xl focus:outline-none focus:ring-2  px-3 mb-2"   onchange={(e)=>props.setTypeSelected(e.currentTarget.value)} value={props.typeSelected} onChange={(e)=>props.setTypeSelected(e.currentTarget.value)}>
+        <select  class="shadow-appearance-none border border-gray-300 rounded-xl focus:outline-none focus:ring-2 py-2 px-3 mb-2"   onchange={(e)=>props.setTypeSelected(e.currentTarget.value)} value={props.typeSelected} onChange={(e)=>props.setTypeSelected(e.currentTarget.value)}>
         <option>Type</option>
             <For each={props.types}>
           
@@ -86,8 +86,8 @@ function ExerciseLibrary(props:props){
 
 
 
-<input disabled={props.selectAction==-1} value={props.searchExercise} onChange={(e)=>props.setSearchSelected(e.currentTarget.value)} class=" disabled:cursor-not-allowed  shadow appearance-none border w-full border-gray-300 rounded-xl focus:outline-none focus:ring-2 py-2 px-3 mb-2 " type="text" placeholder="search Exercise"/>
-</div>
+<input disabled={props.selectAction==-1} value={props.searchExercise} onChange={(e)=>props.setSearchSelected(e.currentTarget.value)} class="  disabled:cursor-not-allowed  shadow appearance-none border  border-gray-300 rounded-xl focus:outline-none focus:ring-2 py-2 px- mb-2 " type="text" placeholder="search Exercise"/>
+
 </Show>
 <div class="h-[400px] overflow-auto">
 

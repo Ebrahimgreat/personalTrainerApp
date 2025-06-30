@@ -103,7 +103,7 @@ function Clients()
     const getClients=async()=>{
      
     const token=await getToken();
-        const response=await fetch(`http://localhost:3001/api/clients?name=${search()}`,{
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/clients?name=${search()}`,{
             method:'GET',
             headers:{
                 'Authorization':`Bearer ${token}`
@@ -179,7 +179,7 @@ const showClient=(id:number)=>{
                 New Client
             </DialogTitle>
             <DialogDescription>
-                This action will create a new client
+                This action will create a new client. Once the client is created you can monitor the progress of the client.
             </DialogDescription>
 
            
@@ -196,7 +196,7 @@ const showClient=(id:number)=>{
         Name
         </TextFieldLabel>
 
-        <TextField value={newClient.name} onChange={(e)=>setNewClient('name',e.currentTarget.value)} type="text">
+        <TextField required value={newClient.name} onChange={(e)=>setNewClient('name',e.currentTarget.value)} type="text">
 
         </TextField>
 
@@ -205,7 +205,7 @@ const showClient=(id:number)=>{
            Age
         </TextFieldLabel>
 
-        <TextField type="number" onChange={(e)=>setNewClient('age',Number(e.currentTarget.value))} value={newClient.age}>
+        <TextField required type="number" onChange={(e)=>setNewClient('age',Number(e.currentTarget.value))} value={newClient.age}>
             
         </TextField>
         </TextFieldRoot>
