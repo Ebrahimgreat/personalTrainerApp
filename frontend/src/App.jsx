@@ -1,20 +1,14 @@
 
-import{createEffect, createResource, createSignal, onMount} from "solid-js"
 import{Router,Route,A, useNavigate, redirect} from '@solidjs/router';
-import Signup from "./signup";
 import Home from './home';
 import Weight from './weight';
 
 
-import createNutrition from './createNutrition';
 import Testing from './testing';
 import Workout from './workout';
-import CreateWorkout from './components/workout/createWorkout';
 import ShowWorkout from './showWorkout';
 import LoginPage from './login';
 import {ClerkProvider,UserButton,useAuth,ClerkLoaded,SignedIn, SignedOut, RedirectToSignIn, RedirectToUserProfile, ClerkLoading, SignIn} from 'clerk-solidjs';
-import Register from './register';
-import { exercise } from './components/CreateExerciseForm';
 import exerciseLibrary from './Exercise';
 import Clients from './clients';
 import Programme from './programme';
@@ -22,19 +16,11 @@ import CreateProgramme from './createProgramme';
 import CreateClient from './createClient';
 import ViewClient from './viewClient';
 import ViewProgramme from './viewProgramme';
-import layout from './layout';
-import Layout1 from './components/Layout';
-
-
-import Button from "./components/ui/button";
-import Layout2 from './components/Layout2';
 import Chat from './chat';
 import signup from './signup';
 import { template } from "solid-js/web";
 import Template from "./template";
-import { QueryClientProvider } from "@tanstack/solid-query";
-
-
+import { QueryClientProvider,QueryClient } from "@tanstack/solid-query";
 
 
 
@@ -68,10 +54,10 @@ function Layout(props)
        Home 
       </A>
       <A href="/clients" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-       clients
+       Clients
       </A>
       <A href='/programme' class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-      Programs
+      Programmes
       </A>
       <A href='/exercise' class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" >
       Exercise
@@ -87,9 +73,7 @@ function Layout(props)
 </nav>
 </SignedIn>
 <SignedOut>
-  <h1 class="text-center">
-    Scope and Fitness
-  </h1>
+ 
 </SignedOut>
 
 </header>
@@ -109,12 +93,23 @@ function Layout(props)
 
 
 
+
 function App() {
+  const queryClient=new QueryClient({
+    defaultOptions:{
+      queries:{
+        gcTime:1000*60+6
+      }
+    }
+  })
  
 
 
   return(
     
+
+  <QueryClientProvider client={queryClient}>
+
 
     <ClerkProvider publishableKey='pk_test_aHVnZS1zZWFob3JzZS00NC5jbGVyay5hY2NvdW50cy5kZXYk'>
     
@@ -147,7 +142,6 @@ function App() {
           <Route path="/workout" component={Workout} />
 
           <Route path="/workout/show" component={ShowWorkout}/>
-          <Route path="/register" component={Register}/>
           <Route path="/clients" component={Clients}/>
           <Route path="/clients/create" component={CreateClient}/>
           <Route path="/programme" component={Programme}/>
@@ -163,6 +157,7 @@ function App() {
  </ClerkLoaded>
 
         </ClerkProvider>
+        </QueryClientProvider>
 
         
 

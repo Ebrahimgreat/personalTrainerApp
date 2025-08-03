@@ -2,22 +2,16 @@ import { query, useLocation } from "@solidjs/router";
 import { createEffect, createResource, createSignal } from "solid-js";
 import { createStore, Store } from "solid-js/store";
 import TemplateDescription from "./components/template/templateDescription";
-import { Location } from "@solidjs/router";
 import ExerciseLibrary from "./components/exercise/exerciseLibrary";
-import { hc } from "hono/client";
-import { myExerciseType } from "../../backend/src/routes/exercise";
-import { types } from "util";
+
+
+
 import TemplateExercises from "./components/template/templateExercises";
-import type { myTemplate } from "../../backend/src/routes/template";
-import { exercise } from "./components/CreateExerciseForm";
+
 import { Exercise } from "../../backend/src/db/schema";
-import { createSign } from "crypto";
 import { Show } from "solid-js";
 import { Badge } from "./components/ui/ui/badge";
 import { useAuth } from "clerk-solidjs";
-import { getAuth } from "@hono/clerk-auth";
-const client=hc<myExerciseType>(`${import.meta.env.VITE_API_URL}/api/exercise`)
-const templateClient=hc<myTemplate>(`${import.meta.env.VITE_API_URL}/api/template`)
 const equipment:string[]=['Barbell','Dumbell','KettleBells','Body Weight','Cable','Machine']
 const bodyPart:string[]=['Chest','Quads','Hamstrings','Rear Delts','Tricpes']
 const[typeSelected,setTypeSelected]=createSignal('Type')
@@ -80,7 +74,7 @@ setTemplateExerciseSaving(true);
 
 const timeout=setTimeout(()=>{
     setTemplateExerciseSaving(false)
-  },2000)
+  },6000)
  
 try{
     const token=await getToken();
@@ -112,18 +106,10 @@ const[myTemplateExercises,setMyTemplateExercises]=createStore<TemplateDetail>({
     details:[]
 })
     const getTemplate=async()=>{
-        const response=templateClient.index.$get({
-            query:{
-                id:id
-            }
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/template?id=${id}`,{
         })
-        setMountedTemplate(false)
-      return (await response).json();
-
-  
-
-
-
+            setMountedTemplate(false)
+            return response.json();
         
     }
 
@@ -194,7 +180,7 @@ const[myTemplateExercises,setMyTemplateExercises]=createStore<TemplateDetail>({
        setTemplateAdditionExercise(true);
 const timeout=setTimeout(()=>{
     setTemplateAdditionExercise(false)
-  },2000)
+  },6000)
  
  
 
@@ -223,17 +209,11 @@ const timeout=setTimeout(()=>{
     }
 }
     const getExercises=async()=>{
-        const response=await client.all.$get({
-            query:{
-                exerciseName:searchExercise(),
-                type:typeSelected(),
-                equipment:equipmentSelected()
-
-
-            }
-        })
-        return await response.json();
+        const response=await fetch(`http://localhost:3001/api/exercise/all?exerciseName=${searchExercise()}&equipment=${equipmentSelected()}&type=${typeSelected()}`)
+        return response.json();
+       
     }
+
     
 
    
@@ -245,7 +225,7 @@ setMyTemplateExercises('details',((current)=>current.filter((value)=>value.id!=i
 setTemplateDeletionExercise(true);
 const timeout=setTimeout(()=>{
     setTemplateDeletionExercise(false)
-  },2000)
+  },6000)
  
  
 try{
@@ -313,7 +293,7 @@ catch(error){
     updateMainTemplate();
     const timeout=setTimeout(()=>{
         setMainAutoSaving(false)
-     },2000)
+     },6000)
 
 
   }

@@ -1,7 +1,8 @@
 import AboutExercise from "../../exercise/about";
 
 
-import { For,Show } from "solid-js";
+import { createSignal, For,Show } from "solid-js";
+
 type Stats={
     created_at:string,
     exercise:{
@@ -17,6 +18,7 @@ type props={
    
 }
 function ClientStats(props:props){
+  
     return(
         <div class="bg shadow-md flex flex-col">
        <h1 class="font-bold text-center">
@@ -25,7 +27,7 @@ function ClientStats(props:props){
      
 
      <Show when={props.stats.length==0}>
-        <p class="text-gray-600 text-center">
+        <p class="text-gray-800 text-center">
             No Stats can be found
         </p>
      </Show>
@@ -34,7 +36,7 @@ function ClientStats(props:props){
         
        <For each={props.stats}>
 
-        {(item)=><div class="flex w-full bg-white shadow-md flex-row gap-x-4">
+        {(item)=><div class="flex w-full bg-white shadow-md flex-row gap-x-4 overflow-x-auto">
             <p class="text-sm">
 
       

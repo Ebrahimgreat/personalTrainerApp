@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { exerciseSchema } from "../../zod/exerciseSchema.js";
 import { db } from "../../db/db.js";
 import { like } from "drizzle-orm";
+import { ilike } from "drizzle-orm";
 import { customExerciseTable, exerciseTable, usersTable } from "../../db/schema.js";
 import { eq,and} from "drizzle-orm";
 import { getAuth } from "@hono/clerk-auth";
@@ -23,8 +24,8 @@ const myExerciseRoute=exerciseRoutes.get('/all',async(c)=>{
   if(exerciseName!='')
   {
     console.log('yes')
-   filters.push(like(exerciseTable.name,`%${exerciseName}%`));
-   filtersCustomExercise.push(like(customExerciseTable.name,`%${customExerciseTable.name}%`));
+   filters.push(ilike(exerciseTable.name,`%${exerciseName}%`));
+   filtersCustomExercise.push(ilike(customExerciseTable.name,`%${customExerciseTable.name}%`));
    
   }
   if(equipment!='' && equipment!='Equipment')
@@ -62,12 +63,12 @@ const myExerciseRoute=exerciseRoutes.get('/all',async(c)=>{
     photo?:string
   }
 
-  const body=await db.select().from(exerciseTable).where(filters.length?  and (...filters): undefined);
+  const body=await db.select().from(exerciseTable).where(filters.length?  and (...filters): undefined)
 
  const newBody=body.flatMap((item)=>({
   id:item?.id?? '',
   name:item?.name ?? '',
-  equipment:item?.name ?? '',
+  equipment:item?.equipment ?? '',
   instructions:item.instructions?.split('.')||[],
   photo:item?.photo?? '',
   target:item?.type?? ''
@@ -83,6 +84,7 @@ const myExerciseRoute=exerciseRoutes.get('/all',async(c)=>{
 
 })
 exerciseRoutes.get('/',async(c)=>{
+  return c.json("HI")
     const query=c.req.query('name');
     if(query=='')
     {

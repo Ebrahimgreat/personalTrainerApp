@@ -32,6 +32,8 @@ import {zValidator} from '@hono/zod-validator';
 import {z} from '@hono/zod-openapi';
 
 import "bun:dotenv";
+import trainerRoutes from './routes/trainer/index.js';
+import workoutRoutes from './routes/workout/index.js';
 const backendUrl = "https://personal-trainer-f1rr9gtg8-ebrahimgreats-projects.vercel.app";
 
 
@@ -206,7 +208,7 @@ return c.json(options)
 })
 
 
-
+app.route('/api/trainer',trainerRoutes);
 app.route('/api/programme',programmeRoutes);
 
 app.route('/api/activity',latestActivitiesRoutes)
@@ -217,8 +219,7 @@ app.route('/api/exercise',exerciseRoutes);
 app.route('/api/dashboard',dashboardRoutes)
 app.route('/api/clients',clientRoutes)
 app.route('/api/template',templateRoutes);
-
-
+app.route('/api/workout',workoutRoutes);
 
 app.post('/api/client/store',async(c)=>{
   const auth=getAuth(c);
@@ -321,6 +322,6 @@ app.get('/api/me',async(c)=>{
 serve({
   fetch:app.fetch,
   port:3001,
-  hostname:"0.0.0.0"
+
 })
 export type AppType=typeof myRoute;

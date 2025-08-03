@@ -1,14 +1,13 @@
 // Converted to Postgres-compatible Drizzle schema using `pg-core`
 
-import { pgTable, serial, text, integer, numeric, timestamp,real} from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, integer, numeric, timestamp, real } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 export const usersTable = pgTable('users', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
   age: integer('age').notNull(),
-  notes:text('notes'),
- 
+  notes: text('notes'),
   user_id: text('user_id'),
   parent_id: integer('parent_id'),
 });
@@ -20,19 +19,16 @@ export const measurementsTable = pgTable('measurements', {
 
 export const measurementsDataTable = pgTable('measurementsData', {
   id: serial('id').primaryKey(),
-  user_id: integer('user_id').notNull().references(() => usersTable.id),
-  measurement_id: integer('measurement_id').references(() => measurementsTable.id),
-  value: real('value',),
-  created_at: timestamp('created_at',{mode:'string'})
+  user_id: integer('user_id').notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
+  measurement_id: integer('measurement_id').references(() => measurementsTable.id, { onDelete: 'cascade' }),
+  value: real('value'),
+  created_at: timestamp('created_at', { mode: 'string' }),
 });
-
 
 export const weightUnitsTable = pgTable('weightUnits', {
   id: serial('id').primaryKey(),
   unit: text('unit').notNull(),
 });
-
-
 
 export const heightUnitTable = pgTable('heightUnit', {
   id: serial('id').primaryKey(),
@@ -43,8 +39,8 @@ export const programmesTable = pgTable('programme', {
   id: serial('id').primaryKey(),
   name: text('name'),
   description: text('description'),
-  user_id: integer('user_id').references(() => usersTable.id),
-  assigned_to: integer('assigned_to').references(() => usersTable.id),
+  user_id: integer('user_id').references(() => usersTable.id, { onDelete: 'cascade' }),
+  assigned_to: integer('assigned_to').references(() => usersTable.id, { onDelete: 'cascade' }),
 });
 
 export const exerciseTable = pgTable('exercise', {
@@ -63,75 +59,74 @@ export const customExerciseTable = pgTable('customExercise', {
   type: text('type'),
   instructions: text('instructions'),
   photo: text('photo'),
-  user_id: integer('user_id').references(() => usersTable.id),
+  user_id: integer('user_id').references(() => usersTable.id, { onDelete: 'cascade' }),
 });
 
 export const workoutTable = pgTable('workout', {
   id: serial('id').primaryKey(),
-  user_id: integer('user_id').references(() => usersTable.id),
+  user_id: integer('user_id').references(() => usersTable.id, { onDelete: 'cascade' }),
   name: text('name'),
-  programme_id: integer('programme_id').references(() => programmesTable.id),
-  created_at: timestamp('created_at',{mode:'string'}),
+  programme_id: integer('programme_id').references(() => programmesTable.id, { onDelete: 'cascade' }),
+  created_at: timestamp('created_at', { mode: 'string' }),
 });
 
 export const userProgrammeTable = pgTable('userProgramme', {
   id: serial('id').primaryKey(),
-  user_id: integer('user_id').references(() => usersTable.id),
-  programme_id: integer('programme_id').references(() => programmesTable.id),
+  user_id: integer('user_id').references(() => usersTable.id, { onDelete: 'cascade' }),
+  programme_id: integer('programme_id').references(() => programmesTable.id, { onDelete: 'cascade' }),
   status: text('status'),
 });
 
 export const latestActivitiesTable = pgTable('latestActivities', {
   id: serial('id').primaryKey(),
-  sender_id: integer('sender_id').references(() => usersTable.id),
-  reciever_id: integer('reciever_id').references(() => usersTable.id),
+  sender_id: integer('sender_id').references(() => usersTable.id, { onDelete: 'cascade' }),
+  reciever_id: integer('reciever_id').references(() => usersTable.id, { onDelete: 'cascade' }),
   message: text('message'),
 });
 
-export const programmeWorkoutTable = pgTable('programmeWorkout', {
+export const programmeWorkoutTable = pgTable('programmeworkout', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
-  programme_id: integer('programme_id').references(() => programmesTable.id),
+  programme_id: integer('programme_id').references(() => programmesTable.id, { onDelete: 'cascade' }),
 });
 
 export const programmeDetailsTable = pgTable('programmeDetails', {
   id: serial('id').primaryKey(),
-  exercise_id: integer('exercise_id').references(() => exerciseTable.id),
+  exercise_id: integer('exercise_id').references(() => exerciseTable.id, { onDelete: 'cascade' }),
   repRange: text('repRange'),
-  programme_workoutId: integer('programme_workoutId').references(() => programmeWorkoutTable.id),
+  programme_workoutId: integer('programme_workoutId').references(() => programmeWorkoutTable.id, { onDelete: 'cascade' }),
   sets: integer('sets'),
 });
 
 export const roomsTable = pgTable('rooms', {
   id: serial('id').primaryKey(),
   name: text('name'),
-  user_id: integer('user_id').references(() => usersTable.id),
+  user_id: integer('user_id').references(() => usersTable.id, { onDelete: 'cascade' }),
 });
 
 export const roomMembersTable = pgTable('roomMembers', {
   id: serial('id').primaryKey(),
-  user_id: integer('user_id').references(() => usersTable.id),
-  room_id: integer('room_id').references(() => roomsTable.id),
+  user_id: integer('user_id').references(() => usersTable.id, { onDelete: 'cascade' }),
+  room_id: integer('room_id').references(() => roomsTable.id, { onDelete: 'cascade' }),
 });
 
 export const messagesTable = pgTable('messages', {
   id: serial('id').primaryKey(),
   content: text('content'),
   created_at: timestamp('created_at'),
-  user_id: integer('user_id').references(() => usersTable.id),
-  room_id: integer('room_id').references(() => roomsTable.id),
+  user_id: integer('user_id').references(() => usersTable.id, { onDelete: 'cascade' }),
+  room_id: integer('room_id').references(() => roomsTable.id, { onDelete: 'cascade' }),
 });
 
 export const workoutDetailsTable = pgTable('workoutDetails', {
   id: serial('id').primaryKey(),
-  workout_id: integer('workout_id').references(() => workoutTable.id),
+  workout_id: integer('workout_id').references(() => workoutTable.id, { onDelete: 'cascade' }),
   set: real('set'),
   reps: real('reps'),
   weight: real('weight'),
   rir: real('rir'),
-  exercise_id: integer('exercise_id').references(() => exerciseTable.id),
+  exercise_id: integer('exercise_id').references(() => exerciseTable.id, { onDelete: 'cascade' }),
 });
-
 
 //Relations
 

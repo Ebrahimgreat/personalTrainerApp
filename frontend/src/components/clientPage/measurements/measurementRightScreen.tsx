@@ -40,6 +40,12 @@ function MeasurementScreen(props:props)
      <h1 class="text-center font-bold text-2xl text-gray-800 mb-6">
         {props.measurement.name}
         </h1>
+
+        <Show when={props.measurement.measurement.length==0}>
+           <h2 class="text-center text-gray-600">
+           No measurements can be found
+           </h2>
+        </Show>
         
 
        

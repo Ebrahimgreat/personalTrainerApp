@@ -3,7 +3,8 @@ import { Show } from "solid-js";
 type AboutExerciseProps={
     name:string,
     equipment:string,
-    targetMuscleGroup:string
+    target:string
+    
 
 }
 
@@ -37,7 +38,7 @@ function AboutExercise(props:AboutExerciseProps)
 
 
             Target Muscle Group <span class="font-extralight">
-          {props.targetMuscleGroup}
+          {props.target}
           </span>
             </span>
             </p>

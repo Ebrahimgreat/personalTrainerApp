@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { db } from "../../db/db";
-import { and, between, desc, eq, inArray, isNotNull, like, lte, max } from "drizzle-orm";
+import { and, between, desc, eq, inArray, isNotNull, like, lte, max,count } from "drizzle-orm";
 import { clerkMiddleware,getAuth } from "@hono/clerk-auth";
 import { workoutTable,workoutDetailsTable,usersTable, userProgrammeTable,exerciseTable,  measurementsTable, measurementsDataTable, programmesTable } from "../../db/schema";
 import { createClerkClient } from "@clerk/backend";
@@ -13,6 +13,7 @@ import { workoutSchema } from "../../zod/workoutSchema";
 import { workoutHistory, workoutHistorySchema } from "../../zod/workoutHistorySchema";
 import { updateClientProgrammeSchema, userProgrammeSchema } from "../../zod/clientProgrammeschema";
 import { messages } from "../../../drizzle/schema";
+
 const clientRoutes=new Hono();
 
 
@@ -46,11 +47,14 @@ clientRoutes.post('/delete',async(c)=>{
   }
 
   const body=await c.req.json();
+
+
   const verfication=clientDeletionSchema.safeParse(body);
   if(verfication.error)
   {
     return c.json({message:"Error"})
   }
+
   const data=await db.delete(usersTable).where(eq(usersTable.id,body.id))
   return c.json("Data deleted")
   
@@ -75,43 +79,42 @@ const mainClientRoute=clientRoutes.get('/',async(c)=>{
    const searchString:string=c.req.query('name')?? '';
    const searchValue:string=searchString??'';
 
-      const data=await db.query.usersTable.findMany({
-      where: and(isNotNull(usersTable.parent_id),
-      like(usersTable.name,`%${searchValue}%`)
-    )
-      ,
-      columns:{
-        user_id:false,
-        parent_id:false
-      },
-      with:{
-        userProgramme:{
-          columns:{
-            user_id:false
-          },
-          with:{
-            
-            programme:{
-              columns:{
-                user_id:false,
-                assigned_to:false
-              }
-            }
-          }
-        }
-      }
-       
-    
-         
-    })
-    
+   const page=Number(c.req.query('page'));
+   
+   const offset=(page-1)*5;
 
-    if(!data)
-    {
-        return c.json('not found')
-    }
+   const userFind=await db.query.usersTable.findFirst({
+    where:eq(usersTable.user_id,auth.userId)
+   });
+   
+
+   const totalPage=await db.select({count:count()}).from(usersTable).where(eq(usersTable.parent_id,userFind.id))
+
+
+   type Client={
+    id:number,
+    name:string,
+    age:number
     
-    return c.json(data)
+   }
+   type Clients={
+    totalPage:number,
+    clients:Client[]
+    
+   }
+  
+      const userData=await db.select().from(usersTable).limit(5).offset(offset).where(eq(usersTable.parent_id,userFind.id)).orderBy(usersTable.id)
+
+      const clients:Clients={
+        totalPage: Math.ceil(totalPage[0].count / 5),
+                clients:userData.map((item)=>({
+                  id:item.id,
+          name:item.name,
+          age:item.age
+        }))
+
+      }
+      return c.json(clients)
 })
 
 
@@ -363,16 +366,22 @@ const clientWorkoutHistory=clientRoutes.get('/:id/workoutHistory',async(c)=>{
 
   
   const id=Number(c.req.param('id'));
-  const dateQuery=c.req.query('date');
-  const date:string=dateQuery?? ""
+  const page=Number(c.req.query('page'))
+const offset=(page-1)*5
   const result=idSchema.safeParse({id});
   if(!result.success){
     return c.json({error:'Validation Failed'})
   }
 
 
+
+  const totalPages=await db.select({count:count()}).from(workoutTable).where(eq(workoutTable.user_id,id));
+
   const workout=await db.query.workoutTable.findMany({
     where:eq(workoutTable.user_id,id),
+    limit:5,
+    offset:offset,
+    
   
  
     with:{
@@ -390,16 +399,16 @@ const clientWorkoutHistory=clientRoutes.get('/:id/workoutHistory',async(c)=>{
     }
   })
 
-
-for(let i=0; i<workout.length; i++)
-{
-  const verfication=workoutHistorySchema.safeParse(workout[i])
-  if(verfication.error){
-    return c.json({message:verfication.error.flatten()})
-  }
+type workoutSend={
+  totalPage:number,
+  workout:[];
+}
+const workoutSend:workoutSend={
+  totalPage:totalPages[0].count,
+  workout:workout
 }
 
-return c.json(workout)
+return c.json(workoutSend)
 
 })
 
@@ -613,6 +622,8 @@ clientRoutes.post('/:id/workout/store',async(c)=>{
  if(!verification.success){
   return c.json("Error has been occured");
  }
+
+
 
 
 

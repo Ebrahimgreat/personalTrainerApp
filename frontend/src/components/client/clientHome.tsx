@@ -5,20 +5,18 @@ import { useNavigate } from "@solidjs/router";
 import AddClient from "../client/addClient";
 import Modal from "../modal";
 import { Dialog,DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-
+import { Pagination,PaginationEllipsis } from "../ui/ui/pagination";
 import { AlertDialog, AlertDialogAction, AlertDialogClose, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 
 
 type ClientProps={
     myClients:any[],
-    
- 
-
-
+    incrementPage:()=>void,
+    decrementPage:()=>void
 
 }
 
-const columns:string[]=[' Action',  'Client']
+const columns:string[]=['Action',  'Client']
 const[dialogOpen,setDialogOpen]=createSignal(false)
 
 function ClientHome(props:ClientProps)
@@ -63,7 +61,7 @@ function ClientHome(props:ClientProps)
                         
                                   <tr class="hover:bg-gray-500 cursor-pointer">
 
-                                    <td class="px-4 py-2 ">
+                                    <td class="px-4 py-2 text-center ">
                                       <AlertDialog>
                                         <AlertDialogTrigger>
                                             <Button>
@@ -120,8 +118,22 @@ function ClientHome(props:ClientProps)
            
                 
                 </table>
-          
+               
+            
             </div>
+          
+          <div class="flex flex-row justify-between">
+            <Button onclick={()=>props.decrementPage()}>
+                Previous
+
+            </Button>
+            <Button onclick={()=>props.incrementPage()}>
+                Next
+
+            </Button>
+          </div>
+           
+
             
         </div>
     )

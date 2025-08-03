@@ -1,5 +1,16 @@
 import{z} from '@hono/zod-openapi'
 
+
+
+const userWeightSchema=z.object({
+   created_at:z.string(),
+    scaleWeight:z.number().openapi({
+        example:2
+    })
+})
+
+
+
 const weightSchema=z.object({
     user_id:z.number().openapi({
         example:1
@@ -20,4 +31,4 @@ const removeWeightSchema=z.object({
 
 })
 
-export {weightSchema,removeWeightSchema}
+export {weightSchema,removeWeightSchema,userWeightSchema}

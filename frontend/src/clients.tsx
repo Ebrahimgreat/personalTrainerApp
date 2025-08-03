@@ -1,4 +1,4 @@
-import { createEffect, createResource, createSignal, For,Show } from "solid-js";
+import { createEffect, createResource, createSignal, For,Show, Suspense } from "solid-js";
 import {useAuth, useSignUp,useEmailLink } from "clerk-solidjs";
 
 import { createStore } from "solid-js/store";
@@ -7,15 +7,16 @@ import {programmeDetails, updateProgrammeDetails} from "./components/programmeDe
 import ViewClient from "./viewClient";
 import { useSearchParams } from "@solidjs/router";
 import ClientCreater from "./components/client/clientHome";
-import{AppType} from '../../backend/src/index';
+
 import { hc } from "hono/client";
-import { mainClientType } from "../../backend/src/routes/clients";
 import { AlertDialog } from "@kobalte/core/alert-dialog";
 import { AlertDialogTrigger } from "./components/ui/alert-dialog";
 import Button from "./components/ui/button";
 import Dialog, { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./components/ui/dialog";
 
 import {TextField, TextFieldLabel, TextFieldRoot } from "./components/ui/textfield";
+import { useQuery, useQueryClient } from "@tanstack/solid-query";
+
 
 type newClient={
     name:string,
@@ -27,6 +28,13 @@ type newClient={
 
 function Clients()
 {
+
+    
+  
+    const queryClient=useQueryClient();
+
+
+
     const{isSignedIn}=useAuth();
     const {getToken}=useAuth();
     const{signUp}=useSignUp()
@@ -46,6 +54,8 @@ function Clients()
 
     const deleteClient=async(item:number)=>{
         try{
+            console.log(item);
+      
    
             const token=await getToken();
             const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/delete`,{
@@ -58,7 +68,7 @@ function Clients()
                 })
             })
             setOpen(false)
-            refetch();
+            queryClient.invalidateQueries({queryKey:['clients',page()]})
         }
         catch(error){
             console.log(error)
@@ -85,8 +95,9 @@ function Clients()
              
             })
         })
+        queryClient.invalidateQueries({queryKey:['clients']})
         setOpen(false)
-        refetch();
+       
       }
       catch(error){
         console.log(error)
@@ -113,8 +124,28 @@ function Clients()
     }
 
 
+    const[page,setPage]=createSignal<number>(1)
+
+
+    const myClients=useQuery(()=>({
+        queryKey:['clients',page()],
+        queryFn:async()=>{
+            const token=await getToken();
+            const response=await fetch(`${import.meta.env.VITE_API_URL}/api/clients?page=${page()}`,{
+                method:'GET',
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            })
+            if(!response.ok) throw new Error("Failed to fetch")
+                return response.json()
+         
+        },
+        staleTime:1000*60*5,
+        throwOnError:true
+    }))
+    
   
-    const[myClients,{refetch}]=createResource(search,getClients);
     const[open,setOpen]=createSignal(false)
 
     const fetchProgrammes=async()=>{
@@ -130,8 +161,23 @@ const showClient=(id:number)=>{
 }
 
 
+const decrementPage=async()=>{
+    if(page()==1){
+        return;
+    }
+    const item=page()-1;
+    setPage(item)
+}
 
- 
+
+ const incrementPage=async()=>{
+    if(page()==myClients.data.totalPage){
+        return;
+    }
+    const item=page()+1;
+    setPage(item)
+    
+ }
     const[programme,setProgramme]=createResource(fetchProgrammes)
     const columns:string[]=['Client','Assigned Programme']
 
@@ -148,11 +194,8 @@ const showClient=(id:number)=>{
         
 
         <div class="flex  flex-col">
-
-<Show when={myClients.loading}>
-                Loading.....
-                </Show>
-           
+<Suspense fallback="Loading">
+     
 
 <h1 class="text-3xl font-semi-bold text-gray-900 ">
                 Clients 
@@ -222,12 +265,26 @@ const showClient=(id:number)=>{
 
     </Dialog>
 
-          <ClientCreater deleteClient={(item)=>deleteClient(item)}  setClientAge={(item)=>setNewClient('age',item)}       addNewClient={addNewClient} newClient={newClient} searchClient={search()} setSearchString={(item)=>setSearch(item)} onClientName={(index)=>showClient(index)} myClients={myClients()}>
+<Show when={myClients.isFetching}>
+    Loading...
+</Show>
+<Show when={myClients.data && myClients.data.clients==0}>
+    <h1 class="text-center font-bold">
+        No clients
+    </h1>
+</Show>
+
+
+    <Show when={myClients.data && myClients.data.clients.length>0}>
+
+ 
+          <ClientCreater decrementPage={()=>decrementPage()} incrementPage={()=>incrementPage()} deleteClient={(item)=>deleteClient(item)}  setClientAge={(item)=>setNewClient('age',item)}       addNewClient={addNewClient} newClient={newClient} searchClient={search()} setSearchString={(item)=>setSearch(item)} onClientName={(index)=>showClient(index)} myClients={myClients.data.clients}>
                 
                 </ClientCreater>
-
+</Show>
                     
-             
+             </Suspense>
+
                 </div>
          
             

@@ -75,7 +75,7 @@ const[nutrientPage,setNutrientPage]=createSignal<number>(1);
     const[message,setMessage]=createSignal('')
 
     const clients=async()=>{
-        const response=await fetch(`${import.meta.env.VITE_API_URL}/dashboard` ,{
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard` ,{
             method:'GET',
         })
         return response.json();
@@ -174,7 +174,7 @@ const token=await getToken()
 
                     </CardTitle>
                     <CardDescription>
-                        <Show when={myValue()}>
+                        <Show when={myValue() }>
                             <For each={myValue()}>
                                 {(item)=><p class="text-center">
                                     {item.children.length}</p>}

@@ -23,18 +23,14 @@ import { useAuth } from "clerk-solidjs";
 import Button from './components/ui/button';
 import Tabs, { TabsContent, TabsIndicator, TabsList, TabsTrigger } from "./components/ui/tabs";
 const tabBarItems:string[]=['Overview','Assigned Programme','Body Measurements', 'Weekly Stats', 'Exercise Statistics','Settings']
-import {MeasurementType} from "../../backend/src/routes/measurements";
-import { clientWorkoutHistoryType } from "../../backend/src/routes/clients";
-import { hc, InferResponseType } from "hono/client";
-import { getAuth } from "@hono/clerk-auth";
 import WorkoutHistory from "./components/clientPage/Manager/assignedProgramme/workoutHistory";
 import type { WorkoutHistoryType } from "./types/workoutHistory";
-const client=hc<MeasurementType>('${import.meta.env.VITE_API_URL}/api/measurements')
 import { Suspense } from "solid-js";
 import { measurementsData, programmeWorkout, workout } from "../../backend/drizzle/schema";
 import { Badge } from "./components/ui/ui/badge";
 import { ref } from "process";
 import { createSign } from "crypto";
+import { useQuery } from "@tanstack/solid-query";
 
 type clientDetails={
     name:string,
@@ -124,7 +120,7 @@ type workout={
 
 const[myWorkout,setMyWorkout]=createStore<workout>({
     name:'',
-    date:'',
+    date:new Date().toISOString().split('T')[0],
     id:0
 ,
 workout:[]
@@ -288,6 +284,12 @@ if(length==0)
 
 
 
+
+
+
+
+
+
 //submit Workout
 
 
@@ -342,6 +344,13 @@ const [measurement,setMeasurement]=createStore<Measurement>({
 
 });
 
+
+
+
+
+
+const[workoutHistoryPage,setWorkoutHistoryPage]=createSignal<number>(1)
+
     const[selectedExercise,setSelectedExercise]=createSignal<string>('')
     const[workoutHistoryDate,setWorkoutHistoryDate]=createSignal('')
 
@@ -368,27 +377,27 @@ const [measurement,setMeasurement]=createStore<Measurement>({
 
     }
 
-    const fetchWorkoutHistory=async()=>{
-        try{
-
-           
-            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/workoutHistory`,{
-                method:'GET',
+    const workoutHistory=useQuery(()=>({
+        queryKey:['workoutHistory',workoutHistoryPage()],
+        queryFn:async()=>{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/workoutHistory?page=${workoutHistoryPage()}`,{
                 headers:{}
+
+
             })
-            return data.json();
-        }
-        catch(error){
-            console.log(error)
-        }
-    }
+            if(!data.ok) throw new Error("Error")
+                return data.json();
+        }, 
+         staleTime:1000*60*5,
+        throwOnError:true
+    }))
 
   
     const exerciseId=createMemo(()=>exercise.id)
     const measurementId=createMemo(()=>measurement.measurement_id)
     const fetchStats=async()=>{
         try{
-            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/stats?id=${exerciseId()}`,{
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/stats?exercise_id=${exerciseId()}`,{
                 method:"GET"
             })
             return data.json();
@@ -445,8 +454,13 @@ const [measurement,setMeasurement]=createStore<Measurement>({
         }
     }
     const fetchMeasurementsData=async()=>{
+        const token=await getToken();
         try{
-            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/measurements?id=${measurementId()}`)
+            const data=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/measurements?id=${measurementId()}`,{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            })
             return data.json();
         }
         catch(error)
@@ -518,10 +532,21 @@ const submitWorkout=async()=>{
 }
 
 
-const updateSelectExercise=(item:Exercise)=>{
+type exercise={
+    id:number,
+    name:string,
+    target:string,
+    instructions?:string,
+    photo?:string,
+    equipment:string
+}
+
+const updateSelectExercise=(item:exercise)=>{
     console.log(item)
     setExercise('id',item.id),
+    setExercise('equipment',item.equipment)
     setExercise('name',item.name)
+    setExercise('target',item.target)
 
    
 }
@@ -566,12 +591,30 @@ const updateShowProgramme=async(item:string)=>{
 
 //Resources
    
-    const[workoutHistory]=createResource<WorkoutHistoryType[]>(fetchWorkoutHistory)
     const[programmes,{refetch:refetchProgrammes}]=createResource(fetchProgrammes);
     const programmeId=createMemo(()=>programmes()?.programme_id)
     const[clientStats,setClientStats]=createResource(exerciseId,fetchStats)
+
+
+
+    const measurementData=useQuery(()=>({
+        queryKey:['measurementsData',measurementId()],
+        queryFn:async()=>{
+            const token=await getToken();
+            const response=await fetch(`${import.meta.env.VITE_API_URL}/api/clients/${id}/measurements?id=${measurementId()}`,{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+ 
+                
+            })
+            if(!response.ok) throw new Error("Error")
+                return response.json();
+        },
+        staleTime:1000*60*5,
+        throwOnError:true
+    }))
     const[measurements]=createResource(fetchMeasurements)
-    const[measurementData]=createResource(measurementId, fetchMeasurementsData);
     const[allProgrammes]=createResource(fetchAllProgrammes);
 
 
@@ -779,7 +822,7 @@ catch(error){
 
     const timeout=setTimeout(()=>{
         setAutosSavingIndicatorClient(false)
-     },2000)
+     },6000)
 
      const token=await getToken();
      try{
@@ -806,6 +849,28 @@ catch(error){
 
    }
 
+ }
+
+
+
+
+
+ //Workout History Increment and Decrement Pages
+
+ const incrementPage=async()=>{
+    console.log("HALA")
+    
+    const item=workoutHistoryPage()+1;
+    setWorkoutHistoryPage(item)
+
+    
+ }
+ const decrementPage=async()=>{
+    if(workoutHistoryPage()==1){
+        return;
+    }
+    const item=workoutHistoryPage()-1;
+    setWorkoutHistoryPage(item)
  }
 
 
@@ -941,7 +1006,7 @@ Loading
                         <div class="hidden md:block">
 
                  
-                   <ManagerClientHeader measurementDate={measurementStore.created_at} updateMeasurementDate={(item)=>setMeasurementStore('created_at',item)} submitMeasurement={()=>submitMeasurement()}  updateProgrammeType={(item)=>setProgrammeType('id',item)}  programmeTypeSelected={programmeTypeSelected} programmeTypes={programmeTypes} showProgramme={showProgramme()} setShowProgramme={(item:string)=>updateShowProgramme(item)} programmeExercise={programmeExercise}  updateWorkout={(id,value,key,field)=>updateWorkout(id,value,key,field)}   submitWorkout={submitWorkout} updateMeasurement={(key,item)=>updateMeasurement(key,item)}
+                   <ManagerClientHeader workoutDate={myWorkout.date} measurementDate={measurementStore.created_at} updateMeasurementDate={(item)=>setMeasurementStore('created_at',item)} submitMeasurement={()=>submitMeasurement()}  updateProgrammeType={(item)=>setProgrammeType('id',item)}  programmeTypeSelected={programmeTypeSelected} programmeTypes={programmeTypes} showProgramme={showProgramme()} setShowProgramme={(item:string)=>updateShowProgramme(item)} programmeExercise={programmeExercise}  updateWorkout={(id,value,key,field)=>updateWorkout(id,value,key,field)}   submitWorkout={submitWorkout} updateMeasurement={(key,item)=>updateMeasurement(key,item)}
                      measurements={measurementStore.measurement}  weight={weight.scaleWeight} weightCreated={weight.created_at} updateScaleWeight={(item)=>setWeight('scaleWeight',item)} updateWeightDate={(item)=>setWeight('created_at',item)}  addWeight={addWeight}  removeItem={(number,value,key)=>removeItem(number,value,key)} setDate={(item)=>setMyWorkout('date',item)} setWorkoutName={(item)=>setMyWorkout('name',item)} myExercise={myWorkout.workout} workoutName={myWorkout.name}    searchString={searchString()} setSearchString={(item)=>setSearchString(item) } equipment={equipment()} setEquipment={(item)=>setEquipment(item)}  setType={(item)=>setType(item)}    type={type()} addExercise={(item)=>addExercise(item)} name={client.name} exercises={allExercises()}/ >
                  
                  </div>
@@ -992,7 +1057,7 @@ Loading
     <div class="flex flex-col gap-y-3">
 {selectedExercise()}
     
-    <AboutExercise targetMuscleGroup={exercise.target} equipment={exercise.equipment} name={exercise.name}/>
+    <AboutExercise target={exercise.target} equipment={exercise.equipment} name={exercise.name}/>
 <ClientStats stats={clientStats()}/>
 </div>
 
@@ -1055,7 +1120,7 @@ Loading
     </MeasurementLibrary>
     </div>
     
-    <Show when={measurementData.loading}>
+    <Show when={measurementData.isLoading}>
         Loading
     </Show>
     <MeasurementScreen deleteMeasurement={(id:number)=>deletingMeasurement(id)()} updateMeasurement={(key,field,item,id)=>updatingMeasurement(key,field,item)()}    measurement={measurement} ></MeasurementScreen>
@@ -1077,12 +1142,12 @@ Loading
                     </AssignedProgramme>
                     
      
-     <Show when={workoutHistory()}>
+     <Show when={workoutHistory.data}>
 
 
 
      
-          <WorkoutHistory date={workoutHistoryDate()} setDate={(item)=>setWorkoutHistoryDate(item)} workout={workoutHistory()}></WorkoutHistory>
+          <WorkoutHistory decrementPage={()=>decrementPage()} incrementPage={()=>incrementPage()} date={workoutHistoryDate()} setDate={(item)=>setWorkoutHistoryDate(item)} workout={workoutHistory.data.workout}></WorkoutHistory>
               
               </Show>
                </div>

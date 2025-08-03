@@ -1,21 +1,21 @@
 import { For,createResource,Show,createSignal} from "solid-js";
-import Table from "./components/table";
-import Modal from "./components/modal";
+
 import Button from "./components/ui/button";
 import { programmeDetails,setProgrammeDetails,updateProgrammeDetails } from "./components/programmeDetails";
 import { useNavigate } from "@solidjs/router";
 import { useSearchParams } from "@solidjs/router";
-import ClientProgramme from "./components/clientNewProgramme";
 import { useAuth } from "clerk-solidjs";
 import { Badge } from "./components/ui/ui/badge";
 import { AlertDialog, AlertDialogAction, AlertDialogClose, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTrigger } from "./components/ui/alert-dialog";
-import { ref } from "process";
-import { createSign } from "crypto";
-import { Suspense } from "solid-js";
 import { createEffect } from "solid-js";
+import { useQuery } from "@tanstack/solid-query";
+import { useQueryClient } from "@tanstack/solid-query";
+
 function Programme()
 
 {
+    const queryClient=useQueryClient();
+
 
     const {getToken,isSignedIn}=useAuth();
 
@@ -26,15 +26,11 @@ function Programme()
     const navigate=useNavigate();
     const[exercise,setExercise]=createSignal('')
 
-    const options:string[]=['1-3','3-6','6-9','9-12','12-15','15+']
-
-
-    const lists:string[]=['name','Clients Enrolled','']
     const fetchData=async()=>{
 
         const token=await getToken();
         
-        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/programme`,{
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/programme?page=${page()}`,{
             method:"GET",
             headers:{
                 'Authorization': `Bearer ${token}`
@@ -55,8 +51,6 @@ function Programme()
             }
         })
         const data=await response.json();
-       
-        refetch();
         setAddingNewIndicator(true)
         await new Promise((resolve)=>setTimeout(resolve,800));
         setAddingNewIndicator(false)
@@ -81,11 +75,10 @@ const deleteProgramme=async(item:number)=>{
    })
    setDeletingNewProgrammeIndicator(true)
    await new Promise((resolve)=>setTimeout(resolve,800));
+
 setDeletingNewProgrammeIndicator(false)
    
-
-
-   refetch();
+queryClient.invalidateQueries({"queryKey":["programme"]})
 
 }
 
@@ -94,11 +87,30 @@ setDeletingNewProgrammeIndicator(false)
    
 
 
- const[myProgrammes,{refetch}]=createResource(fetchData)
-
- 
  
 
+ 
+ const[page,setPage]=createSignal<number>(1)
+
+ const myProgrammes=useQuery(()=>({
+    queryKey:['programme',page()],
+    queryFn:fetchData
+ }))
+ const incrementPage=async()=>{
+    if(page()==myProgrammes.data.totalPages){
+        return;
+    }
+    
+    const item=page()+1
+    setPage(item)
+ }
+ const decrementPage=async()=>{
+    if(page()==1){
+        return;
+    }
+    const item=page()-1;
+    setPage(item)
+ }
 
  const  viewProgramme=(id:number)=>{
     
@@ -134,7 +146,7 @@ setDeletingNewProgrammeIndicator(false)
                 </h1>
 
                 <Show
-  when={myProgrammes.loading}>
+  when={myProgrammes.isLoading}>
 
 
     <div class="flex justify-center items-center p-4">
@@ -181,16 +193,14 @@ setDeletingNewProgrammeIndicator(false)
        
 </div>
    
+   <Show when={myProgrammes.data && myProgrammes.data.programme.length==0}>
+    No Programmes
+   </Show>
 
-       <For each={programmeDetails.exercise}>
-        {(item)=><p>
-            {item.name}</p>}
-
-       </For>
-     <Show when={myProgrammes()}>
+     <Show when={myProgrammes.data && myProgrammes.data.programme.length>0}>
         
 
-        <For each={myProgrammes()}>
+        <For each={myProgrammes.data.programme}>
             {(item)=><div  class="bg-white shadow-md mb-10 rounded-xl p-4 hover:shadow-lg transition ">
                 <h1 class="font-bold text-2xl cursor-pointer" onClick={()=>viewProgramme(item.id)}>
                {item.name}
@@ -233,11 +243,20 @@ setDeletingNewProgrammeIndicator(false)
         </For>
        
 
+    <div class="flex flex-row justify-between">
 
 
+       <Button onclick={()=>decrementPage()}>
+        Previous
+       </Button>
+       <Button onclick={()=>incrementPage()}>
+        Next
+       </Button>
+</div>
         
        
      </Show>
+     
     
     </div>
 )

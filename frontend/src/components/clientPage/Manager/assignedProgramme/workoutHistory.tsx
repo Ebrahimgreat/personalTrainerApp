@@ -1,8 +1,10 @@
 import type { WorkoutHistoryType } from "../../../../types/workoutHistory"
-
+import Button from "../../../ui/button"
 
 type props={
-    workout:WorkoutHistoryType[]
+    workout:WorkoutHistoryType[],
+    incrementPage:()=>void,
+    decrementPage:()=>void,
 }
 
 
@@ -30,7 +32,12 @@ function WorkoutHistory(props:props)
 
 
         <For each={props.workout}>
+           
             {(item)=><div class="border p-2 my-2 text-sm overflow-x-auto">
+
+               <Button>
+                Delete
+                </Button>
                
                 <h1 class="text-center font-bold">
 
@@ -108,6 +115,17 @@ function WorkoutHistory(props:props)
                 </div>}
                 
         </For>
+        <div class="flex flex-row justify-between">
+            <Button onclick={()=>props.decrementPage()}>
+                Previous
+            </Button>
+            <Button onclick={()=>props.incrementPage()}>
+                Next
+            </Button>
+            
+
+        </div>
+       
         </Show>
 
     </div>

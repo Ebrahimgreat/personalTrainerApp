@@ -66,11 +66,14 @@ updateProgrammeType:(item:number)=>void,
     setEquipment:(item:string)=>void,
     setType:(item:string)=>void,
     setWorkoutName:(item:string)=>void,
+    date:string,
+
     setDate:(item:string)=>void,
     workoutName:string,
 
     removeItem:(item:number,value:number,key:number)=>void,
     updateWorkout:(item:number,value:number,key:number)=>void,
+    closeDialog:()=>void,
     submitWorkout:()=>void
 }
 
@@ -126,7 +129,9 @@ function CreateWorkout(props:props)
   }
 
   function submitWorkout(){
+    setSubmitDialog(false)
     props.submitWorkout()
+    props.closeDialog()
   }
 
   function updateWorkout(id:number,key:number,value:number,field:string){
@@ -172,7 +177,7 @@ createEffect(()=>{
 
 
 <h1 class="text-3xl font-semi-bold text-gray-900 ">
-               Create Workout  {props.programmeExercises.length}
+               Create Workout  
         
          
             </h1>
@@ -223,6 +228,7 @@ createEffect(()=>{
 
     
 <div class="flex-1 overflow p-5 ">
+   Date {props.date}
 
 
 
@@ -245,7 +251,7 @@ createEffect(()=>{
         </option>
 
     </select>
-{props.programmeTypeSelected.id}
+
 <Show when={props.showProgramme==='Programme'}>
 
     <select onchange={(item)=>updateProgrammeType(item.currentTarget.value)}   value={props.programmeTypeSelected.id}>
@@ -268,7 +274,7 @@ createEffect(()=>{
          </label>
 
 
-            <input type="date" onChange={(e)=>updateDate(e.currentTarget.value)} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-10 ">
+            <input type="date" value={props.date} onChange={(e)=>updateDate(e.currentTarget.value)} class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-10 ">
             </input>
       
            <AlertDialog open={submitDialog()}>

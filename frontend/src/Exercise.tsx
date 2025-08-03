@@ -28,7 +28,7 @@ const[searchExercise,setSearchExercise]=createSignal('')
 const [equipmentSelected,setEquipment]=createSignal('Equipment')
 type exercise={
     name:string,
-    type:string
+    target:string
     equipment:string,
     instructions:string
 }
@@ -74,11 +74,23 @@ function Exercise()
     const navigate=useNavigate();
     
     const filters=['Chest','Triceps','Bicep','Quads','Hamstrings'];
+
+    
+  const fetchExercises=async()=>{
+    const data=await fetch(`http://localhost:3001/api/exercise/all?exerciseName=${searchExercise()}&equipment=${equipmentSelected()}&type=${typeSelected()}`);
+    return data.json();
+  }
+
+  const myExercises=useQuery(()=>({
+    queryKey:['exercises',equipmentSelected(),searchExercise(),typeSelected()],
+    queryFn:fetchExercises
+
+  }))
    
     const fetchData=async()=>{
         const response=await client.all.$get({
             query:{
-                searchExercise:searchExercise(),
+                exerciseName:searchExercise(),
                 type:typeSelected(),
                 equipment:equipmentSelected()
             }
@@ -90,24 +102,21 @@ function Exercise()
 
 
 
-    const[myExercises,setMyExercises]=createResource(()=>[searchExercise(),typeSelected(),equipmentSelected()],
-    ([search,type,equipment])=>fetchData());
-    const [myExerciseSelected,setMyExerciseSelected]=createStore<myexercise>({
+    const [myExerciseSelected,setMyExerciseSelected]=createStore<exercise>({
         name:'',
-        type:'Chest',
+        target:'Chest',
         instructions:'',
         equipment:'Barbell',
-        targetMuscleGroup:''
 
     })
       
-   const updateExercise=(item:object)=>{
-    console.log('hello')
-    setMyExerciseSelected('instructions',item.instructions),
-    setMyExerciseSelected('name',item.name),
-    setMyExerciseSelected('type',item.type)
-    setMyExerciseSelected('equipment',item.equipment)
-    setMyExerciseSelected('targetMuscleGroup',item.type)
+   const updateExercise=(item:exercise)=>{
+    console.log(item)
+    setMyExerciseSelected('instructions',item?.instructions?? ""),
+    setMyExerciseSelected('name',item?.name?? ""),
+    setMyExerciseSelected('target',item?.target?? "")
+    setMyExerciseSelected('equipment',item?.equipment??"")
+    console.log(myExerciseSelected)
    
 
    }
@@ -143,7 +152,7 @@ createEffect(()=>{
 
 
 <Show
-  when={myExercises.loading}>
+  when={myExercises.isLoading}>
     <div class="flex justify-center items-center p-4">
       <svg class="size-6 text-gray-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
         viewBox="0 0 24 24" stroke="currentColor">
@@ -157,7 +166,7 @@ createEffect(()=>{
 
          
 
-<h1 class="text-3xl font-semi-bold text-gray-900 ">
+<h1 class="text-3xl font-semi-bold text-gray-00">
                 Exercises
         
          
@@ -259,13 +268,13 @@ createEffect(()=>{
             
          
 
-            <Show when={myExercises()}>
+            <Show when={myExercises.data}>
             <div class="grid grid-cols-1 md:grid-cols-2 w-full h-[80vh]   justify-start gap-x-3">
 
                 
 
      
-        <ExerciseLibrary showProgramme="No Programme" setEquipment={(item)=>setEquipment(item)} setTypeSelected={(item)=>setTypeSelected(item)} updatingExercise={(item)=>updateExercise(item)} myExercises={myExercises()} typeSelected={typeSelected()} types={bodyPart} setSearchSelected={(item)=>setSearchExercise(item)} searchExercise={searchExercise()} equipmentSelected={equipmentSelected()} equipment={equipment}>
+        <ExerciseLibrary showProgramme="No Programme" setEquipment={(item)=>setEquipment(item)} setTargetSelected={(item)=>setTypeSelected(item)} updatingExercise={(item)=>updateExercise(item)} myExercises={myExercises.data} typeSelected={typeSelected()} types={bodyPart} setSearchSelected={(item)=>setSearchExercise(item)} searchExercise={searchExercise()} equipmentSelected={equipmentSelected()} equipment={equipment}>
 
         </ExerciseLibrary>
 
@@ -290,7 +299,7 @@ createEffect(()=>{
       <Show when={myExerciseSelected.name!=''}>
 
  
-            <AboutExercise targetMuscleGroup={myExerciseSelected.targetMuscleGroup} name={myExerciseSelected.name} equipment={myExerciseSelected.equipment}>
+            <AboutExercise target={myExerciseSelected.target} name={myExerciseSelected.name} equipment={myExerciseSelected.equipment}>
 
             </AboutExercise>
             <div class="flex flex-col h-full">

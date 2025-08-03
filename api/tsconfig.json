@@ -4,7 +4,7 @@
 		"module": "ESNext",
 		"skipLibCheck": true,
 		"moduleResolution": "Bundler",
-		"strict": true,
+		"strict": false,
 		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx"

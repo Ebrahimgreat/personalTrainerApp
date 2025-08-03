@@ -86,7 +86,7 @@ templateRoutes.post('/updateMain',async(c)=>{
  if(verification.error){
     return c.json("Error")
  }
- const updating=await db.update(programmeWorkout).set({name:body.name}).where(eq(programmeWorkout.id,body.id)).returning();
+ const updating=await db.update(programmeWorkoutTable).set({name:body.name}).where(eq(programmeWorkout.id,body.id)).returning();
  return c.json(updating)
 
 

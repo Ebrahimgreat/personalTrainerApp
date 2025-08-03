@@ -81,6 +81,7 @@ type props={
    setEquipment:(item:string)=>void,
    setWorkoutName:(item:string)=>void,
   workoutName:string,
+  workoutDate:string,
    setDate:(item:string)=>void,
  updateWorkout:(key:number,internalKey:number,value:number,field:string)=>void,
    removeItem:(id:number,value:number,key:number)=>void,
@@ -92,6 +93,9 @@ type props={
 
 function ManagerClientHeader(props:props)
 {
+
+
+    const[openWorkout,setOpenWorkout]=createSignal<boolean>(false)
     const[open,setOpen]=createSignal<boolean>(false)
     function updateSearchString(item:string)
     {
@@ -196,7 +200,7 @@ function ManagerClientHeader(props:props)
    </Dialog>
 
 
-       <Dialog>
+       <Dialog open={openWorkout()} onOpenChange={setOpenWorkout}>
         <DialogTrigger>
             <Button variant="outline">
                 Create Workout
@@ -208,7 +212,7 @@ function ManagerClientHeader(props:props)
                     New Workout
                 </DialogTitle>
             </DialogHeader>
-            <CreateWorkout  updateProgrammeType={(item)=>props.updateProgrammeType(item)}  programmeTypeSelected={props.programmeTypeSelected} programmeTypes={props.programmeTypes} showProgramme={props.showProgramme} programmeExercises={props.programmeExercise} setShowProgramme={(item)=>props.setShowProgramme(item)} updateWorkout={(key:number,internalKey:number,value:number,field:string)=>props.updateWorkout(key,internalKey,value,field)} submitWorkout={props.submitWorkout} removeItem={(number,value,key)=>removeItem(number,value,key)} workoutName={props.workoutName} setWorkoutName={(item)=>updateWorkoutName(item)} myExercise={props.myExercise} equipment={props.equipment} setEquipment={(item)=>updateEquipment(item)} setType={(item)=>updateType(item)}    type={props.type} searchString={props.searchString} setSearchString={(item)=>updateSearchString(item)} addExercise={(item)=>addExercise(item)}   exercises={props.exercises} clientName={props.name}/ >
+            <CreateWorkout closeDialog={()=>setOpenWorkout(false)} date={props.workoutDate}  updateProgrammeType={(item)=>props.updateProgrammeType(item)}  programmeTypeSelected={props.programmeTypeSelected} programmeTypes={props.programmeTypes} showProgramme={props.showProgramme} programmeExercises={props.programmeExercise} setShowProgramme={(item)=>props.setShowProgramme(item)} updateWorkout={(key:number,internalKey:number,value:number,field:string)=>props.updateWorkout(key,internalKey,value,field)} submitWorkout={props.submitWorkout} removeItem={(number,value,key)=>removeItem(number,value,key)} workoutName={props.workoutName} setWorkoutName={(item)=>updateWorkoutName(item)} myExercise={props.myExercise} equipment={props.equipment} setEquipment={(item)=>updateEquipment(item)} setType={(item)=>updateType(item)}    type={props.type} searchString={props.searchString} setSearchString={(item)=>updateSearchString(item)} addExercise={(item)=>addExercise(item)}   exercises={props.exercises} clientName={props.name}/ >
 
         </DialogContent>
         
